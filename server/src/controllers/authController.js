@@ -1,12 +1,16 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+/*
+ * Register a new user
+ */
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // 1. Basic validation
+    // Validate input
     if (!username || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -14,7 +18,7 @@ const register = async (req, res) => {
       });
     }
 
-    // 2. Check username
+    // Check if username already exists
     const usernameExists = await User.findOne({ username });
 
     if (usernameExists) {
@@ -24,7 +28,7 @@ const register = async (req, res) => {
       });
     }
 
-    // 3. Check email
+    // Check if email already exists
     const emailExists = await User.findOne({ email });
 
     if (emailExists) {
@@ -34,10 +38,10 @@ const register = async (req, res) => {
       });
     }
 
-    // 4. Hash password
+    // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // 5. Create user
+    // Create user
     const user = new User({
       username,
       email,
@@ -60,13 +64,14 @@ const register = async (req, res) => {
   }
 };
 
-const jwt = require("jsonwebtoken");
-
+/*
+ * Login user
+ */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Validate input
+    // Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -74,7 +79,7 @@ const login = async (req, res) => {
       });
     }
 
-    // 2. Find user
+    // Find user
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -84,7 +89,7 @@ const login = async (req, res) => {
       });
     }
 
-    // 3. Compare password
+    // Compare password
     const isPasswordValid = await bcrypt.compare(
       password,
       user.passwordHash
@@ -97,7 +102,7 @@ const login = async (req, res) => {
       });
     }
 
-    // 4. Generate JWT
+    // Generate JWT
     const token = jwt.sign(
       {
         id: user.id,
@@ -109,7 +114,6 @@ const login = async (req, res) => {
       }
     );
 
-    // 5. Send response
     return res.status(200).json({
       success: true,
       message: "Login successful.",
@@ -130,8 +134,12 @@ const login = async (req, res) => {
   }
 };
 
+/*
+ * Get currently logged-in user
+ */
 const getCurrentUser = async (req, res) => {
   try {
+    // Since we're using UUIDs, query by the custom id field
     const user = await User.findOne({ id: req.user.id }).select("-passwordHash");
 
     if (!user) {

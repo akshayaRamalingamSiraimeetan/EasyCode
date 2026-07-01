@@ -5,10 +5,7 @@ import { useAuth } from "../context/AuthContext";
 function Dashboard() {
   const navigate = useNavigate();
 
-  const {
-    logout,
-    isAuthenticated,
-  } = useAuth();
+  const { logout, isAuthenticated, user } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -20,20 +17,18 @@ function Dashboard() {
     <div className="dashboard-page">
       <div className="dashboard-card">
         <h1>EasyCode</h1>
-
-        <p>Welcome to your dashboard.</p>
-
         <p>
-          Status:
-          <strong>
-            {isAuthenticated ? " Logged In" : " Logged Out"}
-          </strong>
+          Welcome back,
+          <strong> {user?.username}</strong>.
         </p>
 
-        <button
-          className="btn-primary"
-          onClick={handleLogout}
-        >
+        <p>Email: {user?.email}</p>
+        <p>
+          Status:
+          <strong>{isAuthenticated ? " Logged In" : " Logged Out"}</strong>
+        </p>
+
+        <button className="btn-primary" onClick={handleLogout}>
           Logout
         </button>
       </div>

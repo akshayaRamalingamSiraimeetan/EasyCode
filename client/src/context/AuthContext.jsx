@@ -1,17 +1,45 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
+import { getCurrentUser } from "../services/auth";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("token")
+  );
+
+  const [user, setUser] = useState(null);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    const loadUser = async () => {
+      if (!token) {
+        setLoading(false);
+        return;
+      }
 
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
+      try {
+        const response = await getCurrentUser();
+
+        setUser(response.data.user);
+      } catch (error) {
+        localStorage.removeItem("token");
+        setToken(null);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
+  }, [token]);
 
   const login = (jwtToken) => {
     localStorage.setItem("token", jwtToken);
@@ -21,12 +49,15 @@ export function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    setUser(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
         token,
+        user,
+        loading,
         isAuthenticated: !!token,
         login,
         logout,

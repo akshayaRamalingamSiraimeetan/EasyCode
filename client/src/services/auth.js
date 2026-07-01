@@ -14,3 +14,7 @@ export const login = async (formData) => {
     password: formData.password,
   });
 };
+
+export const getCurrentUser = async () => {
+  return api.get("/auth/me");
+};
