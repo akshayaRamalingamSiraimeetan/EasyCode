@@ -1,0 +1,40 @@
+/* =========================
+   EasyCode Global Styles
+========================= */
+
+:root {
+  --color-primary: #111111;
+  --color-secondary: #ffffff;
+  --color-accent: #ffd60a;
+
+  --color-background: #f7f7f7;
+  --color-border: #dddddd;
+
+  --radius: 8px;
+
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  --transition: 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-primary);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  font-family: inherit;
+}
