@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { login } from "../services/auth";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login: loginUser } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -39,7 +41,7 @@ function Login() {
         password,
       });
 
-      localStorage.setItem("token", response.data.token);
+      loginUser(response.data.token);
 
       navigate("/dashboard");
     } catch (error) {
