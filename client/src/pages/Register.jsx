@@ -1,4 +1,60 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../services/auth";
+
 function Register() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { username, email, password, confirmPassword } = formData;
+
+  const [error, setError] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await register({
+        username,
+        email,
+        password,
+      });
+      navigate("/login", {
+        state: {
+          message: "Registration successful. Please login.",
+        },
+      });
+    } catch (error) {
+      setError(error.response?.data?.message || "Registration failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -6,12 +62,15 @@ function Register() {
 
         <p>Create your account</p>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Username</label>
 
             <input
               type="text"
+              name="username"
+              value={username}
+              onChange={handleChange}
               placeholder="Enter username"
             />
           </div>
@@ -22,6 +81,9 @@ function Register() {
             <input
               type="email"
               placeholder="Enter email"
+              name="email"
+              value={email}
+              onChange={handleChange}
             />
           </div>
 
@@ -31,6 +93,9 @@ function Register() {
             <input
               type="password"
               placeholder="Enter password"
+              name="password"
+              onChange={handleChange}
+              value={password}
             />
           </div>
 
@@ -40,16 +105,29 @@ function Register() {
             <input
               type="password"
               placeholder="Confirm password"
+              name="confirmPassword"
+              onChange={handleChange}
+              value={confirmPassword}
             />
           </div>
-
-          <button className="btn-primary">
-            Create Account
+          {error && (
+            <p
+              style={{
+                color: "red",
+                marginBottom: "15px",
+                textAlign: "center",
+              }}
+            >
+              {error}
+            </p>
+          )}
+          <button className="btn-primary" disabled={loading}>
+            {loading ? "Creating..." : "Create Account"}
           </button>
         </form>
 
         <p>
-          Already have an account? Login
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
