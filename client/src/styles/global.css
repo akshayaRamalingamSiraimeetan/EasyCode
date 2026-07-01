@@ -131,3 +131,40 @@ input {
 .btn-primary:hover {
   opacity: 0.9;
 }
+
+/* =========================
+   Feedback Messages
+========================= */
+
+.message {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.message-success {
+  color: #15803d;
+}
+
+.message-error {
+  color: #dc2626;
+}
+
+/* =========================
+   Authentication Links
+========================= */
+
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth-footer a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}

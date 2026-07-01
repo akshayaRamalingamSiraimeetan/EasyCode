@@ -110,25 +110,18 @@ function Register() {
               value={confirmPassword}
             />
           </div>
-          {error && (
-            <p
-              style={{
-                color: "red",
-                marginBottom: "15px",
-                textAlign: "center",
-              }}
-            >
-              {error}
-            </p>
-          )}
+
+          {error && <p className="message message-error">{error}</p>}
+
           <button className="btn-primary" disabled={loading}>
             {loading ? "Creating..." : "Create Account"}
           </button>
         </form>
 
-        <p>
+        <p className="auth-footer">
           Already have an account? <Link to="/login">Login</Link>
         </p>
+        
       </div>
     </div>
   );

@@ -8,3 +8,9 @@ export const register = async (formData) => {
   });
 };
 
+export const login = async (formData) => {
+  return api.post("/auth/login", {
+    email: formData.email,
+    password: formData.password,
+  });
+};
