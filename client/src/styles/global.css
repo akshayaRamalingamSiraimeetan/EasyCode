@@ -38,3 +38,96 @@ button,
 input {
   font-family: inherit;
 }
+
+.auth-page {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: white;
+
+  padding: 32px;
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+  border: 1px solid var(--color-border);
+}
+
+.auth-card h1 {
+  margin-bottom: 10px;
+
+  text-align: center;
+}
+
+.auth-card p {
+  margin-bottom: 25px;
+
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+
+  padding: 12px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius);
+
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  outline: none;
+
+  border-color: var(--color-accent);
+}
+
+.btn-primary {
+  width: 100%;
+
+  padding: 12px;
+
+  background: var(--color-accent);
+
+  border: none;
+
+  border-radius: var(--radius);
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
