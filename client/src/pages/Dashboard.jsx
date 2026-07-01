@@ -1,20 +1,42 @@
+import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
-  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const {
+    logout,
+    isAuthenticated,
+  } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+
+    navigate("/login");
+  };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Dashboard</h1>
+    <div className="dashboard-page">
+      <div className="dashboard-card">
+        <h1>EasyCode</h1>
 
-      <p>Welcome to EasyCode.</p>
+        <p>Welcome to your dashboard.</p>
 
-      <p>
-        Authentication Status:{" "}
-        <strong>
-          {isAuthenticated ? "Logged In" : "Not Logged In"}
-        </strong>
-      </p>
+        <p>
+          Status:
+          <strong>
+            {isAuthenticated ? " Logged In" : " Logged Out"}
+          </strong>
+        </p>
+
+        <button
+          className="btn-primary"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

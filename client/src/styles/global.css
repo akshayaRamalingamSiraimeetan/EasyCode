@@ -168,3 +168,40 @@ input {
 .auth-footer a:hover {
   text-decoration: underline;
 }
+
+/* =========================
+   Dashboard
+========================= */
+
+.dashboard-page {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 500px;
+
+  background: white;
+
+  padding: 32px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--color-border);
+
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+.dashboard-card p {
+  margin: 20px 0;
+}
