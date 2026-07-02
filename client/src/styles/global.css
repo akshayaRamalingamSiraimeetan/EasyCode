@@ -597,3 +597,52 @@ input {
 .col-actions {
   width: 220px;
 }
+
+
+.loading-state {
+  padding: 60px;
+
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+
+  height: 40px;
+
+  margin: auto;
+
+  border: 4px solid #eee;
+
+  border-top: 4px solid #f4b400;
+
+  border-radius: 50%;
+
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+.sort-select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #f4b400;
+}
+

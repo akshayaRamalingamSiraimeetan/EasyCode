@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import { getAllProblems } from "../services/problem";
 import { useAuth } from "../context/AuthContext";
 import ProblemsTable from "../components/ProblemsTable";
@@ -21,6 +21,7 @@ function Problems() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [modalMode, setModalMode] = useState("create");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("title");
 
   const [selectedProblem, setSelectedProblem] = useState(null);
   useEffect(() => {
@@ -44,45 +45,59 @@ function Problems() {
   const handleCreateProblem = async (problemData) => {
     try {
       await createProblem(problemData);
-
+      toast.success("Problem created successfully.");
       setShowModal(false);
 
       fetchProblems();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to create problem.");
+      toast.error(error.response?.data?.message || "Failed to create problem.");
     }
   };
 
   const handleUpdateProblem = async (problemData) => {
     try {
       await updateProblem(selectedProblem.id, problemData);
-
+      toast.success("Problem updated successfully.");
       setShowModal(false);
       setSelectedProblem(null);
 
       await fetchProblems();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to update problem.");
+      toast.error(error.response?.data?.message || "Failed to update problem.");
     }
   };
 
   const handleDeleteProblem = async () => {
     try {
       await deleteProblem(selectedProblem.id);
-
+      toast.success("Problem deleted successfully.");
       setShowDeleteDialog(false);
 
       setSelectedProblem(null);
 
       await fetchProblems();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to delete problem.");
+      toast.error(error.response?.data?.message || "Failed to delete problem.");
     }
   };
 
-  const filteredProblems = problems.filter((problem) =>
-    problem.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const difficultyOrder = {
+    Easy: 1,
+    Medium: 2,
+    Hard: 3,
+  };
+
+  const filteredProblems = [...problems]
+    .filter((problem) =>
+      problem.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .sort((a, b) => {
+      if (sortBy === "title") {
+        return a.title.localeCompare(b.title);
+      }
+
+      return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+    });
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -119,6 +134,16 @@ function Problems() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+
+        <select
+          className="sort-select"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="title">Sort by Title</option>
+
+          <option value="difficulty">Sort by Difficulty</option>
+        </select>
       </div>
 
       {problems.length === 0 ? (

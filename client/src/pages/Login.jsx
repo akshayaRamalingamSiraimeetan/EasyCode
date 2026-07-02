@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import toast from "react-hot-toast";
 import { login } from "../services/auth";
 import { useAuth } from "../context/AuthContext";
 
@@ -44,7 +44,10 @@ function Login() {
       loginUser(response.data.token);
 
       navigate("/dashboard");
+      toast.success("Welcome back!");
     } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed.");
+
       setError(error.response?.data?.message || "Login failed.");
     } finally {
       setLoading(false);

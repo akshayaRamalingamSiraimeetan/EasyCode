@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 
-function ProblemModal({
-  isOpen,
-  mode,
-  problem,
-  onClose,
-  onSubmit,
-}) {
+function ProblemModal({ isOpen, mode, problem, onClose, onSubmit }) {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     difficulty: "Easy",
     constraints: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (mode === "edit" && problem) {
@@ -41,23 +37,25 @@ function ProblemModal({
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    if (loading) return;
+
+    setLoading(true);
+
+    try {
+      await onSubmit(formData);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="modal-overlay">
       <div className="problem-modal">
-
-        <h2>
-          {mode === "create"
-            ? "Create Problem"
-            : "Edit Problem"}
-        </h2>
-
+        <h2>{mode === "create" ? "Create Problem" : "Edit Problem"}</h2>
         <form onSubmit={handleSubmit}>
-
           <div className="form-group">
             <label>Title</label>
 
@@ -104,28 +102,15 @@ function ProblemModal({
           </div>
 
           <div className="modal-actions">
-
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={onClose}
-            >
+            <button type="button" className="btn-secondary" onClick={onClose}>
               Cancel
             </button>
 
-            <button
-              type="submit"
-              className="header-btn"
-            >
-              {mode === "create"
-                ? "Create"
-                : "Update"}
+            <button type="submit" className="header-btn" disabled={loading}>
+              {loading ? "Saving..." : mode === "create" ? "Create" : "Update"}
             </button>
-
           </div>
-
         </form>
-
       </div>
     </div>
   );

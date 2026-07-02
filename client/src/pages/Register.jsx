@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../services/auth";
+import toast from "react-hot-toast";
 
 function Register() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -43,13 +43,15 @@ function Register() {
         email,
         password,
       });
+      toast.success("Registration successful.");
+
       navigate("/login", {
         state: {
           message: "Registration successful. Please login.",
         },
       });
     } catch (error) {
-      setError(error.response?.data?.message || "Registration failed.");
+      toast.error(error.response?.data?.message || "Registration failed.");
     } finally {
       setLoading(false);
     }
@@ -121,7 +123,6 @@ function Register() {
         <p className="auth-footer">
           Already have an account? <Link to="/login">Login</Link>
         </p>
-        
       </div>
     </div>
   );
