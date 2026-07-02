@@ -21,7 +21,10 @@ function Dashboard() {
           Welcome back,
           <strong> {user?.username}</strong>.
         </p>
-
+        <p>
+          Role:
+          <strong>{user?.role}</strong>
+        </p>
         <p>Email: {user?.email}</p>
         <p>
           Status:

@@ -90,10 +90,7 @@ const login = async (req, res) => {
     }
 
     // Compare password
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user.passwordHash
-    );
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -107,11 +104,12 @@ const login = async (req, res) => {
       {
         id: user.id,
         email: user.email,
+        role: user.role,
       },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
-      }
+      },
     );
 
     return res.status(200).json({
@@ -122,6 +120,7 @@ const login = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -140,7 +139,9 @@ const login = async (req, res) => {
 const getCurrentUser = async (req, res) => {
   try {
     // Since we're using UUIDs, query by the custom id field
-    const user = await User.findOne({ id: req.user.id }).select("-passwordHash");
+    const user = await User.findOne({ id: req.user.id }).select(
+      "-passwordHash",
+    );
 
     if (!user) {
       return res.status(404).json({
