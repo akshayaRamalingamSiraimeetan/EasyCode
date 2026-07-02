@@ -81,8 +81,38 @@ const getAllProblems = async (req, res) => {
   }
 };
 
+/*
+ * Get problem by UUID
+ */
+const getProblemById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const problem = await Problem.findOne({ id }).select("-_id -__v");
+
+    if (!problem) {
+      return res.status(404).json({
+        success: false,
+        message: "Problem not found.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      problem,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+    });
+  }
+};
 
 module.exports = {
   createProblem,
   getAllProblems,
+  getProblemById,
 };

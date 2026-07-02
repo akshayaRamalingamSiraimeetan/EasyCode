@@ -6,20 +6,14 @@ const authorizeAdmin = require("../middleware/authorizeAdmin");
 const {
   createProblem,
   getAllProblems,
+  getProblemById,
 } = require("../controllers/problemController");
 
 const router = express.Router();
-router.get(
-  "/",
-  authenticate,
-  getAllProblems
-);
+router.get("/", authenticate, getAllProblems);
 
-router.post(
-  "/",
-  authenticate,
-  authorizeAdmin,
-  createProblem
-);
+router.get("/:id", authenticate, getProblemById);
+
+router.post("/", authenticate, authorizeAdmin, createProblem);
 
 module.exports = router;
