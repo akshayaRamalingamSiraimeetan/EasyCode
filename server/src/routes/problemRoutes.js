@@ -7,13 +7,14 @@ const {
   createProblem,
   getAllProblems,
   getProblemById,
+  updateProblem,
 } = require("../controllers/problemController");
 
 const router = express.Router();
+
 router.get("/", authenticate, getAllProblems);
-
 router.get("/:id", authenticate, getProblemById);
-
+router.put("/:id", authenticate, authorizeAdmin, updateProblem);
 router.post("/", authenticate, authorizeAdmin, createProblem);
 
 module.exports = router;

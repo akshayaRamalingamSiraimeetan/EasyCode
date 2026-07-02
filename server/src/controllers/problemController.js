@@ -5,12 +5,7 @@ const Problem = require("../models/Problem");
  */
 const createProblem = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      difficulty,
-      constraints,
-    } = req.body;
+    const { title, description, difficulty, constraints } = req.body;
 
     // Validate input
     if (!title || !description || !difficulty) {
@@ -55,7 +50,6 @@ const createProblem = async (req, res) => {
     });
   }
 };
-
 
 /*
  * Get all problems
@@ -111,8 +105,59 @@ const getProblemById = async (req, res) => {
   }
 };
 
+/*
+ * Update Problem
+ */
+const updateProblem = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { title, description, difficulty, constraints } = req.body;
+
+    const problem = await Problem.findOne({ id });
+
+    if (!problem) {
+      return res.status(404).json({
+        success: false,
+        message: "Problem not found.",
+      });
+    }
+
+    // Ownership check
+    if (problem.createdBy !== req.user.id) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to update this problem.",
+      });
+    }
+
+    problem.title = title ?? problem.title;
+    problem.description = description ?? problem.description;
+    problem.difficulty = difficulty ?? problem.difficulty;
+    problem.constraints = constraints ?? problem.constraints;
+
+    problem.updatedAt = new Date();
+
+    await problem.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Problem updated successfully.",
+      problem,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+    });
+  }
+};
+
 module.exports = {
   createProblem,
   getAllProblems,
   getProblemById,
+  updateProblem,
 };
