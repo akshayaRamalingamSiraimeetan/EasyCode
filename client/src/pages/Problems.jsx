@@ -4,7 +4,12 @@ import { getAllProblems } from "../services/problem";
 import { useAuth } from "../context/AuthContext";
 import ProblemsTable from "../components/ProblemsTable";
 import ProblemModal from "../components/ProblemModal";
-import { createProblem, updateProblem } from "../services/problem";
+import DeleteDialog from "../components/DeleteDialog";
+import {
+  createProblem,
+  updateProblem,
+  deleteProblem,
+} from "../services/problem";
 
 function Problems() {
   const { user } = useAuth();
@@ -13,7 +18,7 @@ function Problems() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [modalMode, setModalMode] = useState("create");
 
   const [selectedProblem, setSelectedProblem] = useState(null);
@@ -60,6 +65,20 @@ function Problems() {
     }
   };
 
+  const handleDeleteProblem = async () => {
+    try {
+      await deleteProblem(selectedProblem.id);
+
+      setShowDeleteDialog(false);
+
+      setSelectedProblem(null);
+
+      await fetchProblems();
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to delete problem.");
+    }
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -98,7 +117,10 @@ function Problems() {
             setModalMode("edit");
             setShowModal(true);
           }}
-          onDelete={(problem) => console.log(problem)}
+          onDelete={(problem) => {
+            setSelectedProblem(problem);
+            setShowDeleteDialog(true);
+          }}
         />
       )}
 
@@ -113,6 +135,16 @@ function Problems() {
         onSubmit={
           modalMode === "create" ? handleCreateProblem : handleUpdateProblem
         }
+      />
+
+      <DeleteDialog
+        isOpen={showDeleteDialog}
+        problem={selectedProblem}
+        onClose={() => {
+          setShowDeleteDialog(false);
+          setSelectedProblem(null);
+        }}
+        onConfirm={handleDeleteProblem}
       />
     </div>
   );
