@@ -56,6 +56,33 @@ const createProblem = async (req, res) => {
   }
 };
 
+
+/*
+ * Get all problems
+ */
+const getAllProblems = async (req, res) => {
+  try {
+    const problems = await Problem.find({})
+      .sort({ createdAt: -1 })
+      .select("-_id -__v");
+
+    return res.status(200).json({
+      success: true,
+      count: problems.length,
+      problems,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+    });
+  }
+};
+
+
 module.exports = {
   createProblem,
+  getAllProblems,
 };
