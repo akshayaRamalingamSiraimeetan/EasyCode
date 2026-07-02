@@ -416,3 +416,64 @@ input {
   background: #c82333;
 }
 
+.difficulty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 80px;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.easy {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.hard {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.icon-btn {
+  background: transparent;
+
+  border: none;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 18px;
+
+  padding: 4px;
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: #f4b400;
+
+  transform: scale(1.1);
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+}
+
