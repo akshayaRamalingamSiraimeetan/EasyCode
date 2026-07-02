@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
+const problemRoutes = require("./routes/problemRoutes");
 
 const app = express();
 
@@ -13,11 +14,14 @@ app.use(
   })
 );
 
+
 // Parse JSON bodies
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/problems", problemRoutes);
+
 
 // Health check
 app.get("/", (req, res) => {
