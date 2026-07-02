@@ -4,7 +4,7 @@ import { getAllProblems } from "../services/problem";
 import { useAuth } from "../context/AuthContext";
 import ProblemsTable from "../components/ProblemsTable";
 import ProblemModal from "../components/ProblemModal";
-import { createProblem } from "../services/problem";
+import { createProblem, updateProblem } from "../services/problem";
 
 function Problems() {
   const { user } = useAuth();
@@ -47,6 +47,19 @@ function Problems() {
     }
   };
 
+  const handleUpdateProblem = async (problemData) => {
+    try {
+      await updateProblem(selectedProblem.id, problemData);
+
+      setShowModal(false);
+      setSelectedProblem(null);
+
+      await fetchProblems();
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to update problem.");
+    }
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -80,7 +93,11 @@ function Problems() {
         <ProblemsTable
           problems={problems}
           isAdmin={user?.role === "admin"}
-          onEdit={(problem) => console.log(problem)}
+          onEdit={(problem) => {
+            setSelectedProblem(problem);
+            setModalMode("edit");
+            setShowModal(true);
+          }}
           onDelete={(problem) => console.log(problem)}
         />
       )}
@@ -89,8 +106,13 @@ function Problems() {
         isOpen={showModal}
         mode={modalMode}
         problem={selectedProblem}
-        onClose={() => setShowModal(false)}
-        onSubmit={handleCreateProblem}
+        onClose={() => {
+          setShowModal(false);
+          setSelectedProblem(null);
+        }}
+        onSubmit={
+          modalMode === "create" ? handleCreateProblem : handleUpdateProblem
+        }
       />
     </div>
   );
