@@ -477,3 +477,48 @@ input {
   color: #dc2626;
 }
 
+
+
+/* ===========================
+   Table Toolbar
+=========================== */
+
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-input {
+  width: 320px;
+  max-width: 100%;
+
+  padding: 10px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #f4b400;
+}
+
+.empty-state {
+  text-align: center;
+
+  padding: 60px 20px;
+
+  color: #666;
+}
+
+.empty-state h3 {
+  margin-bottom: 10px;
+}
+

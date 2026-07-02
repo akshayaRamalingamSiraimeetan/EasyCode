@@ -20,6 +20,7 @@ function Problems() {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [modalMode, setModalMode] = useState("create");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [selectedProblem, setSelectedProblem] = useState(null);
   useEffect(() => {
@@ -79,6 +80,10 @@ function Problems() {
     }
   };
 
+  const filteredProblems = problems.filter((problem) =>
+    problem.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -106,11 +111,33 @@ function Problems() {
         )}
       </div>
 
+      <div className="table-toolbar">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search problems..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       {problems.length === 0 ? (
-        <p>No problems found.</p>
+        <div className="empty-state">
+          <h3>No problems found</h3>
+
+          {user?.role === "admin" ? (
+            <p>
+              Create your first coding problem using the
+              <strong> + Create Problem </strong>
+              button.
+            </p>
+          ) : (
+            <p>No problems are currently available.</p>
+          )}
+        </div>
       ) : (
         <ProblemsTable
-          problems={problems}
+          problems={filteredProblems}
           isAdmin={user?.role === "admin"}
           onEdit={(problem) => {
             setSelectedProblem(problem);
