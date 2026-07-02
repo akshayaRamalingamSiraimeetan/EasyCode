@@ -20,7 +20,11 @@ function Dashboard() {
         <p>
           Welcome back,
           <strong> {user?.username}</strong>.
+          <button className="btn-primary" onClick={() => navigate("/problems")}>
+            View Problems
+          </button>
         </p>
+
         <p>
           Role:
           <strong>{user?.role}</strong>

@@ -205,3 +205,24 @@ input {
 .dashboard-card p {
   margin: 20px 0;
 }
+
+/* =========================
+   Problems
+========================= */
+
+.problems-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.problems-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.problems-header h1 {
+  margin: 0;
+}

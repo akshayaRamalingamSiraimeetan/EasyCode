@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Problems from "./pages/Problems";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 
@@ -11,6 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/register" />} />
+
         <Route
           path="/register"
           element={
@@ -18,7 +21,8 @@ function App() {
               <Register />
             </PublicRoute>
           }
-        />{" "}
+        />
+
         <Route
           path="/login"
           element={
@@ -27,6 +31,7 @@ function App() {
             </PublicRoute>
           }
         />
+
         <Route
           path="/dashboard"
           element={
@@ -34,7 +39,16 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           }
-        />{" "}
+        />
+
+        <Route
+          path="/problems"
+          element={
+            <ProtectedRoute>
+              <Problems />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
