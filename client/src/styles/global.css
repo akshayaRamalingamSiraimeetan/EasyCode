@@ -220,7 +220,7 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .problems-header h1 {
@@ -283,18 +283,8 @@ input {
 .action-buttons {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: nowrap;
-}
-
-.action-buttons button {
-  white-space: nowrap;
-}
-
-.action-buttons {
-  display: flex;
-  align-items: center;
   gap: 12px;
+  white-space: nowrap;
 }
 
 .icon-btn {
@@ -303,7 +293,9 @@ input {
   font-size: 18px;
   cursor: pointer;
   padding: 4px;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .icon-btn:hover {
@@ -320,11 +312,15 @@ input {
   color: #111;
   border: none;
   border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 14px;
+  padding: 6px 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.table-btn:hover {
+  background: #dca300;
 }
 
 .table-btn:hover {
@@ -353,7 +349,7 @@ input {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.45);
+  background: rgba(0, 0, 0, 0.45);
 
   display: flex;
   justify-content: center;
@@ -464,7 +460,9 @@ input {
 
   padding: 4px;
 
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .icon-btn:hover {
@@ -477,8 +475,6 @@ input {
   color: #dc2626;
 }
 
-
-
 /* ===========================
    Table Toolbar
 =========================== */
@@ -489,25 +485,28 @@ input {
   align-items: center;
   margin: 20px 0;
 }
-
 .search-input {
-  width: 320px;
+  width: 350px;
+
   max-width: 100%;
 
   padding: 10px 14px;
 
   border: 1px solid #d1d5db;
+
   border-radius: 8px;
 
   font-size: 14px;
 
-  outline: none;
-
-  transition: border-color 0.2s ease;
+  transition: 0.2s;
 }
 
 .search-input:focus {
+  outline: none;
+
   border-color: #f4b400;
+
+  box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.15);
 }
 
 .empty-state {
@@ -522,3 +521,79 @@ input {
   margin-bottom: 10px;
 }
 
+/* ==========================
+   Table Container
+========================== */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ==========================
+   Problems Table
+========================== */
+
+.problems-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.problems-table th,
+.problems-table td {
+  padding: 16px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.problems-table thead {
+  background: #111827;
+  color: white;
+}
+
+.problems-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+/* Zebra rows */
+
+.problems-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Hover */
+
+.problems-table tbody tr:hover {
+  background: #fff9e6;
+}
+
+/* Bottom border */
+
+.problems-table td {
+  border-bottom: 1px solid #ececec;
+}
+
+/* Remove border from last row */
+
+.problems-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.col-number {
+  width: 60px;
+}
+
+.col-title {
+  width: 50%;
+}
+
+.col-difficulty {
+  width: 160px;
+}
+
+.col-actions {
+  width: 220px;
+}

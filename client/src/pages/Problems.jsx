@@ -136,19 +136,20 @@ function Problems() {
           )}
         </div>
       ) : (
-        <ProblemsTable
-          problems={filteredProblems}
-          isAdmin={user?.role === "admin"}
-          onEdit={(problem) => {
-            setSelectedProblem(problem);
-            setModalMode("edit");
-            setShowModal(true);
-          }}
-          onDelete={(problem) => {
-            setSelectedProblem(problem);
-            setShowDeleteDialog(true);
-          }}
-        />
+        <div className="table-container">
+          <ProblemsTable
+            problems={filteredProblems}
+            onEdit={(problem) => {
+              setSelectedProblem(problem);
+              setModalMode("edit");
+              setShowModal(true);
+            }}
+            onDelete={(problem) => {
+              setSelectedProblem(problem);
+              setShowDeleteDialog(true);
+            }}
+          />
+        </div>
       )}
 
       <ProblemModal

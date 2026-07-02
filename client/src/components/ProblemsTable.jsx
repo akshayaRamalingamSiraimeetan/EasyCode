@@ -1,18 +1,14 @@
 import ProblemRow from "./ProblemRow";
 
-function ProblemsTable({
-  problems,
-  onEdit,
-  onDelete,
-}) {
+function ProblemsTable({ problems, onEdit, onDelete }) {
   return (
     <table className="problems-table">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Difficulty</th>
-          <th>Actions</th>
+          <th className="col-number">#</th>
+          <th className="col-title">Title</th>
+          <th className="col-difficulty">Difficulty</th>
+          <th className="col-actions">Actions</th>
         </tr>
       </thead>
 
