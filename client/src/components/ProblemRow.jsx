@@ -18,7 +18,7 @@ const difficultyConfig = {
   },
 };
 
-function ProblemRow({ index, problem, onEdit, onDelete }) {
+function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
   const { user } = useAuth();
 
   return (
@@ -36,6 +36,8 @@ function ProblemRow({ index, problem, onEdit, onDelete }) {
           {difficultyConfig[problem.difficulty].label}
         </span>
       </td>
+
+      {isAdmin && <td>{problem.createdByUsername}</td>}
 
       <td>
         <div className="action-buttons">

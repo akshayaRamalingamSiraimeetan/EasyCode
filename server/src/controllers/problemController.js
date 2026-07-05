@@ -32,6 +32,7 @@ const createProblem = async (req, res) => {
       difficulty,
       constraints,
       createdBy: req.user.id,
+      createdByUsername: req.user.username,
     });
 
     await problem.save();

@@ -35,6 +35,11 @@ const problemSchema = new mongoose.Schema({
     required: true,
   },
 
+  createdByUsername: {
+    type: String,
+    required: true,
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

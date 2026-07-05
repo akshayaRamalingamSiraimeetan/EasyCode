@@ -164,6 +164,7 @@ function Problems() {
         <div className="table-container">
           <ProblemsTable
             problems={filteredProblems}
+            isAdmin={user?.role === "admin"}
             onEdit={(problem) => {
               setSelectedProblem(problem);
               setModalMode("edit");
