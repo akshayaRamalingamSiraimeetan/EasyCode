@@ -1,12 +1,12 @@
 const compiledRunner = require("./compiledRunner");
 
 async function execute(code, input) {
-  return compiledRunner.execute(
+  return compiledRunner.execute({
     code,
     input,
-    "c",
-    "gcc"
-  );
+    extension: "c",
+    compiler: "gcc",
+  });
 }
 
 module.exports = {

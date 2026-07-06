@@ -11,7 +11,7 @@ function deleteFile(filePath) {
   });
 }
 
-async function execute(code, input, extension, compiler) {
+async function execute({code, input, extension, compiler,}) {
   return new Promise((resolve, reject) => {
     const fileName = `${uuid()}.${extension}`;
     const filePath = path.join(__dirname, "..", "temp", fileName);
