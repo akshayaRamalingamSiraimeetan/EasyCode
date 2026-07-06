@@ -49,9 +49,22 @@ async function execute(code, input) {
       programProcess.stdin.write(input || "");
       programProcess.stdin.end();
 
+      let timedOut = false;
+
+      const timeout = setTimeout(() => {
+        timedOut = true;
+        programProcess.kill();
+      }, 2000);
+
       programProcess.on("close", () => {
-        deleteFile(filePath);
-        deleteFile(executablePath);
+        clearTimeout(timeout);
+
+        if (timedOut) {
+          deleteFile(filePath);
+          deleteFile(executablePath);
+          return reject(new Error("Execution timed out"));
+        }
+        
         resolve({
           stdout,
           stderr,
