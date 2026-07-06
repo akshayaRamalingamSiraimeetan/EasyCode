@@ -25,11 +25,28 @@ async function execute(code, input) {
         console.log("Compiler stderr:", compileError);
 
         return reject(new Error(compileError));
-        resolve({
-          stdout: "Compilation successful",
-          stderr: "",
-        });
       }
+      const programProcess = spawn(executablePath);
+
+      let stdout = "";
+      programProcess.stdout.on("data", (data) => {
+        stdout += data.toString();
+      });
+
+      let stderr = "";
+      programProcess.stderr.on("data", (data) => {
+        stderr += data.toString();
+      });
+
+      programProcess.stdin.write(input || "");
+      programProcess.stdin.end();
+
+      programProcess.on("close", () => {
+        resolve({
+          stdout,
+          stderr,
+        });
+      });
     });
   });
 }
