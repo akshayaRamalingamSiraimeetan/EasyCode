@@ -3,6 +3,14 @@ const path = require("path");
 const { v4: uuid } = require("uuid");
 const { spawn } = require("child_process");
 
+function deleteFile(filePath) {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error("Failed to delete:", filePath);
+    }
+  });
+}
+
 async function execute(code, input) {
   return new Promise((resolve, reject) => {
     const fileName = `${uuid()}.c`;
@@ -23,7 +31,7 @@ async function execute(code, input) {
       if (code !== 0) {
         console.log("GCC exit code:", code);
         console.log("Compiler stderr:", compileError);
-
+        deleteFile(filePath);
         return reject(new Error(compileError));
       }
       const programProcess = spawn(executablePath);
@@ -42,6 +50,8 @@ async function execute(code, input) {
       programProcess.stdin.end();
 
       programProcess.on("close", () => {
+        deleteFile(filePath);
+        deleteFile(executablePath);
         resolve({
           stdout,
           stderr,
