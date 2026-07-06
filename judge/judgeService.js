@@ -12,6 +12,11 @@ async function execute(code) {
     fs.writeFileSync(filePath, code);
     console.log(fileName);
     exec(`python "${filePath}"`, (error, stdout, stderr) => {
+      fs.unlink(filePath, (deleteError) => {
+        if (deleteError) {
+          console.error("Failed to delete temp file:", deleteError);
+        }
+      });
       if (error) {
         return reject(error);
       }
