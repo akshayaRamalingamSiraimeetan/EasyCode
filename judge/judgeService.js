@@ -1,5 +1,6 @@
 const pythonRunner = require("./runners/pythonRunner");
 const cRunner = require("./runners/cRunner");
+const cppRunner = require("./runners/cppRunner");
 
 async function execute(language, code, input) {
   switch (language) {
@@ -8,6 +9,9 @@ async function execute(language, code, input) {
     
     case "c":
         return cRunner.execute(code,input);
+
+    case "cpp":
+        return cppRunner.execute(code,input);
 
     default:
       throw new Error(`Unsupported language: ${language}`);
