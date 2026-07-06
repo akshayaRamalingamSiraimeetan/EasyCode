@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const problemRoutes = require("./routes/problemRoutes");
+const compilerRoutes = require("./routes/compilerRoutes");
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/problems", problemRoutes);
-
+app.use("/api/compiler", compilerRoutes);
 
 // Health check
 app.get("/", (req, res) => {
