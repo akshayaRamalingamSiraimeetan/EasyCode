@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
 const { v4: uuid } = require("uuid");
 
 async function execute(code) {
@@ -10,16 +10,21 @@ async function execute(code) {
     const filePath = path.join(__dirname, "temp", fileName);
 
     fs.writeFileSync(filePath, code);
-    console.log(fileName);
-    exec(`python "${filePath}"`, (error, stdout, stderr) => {
-      fs.unlink(filePath, (deleteError) => {
-        if (deleteError) {
-          console.error("Failed to delete temp file:", deleteError);
-        }
-      });
-      if (error) {
-        return reject(error);
-      }
+    //console.log(fileName);
+    const pythonProcess = spawn("python", [filePath]);
+
+    let stdout = "";
+    pythonProcess.stdout.on("data", (data) => {
+      stdout += data.toString();
+    });
+
+    let stderr = "";
+    pythonProcess.stderr.on("data", (data) => {
+      stderr += data.toString();
+    });
+
+    pythonProcess.on("close", () => {
+      fs.unlink(filePath, () => {});
 
       resolve({
         stdout,
