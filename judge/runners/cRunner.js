@@ -6,6 +6,12 @@ async function execute(code, input) {
     input,
     extension: "c",
     compiler: "gcc",
+    createRunCommand(executablePath) {
+      return {
+        command: executablePath,
+        args: [],
+      };
+    },
   });
 }
 

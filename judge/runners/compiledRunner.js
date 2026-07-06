@@ -11,7 +11,7 @@ function deleteFile(filePath) {
   });
 }
 
-async function execute({code, input, extension, compiler,}) {
+async function execute({ code, input, extension, compiler, createRunCommand }) {
   return new Promise((resolve, reject) => {
     const fileName = `${uuid()}.${extension}`;
     const filePath = path.join(__dirname, "..", "temp", fileName);
@@ -35,8 +35,9 @@ async function execute({code, input, extension, compiler,}) {
         deleteFile(executablePath);
         return reject(new Error(compileError));
       }
-      const programProcess = spawn(executablePath);
+      const runConfig = createRunCommand(executablePath);
 
+      const programProcess = spawn(runConfig.command, runConfig.args);
       let stdout = "";
       programProcess.stdout.on("data", (data) => {
         stdout += data.toString();

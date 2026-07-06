@@ -6,6 +6,12 @@ async function execute(code, input) {
     input,
     extension: "cpp",
     compiler: "g++",
+    createRunCommand(executablePath) {
+      return {
+        command: executablePath,
+        args: [],
+      };
+    },
   });
 }
 
