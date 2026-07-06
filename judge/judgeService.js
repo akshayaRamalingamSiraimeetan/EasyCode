@@ -3,7 +3,7 @@ const path = require("path");
 const { spawn } = require("child_process");
 const { v4: uuid } = require("uuid");
 
-async function execute(code) {
+async function execute(code, input) {
   return new Promise((resolve, reject) => {
     const fileName = `${uuid()}.py`;
 
@@ -12,6 +12,9 @@ async function execute(code) {
     fs.writeFileSync(filePath, code);
     //console.log(fileName);
     const pythonProcess = spawn("python", [filePath]);
+    
+    pythonProcess.stdin.write(input || "");
+    pythonProcess.stdin.end();
 
     let stdout = "";
     pythonProcess.stdout.on("data", (data) => {

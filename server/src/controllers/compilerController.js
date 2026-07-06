@@ -2,9 +2,9 @@ const judge = require("../../../judge/judgeService");
 
 const runCode = async (req, res) => {
   try {
-    const { code } = req.body;
+    const { code, input } = req.body;
 
-    const result = await judge.execute(code);
+    const result = await judge.execute(code, input);
 
     return res.status(200).json({
       success: true,
