@@ -9,6 +9,7 @@ const Status = {
   SUCCESS: "success",
   RUNTIME_ERROR: "runtime_error",
   TIME_LIMIT_EXCEEDED: "time_limit_exceeded",
+  OUTPUT_LIMIT_EXCEEDED: "output_limit_exceeded",
 };
 
 function deleteWorkspace(workspacePath) {
@@ -38,7 +39,7 @@ async function execute(code, input) {
     args: ["solution.py"],
     cwd: `/workspace/${workspaceId}`,
     stdin: input,
-    timeout: 2000,
+    timeout: 30000,
   });
 
   deleteWorkspace(workspacePath);
@@ -48,6 +49,14 @@ async function execute(code, input) {
       status: Status.TIME_LIMIT_EXCEEDED,
       stdout: result.stdout,
       stderr: result.stderr,
+    };
+  }
+
+  if (result.outputLimitExceeded) {
+    return {
+      status: Status.RUNTIME_ERROR,
+      stdout: "",
+      stderr: "Output limit exceeded",
     };
   }
 

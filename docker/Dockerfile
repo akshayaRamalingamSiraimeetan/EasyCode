@@ -16,4 +16,10 @@ RUN apt-get update && \
 
 WORKDIR /workspace
 
+# Create a non-root user and hand over /workspace
+RUN useradd --create-home --shell /bin/bash runner \
+    && chown -R runner:runner /workspace
+
+USER runner
+
 CMD ["bash"]
