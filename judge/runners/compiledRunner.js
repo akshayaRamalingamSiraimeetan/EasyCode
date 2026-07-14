@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { v4: uuid } = require("uuid");
-const { spawn } = require("child_process");
+const { runInDocker } = require("../dockerExecutor");
 
 const TEMP_DIR = path.join(__dirname, "..", "temp");
 
@@ -22,11 +22,6 @@ function deleteWorkspace(workspacePath) {
   });
 }
 
-/**
- * Executes compiled code (C / C++) in an isolated per-submission workspace.
- *
- * Resolves with { status, stdout, stderr }. Never rejects.
- */
 async function execute({
   code,
   input,
@@ -35,90 +30,75 @@ async function execute({
   compiler,
   compilerArgs = [],
 }) {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     let settled = false;
+
     function settle(result) {
       if (settled) return;
       settled = true;
       resolve(result);
     }
 
-    // ── 1. Create isolated workspace ──────────────────────────────────────────
     const workspaceId = uuid();
     const workspacePath = path.join(TEMP_DIR, workspaceId);
+
     fs.mkdirSync(workspacePath, { recursive: true });
 
     const sourcePath = path.join(workspacePath, sourceFileName);
-    const executablePath = path.join(workspacePath, executableName);
 
-    // ── 2. Write source file ──────────────────────────────────────────────────
     fs.writeFileSync(sourcePath, code);
 
-    // ── 3. Compile ────────────────────────────────────────────────────────────
-    const compileArgs = [sourcePath, "-o", executablePath, ...compilerArgs];
-    const compilerProcess = spawn(compiler, compileArgs, {
-      cwd: workspacePath,
-      stdio: ["ignore", "pipe", "pipe"],
+    const compileResult = await runInDocker({
+      command: compiler,
+      args: [
+        sourceFileName,
+        "-o",
+        executableName,
+        ...compilerArgs,
+      ],
+      cwd: `/workspace/${workspaceId}`,
+      timeout: 10000,
     });
 
-    let compileError = "";
-    compilerProcess.stderr.on("data", (data) => {
-      compileError += data.toString();
-    });
-
-    compilerProcess.on("error", (err) => {
+    if (compileResult.exitCode !== 0) {
       deleteWorkspace(workspacePath);
-      settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: `Compiler error: ${err.message}` });
+
+      return settle({
+        status: Status.COMPILATION_ERROR,
+        stdout: "",
+        stderr: compileResult.stderr,
+      });
+    }
+
+    const runResult = await runInDocker({
+      command: `./${executableName}`,
+      cwd: `/workspace/${workspaceId}`,
+      stdin: input,
+      timeout: 2000,
     });
 
-    compilerProcess.on("close", (exitCode) => {
-      if (exitCode !== 0) {
-        deleteWorkspace(workspacePath);
-        return settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: compileError });
-      }
+    deleteWorkspace(workspacePath);
 
-      // ── 4. Execute ──────────────────────────────────────────────────────────
-      const programProcess = spawn(executablePath, [], {
-        cwd: workspacePath,
-        stdio: ["pipe", "pipe", "pipe"],
+    if (runResult.timedOut) {
+      return settle({
+        status: Status.TIME_LIMIT_EXCEEDED,
+        stdout: runResult.stdout,
+        stderr: runResult.stderr,
       });
+    }
 
-      let stdout = "";
-      let stderr = "";
-
-      programProcess.stdout.on("data", (data) => { stdout += data.toString(); });
-      programProcess.stderr.on("data", (data) => { stderr += data.toString(); });
-
-      programProcess.stdin.write(input || "");
-      programProcess.stdin.end();
-
-      // ── 5. Timeout ──────────────────────────────────────────────────────────
-      let timedOut = false;
-      const timeout = setTimeout(() => {
-        timedOut = true;
-        programProcess.kill("SIGKILL");
-      }, 2000);
-
-      // ── 6. Process startup failure ──────────────────────────────────────────
-      programProcess.on("error", (err) => {
-        clearTimeout(timeout);
-        deleteWorkspace(workspacePath);
-        settle({ status: Status.RUNTIME_ERROR, stdout, stderr: `Spawn error: ${err.message}` });
+    if (runResult.exitCode !== 0) {
+      return settle({
+        status: Status.RUNTIME_ERROR,
+        stdout: runResult.stdout,
+        stderr: runResult.stderr,
       });
+    }
 
-      // ── 7. Process finished ─────────────────────────────────────────────────
-      programProcess.on("close", (exitCode, signal) => {
-        clearTimeout(timeout);
-        deleteWorkspace(workspacePath);
-
-        if (timedOut) {
-          return settle({ status: Status.TIME_LIMIT_EXCEEDED, stdout, stderr });
-        }
-        if (exitCode !== 0 || signal !== null) {
-          return settle({ status: Status.RUNTIME_ERROR, stdout, stderr });
-        }
-        settle({ status: Status.SUCCESS, stdout, stderr });
-      });
+    return settle({
+      status: Status.SUCCESS,
+      stdout: runResult.stdout,
+      stderr: runResult.stderr,
     });
   });
 }

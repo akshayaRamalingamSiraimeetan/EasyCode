@@ -5,7 +5,7 @@ async function execute(code, input) {
     code,
     input,
     sourceFileName: "solution.cpp",
-    executableName: "solution.exe",
+    executableName: "solution.out",
     compiler: "g++",
   });
 }
