@@ -55,7 +55,7 @@ async function execute({
         "-o",
         executableName,
         ...compilerArgs,
-      ],,
+      ],
       cwd: `/workspace/${workspaceId}`,
       timeout: 10000,
     });
