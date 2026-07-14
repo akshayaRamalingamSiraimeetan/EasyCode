@@ -10,6 +10,7 @@ const Status = {
   RUNTIME_ERROR: "runtime_error",
   TIME_LIMIT_EXCEEDED: "time_limit_exceeded",
   COMPILATION_ERROR: "compilation_error",
+  OUTPUT_LIMIT_EXCEEDED: "output_limit_exceeded",
 };
 
 function deleteWorkspace(workspacePath) {
@@ -58,6 +59,7 @@ async function execute({
       ],
       cwd: `/workspace/${workspaceId}`,
       timeout: 10000,
+      checkOutputLimit: false,
     });
 
     if (compileResult.exitCode !== 0) {
@@ -84,6 +86,14 @@ async function execute({
         status: Status.TIME_LIMIT_EXCEEDED,
         stdout: runResult.stdout,
         stderr: runResult.stderr,
+      });
+    }
+
+    if (runResult.outputLimitExceeded) {
+      return settle({
+        status: Status.RUNTIME_ERROR,
+        stdout: "",
+        stderr: "Output limit exceeded",
       });
     }
 
