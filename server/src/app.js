@@ -15,7 +15,6 @@ app.use(
   })
 );
 
-
 // Parse JSON bodies
 app.use(express.json());
 

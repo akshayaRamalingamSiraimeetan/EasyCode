@@ -1,76 +1,97 @@
 const fs = require("fs");
 const path = require("path");
-const { spawn } = require("child_process");
 const { v4: uuid } = require("uuid");
+const { spawn } = require("child_process");
 
+const TEMP_DIR = path.join(__dirname, "..", "temp");
+
+const Status = {
+  SUCCESS: "success",
+  RUNTIME_ERROR: "runtime_error",
+  TIME_LIMIT_EXCEEDED: "time_limit_exceeded",
+};
+
+function deleteWorkspace(workspacePath) {
+  setImmediate(() => {
+    try {
+      fs.rmSync(workspacePath, { recursive: true, force: true });
+    } catch (err) {
+      console.error("Failed to delete workspace:", workspacePath, err.message);
+    }
+  });
+}
+
+/**
+ * Executes Python code in an isolated per-submission workspace.
+ *
+ * Workspace layout:
+ *   temp/<uuid>/
+ *     solution.py
+ *
+ * Resolves with { status, stdout, stderr }. Never rejects.
+ */
 async function execute(code, input) {
-  return new Promise((resolve, reject) => {
-    // Generate unique filename
-    const fileName = `${uuid()}.py`;
-    const filePath = path.join(__dirname, "..", "temp", fileName);
-    // Write code to file
-    fs.writeFileSync(filePath, code);
+  return new Promise((resolve) => {
+    let settled = false;
+    function settle(result) {
+      if (settled) return;
+      settled = true;
+      resolve(result);
+    }
 
-    // Start Python process
-    const pythonProcess = spawn("python", [filePath]);
+    // ── 1. Create isolated workspace ──────────────────────────────────────────
+    const workspaceId = uuid();
+    const workspacePath = path.join(TEMP_DIR, workspaceId);
+    fs.mkdirSync(workspacePath, { recursive: true });
 
-    let timedOut = false;
+    const sourcePath = path.join(workspacePath, "solution.py");
 
-    // Kill process after 2 seconds
-    const timeout = setTimeout(() => {
-      timedOut = true;
+    // ── 2. Write source file ──────────────────────────────────────────────────
+    fs.writeFileSync(sourcePath, code);
 
-      pythonProcess.kill();
-    }, 2000);
-
-    // Send stdin
-    pythonProcess.stdin.write(input || "");
-    pythonProcess.stdin.end();
+    // ── 3. Execute ────────────────────────────────────────────────────────────
+    const pythonProcess = spawn("python", ["solution.py"], {
+      cwd: workspacePath,
+      stdio: ["pipe", "pipe", "pipe"],
+    });
 
     let stdout = "";
     let stderr = "";
 
-    // Capture stdout
-    pythonProcess.stdout.on("data", (data) => {
-      stdout += data.toString();
-    });
+    pythonProcess.stdout.on("data", (data) => { stdout += data.toString(); });
+    pythonProcess.stderr.on("data", (data) => { stderr += data.toString(); });
 
-    // Capture stderr
-    pythonProcess.stderr.on("data", (data) => {
-      stderr += data.toString();
-    });
+    pythonProcess.stdin.write(input || "");
+    pythonProcess.stdin.end();
 
-    // Process finished
-    pythonProcess.on("close", (code, signal) => {
+    // ── 4. Timeout ────────────────────────────────────────────────────────────
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      pythonProcess.kill("SIGKILL");
+    }, 2000);
+
+    // ── 5. Process startup failure ────────────────────────────────────────────
+    pythonProcess.on("error", (err) => {
       clearTimeout(timeout);
+      deleteWorkspace(workspacePath);
+      settle({ status: Status.RUNTIME_ERROR, stdout, stderr: `Spawn error: ${err.message}` });
+    });
 
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Failed to delete temp file:", err);
-        }
-      });
+    // ── 6. Process finished ───────────────────────────────────────────────────
+    pythonProcess.on("close", (exitCode, signal) => {
+      clearTimeout(timeout);
+      deleteWorkspace(workspacePath);
 
       if (timedOut) {
-        return reject(new Error("Execution timed out"));
+        return settle({ status: Status.TIME_LIMIT_EXCEEDED, stdout, stderr });
       }
-
-      resolve({
-        stdout,
-        stderr,
-      });
-    });
-
-    // Process failed to start
-    pythonProcess.on("error", (error) => {
-      clearTimeout(timeout);
-
-      fs.unlink(filePath, () => {});
-
-      reject(error);
+      if (exitCode !== 0 || signal !== null) {
+        return settle({ status: Status.RUNTIME_ERROR, stdout, stderr });
+      }
+      settle({ status: Status.SUCCESS, stdout, stderr });
     });
   });
 }
 
-module.exports = {
-  execute,
-};
+module.exports = { execute, Status };

@@ -4,17 +4,10 @@ async function execute(code, input) {
   return compiledRunner.execute({
     code,
     input,
-    extension: "cpp",
+    sourceFileName: "solution.cpp",
+    executableName: "solution.exe",
     compiler: "g++",
-    createRunCommand(executablePath) {
-      return {
-        command: executablePath,
-        args: [],
-      };
-    },
   });
 }
 
-module.exports = {
-  execute,
-};
+module.exports = { execute };

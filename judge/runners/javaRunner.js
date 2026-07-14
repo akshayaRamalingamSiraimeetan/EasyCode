@@ -23,18 +23,29 @@ function deleteWorkspace(workspacePath) {
 }
 
 /**
- * Executes compiled code (C / C++) in an isolated per-submission workspace.
+ * Kills a process and its entire child process tree.
+ * Uses taskkill on Windows to ensure child JVM processes are also terminated,
+ * which allows the 'close' event to fire reliably.
+ */
+function killProcessTree(proc) {
+  if (process.platform === "win32") {
+    spawn("taskkill", ["/F", "/T", "/PID", proc.pid.toString()], { stdio: "ignore" });
+  } else {
+    proc.kill("SIGKILL");
+  }
+}
+
+/**
+ * Executes Java code in an isolated per-submission workspace.
+ *
+ * Workspace layout:
+ *   temp/<uuid>/
+ *     Main.java
+ *     Main.class
  *
  * Resolves with { status, stdout, stderr }. Never rejects.
  */
-async function execute({
-  code,
-  input,
-  sourceFileName,
-  executableName,
-  compiler,
-  compilerArgs = [],
-}) {
+async function execute(code, input) {
   return new Promise((resolve) => {
     let settled = false;
     function settle(result) {
@@ -48,23 +59,17 @@ async function execute({
     const workspacePath = path.join(TEMP_DIR, workspaceId);
     fs.mkdirSync(workspacePath, { recursive: true });
 
-    const sourcePath = path.join(workspacePath, sourceFileName);
-    const executablePath = path.join(workspacePath, executableName);
-
-    // ── 2. Write source file ──────────────────────────────────────────────────
+    const sourcePath = path.join(workspacePath, "Main.java");
     fs.writeFileSync(sourcePath, code);
 
-    // ── 3. Compile ────────────────────────────────────────────────────────────
-    const compileArgs = [sourcePath, "-o", executablePath, ...compilerArgs];
-    const compilerProcess = spawn(compiler, compileArgs, {
+    // ── 2. Compile ────────────────────────────────────────────────────────────
+    const compilerProcess = spawn("javac", ["Main.java"], {
       cwd: workspacePath,
       stdio: ["ignore", "pipe", "pipe"],
     });
 
     let compileError = "";
-    compilerProcess.stderr.on("data", (data) => {
-      compileError += data.toString();
-    });
+    compilerProcess.stderr.on("data", (data) => { compileError += data.toString(); });
 
     compilerProcess.on("error", (err) => {
       deleteWorkspace(workspacePath);
@@ -77,8 +82,8 @@ async function execute({
         return settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: compileError });
       }
 
-      // ── 4. Execute ──────────────────────────────────────────────────────────
-      const programProcess = spawn(executablePath, [], {
+      // ── 3. Execute ────────────────────────────────────────────────────────
+      const programProcess = spawn("java", ["Main"], {
         cwd: workspacePath,
         stdio: ["pipe", "pipe", "pipe"],
       });
@@ -92,21 +97,19 @@ async function execute({
       programProcess.stdin.write(input || "");
       programProcess.stdin.end();
 
-      // ── 5. Timeout ──────────────────────────────────────────────────────────
+      // ── 4. Timeout ──────────────────────────────────────────────────────────
       let timedOut = false;
       const timeout = setTimeout(() => {
         timedOut = true;
-        programProcess.kill("SIGKILL");
-      }, 2000);
+        killProcessTree(programProcess);
+      }, 5000);
 
-      // ── 6. Process startup failure ──────────────────────────────────────────
       programProcess.on("error", (err) => {
         clearTimeout(timeout);
         deleteWorkspace(workspacePath);
         settle({ status: Status.RUNTIME_ERROR, stdout, stderr: `Spawn error: ${err.message}` });
       });
 
-      // ── 7. Process finished ─────────────────────────────────────────────────
       programProcess.on("close", (exitCode, signal) => {
         clearTimeout(timeout);
         deleteWorkspace(workspacePath);

@@ -1,8 +1,6 @@
 const express = require("express");
 
-const {
-  runCode,
-} = require("../controllers/compilerController");
+const { runCode } = require("../controllers/compilerController");
 
 const router = express.Router();
 
