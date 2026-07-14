@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { v4: uuid } = require("uuid");
-const { spawn } = require("child_process");
+const { runInDocker } = require("../dockerExecutor");
 
 const TEMP_DIR = path.join(__dirname, "..", "temp");
 
@@ -23,105 +23,78 @@ function deleteWorkspace(workspacePath) {
 }
 
 /**
- * Kills a process and its entire child process tree.
- * Uses taskkill on Windows to ensure child JVM processes are also terminated,
- * which allows the 'close' event to fire reliably.
- */
-function killProcessTree(proc) {
-  if (process.platform === "win32") {
-    spawn("taskkill", ["/F", "/T", "/PID", proc.pid.toString()], { stdio: "ignore" });
-  } else {
-    proc.kill("SIGKILL");
-  }
-}
-
-/**
  * Executes Java code in an isolated per-submission workspace.
- *
- * Workspace layout:
- *   temp/<uuid>/
- *     Main.java
- *     Main.class
  *
  * Resolves with { status, stdout, stderr }. Never rejects.
  */
 async function execute(code, input) {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     let settled = false;
+
     function settle(result) {
       if (settled) return;
       settled = true;
       resolve(result);
     }
 
-    // ── 1. Create isolated workspace ──────────────────────────────────────────
+    // 1. Create workspace
     const workspaceId = uuid();
     const workspacePath = path.join(TEMP_DIR, workspaceId);
+
     fs.mkdirSync(workspacePath, { recursive: true });
 
+    // 2. Write source
     const sourcePath = path.join(workspacePath, "Main.java");
     fs.writeFileSync(sourcePath, code);
 
-    // ── 2. Compile ────────────────────────────────────────────────────────────
-    const compilerProcess = spawn("javac", ["Main.java"], {
-      cwd: workspacePath,
-      stdio: ["ignore", "pipe", "pipe"],
+    // 3. Compile inside Docker
+    const compileResult = await runInDocker({
+      command: "javac",
+      args: ["Main.java"],
+      cwd: `/workspace/${workspaceId}`,
     });
 
-    let compileError = "";
-    compilerProcess.stderr.on("data", (data) => { compileError += data.toString(); });
-
-    compilerProcess.on("error", (err) => {
+    if (compileResult.exitCode !== 0) {
       deleteWorkspace(workspacePath);
-      settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: `Compiler error: ${err.message}` });
+
+      return settle({
+        status: Status.COMPILATION_ERROR,
+        stdout: "",
+        stderr: compileResult.stderr,
+      });
+    }
+
+    // 4. Execute inside Docker
+    const executionResult = await runInDocker({
+      command: "java",
+      args: ["Main"],
+      cwd: `/workspace/${workspaceId}`,
+      stdin: input,
+      timeout: 5000,
     });
 
-    compilerProcess.on("close", (exitCode) => {
-      if (exitCode !== 0) {
-        deleteWorkspace(workspacePath);
-        return settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: compileError });
-      }
+    deleteWorkspace(workspacePath);
 
-      // ── 3. Execute ────────────────────────────────────────────────────────
-      const programProcess = spawn("java", ["Main"], {
-        cwd: workspacePath,
-        stdio: ["pipe", "pipe", "pipe"],
+    if (executionResult.timedOut) {
+      return settle({
+        status: Status.TIME_LIMIT_EXCEEDED,
+        stdout: executionResult.stdout,
+        stderr: executionResult.stderr,
       });
+    }
 
-      let stdout = "";
-      let stderr = "";
-
-      programProcess.stdout.on("data", (data) => { stdout += data.toString(); });
-      programProcess.stderr.on("data", (data) => { stderr += data.toString(); });
-
-      programProcess.stdin.write(input || "");
-      programProcess.stdin.end();
-
-      // ── 4. Timeout ──────────────────────────────────────────────────────────
-      let timedOut = false;
-      const timeout = setTimeout(() => {
-        timedOut = true;
-        killProcessTree(programProcess);
-      }, 5000);
-
-      programProcess.on("error", (err) => {
-        clearTimeout(timeout);
-        deleteWorkspace(workspacePath);
-        settle({ status: Status.RUNTIME_ERROR, stdout, stderr: `Spawn error: ${err.message}` });
+    if (executionResult.exitCode !== 0) {
+      return settle({
+        status: Status.RUNTIME_ERROR,
+        stdout: executionResult.stdout,
+        stderr: executionResult.stderr,
       });
+    }
 
-      programProcess.on("close", (exitCode, signal) => {
-        clearTimeout(timeout);
-        deleteWorkspace(workspacePath);
-
-        if (timedOut) {
-          return settle({ status: Status.TIME_LIMIT_EXCEEDED, stdout, stderr });
-        }
-        if (exitCode !== 0 || signal !== null) {
-          return settle({ status: Status.RUNTIME_ERROR, stdout, stderr });
-        }
-        settle({ status: Status.SUCCESS, stdout, stderr });
-      });
+    return settle({
+      status: Status.SUCCESS,
+      stdout: executionResult.stdout,
+      stderr: executionResult.stderr,
     });
   });
 }
