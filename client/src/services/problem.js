@@ -34,3 +34,35 @@ export const updateProblem = async (id, problemData) => {
 export const deleteProblem = async (id) => {
   return api.delete(`/problems/${id}`);
 };
+
+/* ===========================
+   Test Case Service Functions
+=========================== */
+
+/*
+ * Get all test cases for a problem
+ */
+export const getTestCases = async (problemId) => {
+  return api.get(`/problems/${problemId}/testcases`);
+};
+
+/*
+ * Create a test case for a problem
+ */
+export const createTestCase = async (problemId, data) => {
+  return api.post(`/problems/${problemId}/testcases`, data);
+};
+
+/*
+ * Update a test case by its UUID
+ */
+export const updateTestCase = async (tcId, data) => {
+  return api.put(`/problems/testcases/${tcId}`, data);
+};
+
+/*
+ * Delete a test case by its UUID
+ */
+export const deleteTestCase = async (tcId) => {
+  return api.delete(`/problems/testcases/${tcId}`);
+};

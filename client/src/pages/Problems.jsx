@@ -42,28 +42,20 @@ function Problems() {
     }
   };
 
-  const handleCreateProblem = async (problemData) => {
-    try {
-      await createProblem(problemData);
+  // Called by ProblemModal for both create and edit.
+  // Must return the saved problem object so the modal can attach test cases.
+  const handleModalSave = async ({ mode, problemData }) => {
+    if (mode === "create") {
+      const res = await createProblem(problemData);
       toast.success("Problem created successfully.");
-      setShowModal(false);
-
       fetchProblems();
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to create problem.");
-    }
-  };
-
-  const handleUpdateProblem = async (problemData) => {
-    try {
+      return res.data.problem; // modal uses .id to create test cases
+    } else {
       await updateProblem(selectedProblem.id, problemData);
       toast.success("Problem updated successfully.");
-      setShowModal(false);
       setSelectedProblem(null);
-
       await fetchProblems();
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update problem.");
+      return { id: selectedProblem.id };
     }
   };
 
@@ -186,9 +178,7 @@ function Problems() {
           setShowModal(false);
           setSelectedProblem(null);
         }}
-        onSubmit={
-          modalMode === "create" ? handleCreateProblem : handleUpdateProblem
-        }
+        onSave={handleModalSave}
       />
 
       <DeleteDialog
