@@ -1780,3 +1780,145 @@ input {
     flex-direction: column;
   }
 }
+
+/* ============================================================
+   RUN RESULT TABS  (rt- prefix)
+   Tabbed per-testcase output panel for the Run action.
+   No new colors — uses existing dark console palette + accent.
+============================================================ */
+
+/* ── tab list scrollability ───────────────────────────────── */
+
+.solve-console-tabs {
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.solve-console-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── tab dot indicator (pass / fail / err) ────────────────── */
+
+.rt-tab-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 5px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.rt-tab-dot--ok    { background: #22c55e; }
+.rt-tab-dot--wrong { background: #ef4444; }
+.rt-tab-dot--err   { background: var(--color-accent); }
+
+/* tab with icon/dot — keep contents inline */
+.rt-tab {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── result pane ──────────────────────────────────────────── */
+
+.rt-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+/* status banner at top of public test pane */
+.rt-status-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.rt-status-banner--ok {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.rt-status-banner--wrong {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.rt-status-banner--err {
+  background: rgba(255, 214, 10, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(255, 214, 10, 0.2);
+}
+
+/* three-column layout for input/expected/output */
+.rt-pane-cols {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rt-pane-cols .rt-pane-block {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* label above each pre */
+.rt-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* code blocks */
+.rt-pre {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 8px 10px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+  overflow-x: auto;
+}
+
+.rt-pre--neutral {
+  background: #2a2a2a;
+  color: #c8c8c8;
+  border: 1px solid #3a3a3a;
+}
+
+.rt-pre--expected {
+  background: rgba(34, 197, 94, 0.08);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.18);
+}
+
+.rt-pre--actual {
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+}
+
+.rt-pre--err {
+  background: rgba(255, 214, 10, 0.06);
+  color: var(--color-accent);
+  border: 1px solid rgba(255, 214, 10, 0.15);
+}

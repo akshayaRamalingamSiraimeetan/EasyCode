@@ -125,14 +125,6 @@ const updateProblem = async (req, res) => {
       });
     }
 
-    // Ownership check
-    if (problem.createdBy !== req.user.id) {
-      return res.status(403).json({
-        success: false,
-        message: "You are not authorized to update this problem.",
-      });
-    }
-
     problem.title = title ?? problem.title;
     problem.description = description ?? problem.description;
     problem.difficulty = difficulty ?? problem.difficulty;
@@ -171,13 +163,6 @@ const deleteProblem = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Problem not found.",
-      });
-    }
-
-    if (problem.createdBy !== req.user.id) {
-      return res.status(403).json({
-        success: false,
-        message: "You are not authorized to delete this problem.",
       });
     }
 
