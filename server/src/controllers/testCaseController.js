@@ -48,6 +48,16 @@ const createTestCase = async (req, res) => {
       });
     }
 
+    // Reject duplicate test cases (same problem + input + expectedOutput)
+    const duplicate = await TestCase.findOne({ problemId, input, expectedOutput });
+
+    if (duplicate) {
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate test case already exists.",
+      });
+    }
+
     const testCase = new TestCase({
       problemId,
       input,
@@ -64,6 +74,14 @@ const createTestCase = async (req, res) => {
       testCase,
     });
   } catch (error) {
+    // Concurrent duplicate insert — Mongo unique index rejected the second write
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate test case already exists.",
+      });
+    }
+
     console.error(error);
 
     return res.status(500).json({

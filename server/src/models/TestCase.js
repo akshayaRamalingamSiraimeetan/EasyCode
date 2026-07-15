@@ -48,4 +48,7 @@ const testCaseSchema = new mongoose.Schema({
 // Covers the common query: find by problem, sorted by display order
 testCaseSchema.index({ problemId: 1, orderIndex: 1 });
 
+// Prevents duplicate test cases at the database level
+testCaseSchema.index({ problemId: 1, input: 1, expectedOutput: 1 }, { unique: true });
+
 module.exports = mongoose.model("TestCase", testCaseSchema);

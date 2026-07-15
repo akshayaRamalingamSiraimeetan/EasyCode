@@ -13,7 +13,9 @@ const Status = {
   OUTPUT_LIMIT_EXCEEDED: "output_limit_exceeded",
 };
 
-function deleteWorkspace(workspacePath) {
+// ─── Private helpers ──────────────────────────────────────────────────────────
+
+function _deleteWorkspace(workspacePath) {
   setImmediate(() => {
     try {
       fs.rmSync(workspacePath, { recursive: true, force: true });
@@ -23,10 +25,27 @@ function deleteWorkspace(workspacePath) {
   });
 }
 
+function _mapRunResult(result) {
+  if (result.timedOut) {
+    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: result.stdout, stderr: result.stderr };
+  }
+
+  if (result.outputLimitExceeded) {
+    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded" };
+  }
+
+  if (result.exitCode !== 0) {
+    return { status: Status.RUNTIME_ERROR, stdout: result.stdout, stderr: result.stderr };
+  }
+
+  return { status: Status.SUCCESS, stdout: result.stdout, stderr: result.stderr };
+}
+
+// ─── Public API ───────────────────────────────────────────────────────────────
+
 /**
- * Executes Java code in an isolated per-submission workspace.
- *
- * Resolves with { status, stdout, stderr }. Never rejects.
+ * Single-run execution. Used by the "Run Code" endpoint.
+ * Behaviour is unchanged from the original implementation.
  */
 async function execute(code, input) {
   return new Promise(async (resolve) => {
@@ -38,17 +57,12 @@ async function execute(code, input) {
       resolve(result);
     }
 
-    // 1. Create workspace
     const workspaceId = uuid();
     const workspacePath = path.join(TEMP_DIR, workspaceId);
 
     fs.mkdirSync(workspacePath, { recursive: true });
+    fs.writeFileSync(path.join(workspacePath, "Main.java"), code);
 
-    // 2. Write source
-    const sourcePath = path.join(workspacePath, "Main.java");
-    fs.writeFileSync(sourcePath, code);
-
-    // 3. Compile inside Docker
     const compileResult = await runInDocker({
       command: "javac",
       args: ["Main.java"],
@@ -57,17 +71,11 @@ async function execute(code, input) {
     });
 
     if (compileResult.exitCode !== 0) {
-      deleteWorkspace(workspacePath);
-
-      return settle({
-        status: Status.COMPILATION_ERROR,
-        stdout: "",
-        stderr: compileResult.stderr,
-      });
+      _deleteWorkspace(workspacePath);
+      return settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: compileResult.stderr });
     }
 
-    // 4. Execute inside Docker
-    const executionResult = await runInDocker({
+    const runResult = await runInDocker({
       command: "java",
       args: ["Main"],
       cwd: `/workspace/${workspaceId}`,
@@ -75,38 +83,73 @@ async function execute(code, input) {
       timeout: 5000,
     });
 
-    deleteWorkspace(workspacePath);
+    _deleteWorkspace(workspacePath);
 
-    if (executionResult.timedOut) {
-      return settle({
-        status: Status.TIME_LIMIT_EXCEEDED,
-        stdout: executionResult.stdout,
-        stderr: executionResult.stderr,
-      });
-    }
-
-    if (executionResult.outputLimitExceeded) {
-      return settle({
-        status: Status.RUNTIME_ERROR,
-        stdout: "",
-        stderr: "Output limit exceeded",
-      });
-    }
-
-    if (executionResult.exitCode !== 0) {
-      return settle({
-        status: Status.RUNTIME_ERROR,
-        stdout: executionResult.stdout,
-        stderr: executionResult.stderr,
-      });
-    }
-
-    return settle({
-      status: Status.SUCCESS,
-      stdout: executionResult.stdout,
-      stderr: executionResult.stderr,
-    });
+    return settle(_mapRunResult(runResult));
   });
 }
 
-module.exports = { execute, Status };
+/**
+ * Multi-testcase execution. Used by the "Submit" endpoint.
+ * Compiles once, executes once per test case, stops on first non-SUCCESS result.
+ *
+ * Returns { compilationError, compileResult?, results }:
+ *   - compilationError: true  → compileResult contains the compiler output, results is []
+ *   - compilationError: false → results is an array of { status, stdout, stderr }
+ *
+ * Comparison and verdict generation are the responsibility of judgeService.
+ *
+ * @param {string} code
+ * @param {{ input: string }[]} testCases  sorted by orderIndex
+ */
+async function judge(code, testCases) {
+  const workspaceId = uuid();
+  const workspacePath = path.join(TEMP_DIR, workspaceId);
+  const results = [];
+
+  try {
+    fs.mkdirSync(workspacePath, { recursive: true });
+    fs.writeFileSync(path.join(workspacePath, "Main.java"), code);
+
+    // Compile once
+    const compileResult = await runInDocker({
+      command: "javac",
+      args: ["Main.java"],
+      cwd: `/workspace/${workspaceId}`,
+      checkOutputLimit: false,
+    });
+
+    if (compileResult.exitCode !== 0) {
+      return {
+        compilationError: true,
+        compileResult: { status: Status.COMPILATION_ERROR, stdout: "", stderr: compileResult.stderr },
+        results: [],
+      };
+    }
+
+    // Execute once per test case, stop on first execution failure
+    for (const testCase of testCases) {
+      const runResult = await runInDocker({
+        command: "java",
+        args: ["Main"],
+        cwd: `/workspace/${workspaceId}`,
+        stdin: testCase.input,
+        timeout: 5000,
+      });
+
+      const result = _mapRunResult(runResult);
+      results.push(result);
+
+      if (result.status !== Status.SUCCESS) {
+        break;
+      }
+    }
+
+    return { compilationError: false, results };
+
+  } finally {
+    _deleteWorkspace(workspacePath);
+  }
+}
+
+module.exports = { execute, judge, Status };
