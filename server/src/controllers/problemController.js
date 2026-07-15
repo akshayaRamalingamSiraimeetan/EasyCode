@@ -1,4 +1,5 @@
 const Problem = require("../models/Problem");
+const TestCase = require("../models/TestCase");
 
 /*
  Create a new problem
@@ -180,6 +181,7 @@ const deleteProblem = async (req, res) => {
       });
     }
 
+    await TestCase.deleteMany({ problemId: problem.id });
     await Problem.deleteOne({ id });
 
     return res.status(200).json({
