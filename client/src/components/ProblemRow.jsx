@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
@@ -20,6 +21,7 @@ const difficultyConfig = {
 
 function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <tr>
@@ -41,7 +43,12 @@ function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
 
       <td>
         <div className="action-buttons">
-          <button className="table-btn">Solve</button>
+          <button
+            className="table-btn"
+            onClick={() => navigate(`/problems/${problem.id}/solve`)}
+          >
+            Solve
+          </button>
 
           {user?.role === "admin" && (
             <>
