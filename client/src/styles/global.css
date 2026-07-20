@@ -2660,3 +2660,277 @@ input {
     width: 100%;
   }
 }
+
+/* ============================================================
+   AI HINT PANEL — conversation history style
+   Prefix: ai-hint-
+   Dark-themed to match the qp-panel / editor section.
+   Sits inside a QpSection on the problem panel.
+============================================================ */
+
+/* ── outer shell ──────────────────────────────────────────── */
+
+.ai-hint-panel {
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+
+/* ── empty / first-load state ─────────────────────────────── */
+
+.ai-hint-empty {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-hint-intro {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* ── hint history container ───────────────────────────────── */
+
+.ai-hint-history {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── individual hint card ─────────────────────────────────── */
+
+.ai-hint-card {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Muted background for loading / error cards */
+.ai-hint-card--loading,
+.ai-hint-card--error {
+  background: #1e1e1e;
+}
+
+/* ── card label row — "💡 Hint 1" ────────────────────────── */
+
+.ai-hint-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-accent);
+}
+
+.ai-hint-card-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ── thin divider between cards ──────────────────────────── */
+
+.ai-hint-divider {
+  height: 1px;
+  background: #2a2a2a;
+  margin: 6px 0 0;
+}
+
+/* ── loading row (spinner + text) ────────────────────────── */
+
+.ai-hint-loading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.ai-hint-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #3a3a3a;
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.ai-hint-loading-text {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ── inline error row ─────────────────────────────────────── */
+
+.ai-hint-error-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  border-radius: 6px;
+  font-size: 13px;
+  color: #f87171;
+  line-height: 1.5;
+}
+
+.ai-hint-error-row svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── hint markdown content ────────────────────────────────── */
+
+.ai-hint-content {
+  font-size: 13.5px;
+  line-height: 1.78;
+  color: #c8c8c8;
+}
+
+/* Markdown resets — scoped so they never bleed outside */
+
+.ai-hint-content p {
+  margin: 0 0 8px;
+}
+
+.ai-hint-content p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-hint-content ul,
+.ai-hint-content ol {
+  margin: 4px 0 8px 18px;
+  padding: 0;
+}
+
+.ai-hint-content li {
+  margin-bottom: 3px;
+  line-height: 1.7;
+}
+
+.ai-hint-content strong {
+  color: #e0e0e0;
+  font-weight: 700;
+}
+
+.ai-hint-content em {
+  color: #999;
+  font-style: italic;
+}
+
+.ai-hint-content code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 12.5px;
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #e2c97e; /* warm yellow — stands out on dark bg */
+}
+
+.ai-hint-content pre {
+  margin: 8px 0 4px;
+  background: #1e1e1e;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.ai-hint-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #c8c8c8;
+}
+
+.ai-hint-content blockquote {
+  margin: 6px 0;
+  padding: 5px 12px;
+  border-left: 3px solid var(--color-accent);
+  background: rgba(255, 214, 10, 0.04);
+  color: #999;
+  font-style: italic;
+}
+
+.ai-hint-content h1,
+.ai-hint-content h2,
+.ai-hint-content h3 {
+  color: #e8e8e8;
+  margin: 0 0 6px;
+}
+
+/* ── actions row (below the history) ─────────────────────── */
+
+.ai-hint-actions {
+  padding: 10px 16px 14px;
+  border-top: 1px solid #242424;
+}
+
+/* ── shared button base ───────────────────────────────────── */
+
+.ai-hint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  width: fit-content;
+  border: none;
+}
+
+/* Primary: Get Hint — filled yellow */
+.ai-hint-btn--primary {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.ai-hint-btn--primary:hover {
+  opacity: 0.88;
+}
+
+/* Next level: Need More Help / Still Stuck — outlined */
+.ai-hint-btn--next {
+  background: transparent;
+  border: 1.5px solid #3a3a3a;
+  color: #888;
+}
+
+.ai-hint-btn--next:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Retry — subtle outlined */
+.ai-hint-btn--secondary {
+  background: transparent;
+  border: 1.5px solid #444;
+  color: #777;
+}
+
+.ai-hint-btn--secondary:hover {
+  border-color: #777;
+  color: #bbb;
+}
+
+/* ── max notice ───────────────────────────────────────────── */
+
+.ai-hint-max-notice {
+  font-size: 12px;
+  color: #4a4a4a;
+  font-style: italic;
+}

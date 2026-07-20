@@ -5,6 +5,7 @@ const authRoutes = require("./routes/authRoutes");
 const problemRoutes = require("./routes/problemRoutes");
 const compilerRoutes = require("./routes/compilerRoutes");
 const submissionRoutes = require("./routes/submissionRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/compiler", compilerRoutes);
 app.use("/api/submissions", submissionRoutes);
+app.use("/api/ai", aiRoutes);
 
 // Health check
 app.get("/", (req, res) => {

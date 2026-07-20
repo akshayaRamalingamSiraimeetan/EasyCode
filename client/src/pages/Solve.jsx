@@ -21,6 +21,7 @@ import {
 
 import { getProblemById } from "../services/problem";
 import { runCode, submitSolution } from "../services/compiler";
+import AIHintPanel from "../components/AIHintPanel";
 
 /* ─── constants ──────────────────────────────────────────── */
 
@@ -267,7 +268,7 @@ function QpSection({ id, icon, title, children, defaultOpen = true }) {
 }
 
 /* ─── left problem panel ─────────────────────────────────── */
-function ProblemPanel({ problem }) {
+function ProblemPanel({ problem, language, currentCode }) {
   const contentRef = useRef(null);
   const diffCls = problem.difficulty?.toLowerCase() ?? "easy";
   const tags = Array.isArray(problem.tags)
@@ -303,6 +304,14 @@ function ProblemPanel({ problem }) {
             </div>
           </QpSection>
         )}
+
+        <QpSection id="qp-ai-hint" icon={<FiZap size={14} />} title="AI Hint" defaultOpen={false}>
+          <AIHintPanel
+            problemId={problem.id}
+            language={language}
+            userCode={currentCode}
+          />
+        </QpSection>
       </div>
     </aside>
   );
@@ -507,7 +516,7 @@ export default function Solve() {
       <main className="solve-workspace">
 
         {/* LEFT */}
-        <ProblemPanel problem={problem} />
+        <ProblemPanel problem={problem} language={language} currentCode={currentCode} />
 
         {/* RIGHT */}
         <section className="solve-right">
