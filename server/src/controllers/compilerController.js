@@ -1,26 +1,12 @@
 const judge = require("../../../judge/judgeService");
 const Problem = require("../models/Problem");
 const TestCase = require("../models/TestCase");
+const Submission = require("../models/Submission");
 
 /*
  * Run code against all PUBLIC test cases, then optionally against custom input.
  * POST /api/compiler/run
- *
- * Body: { language, code, problemId, input? }
- *
- * Response:
- * {
- *   success: true,
- *   results: [
- *     { type: "public", name: "Test 1", status: "passed"|"wrong_answer"|"runtime_error"|...,
- *       input, expected, output, stderr? },
- *     { type: "custom", name: "Custom Input", status: "executed"|"error",
- *       input, output, stderr? }
- *   ]
- * }
- *
- * Hidden test cases are NEVER executed here.
- * Execution continues past failing public test cases (no early exit).
+ * Run executions are NEVER saved to the Submission collection.
  */
 const runCode = async (req, res) => {
   try {
@@ -33,20 +19,17 @@ const runCode = async (req, res) => {
       });
     }
 
-    // Fetch the problem
     const problem = await Problem.findOne({ id: problemId });
     if (!problem) {
       return res.status(404).json({ success: false, message: "Problem not found." });
     }
 
-    // Fetch only public (non-hidden) test cases
     const publicTestCases = await TestCase.find({ problemId, isHidden: false })
       .sort({ orderIndex: 1 })
       .select("-_id -__v");
 
     const results = [];
 
-    // ── Execute each public test case individually ──────────────────────────
     for (let i = 0; i < publicTestCases.length; i++) {
       const tc = publicTestCases[i];
       let runResult;
@@ -66,12 +49,11 @@ const runCode = async (req, res) => {
         continue;
       }
 
-      // Map execution status to verdict status
       if (runResult.status !== "success") {
         results.push({
           type: "public",
           name: `Test ${i + 1}`,
-          status: runResult.status, // runtime_error | time_limit_exceeded | etc.
+          status: runResult.status,
           input: tc.input,
           expected: tc.expectedOutput,
           output: runResult.stdout ?? "",
@@ -93,7 +75,6 @@ const runCode = async (req, res) => {
       });
     }
 
-    // ── Execute custom input if provided ────────────────────────────────────
     const hasCustomInput = typeof customInput === "string" && customInput.trim() !== "";
 
     if (hasCustomInput) {
@@ -135,8 +116,8 @@ const runCode = async (req, res) => {
 
 /*
  * Submit solution — judges against ALL test cases (public + hidden).
- * Stops on the first failure. Hidden test case input/output is never exposed.
- * POST /api/compiler/submit  (unchanged semantics)
+ * Saves a Submission document for every attempt regardless of verdict.
+ * POST /api/compiler/submit
  */
 const submitSolution = async (req, res) => {
   try {
@@ -166,6 +147,26 @@ const submitSolution = async (req, res) => {
     }
 
     const verdict = await judge.judge(language, code, testCases);
+
+    // ── Persist every submission attempt ────────────────────────────────────
+    // Fire-and-forget style: we don't let a DB write failure break the
+    // response. The verdict is already computed so we send it regardless.
+    try {
+      await Submission.create({
+        userId:       req.user.id,
+        username:     req.user.username,
+        problemId:    problem.id,
+        problemTitle: problem.title,
+        language,
+        code,
+        verdict:      verdict.status,
+        passed:       verdict.passed  ?? 0,
+        total:        verdict.total   ?? testCases.length,
+      });
+    } catch (saveErr) {
+      // Log but do not surface to the user — the verdict is still valid.
+      console.error("[Submission] Failed to save submission:", saveErr.message);
+    }
 
     return res.status(200).json({
       success: verdict.status === "accepted",

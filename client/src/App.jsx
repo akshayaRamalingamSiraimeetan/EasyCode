@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Problems from "./pages/Problems";
 import Solve from "./pages/Solve";
+import Submissions from "./pages/Submissions";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -56,6 +57,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Solve />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/submissions"
+          element={
+            <ProtectedRoute>
+              <Submissions />
             </ProtectedRoute>
           }
         />

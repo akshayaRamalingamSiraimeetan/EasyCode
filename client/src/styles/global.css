@@ -1922,3 +1922,741 @@ input {
   color: var(--color-accent);
   border: 1px solid rgba(255, 214, 10, 0.15);
 }
+
+/* ============================================================
+   SUBMISSIONS PAGE  (sub- prefix)
+   Uses existing --color-* tokens, table and modal patterns.
+============================================================ */
+
+/* ── verdict pills ────────────────────────────────────────── */
+
+.sub-verdict-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sub-verdict--accepted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.sub-verdict--wrong {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.sub-verdict--tle {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.sub-verdict--error {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ── table row hover ──────────────────────────────────────── */
+
+.sub-row:hover {
+  background: #fff9e6 !important;
+}
+
+.sub-problem-title {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ── pagination bar ───────────────────────────────────────── */
+
+.sub-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.sub-pagination-label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ── submission detail modal ──────────────────────────────── */
+
+.sub-modal {
+  background: white;
+  width: 820px;
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sub-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.sub-modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.sub-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.sub-modal-close:hover {
+  background: #f3f3f3;
+  color: var(--color-primary);
+}
+
+.sub-modal-loading {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* meta strip */
+.sub-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 20px;
+  background: #fafafa;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.sub-modal-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 100px;
+}
+
+.sub-modal-meta-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+}
+
+.sub-modal-meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* code section */
+.sub-modal-code-label {
+  padding: 10px 20px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.sub-modal-editor {
+  flex: 1;
+  min-height: 0;
+  /* give it a sensible fixed height so Monaco can measure */
+  height: 420px;
+  border-top: 1px solid var(--color-border);
+}
+
+
+/* ============================================================
+   DASHBOARD — redesigned  (db- prefix)
+   Uses only existing --color-* tokens.
+   All new rules are scoped under .db-* to avoid collisions.
+============================================================ */
+
+/* ── page shell ───────────────────────────────────────────── */
+
+.db-page {
+  min-height: 100vh;
+  background: var(--color-background);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── top header bar ───────────────────────────────────────── */
+
+.db-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 32px;
+  background: var(--color-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.db-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.db-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+}
+
+.db-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.db-header-date {
+  font-size: 13px;
+  color: #888;
+  font-weight: 500;
+}
+
+.db-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.db-logout-btn:hover {
+  border-color: #999;
+  color: var(--color-primary);
+}
+
+/* ── main content ─────────────────────────────────────────── */
+
+.db-main {
+  flex: 1;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 40px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── hero / greeting ──────────────────────────────────────── */
+
+.db-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.db-greeting {
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
+}
+
+.db-username {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.db-subtitle {
+  font-size: 14px;
+  color: #888;
+  font-weight: 400;
+}
+
+.db-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── section wrapper ──────────────────────────────────────── */
+
+.db-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.db-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #aaa;
+}
+
+/* ── stats grid ───────────────────────────────────────────── */
+
+.db-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.db-stat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.db-stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+.db-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.db-stat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.db-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.db-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.db-stat-accent-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background var(--transition);
+}
+
+.db-stat-card:hover .db-stat-accent-bar {
+  background: var(--color-accent);
+}
+
+/* ── quick actions grid ───────────────────────────────────── */
+
+.db-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.db-action-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: box-shadow var(--transition), transform var(--transition),
+    border-color var(--transition);
+}
+
+.db-action-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px) scale(1.01);
+  border-color: #ccc;
+}
+
+.db-action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #f4f4f4;
+  border-radius: 12px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+
+.db-action-card:hover .db-action-icon {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.db-action-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.db-action-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.db-action-desc {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.db-action-arrow {
+  font-size: 16px;
+  color: #ccc;
+  flex-shrink: 0;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.db-action-card:hover .db-action-arrow {
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+
+/* ── account card ─────────────────────────────────────────── */
+
+.db-account-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: box-shadow var(--transition);
+}
+
+.db-account-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.db-account-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary);
+  color: var(--color-accent);
+  font-size: 17px;
+  font-weight: 800;
+  border-radius: 10px;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+.db-account-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.db-account-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.db-account-email {
+  font-size: 13px;
+  color: #888;
+}
+
+.db-account-meta {
+  flex-shrink: 0;
+}
+
+.db-account-role {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: #f0f0f0;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+  text-transform: capitalize;
+  letter-spacing: 0.04em;
+}
+
+.db-account-role--admin {
+  background: #fffbe6;
+  border-color: #ffe566;
+  color: #7a5c00;
+}
+
+/* ── responsive ───────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .db-header {
+    padding: 0 16px;
+  }
+
+  .db-header-date {
+    display: none;
+  }
+
+  .db-main {
+    padding: 28px 20px 48px;
+    gap: 32px;
+  }
+
+  .db-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .db-username {
+    font-size: 26px;
+  }
+
+  .db-stats-grid,
+  .db-actions-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .db-stats-grid,
+  .db-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .db-account-card {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* ============================================================
+   PROBLEMS PAGE — layout improvements
+============================================================ */
+
+.problems-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.problems-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.problems-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* ============================================================
+   IMPROVED EMPTY STATE
+============================================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 20px;
+  text-align: center;
+  color: #999;
+  gap: 8px;
+}
+
+.empty-state-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: #f4f4f4;
+  border-radius: 16px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #555;
+  margin: 0;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #aaa;
+  max-width: 320px;
+  line-height: 1.6;
+  margin: 4px 0 0;
+}
+
+/* ============================================================
+   TABLE — tighter, cleaner
+============================================================ */
+
+.table-container {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.problems-table {
+  border-radius: 0;
+}
+
+.problems-table thead th {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 18px;
+}
+
+.problems-table tbody td {
+  font-size: 14px;
+  padding: 14px 18px;
+}
+
+/* ============================================================
+   TABLE TOOLBAR — subtle polish
+============================================================ */
+
+.table-toolbar {
+  margin: 0 0 20px;
+  gap: 12px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ============================================================
+   RESPONSIVE — PROBLEMS + SUBMISSIONS
+============================================================ */
+
+@media (max-width: 640px) {
+  .problems-page {
+    padding: 24px 16px 48px;
+  }
+
+  .problems-header h1 {
+    font-size: 22px;
+  }
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}

@@ -92,17 +92,31 @@ function Problems() {
     });
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className="loading-state" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className="spinner" />
+      </div>
+    );
   }
 
   if (error) {
-    return <h2>{error}</h2>;
+    return (
+      <div className="empty-state" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <h3>Something went wrong</h3>
+        <p>{error}</p>
+      </div>
+    );
   }
 
   return (
     <div className="problems-page">
       <div className="problems-header">
-        <h1>Problems</h1>
+        <div>
+          <h1 style={{ marginBottom: 4 }}>Problems</h1>
+          <p style={{ fontSize: 13, color: "#888", margin: 0 }}>
+            {filteredProblems.length} problem{filteredProblems.length !== 1 ? "s" : ""} found
+          </p>
+        </div>
 
         {user?.role === "admin" && (
           <button
@@ -133,24 +147,36 @@ function Problems() {
           onChange={(e) => setSortBy(e.target.value)}
         >
           <option value="title">Sort by Title</option>
-
           <option value="difficulty">Sort by Difficulty</option>
         </select>
       </div>
 
       {problems.length === 0 ? (
         <div className="empty-state">
-          <h3>No problems found</h3>
-
+          <div className="empty-state-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="3" y1="9" x2="21" y2="9" />
+              <line x1="9" y1="21" x2="9" y2="9" />
+            </svg>
+          </div>
+          <h3>No problems yet</h3>
           {user?.role === "admin" ? (
-            <p>
-              Create your first coding problem using the
-              <strong> + Create Problem </strong>
-              button.
-            </p>
+            <p>Create your first coding problem using the <strong>+ Create Problem</strong> button above.</p>
           ) : (
-            <p>No problems are currently available.</p>
+            <p>No problems are currently available. Check back soon.</p>
           )}
+        </div>
+      ) : filteredProblems.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <h3>No results found</h3>
+          <p>Try adjusting your search or filter.</p>
         </div>
       ) : (
         <div className="table-container">
