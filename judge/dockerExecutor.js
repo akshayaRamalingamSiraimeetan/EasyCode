@@ -1,7 +1,8 @@
 const { spawn } = require("child_process");
 const path = require("path");
 
-const IMAGE = "easycode-runner";
+const IMAGE         = process.env.RUNNER_IMAGE   || "easycode-runner:latest";
+const DOCKER_SOCKET = process.env.DOCKER_SOCKET  || "/var/run/docker.sock";
 
 const TEMP_DIR = path.join(__dirname, "temp");
 
@@ -63,6 +64,7 @@ function runInDocker({
       "-i",
       "-w", containerWorkspaceRoot,
       "-v", `${hostMountDir}:${containerWorkspaceRoot}`,
+      "-v", `${DOCKER_SOCKET}:/var/run/docker.sock`,
       "--network", "none",
       "--memory", "256m",
       "--memory-swap", "256m",
