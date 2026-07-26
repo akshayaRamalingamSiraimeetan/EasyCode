@@ -24,11 +24,6 @@ coverage/
 build/
 dist/
 
-# Legacy root-level source files (replaced by src/)
-judgeService.js
-dockerExecutor.js
-runners/
-
 # Editor / OS artifacts
 .vscode/
 .DS_Store

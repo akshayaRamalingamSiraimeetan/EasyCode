@@ -19,8 +19,15 @@ COPY package.json package-lock.json ./
 # Install production dependencies only
 RUN npm ci --omit=dev
 
-# Copy application source and the temp directory placeholder
-COPY src/   ./src/
+# Copy original execution logic (untouched — these are the real implementation files)
+COPY judgeService.js    ./judgeService.js
+COPY dockerExecutor.js  ./dockerExecutor.js
+COPY runners/           ./runners/
+
+# Copy Express API layer
+COPY src/               ./src/
+
+# Create temp dir for execution workspaces (populated at runtime)
 RUN mkdir -p temp
 
 # Switch to non-root user
