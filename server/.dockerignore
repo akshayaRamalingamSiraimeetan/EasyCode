@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Environment secrets
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Version control
+.git/
+.gitignore
+
+# Test coverage
+coverage/
+
+# Build artifacts
+build/
+dist/
+
+# Judge folder must not be included
+../judge/
+
+# Editor / OS artifacts
+.vscode/
+.DS_Store
+Thumbs.db
