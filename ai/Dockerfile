@@ -6,13 +6,13 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app/ai
 
 # Copy dependency manifests first to leverage Docker layer caching
-COPY package.json package-lock.json ./
+COPY ai/package.json ai/package-lock.json ./
 
 # Install production dependencies only
 RUN npm ci --omit=dev
 
 # Copy application source
-COPY src/ ./src/
+COPY ai/src/ ./src/
 
 # Switch to non-root user
 USER appuser

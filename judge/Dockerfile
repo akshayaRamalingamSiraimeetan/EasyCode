@@ -6,7 +6,7 @@ RUN apk add --no-cache docker-cli
 
 # Create a non-root user and add it to a docker group (gid 999 matches the
 # typical docker group on EC2/Linux hosts so the socket is accessible).
-RUN addgroup -g 999 -S docker && \
+RUN addgroup -S docker && \
     addgroup -S appgroup && \
     adduser  -S appuser -G appgroup && \
     adduser  appuser docker
@@ -14,18 +14,18 @@ RUN addgroup -g 999 -S docker && \
 WORKDIR /app/judge
 
 # Copy dependency manifests first to leverage Docker layer caching
-COPY package.json package-lock.json ./
+COPY judge/package.json judge/package-lock.json ./
 
 # Install production dependencies only
 RUN npm ci --omit=dev
 
 # Copy original execution logic (untouched — these are the real implementation files)
-COPY judgeService.js    ./judgeService.js
-COPY dockerExecutor.js  ./dockerExecutor.js
-COPY runners/           ./runners/
+COPY judge/judgeService.js   ./judgeService.js
+COPY judge/dockerExecutor.js ./dockerExecutor.js
+COPY judge/runners/          ./runners/
 
 # Copy Express API layer
-COPY src/               ./src/
+COPY judge/src/              ./src/
 
 # Create temp dir for execution workspaces (populated at runtime)
 RUN mkdir -p temp

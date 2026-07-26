@@ -1,0 +1,40 @@
+# ── Shared ignores (apply to all service builds) ─────────────────────────────
+
+# Version control
+.git/
+.gitignore
+
+# Editor / OS artifacts
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ── server ────────────────────────────────────────────────────────────────────
+server/node_modules/
+server/.env
+server/.env.*
+server/logs/
+server/coverage/
+server/build/
+server/dist/
+
+# ── ai ───────────────────────────────────────────────────────────────────────
+ai/node_modules/
+ai/.env
+ai/.env.*
+ai/logs/
+ai/coverage/
+ai/build/
+ai/dist/
+ai/README.md
+
+# ── judge ─────────────────────────────────────────────────────────────────────
+judge/node_modules/
+judge/.env
+judge/.env.*
+judge/logs/
+judge/coverage/
+judge/build/
+judge/dist/
+# Runtime workspace — created fresh on each execution, never baked in
+judge/temp/
