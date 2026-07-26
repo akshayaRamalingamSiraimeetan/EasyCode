@@ -1,4 +1,4 @@
-const judge = require("../../../judge/judgeService");
+const judge = require("../services/judgeClient");
 const Problem = require("../models/Problem");
 const TestCase = require("../models/TestCase");
 const Submission = require("../models/Submission");
