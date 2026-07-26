@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { name: SERVICE_NAME, version: SERVICE_VERSION } = require("../../package.json");
 
 const hintRoutes = require("./routes/hintRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
@@ -16,13 +17,22 @@ app.use(
 
 app.use(express.json());
 
-// Health check
-app.get("/", (req, res) => {
+// Root — quick human/browser check
+app.get("/", (_req, res) =>
+  res.status(200).json({ service: "EasyCode AI Service", status: "running" })
+);
+
+// Health — for AWS ALB / load-balancer probes
+app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
+
+// Version
+app.get("/version", (_req, res) =>
   res.status(200).json({
-    success: true,
-    message: "EasyCode AI Service is running...",
-  });
-});
+    service:     SERVICE_NAME,
+    version:     SERVICE_VERSION,
+    environment: process.env.NODE_ENV ?? "development",
+  })
+);
 
 // Routes
 app.use("/hint", hintRoutes);

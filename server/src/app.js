@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { name: SERVICE_NAME, version: SERVICE_VERSION } = require("../../package.json");
 
 const authRoutes = require("./routes/authRoutes");
 const problemRoutes = require("./routes/problemRoutes");
@@ -27,12 +28,21 @@ app.use("/api/compiler", compilerRoutes);
 app.use("/api/submissions", submissionRoutes);
 app.use("/api/ai", aiRoutes);
 
-// Health check
-app.get("/", (req, res) => {
+// Root — quick human/browser check
+app.get("/", (_req, res) =>
+  res.status(200).json({ service: "EasyCode Backend", status: "running" })
+);
+
+// Health — for AWS ALB / load-balancer probes
+app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
+
+// Version
+app.get("/version", (_req, res) =>
   res.status(200).json({
-    success: true,
-    message: "EasyCode API is running...",
-  });
-});
+    service:     SERVICE_NAME,
+    version:     SERVICE_VERSION,
+    environment: process.env.NODE_ENV ?? "development",
+  })
+);
 
 module.exports = app;
