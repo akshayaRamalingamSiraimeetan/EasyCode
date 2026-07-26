@@ -1,38 +1,37 @@
 FROM node:22-alpine
 
-# Install the Docker CLI so the service can spawn containers at runtime.
-# The Docker *daemon* is NOT installed — the host socket is bind-mounted in.
-RUN apk add --no-cache docker-cli
+# docker-cli  — lets the service spawn sandboxed containers via the host daemon
+# su-exec     — minimal setuid helper to drop from root to appuser after the
+#               entrypoint has fixed socket permissions (safer than gosu on Alpine)
+RUN apk add --no-cache docker-cli su-exec
 
-# Create a non-root user and add it to a docker group (gid 999 matches the
-# typical docker group on EC2/Linux hosts so the socket is accessible).
-RUN addgroup -S docker && \
-    addgroup -S appgroup && \
-    adduser  -S appuser -G appgroup && \
-    adduser  appuser docker
+# Create appuser/appgroup. No docker group is created here — the entrypoint
+# creates a matching group at runtime based on the socket's actual GID.
+RUN addgroup -S appgroup && \
+    adduser  -S appuser -G appgroup
 
 WORKDIR /app/judge
 
-# Copy dependency manifests first to leverage Docker layer caching
+# ── Dependencies (cached layer) ───────────────────────────────────────────────
 COPY judge/package.json judge/package-lock.json ./
-
-# Install production dependencies only
 RUN npm ci --omit=dev
 
-# Copy original execution logic (untouched — these are the real implementation files)
+# ── Application source ────────────────────────────────────────────────────────
 COPY judge/judgeService.js   ./judgeService.js
 COPY judge/dockerExecutor.js ./dockerExecutor.js
 COPY judge/runners/          ./runners/
-
-# Copy Express API layer
 COPY judge/src/              ./src/
 
-# Create temp dir for execution workspaces (populated at runtime)
-RUN mkdir -p temp
+# ── Runtime workspace for code execution sandboxes ───────────────────────────
+RUN mkdir -p temp && chown appuser:appgroup temp
 
-# Switch to non-root user
-USER appuser
+# ── Entrypoint ────────────────────────────────────────────────────────────────
+# Runs as root so it can inspect the socket GID and create a matching group,
+# then drops to appuser before exec-ing the Node process.
+COPY judge/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 7000
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["npm", "start"]
