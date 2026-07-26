@@ -1,0 +1,22 @@
+{
+  "name": "judge-service",
+  "version": "1.0.0",
+  "description": "EasyCode judge microservice — sandboxed Docker-based code execution",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev":   "nodemon src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv":  "^16.4.5",
+    "express": "^4.19.2",
+    "uuid":    "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

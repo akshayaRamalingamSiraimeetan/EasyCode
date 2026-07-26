@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Temporary execution workspaces — created at runtime, never baked in
+temp/
+
+# Environment secrets
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Version control
+.git/
+.gitignore
+
+# Test coverage
+coverage/
+
+# Build artifacts
+build/
+dist/
+
+# Legacy root-level source files (replaced by src/)
+judgeService.js
+dockerExecutor.js
+runners/
+
+# Editor / OS artifacts
+.vscode/
+.DS_Store
+Thumbs.db
