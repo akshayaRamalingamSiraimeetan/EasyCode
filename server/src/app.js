@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { name: SERVICE_NAME, version: SERVICE_VERSION } = require("../../package.json");
+const { name: SERVICE_NAME, version: SERVICE_VERSION } = require("../package.json");
 
 const authRoutes = require("./routes/authRoutes");
 const problemRoutes = require("./routes/problemRoutes");
