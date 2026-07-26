@@ -19,7 +19,7 @@ Express Server  (port 5000)
      │
      │  POST /hint
      ▼
-AI Service  (port 6000)
+AI Service  (port 6001)
      │  — validates payload
      │  — builds prompt
      │
@@ -72,7 +72,7 @@ npm install
 Copy `.env` and fill in your key:
 
 ```
-PORT=6000
+PORT=6001
 GEMINI_API_KEY=your_key_here
 MODEL=gemini-2.5-flash
 ```
@@ -147,6 +147,6 @@ To add any of these:
 ## Health Check
 
 ```
-GET http://localhost:6000/
+GET http://localhost:6001/
 → { "success": true, "message": "EasyCode AI Service is running..." }
 ```

@@ -17,6 +17,6 @@ COPY src/ ./src/
 # Switch to non-root user
 USER appuser
 
-EXPOSE 6000
+EXPOSE 6001
 
 CMD ["npm", "start"]

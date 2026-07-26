@@ -78,7 +78,7 @@ const getHint = async (req, res) => {
       });
     }
 
-    const aiServiceUrl = process.env.AI_SERVICE_URL || "http://localhost:6000";
+    const aiServiceUrl = process.env.AI_SERVICE_URL || "http://localhost:6001";
 
     const payload = {
       problem: {

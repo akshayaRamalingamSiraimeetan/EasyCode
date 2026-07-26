@@ -53,13 +53,13 @@ npm install
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-AI_SERVICE_URL=http://localhost:6000
+AI_SERVICE_URL=http://localhost:6001
 ```
 
 ## ai/.env
 
 ```env
-PORT=6000
+PORT=6001
 GEMINI_API_KEY=your_gemini_api_key
 MODEL=gemini-flash-latest
 ```
@@ -125,7 +125,7 @@ npm run dev
 Runs on:
 
 ```
-http://localhost:6000
+http://localhost:6001
 ```
 
 ---
@@ -196,4 +196,4 @@ Each container runs with:
 |----------|------|
 | React Client | 5173 |
 | Express Server | 5000 |
-| AI Service | 6000 |
+| AI Service | 6001 |
