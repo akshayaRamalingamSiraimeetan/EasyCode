@@ -20,8 +20,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  * @returns {Promise<string>} - The model's text response
  */
 const generate = async (prompt) => {
-  const modelName = process.env.MODEL || "gemini-flash-latest";
-
+  const modelName = process.env.MODEL ?? "gemini-flash-latest";
   const MAX_RETRIES = 3;
   let attempt = 0;
 
