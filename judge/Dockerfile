@@ -23,7 +23,12 @@ COPY judge/runners/          ./runners/
 COPY judge/src/              ./src/
 
 # ── Runtime workspace for code execution sandboxes ───────────────────────────
-RUN mkdir -p temp && chown appuser:appgroup temp
+# Creates the default fallback path used when JUDGE_TEMP_DIR is not set.
+# For containerised deployments, JUDGE_TEMP_DIR must point to a host path
+# that is bind-mounted into this container at the same absolute path so that
+# runner containers spawned by the host daemon can resolve it.
+# See .env.example for the required docker run flags.
+RUN mkdir -p /tmp/judge-workspace && chown appuser:appgroup /tmp/judge-workspace
 
 # ── Entrypoint ────────────────────────────────────────────────────────────────
 # Runs as root so it can inspect the socket GID and create a matching group,

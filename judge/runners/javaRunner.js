@@ -3,7 +3,7 @@ const path = require("path");
 const { v4: uuid } = require("uuid");
 const { runInDocker } = require("../dockerExecutor");
 
-const TEMP_DIR = path.join(__dirname, "..", "temp");
+const TEMP_DIR = process.env.JUDGE_TEMP_DIR || path.join(__dirname, "..", "temp");
 
 const Status = {
   SUCCESS: "success",
@@ -60,7 +60,8 @@ async function execute(code, input) {
     const workspaceId = uuid();
     const workspacePath = path.join(TEMP_DIR, workspaceId);
 
-    fs.mkdirSync(workspacePath, { recursive: true });
+    fs.mkdirSync(workspacePath, { recursive: true, mode: 0o777 });
+    fs.chmodSync(workspacePath, 0o777);
     fs.writeFileSync(path.join(workspacePath, "Main.java"), code);
 
     const compileResult = await runInDocker({
@@ -77,7 +78,7 @@ async function execute(code, input) {
 
     const runResult = await runInDocker({
       command: "java",
-      args: ["Main"],
+      args: ["-cp", "/workspace", "Main"],
       cwd: `/workspace/${workspaceId}`,
       stdin: input,
       timeout: 5000,
@@ -108,7 +109,8 @@ async function judge(code, testCases) {
   const results = [];
 
   try {
-    fs.mkdirSync(workspacePath, { recursive: true });
+    fs.mkdirSync(workspacePath, { recursive: true, mode: 0o777 });
+    fs.chmodSync(workspacePath, 0o777);
     fs.writeFileSync(path.join(workspacePath, "Main.java"), code);
 
     // Compile once
@@ -131,7 +133,7 @@ async function judge(code, testCases) {
     for (const testCase of testCases) {
       const runResult = await runInDocker({
         command: "java",
-        args: ["Main"],
+        args: ["-cp", "/workspace", "Main"],
         cwd: `/workspace/${workspaceId}`,
         stdin: testCase.input,
         timeout: 5000,

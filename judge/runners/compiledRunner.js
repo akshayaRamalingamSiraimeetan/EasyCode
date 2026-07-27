@@ -3,7 +3,7 @@ const path = require("path");
 const { v4: uuid } = require("uuid");
 const { runInDocker } = require("../dockerExecutor");
 
-const TEMP_DIR = path.join(__dirname, "..", "temp");
+const TEMP_DIR = process.env.JUDGE_TEMP_DIR || path.join(__dirname, "..", "temp");
 
 const Status = {
   SUCCESS: "success",
@@ -16,9 +16,15 @@ const Status = {
 // ─── Private helpers ──────────────────────────────────────────────────────────
 
 function _createWorkspace() {
-  const workspaceId = uuid();
+  const workspaceId   = uuid();
   const workspacePath = path.join(TEMP_DIR, workspaceId);
-  fs.mkdirSync(workspacePath, { recursive: true });
+  // mode 0o777 + chmodSync: the runner container executes as a different UID
+  // (runner) than the judge process that creates this directory. Setting world-
+  // writable permissions ensures the runner can write compiled artifacts into
+  // the shared bind-mounted workspace regardless of UID mapping on any host OS.
+  // chmodSync is required because mkdirSync's mode option is subject to umask.
+  fs.mkdirSync(workspacePath, { recursive: true, mode: 0o777 });
+  fs.chmodSync(workspacePath, 0o777);
   return { workspaceId, workspacePath };
 }
 
@@ -47,7 +53,7 @@ async function _compile({ workspaceId, compiler, sourceFileName, executableName,
 }
 
 /**
- * Runs the compiled executable once against a single input.
+ * Runs the compiled executable from /workspace where it was written by _compile.
  * Returns { status, stdout, stderr }.
  */
 async function _runOne({ workspaceId, executableName, input }) {

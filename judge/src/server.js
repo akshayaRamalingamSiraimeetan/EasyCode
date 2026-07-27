@@ -9,6 +9,21 @@ const PORT         = process.env.PORT         || 7000;
 const RUNNER_IMAGE = process.env.RUNNER_IMAGE || "easycode-runner:latest";
 
 async function start() {
+  // ── Startup configuration log ─────────────────────────────────────────────
+  const JUDGE_TEMP_DIR_ENV  = process.env.JUDGE_TEMP_DIR;
+  const HOST_TEMP_DIR_ENV   = process.env.HOST_JUDGE_TEMP_DIR;
+  const DOCKER_SOCKET       = process.env.DOCKER_SOCKET  || "/var/run/docker.sock";
+  const TEMP_DIR_RESOLVED   = JUDGE_TEMP_DIR_ENV || require("path").join(__dirname, "..", "temp");
+
+  console.log("[Judge API] ── startup configuration ──────────────────────────");
+  console.log("[Judge API] process.cwd()        :", process.cwd());
+  console.log("[Judge API] __dirname            :", __dirname);
+  console.log("[Judge API] JUDGE_TEMP_DIR       :", JUDGE_TEMP_DIR_ENV ? `${JUDGE_TEMP_DIR_ENV} (from env)` : `${TEMP_DIR_RESOLVED} (fallback)`);
+  console.log("[Judge API] HOST_JUDGE_TEMP_DIR  :", HOST_TEMP_DIR_ENV  ? `${HOST_TEMP_DIR_ENV} (from env)`  : `(not set — defaults to JUDGE_TEMP_DIR)`);
+  console.log("[Judge API] RUNNER_IMAGE         :", RUNNER_IMAGE);
+  console.log("[Judge API] DOCKER_SOCKET        :", DOCKER_SOCKET);
+  console.log("[Judge API] PORT                 :", PORT);
+  console.log("[Judge API] ────────────────────────────────────────────────────");
   // ── Docker connectivity check ─────────────────────────────────────────────
   try {
     await verifyDocker();

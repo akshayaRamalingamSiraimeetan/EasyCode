@@ -21,6 +21,8 @@ if (!JUDGE_SERVICE_URL) {
   );
 }
 
+console.log("[judgeClient] baseURL:", JUDGE_SERVICE_URL);
+
 /** Shared axios instance with a sensible execution timeout (30 s). */
 const client = axios.create({
   baseURL: JUDGE_SERVICE_URL,
@@ -38,7 +40,6 @@ async function _post(path, payload) {
     const response = await client.post(path, payload);
     return response.data;
   } catch (err) {
-    // Preserve the upstream error message when the judge returned a response
     const message =
       err.response?.data?.message ??
       err.message ??
