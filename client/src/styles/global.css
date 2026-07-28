@@ -343,6 +343,32 @@ input {
 }
 
 /* ==========================
+   Problems Back Button
+========================== */
+
+.problems-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #111;
+  color: #fff;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.problems-back-btn:hover {
+  background: #f4b400;
+  color: #111;
+  border-color: #f4b400;
+}
+
+/* ==========================
    Modal
 ========================== */
 

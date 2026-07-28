@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getAllProblems } from "../services/problem";
 import { useAuth } from "../context/AuthContext";
@@ -13,6 +14,7 @@ import {
 
 function Problems() {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -111,11 +113,23 @@ function Problems() {
   return (
     <div className="problems-page">
       <div className="problems-header">
-        <div>
-          <h1 style={{ marginBottom: 4 }}>Problems</h1>
-          <p style={{ fontSize: 13, color: "#888", margin: 0 }}>
-            {filteredProblems.length} problem{filteredProblems.length !== 1 ? "s" : ""} found
-          </p>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <button
+            className="problems-back-btn"
+            onClick={() => navigate("/dashboard")}
+            aria-label="Back to Dashboard"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Back
+          </button>
+          <div>
+            <h1 style={{ marginBottom: 4 }}>Problems</h1>
+            <p style={{ fontSize: 13, color: "#888", margin: 0 }}>
+              {filteredProblems.length} problem{filteredProblems.length !== 1 ? "s" : ""} found
+            </p>
+          </div>
         </div>
 
         {user?.role === "admin" && (
