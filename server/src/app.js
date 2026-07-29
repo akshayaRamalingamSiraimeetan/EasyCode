@@ -12,17 +12,28 @@ const app = express();
 
 // Enable CORS
 const allowedOrigins = [
+  // Production
+  "https://codessey.in",
+  "https://www.codessey.in",
+  // Development
   "http://localhost:5173",
+  "http://localhost:3000",
+  // Optional: additional origin from env (e.g. staging)
   process.env.CLIENT_URL,
 ].filter(Boolean);
+
+// Handle OPTIONS preflight for all routes before any other middleware
+app.options("*", cors());
 
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow server-to-server requests (no Origin header)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error("Not allowed by CORS"));
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
     },
     credentials: true,
   })
