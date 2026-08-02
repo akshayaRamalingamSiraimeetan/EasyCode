@@ -10,39 +10,71 @@ const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
-// Enable CORS
-const allowedOrigins = [
-  // Production
+// ---------------------------------------------------------------------------
+// CORS — build the allowed-origin list once at startup
+// ---------------------------------------------------------------------------
+
+const BASE_ORIGINS = [
   "https://codessey.in",
   "https://www.codessey.in",
-  // Development
   "http://localhost:5173",
   "http://localhost:3000",
-  // Optional: additional origin from env (e.g. staging)
-  process.env.CLIENT_URL,
-].filter(Boolean);
+];
 
-// Handle OPTIONS preflight for all routes before any other middleware
-app.options("*", cors());
+// Merge optional comma-separated env var (e.g. staging URLs)
+const ENV_ORIGINS = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim()).filter(Boolean)
+  : [];
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      // Allow server-to-server requests (no Origin header)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error(`Origin ${origin} not allowed by CORS`));
-    },
-    credentials: true,
-  })
-);
+const ALLOWED_ORIGINS = [...new Set([...BASE_ORIGINS, ...ENV_ORIGINS])];
 
-// Parse JSON bodies
+// Log the final list once so it's visible in CloudWatch at startup
+console.log("[CORS] Allowed origins:", ALLOWED_ORIGINS);
+
+const corsOptions = {
+  origin(origin, callback) {
+    // Log every incoming origin for CloudWatch visibility
+    console.log(`[CORS] Incoming origin: ${origin ?? "(no origin)"}`);
+
+    // Allow server-to-server / curl requests that carry no Origin header
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (ALLOWED_ORIGINS.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Blocked — log it and reject cleanly (never throw)
+    console.warn(`[CORS] Blocked origin: ${origin}`);
+    return callback(null, false);
+  },
+  credentials: true,
+  // Explicit list keeps the preflight response tight
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  // Tell browsers they may cache the preflight for 10 minutes
+  maxAge: 600,
+  // Ensures Express sets 204 on preflight, not 200
+  optionsSuccessStatus: 204,
+};
+
+// ---------------------------------------------------------------------------
+// Middleware — order matters
+// ---------------------------------------------------------------------------
+
+// 1. Handle OPTIONS preflight for every route first, using the same corsOptions
+app.options("*", cors(corsOptions));
+
+// 2. Apply CORS headers to all other requests
+app.use(cors(corsOptions));
+
+// 3. Parse JSON bodies
 app.use(express.json());
 
+// ---------------------------------------------------------------------------
 // Routes
+// ---------------------------------------------------------------------------
 app.use("/api/auth", authRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/compiler", compilerRoutes);
