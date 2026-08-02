@@ -1,5 +1,24 @@
 require("dotenv").config();
 
+// [DIAGNOSTIC PROBE] — Remove after confirming correct image is running in ECS
+// Fires before any async code so it always appears in CloudWatch regardless of DB state
+const fs = require("fs");
+const path = require("path");
+console.log("========== IMAGE VERIFICATION PROBE ==========");
+console.log("[Probe] Time        :", new Date().toISOString());
+console.log("[Probe] process.cwd():", process.cwd());
+console.log("[Probe] __filename  :", __filename);
+const serverFilePath = "/app/server/src/server.js";
+try {
+  const lines = fs.readFileSync(serverFilePath, "utf8").split("\n").slice(0, 25).join("\n");
+  console.log(`[Probe] First 25 lines of ${serverFilePath}:\n`, lines);
+} catch (e) {
+  console.log("[Probe] Could not read", serverFilePath, "—", e.message);
+}
+console.log("[Probe] BUILD_TAG   :", process.env.BUILD_TAG ?? "(not set — add BUILD_TAG env var to task definition)");
+console.log("===============================================");
+// [END DIAGNOSTIC PROBE]
+
 const app = require("./app");
 const connectDB = require("./config/db");
 
