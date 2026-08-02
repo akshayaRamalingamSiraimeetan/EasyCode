@@ -60,16 +60,12 @@ const corsOptions = {
 };
 
 // ---------------------------------------------------------------------------
-// Middleware — order matters
+// Middleware
 // ---------------------------------------------------------------------------
 
-// 1. Handle OPTIONS preflight for every route first, using the same corsOptions
-app.options("*", cors(corsOptions));
-
-// 2. Apply CORS headers to all other requests
+// cors() handles OPTIONS preflight automatically when registered globally
 app.use(cors(corsOptions));
 
-// 3. Parse JSON bodies
 app.use(express.json());
 
 // ---------------------------------------------------------------------------
