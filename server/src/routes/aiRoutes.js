@@ -1,8 +1,14 @@
+// [DIAGNOSTIC] Fires at require() time — confirms this file was loaded by the running container
+console.log("[AI ROUTES] module loaded");
+
 const express = require("express");
 const authenticate = require("../middleware/authMiddleware");
 const { getHint } = require("../controllers/aiController");
 
 const router = express.Router();
+
+// [DIAGNOSTIC] Fires immediately after router creation
+console.log("[AI ROUTES] router created");
 
 // POST /api/ai/hint
 // Auth is enforced here — the AI service itself is not exposed to the internet
@@ -30,5 +36,9 @@ router.post(
 // router.post("/editorial",  authenticate, getEditorial);
 // router.post("/complexity", authenticate, getComplexity);
 // router.post("/chat",       authenticate, chat);
+
+// [DIAGNOSTIC] Fires just before export — prints every registered route path and method
+console.log("[AI ROUTES] registered routes:");
+console.log(router.stack.map((r) => ({ path: r.route?.path, methods: r.route?.methods })));
 
 module.exports = router;

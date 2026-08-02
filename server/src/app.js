@@ -88,6 +88,45 @@ app.use("/api/submissions", submissionRoutes);
 // [DIAGNOSTIC] Confirm the AI router is being mounted at startup
 console.log("[App] Mounting AI router at /api/ai");
 app.use("/api/ai", aiRoutes);
+console.log("[App] AI router mounted");
+console.log("[App] aiRoutes stack length:", aiRoutes.stack?.length);
+if (aiRoutes.stack) {
+  console.log(
+    aiRoutes.stack.map((layer) => ({
+      path: layer.route?.path,
+      methods: layer.route?.methods,
+    }))
+  );
+}
+
+// ---------------------------------------------------------------------------
+// [TEMPORARY DEBUG] — Remove after diagnosing AI service connectivity
+// Hit GET /debug-ai to test raw reachability of the AI service from this container
+// ---------------------------------------------------------------------------
+app.get("/debug-ai", async (_req, res) => {
+  try {
+    const response = await fetch("http://13.200.39.228:6001/hint", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        problem: { title: "Test", description: "Test" },
+        language: "python",
+        userCode: "",
+        hintLevel: 1,
+      }),
+    });
+
+    const text = await response.text();
+
+    res.json({ status: response.status, body: text });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+      code: err.code,
+      stack: err.stack,
+    });
+  }
+});
 
 // Root — quick human/browser check
 app.get("/", (_req, res) =>

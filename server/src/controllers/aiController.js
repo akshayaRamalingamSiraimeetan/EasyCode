@@ -9,6 +9,12 @@ const Problem = require("../models/Problem");
 const postJSON = (url, body) => {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify(body);
+
+    // [DIAGNOSTIC] Log exactly what we are about to send
+    console.log("[postJSON] URL:", url);
+    console.log("[postJSON] Method: POST");
+    console.log("[postJSON] Payload bytes:", Buffer.byteLength(data));
+
     const parsed = new URL(url);
     const isHttps = parsed.protocol === "https:";
     const lib = isHttps ? https : http;
@@ -24,18 +30,13 @@ const postJSON = (url, body) => {
       },
     };
 
-    // [DIAGNOSTIC] Log connection attempt details
-    console.log("[postJSON] Opening HTTP connection...");
-    console.log("[postJSON] Host:", parsed.hostname);
-    console.log("[postJSON] Port:", options.port);
-    console.log("[postJSON] Path:", options.path);
-
     const req = lib.request(options, (res) => {
       let raw = "";
       let bytesReceived = 0;
 
-      // [DIAGNOSTIC] Log when response headers arrive
-      console.log("[postJSON] Response headers received. Status:", res.statusCode);
+      // [DIAGNOSTIC] Log status and headers as soon as they arrive
+      console.log("[postJSON] HTTP status:", res.statusCode);
+      console.log("[postJSON] headers:", res.headers);
 
       res.setEncoding("utf8");
       res.on("data", (chunk) => {
@@ -43,8 +44,8 @@ const postJSON = (url, body) => {
         bytesReceived += Buffer.byteLength(chunk);
       });
       res.on("end", () => {
-        // [DIAGNOSTIC] Log when full response body is received
-        console.log("[postJSON] Response completed. Bytes received:", bytesReceived);
+        // [DIAGNOSTIC] Response body fully received
+        console.log("[postJSON] response finished");
         try {
           resolve({ status: res.statusCode, body: JSON.parse(raw) });
         } catch {
@@ -53,31 +54,18 @@ const postJSON = (url, body) => {
       });
     });
 
-    // [DIAGNOSTIC] Socket lifecycle events
-    req.on("socket", (socket) => {
-      socket.on("connect", () => {
-        console.log("[postJSON] Socket connected.");
-      });
-      socket.on("timeout", () => {
-        console.error("[postJSON] HTTP request timeout.");
-        req.destroy();
-        reject(new Error("HTTP request timeout"));
-      });
-      socket.on("error", (err) => {
-        console.error("[postJSON] Socket error:", err.message);
-      });
+    // [DIAGNOSTIC] Socket lifecycle — tells us how far the TCP handshake got
+    req.on("socket", () => console.log("[postJSON] socket assigned"));
+
+    req.on("timeout", () => {
+      console.log("[postJSON] request timeout");
+      req.destroy();
+      reject(new Error("HTTP request timeout"));
     });
 
     req.on("error", (err) => {
-      // [DIAGNOSTIC] Distinguish common network failure modes
-      if (err.code === "ECONNREFUSED") {
-        console.error("[postJSON] Connection refused. Is the AI service running?");
-      } else if (err.code === "ENOTFOUND") {
-        console.error("[postJSON] DNS failure. Could not resolve host:", parsed.hostname);
-      } else {
-        console.error("[postJSON] Request error:", err.message, "| Code:", err.code);
-      }
-      reject(err);
+      // [DIAGNOSTIC] Transport-level error — ECONNREFUSED, ETIMEDOUT, ENOTFOUND, etc.
+      console.error("[postJSON] request error:", err);
     });
 
     req.write(data);
@@ -87,39 +75,35 @@ const postJSON = (url, body) => {
 
 /**
  * POST /api/ai/hint
- *
- * 1. Authenticate user (handled by authMiddleware before this controller)
- * 2. Fetch the full problem from MongoDB
- * 3. Build the payload for the AI service
- * 4. Forward the request to the AI service
- * 5. Return the hint to the client
- *
- * The client never communicates with the AI service directly.
- * The AI service never touches MongoDB.
  */
 const getHint = async (req, res) => {
+  // -----------------------------------------------------------------------
+  // [DIAGNOSTIC] ENTRY — outside every try/catch block.
+  // If this never appears in CloudWatch, getHint is not being called at all.
+  // -----------------------------------------------------------------------
+  console.log("========== AI HINT REQUEST (ENTRY) ==========");
+  console.log("[ENTRY] Time:", new Date().toISOString());
+  console.log("[ENTRY] Body:", req.body);
+
   try {
     const { problemId, language, userCode, hintLevel } = req.body;
 
-    // [DIAGNOSTIC] Log every incoming request at the top of the handler
-    console.log("========== AI HINT REQUEST ==========");
-    console.log("[AIController] Time:", new Date().toISOString());
     console.log("[AIController] User:", req.user?.id);
     console.log("[AIController] Problem:", problemId);
     console.log("[AIController] Language:", language);
     console.log("[AIController] Hint Level:", hintLevel);
+
     const aiServiceUrl = process.env.AI_SERVICE_URL ?? "http://localhost:6001";
     console.log("[AIController] AI_SERVICE_URL:", aiServiceUrl);
-    console.log("[AIController] Request received.");
 
     if (!problemId || !language || !hintLevel) {
+      console.log("[AIController] Rejecting: missing required fields");
       return res.status(400).json({
         success: false,
         message: "Fields 'problemId', 'language', and 'hintLevel' are required.",
       });
     }
 
-    // [DIAGNOSTIC] Log before DB lookup
     console.log("[AIController] Fetching problem from MongoDB...");
 
     // Fetch problem — the server owns the DB, the AI service does not
@@ -128,14 +112,14 @@ const getHint = async (req, res) => {
     );
 
     if (!problem) {
+      console.log("[AIController] Problem not found:", problemId);
       return res.status(404).json({
         success: false,
         message: "Problem not found.",
       });
     }
 
-    // [DIAGNOSTIC] Log successful DB fetch (no sensitive data)
-    console.log("[AIController] Problem loaded successfully. Title:", problem.title);
+    console.log("[AIController] Problem loaded. Title:", problem.title);
 
     const payload = {
       problem: {
@@ -149,29 +133,35 @@ const getHint = async (req, res) => {
       hintLevel: Number(hintLevel),
     };
 
-    // [DIAGNOSTIC] Log payload sizes only — never log full content
-    console.log("[AIController] Forwarding request to AI service...");
-    console.log("[AIController] Destination:", `${aiServiceUrl}/hint`);
+    console.log("[AIController] Forwarding to AI service:", `${aiServiceUrl}/hint`);
     console.log("[AIController] Description length:", (problem.description ?? "").length);
-    console.log("[AIController] Constraints length:", (JSON.stringify(problem.constraints ?? "")).length);
     console.log("[AIController] User code length:", (userCode ?? "").length);
 
-    // [DIAGNOSTIC] Measure round-trip time to AI service
     const start = Date.now();
     let aiResponse;
 
     try {
       aiResponse = await postJSON(`${aiServiceUrl}/hint`, payload);
-      // [DIAGNOSTIC] Log successful response with elapsed time
       console.log("[AIController] AI service responded. Elapsed:", Date.now() - start, "ms");
     } catch (networkErr) {
-      // [DIAGNOSTIC] Full diagnostics on network failure
+      // -----------------------------------------------------------------------
+      // [DIAGNOSTIC] Full property dump — identifies the exact transport failure
+      // -----------------------------------------------------------------------
       console.error("========== AI REQUEST FAILED ==========");
-      console.error("[AIController] AI request FAILED");
-      console.error("[AIController] Elapsed:", Date.now() - start, "ms");
-      console.error("[AIController] error.message:", networkErr.message);
-      console.error("[AIController] error.code:", networkErr.code);
-      console.error("[AIController] error.stack:", networkErr.stack);
+      console.error("message:", networkErr.message);
+      console.error("code:", networkErr.code);
+      console.error("errno:", networkErr.errno);
+      console.error("name:", networkErr.name);
+      console.error("cause:", networkErr.cause);
+      console.error("stack:", networkErr.stack);
+      if (networkErr.response) {
+        console.error("response status:", networkErr.response.status);
+        console.error("response body:", networkErr.response.data);
+      }
+      if (networkErr.cause) {
+        console.error("cause:", networkErr.cause);
+      }
+      console.error("Elapsed:", Date.now() - start, "ms");
       return res.status(503).json({
         success: false,
         message: "AI service is currently unavailable. Please try again later.",
@@ -179,8 +169,7 @@ const getHint = async (req, res) => {
     }
 
     if (!aiResponse.body.success) {
-      // [DIAGNOSTIC] Log non-success response from AI service
-      console.error("[AIController] AI service returned non-success body:", JSON.stringify(aiResponse.body));
+      console.error("[AIController] AI service non-success body:", JSON.stringify(aiResponse.body));
       return res.status(502).json({
         success: false,
         message: aiResponse.body.message || "AI service returned an error.",
@@ -192,11 +181,11 @@ const getHint = async (req, res) => {
       hint: aiResponse.body.hint,
     });
   } catch (error) {
-    // [DIAGNOSTIC] Catch-all with full stack trace
     console.error("========== AI CONTROLLER UNEXPECTED ERROR ==========");
-    console.error("[AIController] error.message:", error.message);
-    console.error("[AIController] error.stack:", error.stack);
-    console.error("[AIController] error.code:", error.code);
+    console.error(error);
+    console.error("message:", error.message);
+    console.error("stack:", error.stack);
+    console.error("code:", error.code);
     return res.status(500).json({
       success: false,
       message: "Internal server error.",
