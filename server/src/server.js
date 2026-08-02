@@ -11,7 +11,13 @@ const startServer = async () => {
     console.log("MongoDB Connected");
 
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      // [DIAGNOSTIC] Print startup environment so CloudWatch confirms the running config
+      console.log("========== SERVER STARTUP ==========");
+      console.log("[Server] Environment:", process.env.NODE_ENV ?? "development");
+      console.log("[Server] PORT:", PORT);
+      console.log("[Server] AI_SERVICE_URL:", process.env.AI_SERVICE_URL ?? "http://localhost:6001 (default)");
+      console.log("[Server] Running on http://localhost:" + PORT);
+      console.log("=====================================");
     });
   } catch (error) {
     console.error("MongoDB Connection Failed:", error.message);
