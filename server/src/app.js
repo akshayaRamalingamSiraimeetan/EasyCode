@@ -11,6 +11,15 @@ const aiRoutes = require("./routes/aiRoutes");
 const app = express();
 
 // ---------------------------------------------------------------------------
+// [DIAGNOSTIC] Global request logger — fires before every middleware and router
+// ---------------------------------------------------------------------------
+app.use((req, _res, next) => {
+  console.log("========== EXPRESS REQUEST ==========");
+  console.log(req.method, req.originalUrl);
+  next();
+});
+
+// ---------------------------------------------------------------------------
 // CORS — build the allowed-origin list once at startup
 // ---------------------------------------------------------------------------
 
@@ -75,6 +84,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/compiler", compilerRoutes);
 app.use("/api/submissions", submissionRoutes);
+
+// [DIAGNOSTIC] Confirm the AI router is being mounted at startup
+console.log("[App] Mounting AI router at /api/ai");
 app.use("/api/ai", aiRoutes);
 
 // Root — quick human/browser check
@@ -93,5 +105,26 @@ app.get("/version", (_req, res) =>
     environment: process.env.NODE_ENV ?? "development",
   })
 );
+
+// ---------------------------------------------------------------------------
+// [DIAGNOSTIC] 404 handler — catches any request that fell through all routers
+// ---------------------------------------------------------------------------
+app.use((req, res) => {
+  console.log("[404]", req.method, req.originalUrl);
+  res.status(404).json({ success: false, message: "Route not found." });
+});
+
+// ---------------------------------------------------------------------------
+// [DIAGNOSTIC] Global error handler — catches anything passed to next(err)
+// ---------------------------------------------------------------------------
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, _next) => {
+  console.error("[ERROR MIDDLEWARE]");
+  console.error(err);
+  res.status(err.status ?? 500).json({
+    success: false,
+    message: err.message ?? "Internal server error.",
+  });
+});
 
 module.exports = app;
