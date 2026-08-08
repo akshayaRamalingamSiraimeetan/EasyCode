@@ -58,6 +58,7 @@ const runCode = async (req, res) => {
           expected: tc.expectedOutput,
           output: runResult.stdout ?? "",
           stderr: runResult.stderr ?? "",
+          executionTime: runResult.executionTime ?? null,
         });
         continue;
       }
@@ -72,6 +73,7 @@ const runCode = async (req, res) => {
         input: tc.input,
         expected: tc.expectedOutput,
         output: runResult.stdout ?? "",
+        executionTime: runResult.executionTime ?? null,
       });
     }
 
@@ -100,6 +102,7 @@ const runCode = async (req, res) => {
         input: customInput,
         output: runResult.stdout ?? "",
         stderr: runResult.stderr ?? "",
+        executionTime: runResult.executionTime ?? null,
       });
     }
 
@@ -168,6 +171,7 @@ const submitSolution = async (req, res) => {
       console.error("[Submission] Failed to save submission:", saveErr.message);
     }
 
+    console.log("[compilerController] verdict =", JSON.stringify(verdict));
     return res.status(200).json({
       success: verdict.status === "accepted",
       verdict,

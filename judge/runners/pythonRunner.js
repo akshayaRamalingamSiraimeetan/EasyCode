@@ -26,11 +26,11 @@ function _deleteWorkspace(workspacePath) {
   });
 }
 
-function _mapRunResult(result) {
-  if (result.timedOut)            return { status: Status.TIME_LIMIT_EXCEEDED,   stdout: result.stdout, stderr: result.stderr };
-  if (result.outputLimitExceeded) return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "",            stderr: "Output limit exceeded" };
-  if (result.exitCode !== 0)      return { status: Status.RUNTIME_ERROR,         stdout: result.stdout, stderr: result.stderr };
-  return                                 { status: Status.SUCCESS,                stdout: result.stdout, stderr: result.stderr };
+function _mapRunResult(result, executionTime) {
+  if (result.timedOut)            return { status: Status.TIME_LIMIT_EXCEEDED,   stdout: result.stdout, stderr: result.stderr, executionTime };
+  if (result.outputLimitExceeded) return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "",            stderr: "Output limit exceeded", executionTime };
+  if (result.exitCode !== 0)      return { status: Status.RUNTIME_ERROR,         stdout: result.stdout, stderr: result.stderr, executionTime };
+  return                                 { status: Status.SUCCESS,                stdout: result.stdout, stderr: result.stderr, executionTime };
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -47,6 +47,7 @@ async function execute(code, input) {
   fs.chmodSync(workspacePath, 0o777);
   fs.writeFileSync(path.join(workspacePath, "solution.py"), code);
 
+  const t0 = Date.now();
   const result = await runInDocker({
     command: "python3",
     args:    ["solution.py"],
@@ -54,9 +55,10 @@ async function execute(code, input) {
     stdin:   input,
     timeout: 5000,
   });
+  const executionTime = Date.now() - t0;
 
   _deleteWorkspace(workspacePath);
-  return _mapRunResult(result);
+  return _mapRunResult(result, executionTime);
 }
 
 /**
@@ -82,6 +84,7 @@ async function judge(code, testCases) {
     fs.writeFileSync(path.join(workspacePath, "solution.py"), code);
 
     for (const testCase of testCases) {
+      const t0 = Date.now();
       const runResult = await runInDocker({
         command: "python3",
         args:    ["solution.py"],
@@ -89,13 +92,17 @@ async function judge(code, testCases) {
         stdin:   testCase.input,
         timeout: 5000,
       });
+      const executionTime = Date.now() - t0;
 
-      const result = _mapRunResult(runResult);
+      const result = _mapRunResult(runResult, executionTime);
       results.push(result);
       if (result.status !== Status.SUCCESS) break;
     }
 
-    return { compilationError: false, results };
+    const maxExecutionTime = results.reduce((max, r) => Math.max(max, r.executionTime ?? 0), 0);
+    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime };
+    console.log("[RUNNER pythonRunner]", JSON.stringify({ executionTime: maxExecutionTime, resultCount: results.length, firstResult: results[0] }));
+    return runnerReturn;
   } finally {
     _deleteWorkspace(workspacePath);
   }

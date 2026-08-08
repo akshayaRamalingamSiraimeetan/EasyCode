@@ -93,6 +93,14 @@ function RunResultPane({ item }) {
             <pre className="rt-pre rt-pre--neutral">{item.output || "(no output)"}</pre>
           )}
         </div>
+        {item.executionTime != null && (
+          <div className="rt-pane-block">
+            <span className="rt-exec-time rt-exec-time--standalone">
+              <FiClock size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
+              {item.executionTime} ms
+            </span>
+          </div>
+        )}
       </div>
     );
   }
@@ -106,6 +114,12 @@ function RunResultPane({ item }) {
         {mod === "wrong" && <FiXCircle     size={15} />}
         {mod === "err"   && <FiAlertTriangle size={15} />}
         <span>{statusLabel(item.status)}</span>
+        {item.executionTime != null && (
+          <span className="rt-exec-time">
+            <FiClock size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
+            {item.executionTime} ms
+          </span>
+        )}
       </div>
 
       <div className="rt-pane-cols">
@@ -151,6 +165,14 @@ function SubmitVerdict({ data }) {
         <p className="verdict-detail">
           Passed <strong>{v.passed}</strong> / <strong>{v.total}</strong> test cases
         </p>
+        {v.executionTime != null && (
+          <div className="verdict-stats">
+            <div className="verdict-stat">
+              <span className="verdict-stat-label">Execution Time</span>
+              <span className="verdict-stat-value">{v.executionTime} ms</span>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

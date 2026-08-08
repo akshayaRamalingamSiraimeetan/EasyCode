@@ -54,29 +54,31 @@ async function _compile({ workspaceId, compiler, sourceFileName, executableName,
 
 /**
  * Runs the compiled executable from /workspace where it was written by _compile.
- * Returns { status, stdout, stderr }.
+ * Returns { status, stdout, stderr, executionTime }.
  */
 async function _runOne({ workspaceId, executableName, input }) {
+  const t0 = Date.now();
   const runResult = await runInDocker({
     command: `./${executableName}`,
     cwd: `/workspace/${workspaceId}`,
     stdin: input,
     timeout: 2000,
   });
+  const executionTime = Date.now() - t0;
 
   if (runResult.timedOut) {
-    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: runResult.stdout, stderr: runResult.stderr };
+    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
   }
 
   if (runResult.outputLimitExceeded) {
-    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded" };
+    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime };
   }
 
   if (runResult.exitCode !== 0) {
-    return { status: Status.RUNTIME_ERROR, stdout: runResult.stdout, stderr: runResult.stderr };
+    return { status: Status.RUNTIME_ERROR, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
   }
 
-  return { status: Status.SUCCESS, stdout: runResult.stdout, stderr: runResult.stderr };
+  return { status: Status.SUCCESS, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -148,7 +150,10 @@ async function judge(code, testCases, { sourceFileName, executableName, compiler
       }
     }
 
-    return { compilationError: false, results };
+    const maxExecutionTime = results.reduce((max, r) => Math.max(max, r.executionTime ?? 0), 0);
+    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime };
+    console.log("[RUNNER compiledRunner]", JSON.stringify({ executionTime: maxExecutionTime, resultCount: results.length, firstResult: results[0] }));
+    return runnerReturn;
 
   } finally {
     _deleteWorkspace(workspacePath);

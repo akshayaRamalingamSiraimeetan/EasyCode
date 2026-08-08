@@ -25,20 +25,20 @@ function _deleteWorkspace(workspacePath) {
   });
 }
 
-function _mapRunResult(result) {
+function _mapRunResult(result, executionTime) {
   if (result.timedOut) {
-    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: result.stdout, stderr: result.stderr };
+    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: result.stdout, stderr: result.stderr, executionTime };
   }
 
   if (result.outputLimitExceeded) {
-    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded" };
+    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime };
   }
 
   if (result.exitCode !== 0) {
-    return { status: Status.RUNTIME_ERROR, stdout: result.stdout, stderr: result.stderr };
+    return { status: Status.RUNTIME_ERROR, stdout: result.stdout, stderr: result.stderr, executionTime };
   }
 
-  return { status: Status.SUCCESS, stdout: result.stdout, stderr: result.stderr };
+  return { status: Status.SUCCESS, stdout: result.stdout, stderr: result.stderr, executionTime };
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -76,6 +76,7 @@ async function execute(code, input) {
       return settle({ status: Status.COMPILATION_ERROR, stdout: "", stderr: compileResult.stderr });
     }
 
+    const t0 = Date.now();
     const runResult = await runInDocker({
       command: "java",
       args: ["-cp", "/workspace", "Main"],
@@ -83,10 +84,11 @@ async function execute(code, input) {
       stdin: input,
       timeout: 5000,
     });
+    const executionTime = Date.now() - t0;
 
     _deleteWorkspace(workspacePath);
 
-    return settle(_mapRunResult(runResult));
+    return settle(_mapRunResult(runResult, executionTime));
   });
 }
 
@@ -131,6 +133,7 @@ async function judge(code, testCases) {
 
     // Execute once per test case, stop on first execution failure
     for (const testCase of testCases) {
+      const t0 = Date.now();
       const runResult = await runInDocker({
         command: "java",
         args: ["-cp", "/workspace", "Main"],
@@ -138,8 +141,9 @@ async function judge(code, testCases) {
         stdin: testCase.input,
         timeout: 5000,
       });
+      const executionTime = Date.now() - t0;
 
-      const result = _mapRunResult(runResult);
+      const result = _mapRunResult(runResult, executionTime);
       results.push(result);
 
       if (result.status !== Status.SUCCESS) {
@@ -147,7 +151,10 @@ async function judge(code, testCases) {
       }
     }
 
-    return { compilationError: false, results };
+    const maxExecutionTime = results.reduce((max, r) => Math.max(max, r.executionTime ?? 0), 0);
+    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime };
+    console.log("[RUNNER javaRunner]", JSON.stringify({ executionTime: maxExecutionTime, resultCount: results.length, firstResult: results[0] }));
+    return runnerReturn;
 
   } finally {
     _deleteWorkspace(workspacePath);

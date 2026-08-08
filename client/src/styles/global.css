@@ -2972,3 +2972,58 @@ input {
   color: #4a4a4a;
   font-style: italic;
 }
+
+
+/* ============================================================
+   EXECUTION TIME — inline stat for run result and verdict
+============================================================ */
+
+/* Inline badge inside the rt-status-banner */
+.rt-exec-time {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Standalone row used under custom-input pane */
+.rt-exec-time--standalone {
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Stats row inside the verdict-accepted card */
+.verdict-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(74, 222, 128, 0.15);
+}
+
+.verdict-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.verdict-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(74, 222, 128, 0.5);
+}
+
+.verdict-stat-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: -0.01em;
+}

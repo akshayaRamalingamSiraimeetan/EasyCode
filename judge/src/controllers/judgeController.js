@@ -17,6 +17,7 @@ async function judgeCode(req, res, next) {
 
     const verdict = await judgeService.judge(language, code, testCases);
 
+    console.log("[judgeController] response =", JSON.stringify(verdict));
     // Always 200 — status field in the body carries the verdict.
     return res.status(200).json(verdict);
   } catch (err) {

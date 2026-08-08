@@ -38,11 +38,20 @@ const client = axios.create({
 async function _post(path, payload) {
   try {
     const response = await client.post(path, payload);
+    console.log("[judgeClient] response =", JSON.stringify(response.data));
     return response.data;
   } catch (err) {
+    // Log the raw error so the real failure (ECONNREFUSED, ETIMEDOUT, etc.) is visible
+    console.error("[judgeClient] raw error:", {
+      code:    err.code,
+      message: err.message,
+      status:  err.response?.status,
+      data:    err.response?.data,
+    });
+
     const message =
-      err.response?.data?.message ??
-      err.message ??
+      err.response?.data?.message ||
+      err.message ||
       "Unknown error from judge service";
     throw new Error(`[judgeClient] ${message}`);
   }

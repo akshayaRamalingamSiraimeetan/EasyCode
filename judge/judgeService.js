@@ -72,15 +72,18 @@ async function judge(language, code, testCases) {
 
   // Delegate all execution to the runner
   const runnerResult = await runner.judge(code, testCases);
+  console.log("[judgeService] runnerResult =", JSON.stringify(runnerResult));
 
   // Compilation failed — no test cases were executed
   if (runnerResult.compilationError) {
-    return {
+    const verdict = {
       status: "compilation_error",
       passed: 0,
       total,
       stderr: runnerResult.compileResult.stderr,
     };
+    console.log("[judgeService] returning =", JSON.stringify(verdict));
+    return verdict;
   }
 
   // Iterate execution results alongside test cases
@@ -90,13 +93,15 @@ async function judge(language, code, testCases) {
 
     // Execution failed — return immediately with context
     if (runResult.status !== "success") {
-      return _buildExecutionFailure(
+      const verdict = _buildExecutionFailure(
         runResult.status,
         runResult,
         i,
         total,
         i + 1,
       );
+      console.log("[judgeService] returning =", JSON.stringify(verdict));
+      return verdict;
     }
 
     // Compare outputs — trim trailing whitespace only
@@ -104,7 +109,7 @@ async function judge(language, code, testCases) {
     const expected = testCase.expectedOutput.trimEnd();
 
     if (actual !== expected) {
-      return {
+      const verdict = {
         status: "wrong_answer",
         passed: i,
         total,
@@ -112,14 +117,19 @@ async function judge(language, code, testCases) {
         expectedOutput: expected,
         actualOutput: actual,
       };
+      console.log("[judgeService] returning =", JSON.stringify(verdict));
+      return verdict;
     }
   }
 
-  return {
+  const verdict = {
     status: "accepted",
     passed: total,
     total,
+    executionTime: runnerResult.executionTime ?? null,
   };
+  console.log("[judgeService] returning =", JSON.stringify(verdict));
+  return verdict;
 }
 
 module.exports = { execute, judge };
