@@ -1,27 +1,49 @@
+const https = require("https");
+const http = require("http");
 const Problem = require("../models/Problem");
 
 /**
  * POST a JSON body to url and return { status, body }.
- * Uses the global fetch available in Node 22 — no extra dependencies.
- * AbortSignal.timeout(30000) gives a 30-second deadline that covers
- * slow Gemini responses without relying on socket-level keep-alive timeouts.
+ * Uses Node built-in http/https — no external dependencies.
  */
-const postJSON = async (url, body) => {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(30_000),
+const postJSON = (url, body) => {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const parsed = new URL(url);
+    const isHttps = parsed.protocol === "https:";
+    const lib = isHttps ? https : http;
+
+    const options = {
+      hostname: parsed.hostname,
+      port: parsed.port || (isHttps ? 443 : 80),
+      path: parsed.pathname,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(data),
+      },
+    };
+
+    const req = lib.request(options, (res) => {
+      let raw = "";
+      res.setEncoding("utf8");
+      res.on("data", (chunk) => { raw += chunk; });
+      res.on("end", () => {
+        try {
+          resolve({ status: res.statusCode, body: JSON.parse(raw) });
+        } catch {
+          reject(new Error("AI service returned non-JSON response."));
+        }
+      });
+    });
+
+    req.on("error", (err) => {
+      reject(err);
+    });
+
+    req.write(data);
+    req.end();
   });
-
-  let parsed;
-  try {
-    parsed = await response.json();
-  } catch {
-    throw new Error("AI service returned non-JSON response.");
-  }
-
-  return { status: response.status, body: parsed };
 };
 
 /**
