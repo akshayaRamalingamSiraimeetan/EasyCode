@@ -10,6 +10,7 @@ import {
   FiZap,
   FiCode,
   FiX,
+  FiEdit2,
 } from "react-icons/fi";
 
 import { getMySubmissions, getSubmissionById } from "../services/submission";
@@ -77,7 +78,7 @@ function formatDate(iso) {
 
 /* ─── submission detail modal ────────────────────────────── */
 
-function SubmissionModal({ submissionId, onClose }) {
+function SubmissionModal({ submissionId, onClose, onLoad }) {
   const [sub, setSub]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError]   = useState("");
@@ -105,13 +106,27 @@ function SubmissionModal({ submissionId, onClose }) {
             <FiCode size={16} />
             <span>Submission Details</span>
           </div>
-          <button
-            className="sub-modal-close"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            <FiX size={18} />
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {/* Load into Editor — only shown once sub is loaded */}
+            {!loading && sub && (
+              <button
+                className="table-btn"
+                style={{ display: "inline-flex", alignItems: "center", gap: 6 }}
+                onClick={() => onLoad(sub)}
+                title="Load this code into the editor for that problem"
+              >
+                <FiEdit2 size={13} />
+                Load into Editor
+              </button>
+            )}
+            <button
+              className="sub-modal-close"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              <FiX size={18} />
+            </button>
+          </div>
         </div>
 
         {loading && (
@@ -167,9 +182,11 @@ function SubmissionModal({ submissionId, onClose }) {
             <div className="sub-modal-code-label">Submitted Code</div>
             <div className="sub-modal-editor">
               <Editor
+                key={sub.id}
                 language={MONACO_LANG[sub.language] ?? "plaintext"}
                 value={sub.code}
                 theme="vs-dark"
+                saveViewState={false}
                 options={{
                   readOnly: true,
                   fontSize: 13,
@@ -214,6 +231,15 @@ export default function Submissions() {
 
   /* detail modal */
   const [selectedId, setSelectedId] = useState(null);
+
+  /* ── load submission into editor ─────────────────────── */
+  const handleLoad = (sub) => {
+    // Navigate to the problem's solve page and seed the editor
+    // via router state. Solve.jsx reads this on mount.
+    navigate(`/problems/${sub.problemId}/solve`, {
+      state: { preloadCode: sub.code, preloadLanguage: sub.language },
+    });
+  };
 
   /* ── fetch ───────────────────────────────────────────── */
   useEffect(() => {
@@ -393,12 +419,32 @@ export default function Submissions() {
                     {formatDate(s.submittedAt)}
                   </td>
                   <td>
-                    <button
-                      className="table-btn"
-                      onClick={(e) => { e.stopPropagation(); setSelectedId(s.id); }}
-                    >
-                      View
-                    </button>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <button
+                        className="table-btn"
+                        onClick={(e) => { e.stopPropagation(); setSelectedId(s.id); }}
+                      >
+                        View
+                      </button>
+                      <button
+                        className="table-btn"
+                        style={{ background: "#111", color: "#fff", border: "1px solid #444" }}
+                        onClick={async (e) => {
+                          e.stopPropagation();
+                          try {
+                            const res = await getSubmissionById(s.id);
+                            handleLoad(res.data.submission);
+                          } catch {
+                            // Fall back to opening the modal so the user can try manually
+                            setSelectedId(s.id);
+                          }
+                        }}
+                        title="Load this submission into the editor"
+                      >
+                        <FiEdit2 size={12} style={{ marginRight: 4 }} />
+                        Load
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -435,6 +481,7 @@ export default function Submissions() {
         <SubmissionModal
           submissionId={selectedId}
           onClose={() => setSelectedId(null)}
+          onLoad={handleLoad}
         />
       )}
     </div>

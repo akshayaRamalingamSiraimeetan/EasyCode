@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
   FiArrowLeft,
@@ -317,10 +317,56 @@ function ProblemPanel({ problem, language, currentCode }) {
   );
 }
 
+/* ─── localStorage draft helpers ─────────────────────────
+ *
+ * All drafts live under a single key so we never litter
+ * localStorage with one entry per problem.
+ *
+ * Shape:
+ *   easycode_drafts = {
+ *     [problemId]: {
+ *       [language]: code   // e.g. { python: "...", cpp: "..." }
+ *     }
+ *   }
+ * ─────────────────────────────────────────────────────── */
+
+const DRAFTS_KEY = "easycode_drafts";
+
+function readDraftsStore() {
+  try {
+    const raw = localStorage.getItem(DRAFTS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+/** Return the saved code for a specific problem + language, or null. */
+function loadDraft(problemId, language) {
+  const store = readDraftsStore();
+  return store[problemId]?.[language] ?? null;
+}
+
+/**
+ * Persist code for one problem + language.
+ * Merges into the shared store so other problems' drafts are preserved.
+ */
+function saveDraft(problemId, language, code) {
+  try {
+    const store = readDraftsStore();
+    if (!store[problemId]) store[problemId] = {};
+    store[problemId][language] = code;
+    localStorage.setItem(DRAFTS_KEY, JSON.stringify(store));
+  } catch {
+    // Best-effort — silently ignore quota errors
+  }
+}
+
 /* ─── main page ──────────────────────────────────────────── */
 export default function Solve() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* problem */
   const [problem, setProblem]         = useState(null);
@@ -330,6 +376,96 @@ export default function Solve() {
   /* editor */
   const [language, setLanguage] = useState("python");
   const [codeMap, setCodeMap]   = useState({ ...DEFAULT_CODE });
+
+  /*
+   * userHasEdited tracks whether the user has made at least one
+   * actual keystroke since the page loaded (or since a submission
+   * was loaded into the editor).  We gate draft saves behind this
+   * flag so that loading a submission never immediately overwrites
+   * the existing draft — only real user edits do.
+   */
+  const userHasEdited = useRef(false);
+
+  /*
+   * Seed priority on mount (runs once):
+   *   1. location.state.preloadCode  — arrived via "Load into Editor"
+   *   2. localStorage draft for this problem + language
+   *   3. DEFAULT_CODE                — already the initial value
+   *
+   * When we load a preloaded submission we reset userHasEdited so
+   * the save gate works correctly for the new content.
+   */
+  useEffect(() => {
+    const { preloadCode, preloadLanguage } = location.state ?? {};
+
+    if (preloadCode && preloadLanguage) {
+      userHasEdited.current = false;
+      setLanguage(preloadLanguage);
+      setCodeMap((prev) => ({ ...prev, [preloadLanguage]: preloadCode }));
+      // Clear router state so a refresh doesn't re-apply the load
+      window.history.replaceState({}, "");
+      return;
+    }
+
+    // No router state — restore any saved draft for this problem.
+    // Every language slot that has a saved draft is seeded independently
+    // so switching languages later restores their saved code too.
+    if (id) {
+      const store = readDraftsStore();
+      const problemDrafts = store[id];
+
+      if (problemDrafts) {
+        setCodeMap((prev) => {
+          const next = { ...prev };
+          for (const lang of Object.keys(DEFAULT_CODE)) {
+            if (problemDrafts[lang] !== undefined) next[lang] = problemDrafts[lang];
+          }
+          return next;
+        });
+
+        /*
+         * Language selection priority:
+         *   1. Keep the current language if it has a saved draft
+         *      ("python" is the useState default, and it's fine to
+         *      stay on it if the user drafted in Python).
+         *   2. Fall back to the first language that does have a draft,
+         *      so the editor doesn't open blank when the user's last
+         *      session was in a different language.
+         *
+         * We read the current language from its useState initial value
+         * ("python") rather than the state variable because this effect
+         * runs once synchronously before any re-render.
+         */
+        const currentLang = language; // matches useState value on first render
+        if (problemDrafts[currentLang] === undefined) {
+          const preferredOrder = ["python", "cpp", "c", "java"];
+          const fallback = preferredOrder.find((l) => problemDrafts[l] !== undefined);
+          if (fallback) setLanguage(fallback);
+        }
+        // else: current language has a draft — keep it, no setLanguage needed
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /*
+   * Auto-save draft, debounced 800 ms.
+   *
+   * Intentionally does NOT save when userHasEdited is false so that
+   * loading a submission (or restoring a draft) never overwrites the
+   * previously saved draft until the user actually types something.
+   */
+  const draftTimerRef = useRef(null);
+  const currentCode = codeMap[language] ?? DEFAULT_CODE[language];
+
+  useEffect(() => {
+    if (!id || !userHasEdited.current) return;
+    clearTimeout(draftTimerRef.current);
+    draftTimerRef.current = setTimeout(() => {
+      saveDraft(id, language, currentCode);
+    }, 800);
+    return () => clearTimeout(draftTimerRef.current);
+  }, [id, language, currentCode]);
 
   /* console state */
   const [consoleMode, setConsoleMode]   = useState("input"); // "input" | "run" | "submit"
@@ -402,8 +538,10 @@ export default function Solve() {
   };
 
   /* ── code helpers ────────────────────────────────────── */
-  const currentCode = codeMap[language] ?? DEFAULT_CODE[language];
-  const handleCodeChange   = (val) => setCodeMap((p) => ({ ...p, [language]: val ?? "" }));
+  const handleCodeChange = (val) => {
+    userHasEdited.current = true;
+    setCodeMap((p) => ({ ...p, [language]: val ?? "" }));
+  };
   const handleLanguageChange = (e) => setLanguage(e.target.value);
 
   /* ── run ─────────────────────────────────────────────── */

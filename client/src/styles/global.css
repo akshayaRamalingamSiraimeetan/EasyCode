@@ -2112,11 +2112,23 @@ input {
   flex-shrink: 0;
 }
 
+/*
+ * .sub-modal-editor must have an explicit pixel height so the
+ * @monaco-editor/react wrapper's height:100% resolves to a
+ * non-zero value when Monaco calls editor.create().
+ *
+ * flex:1 alone does NOT work: CSS percentage-height resolution
+ * requires an explicit height on the parent, not a flex-computed
+ * one. With only flex:1 the inner section height:100% collapses
+ * to 0, Monaco sees clientHeight===0, and skips building the
+ * view DOM (only monaco-aria-container is created).
+ *
+ * 420px fits comfortably inside the modal's max-height:90vh
+ * after the header (~53px) + meta strip (~80px) + code label (~32px).
+ */
 .sub-modal-editor {
-  flex: 1;
-  min-height: 0;
-  /* give it a sensible fixed height so Monaco can measure */
   height: 420px;
+  flex-shrink: 0;
   border-top: 1px solid var(--color-border);
 }
 
