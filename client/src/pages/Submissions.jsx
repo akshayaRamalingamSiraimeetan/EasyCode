@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
-  FiArrowLeft,
   FiCheckCircle,
   FiXCircle,
   FiAlertTriangle,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/fi";
 
 import { getMySubmissions, getSubmissionById } from "../services/submission";
+import AppNavbar from "../components/AppNavbar";
 
 /* ─── helpers ────────────────────────────────────────────── */
 
@@ -79,9 +79,9 @@ function formatDate(iso) {
 /* ─── submission detail modal ────────────────────────────── */
 
 function SubmissionModal({ submissionId, onClose, onLoad }) {
-  const [sub, setSub]       = useState(null);
+  const [sub, setSub]         = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError]   = useState("");
+  const [error, setError]     = useState("");
 
   useEffect(() => {
     if (!submissionId) return;
@@ -107,7 +107,6 @@ function SubmissionModal({ submissionId, onClose, onLoad }) {
             <span>Submission Details</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {/* Load into Editor — only shown once sub is loaded */}
             {!loading && sub && (
               <button
                 className="table-btn"
@@ -119,11 +118,7 @@ function SubmissionModal({ submissionId, onClose, onLoad }) {
                 Load into Editor
               </button>
             )}
-            <button
-              className="sub-modal-close"
-              onClick={onClose}
-              aria-label="Close"
-            >
+            <button className="sub-modal-close" onClick={onClose} aria-label="Close">
               <FiX size={18} />
             </button>
           </div>
@@ -139,7 +134,6 @@ function SubmissionModal({ submissionId, onClose, onLoad }) {
 
         {!loading && sub && (
           <>
-            {/* meta strip */}
             <div className="sub-modal-meta">
               <div className="sub-modal-meta-item">
                 <span className="sub-modal-meta-label">Problem</span>
@@ -160,15 +154,11 @@ function SubmissionModal({ submissionId, onClose, onLoad }) {
               </div>
               <div className="sub-modal-meta-item">
                 <span className="sub-modal-meta-label">Passed</span>
-                <span className="sub-modal-meta-value">
-                  {sub.passed} / {sub.total}
-                </span>
+                <span className="sub-modal-meta-value">{sub.passed} / {sub.total}</span>
               </div>
               <div className="sub-modal-meta-item">
                 <span className="sub-modal-meta-label">Submitted</span>
-                <span className="sub-modal-meta-value">
-                  {formatDate(sub.submittedAt)}
-                </span>
+                <span className="sub-modal-meta-value">{formatDate(sub.submittedAt)}</span>
               </div>
               {sub.runtime != null && (
                 <div className="sub-modal-meta-item">
@@ -178,7 +168,6 @@ function SubmissionModal({ submissionId, onClose, onLoad }) {
               )}
             </div>
 
-            {/* read-only code viewer */}
             <div className="sub-modal-code-label">Submitted Code</div>
             <div className="sub-modal-editor">
               <Editor
@@ -221,27 +210,25 @@ export default function Submissions() {
   /* pagination */
   const [page, setPage]             = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const LIMIT = 50; // fetch generous amount; client-side filters work on this
+  const LIMIT = 50;
 
   /* filters */
   const [search,  setSearch]  = useState("");
   const [lang,    setLang]    = useState("");
   const [verdict, setVerdict] = useState("");
-  const [sortDir, setSortDir] = useState("desc"); // "desc" | "asc"
+  const [sortDir, setSortDir] = useState("desc");
 
   /* detail modal */
   const [selectedId, setSelectedId] = useState(null);
 
-  /* ── load submission into editor ─────────────────────── */
+  /* ── load into editor ─────────────────────────────────── */
   const handleLoad = (sub) => {
-    // Navigate to the problem's solve page and seed the editor
-    // via router state. Solve.jsx reads this on mount.
     navigate(`/problems/${sub.problemId}/solve`, {
       state: { preloadCode: sub.code, preloadLanguage: sub.language },
     });
   };
 
-  /* ── fetch ───────────────────────────────────────────── */
+  /* ── fetch ────────────────────────────────────────────── */
   useEffect(() => {
     setLoading(true);
     getMySubmissions(page, LIMIT)
@@ -269,212 +256,211 @@ export default function Submissions() {
 
   /* ─────────────────────── render ─────────────────────── */
   return (
-    <div className="problems-page">
+    <div className="sub-page">
 
-      {/* ── page header ──────────────────────────────────── */}
-      <div className="problems-header">
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button
-            className="solve-back-btn"
-            onClick={() => navigate("/dashboard")}
-            title="Back to Dashboard"
-          >
-            <FiArrowLeft size={15} />
-          </button>
+      {/* ── shared app navbar ──────────────────────────────── */}
+      <AppNavbar title="My Submissions" />
+
+      {/* ── page body ─────────────────────────────────────── */}
+      <main className="sub-body">
+
+        {/* ── page heading ──────────────────────────────────── */}
+        <div className="sub-page-heading">
           <div>
-            <h1 style={{ marginBottom: 2 }}>My Submissions</h1>
-            <p className="submissions-subtitle">Your full submission history</p>
+            <h1 className="sub-page-title">My Submissions</h1>
+            <p className="sub-page-subtitle">Your full submission history</p>
           </div>
+          <button
+            className="header-btn"
+            onClick={() => navigate("/problems")}
+          >
+            Browse Problems
+          </button>
         </div>
-        <button
-          className="header-btn"
-          onClick={() => navigate("/problems")}
-        >
-          Browse Problems
-        </button>
-      </div>
 
-      {/* ── filters ──────────────────────────────────────── */}
-      <div className="table-toolbar" style={{ flexWrap: "wrap", gap: 10 }}>
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search by problem title…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ flex: "1 1 220px" }}
-        />
+        {/* ── filters ───────────────────────────────────────── */}
+        <div className="sub-filters">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search by problem title…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            aria-label="Search submissions by problem title"
+          />
 
-        <select
-          className="sort-select"
-          value={lang}
-          onChange={(e) => setLang(e.target.value)}
-        >
-          {LANGUAGES.map((l) => (
-            <option key={l.value} value={l.value}>{l.label}</option>
-          ))}
-        </select>
+          <select
+            className="sort-select"
+            value={lang}
+            onChange={(e) => setLang(e.target.value)}
+            aria-label="Filter by language"
+          >
+            {LANGUAGES.map((l) => (
+              <option key={l.value} value={l.value}>{l.label}</option>
+            ))}
+          </select>
 
-        <select
-          className="sort-select"
-          value={verdict}
-          onChange={(e) => setVerdict(e.target.value)}
-        >
-          {VERDICTS.map((v) => (
-            <option key={v.value} value={v.value}>{v.label}</option>
-          ))}
-        </select>
+          <select
+            className="sort-select"
+            value={verdict}
+            onChange={(e) => setVerdict(e.target.value)}
+            aria-label="Filter by verdict"
+          >
+            {VERDICTS.map((v) => (
+              <option key={v.value} value={v.value}>{v.label}</option>
+            ))}
+          </select>
 
-        <select
-          className="sort-select"
-          value={sortDir}
-          onChange={(e) => setSortDir(e.target.value)}
-        >
-          <option value="desc">Newest First</option>
-          <option value="asc">Oldest First</option>
-        </select>
-      </div>
-
-      {/* ── states ───────────────────────────────────────── */}
-      {loading && (
-        <div className="loading-state">
-          <div className="spinner" />
+          <select
+            className="sort-select"
+            value={sortDir}
+            onChange={(e) => setSortDir(e.target.value)}
+            aria-label="Sort order"
+          >
+            <option value="desc">Newest First</option>
+            <option value="asc">Oldest First</option>
+          </select>
         </div>
-      )}
 
-      {!loading && error && (
-        <div className="empty-state">
-          <h3>Error</h3>
-          <p>{error}</p>
-        </div>
-      )}
+        {/* ── loading ───────────────────────────────────────── */}
+        {loading && (
+          <div className="loading-state">
+            <div className="spinner" />
+          </div>
+        )}
 
-      {!loading && !error && filtered.length === 0 && (
-        <div className="empty-state">
-          <div className="empty-state-icon">
-            {submissions.length === 0 ? (
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 11 12 14 22 4" />
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
-            ) : (
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
+        {/* ── error ─────────────────────────────────────────── */}
+        {!loading && error && (
+          <div className="empty-state">
+            <h3>Error</h3>
+            <p>{error}</p>
+          </div>
+        )}
+
+        {/* ── empty ─────────────────────────────────────────── */}
+        {!loading && !error && filtered.length === 0 && (
+          <div className="empty-state">
+            <div className="empty-state-icon">
+              {submissions.length === 0 ? (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+              ) : (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              )}
+            </div>
+            <h3>{submissions.length === 0 ? "No submissions yet" : "No results found"}</h3>
+            <p>
+              {submissions.length === 0
+                ? "Submit a solution to a problem and it will appear here."
+                : "No submissions match your current filters."}
+            </p>
+            {submissions.length === 0 && (
+              <button
+                className="header-btn"
+                style={{ marginTop: 16 }}
+                onClick={() => navigate("/problems")}
+              >
+                Browse Problems
+              </button>
             )}
           </div>
-          <h3>
-            {submissions.length === 0 ? "No submissions yet" : "No results found"}
-          </h3>
-          <p>
-            {submissions.length === 0
-              ? "Submit a solution to a problem and it will appear here."
-              : "No submissions match your current filters."}
-          </p>
-          {submissions.length === 0 && (
-            <button
-              className="header-btn"
-              style={{ marginTop: 16 }}
-              onClick={() => navigate("/problems")}
-            >
-              Browse Problems
-            </button>
-          )}
-        </div>
-      )}
+        )}
 
-      {/* ── table ────────────────────────────────────────── */}
-      {!loading && !error && filtered.length > 0 && (
-        <div className="table-container">
-          <table className="problems-table">
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Problem</th>
-                <th>Language</th>
-                <th>Passed</th>
-                <th>Submitted At</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((s) => (
-                <tr
-                  key={s.id}
-                  className="sub-row"
-                  onClick={() => setSelectedId(s.id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <td>
-                    <span className={`sub-verdict-pill ${verdictClass(s.verdict)}`}>
-                      <VerdictIcon verdict={s.verdict} size={11} />
-                      {verdictLabel(s.verdict)}
-                    </span>
-                  </td>
-                  <td className="sub-problem-title">{s.problemTitle}</td>
-                  <td>{LANG_LABELS[s.language] ?? s.language}</td>
-                  <td>{s.passed} / {s.total}</td>
-                  <td className="sub-date-cell">
-                    {formatDate(s.submittedAt)}
-                  </td>
-                  <td>
-                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <button
-                        className="table-btn"
-                        onClick={(e) => { e.stopPropagation(); setSelectedId(s.id); }}
-                      >
-                        View
-                      </button>
-                      <button
-                        className="table-btn table-btn--secondary"
-                        onClick={async (e) => {
-                          e.stopPropagation();
-                          try {
-                            const res = await getSubmissionById(s.id);
-                            handleLoad(res.data.submission);
-                          } catch {
-                            // Fall back to opening the modal so the user can try manually
-                            setSelectedId(s.id);
-                          }
-                        }}
-                        title="Load this submission into the editor"
-                      >
-                        <FiEdit2 size={12} style={{ marginRight: 4 }} />
-                        Load
-                      </button>
-                    </div>
-                  </td>
+        {/* ── table ─────────────────────────────────────────── */}
+        {!loading && !error && filtered.length > 0 && (
+          <div className="table-container">
+            <table className="problems-table">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Problem</th>
+                  <th>Language</th>
+                  <th>Passed</th>
+                  <th>Submitted At</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {filtered.map((s) => (
+                  <tr
+                    key={s.id}
+                    className="sub-row"
+                    onClick={() => setSelectedId(s.id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>
+                      <span className={`sub-verdict-pill ${verdictClass(s.verdict)}`}>
+                        <VerdictIcon verdict={s.verdict} size={11} />
+                        {verdictLabel(s.verdict)}
+                      </span>
+                    </td>
+                    <td className="sub-problem-title">{s.problemTitle}</td>
+                    <td>{LANG_LABELS[s.language] ?? s.language}</td>
+                    <td>{s.passed} / {s.total}</td>
+                    <td className="sub-date-cell">{formatDate(s.submittedAt)}</td>
+                    <td>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        <button
+                          className="table-btn"
+                          onClick={(e) => { e.stopPropagation(); setSelectedId(s.id); }}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="table-btn table-btn--secondary"
+                          onClick={async (e) => {
+                            e.stopPropagation();
+                            try {
+                              const res = await getSubmissionById(s.id);
+                              handleLoad(res.data.submission);
+                            } catch {
+                              setSelectedId(s.id);
+                            }
+                          }}
+                          title="Load this submission into the editor"
+                        >
+                          <FiEdit2 size={12} style={{ marginRight: 4 }} />
+                          Load
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
-      {/* ── pagination ───────────────────────────────────── */}
-      {totalPages > 1 && (
-        <div className="sub-pagination">
-          <button
-            className="btn-secondary"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => p - 1)}
-          >
-            ← Prev
-          </button>
-          <span className="sub-pagination-label">
-            Page {page} of {totalPages}
-          </span>
-          <button
-            className="btn-secondary"
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Next →
-          </button>
-        </div>
-      )}
+        {/* ── pagination ────────────────────────────────────── */}
+        {totalPages > 1 && (
+          <div className="sub-pagination">
+            <button
+              className="btn-secondary"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+            >
+              ← Prev
+            </button>
+            <span className="sub-pagination-label">
+              Page {page} of {totalPages}
+            </span>
+            <button
+              className="btn-secondary"
+              disabled={page >= totalPages}
+              onClick={() => setPage((p) => p + 1)}
+            >
+              Next →
+            </button>
+          </div>
+        )}
 
-      {/* ── detail modal ─────────────────────────────────── */}
+      </main>
+
+      {/* ── detail modal ──────────────────────────────────── */}
       {selectedId && (
         <SubmissionModal
           submissionId={selectedId}

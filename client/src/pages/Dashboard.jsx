@@ -8,16 +8,14 @@ import { getMySubmissions } from "../services/submission";
 import ProblemModal from "../components/ProblemModal";
 
 import {
-  FiCode,
   FiList,
   FiPlusSquare,
   FiFileText,
-  FiLogOut,
   FiCheckCircle,
   FiBookOpen,
   FiCalendar,
 } from "react-icons/fi";
-import ThemeToggle from "../components/ThemeToggle";
+import AppNavbar from "../components/AppNavbar";
 
 /* ── helpers ─────────────────────────────────────────────── */
 
@@ -26,15 +24,6 @@ function getGreeting() {
   if (h < 12) return "Good morning";
   if (h < 18) return "Good afternoon";
   return "Good evening";
-}
-
-function formatDate() {
-  return new Date().toLocaleDateString(undefined, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 function formatJoined(iso) {
@@ -83,11 +72,9 @@ function ActionCard({ icon, title, description, onClick }) {
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { logout, user } = useAuth();
+  const { user } = useAuth();
 
   const isAdmin = user?.role === "admin";
-
-  /* ── stats state ──────────────────────────────────────── */
   const [totalProblems, setTotalProblems] = useState(null);
   const [totalSubmissions, setTotalSubmissions] = useState(null);
 
@@ -117,12 +104,6 @@ function Dashboard() {
       typeof prev === "number" ? prev + 1 : prev
     );
     return res.data.problem;
-  };
-
-  /* ── logout ───────────────────────────────────────────── */
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
   };
 
   /* ── stats definition ─────────────────────────────────── */
@@ -188,23 +169,8 @@ function Dashboard() {
   /* ── render ───────────────────────────────────────────── */
   return (
     <div className="db-page">
-      {/* ── header ──────────────────────────────────────── */}
-      <header className="db-header">
-        <div className="db-header-left">
-          <div className="db-logo">
-            <FiCode size={20} />
-            <span>EasyCode</span>
-          </div>
-        </div>
-        <div className="db-header-right">
-          <span className="db-header-date">{formatDate()}</span>
-          <ThemeToggle />
-          <button className="db-logout-btn" onClick={handleLogout} title="Logout">
-            <FiLogOut size={15} />
-            <span>Logout</span>
-          </button>
-        </div>
-      </header>
+      {/* ── shared app navbar ──────────────────────────────── */}
+      <AppNavbar />
 
       <main className="db-main">
         {/* ── hero ────────────────────────────────────────── */}

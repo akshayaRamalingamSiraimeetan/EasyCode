@@ -966,3 +966,278 @@ button { cursor: pointer; }
   .solve-left { width: 100%; max-width: 100%; height: 40vh; border-right: none; border-bottom: 1px solid #2d2d2d; }
   .solve-nav-title { max-width: 160px; }
 }
+
+/* ============================================================
+   APP NAVBAR  (app-nav- prefix)
+   Shared top navigation bar used on Dashboard, Problems,
+   Submissions, and any future main pages.
+   Fully theme-aware via CSS custom properties.
+============================================================ */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+  padding: 0 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+/* ── left cluster ─────────────────────────────────────────── */
+.app-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.app-nav-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: border-color var(--transition), color var(--transition);
+  margin-right: 4px;
+}
+.app-nav-back:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* logo button */
+.app-nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  padding: 4px 6px;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  transition: color var(--transition);
+}
+.app-nav-logo:hover { color: var(--accent); }
+
+/* breadcrumb separator + title */
+.app-nav-bc-sep {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 0 2px;
+  user-select: none;
+}
+.app-nav-bc-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* nav links */
+.app-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 12px;
+}
+.app-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+.app-nav-link:hover {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+.app-nav-link--active {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--surface-secondary);
+}
+
+/* ── right cluster ────────────────────────────────────────── */
+.app-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* user block */
+.app-nav-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 3px 3px 8px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.app-nav-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--text-primary);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 50%;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+.app-nav-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-nav-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+.app-nav-logout:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* ── responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .app-nav { padding: 0 16px; }
+  .app-nav-links { display: none; }       /* collapse nav links on small screens */
+  .app-nav-bc-title { max-width: 120px; }
+  .app-nav-username { display: none; }    /* show avatar only */
+}
+@media (max-width: 480px) {
+  .app-nav-bc-sep,
+  .app-nav-bc-title { display: none; }    /* breadcrumb hidden on very small screens */
+}
+
+/* ============================================================
+   SUBMISSIONS PAGE — new layout  (sub- prefix additions)
+   Uses AppNavbar. sub-page is the outer shell,
+   sub-body is the scrollable content container.
+============================================================ */
+
+.sub-page {
+  min-height: 100vh;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-body {
+  flex: 1;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* page heading row */
+.sub-page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.sub-page-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+
+.sub-page-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* filter toolbar */
+.sub-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.sub-filters .search-input {
+  flex: 1 1 220px;
+}
+
+@media (max-width: 640px) {
+  .sub-body { padding: 24px 16px 48px; }
+  .sub-page-title { font-size: 20px; }
+  .sub-filters { flex-direction: column; align-items: stretch; }
+  .sub-filters .search-input { width: 100%; }
+}
+
+/* ============================================================
+   PROBLEMS PAGE — navbar actions slot  (prob-nav-actions)
+   Holds view toggle + Create button side by side inside AppNavbar.
+============================================================ */
+
+.prob-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tighten pbp-hero top padding now that the sticky nav is app-nav (54px) */
+.pbp-hero {
+  padding-top: 28px;
+}
+
+@media (max-width: 640px) {
+  .prob-nav-actions .pbp-view-toggle span { display: none; }
+}
