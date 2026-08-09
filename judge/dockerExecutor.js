@@ -1,5 +1,6 @@
 const { spawn } = require("child_process");
 const path = require("path");
+const fs   = require("fs");
 
 const IMAGE         = process.env.RUNNER_IMAGE   || "easycode-runner:latest";
 const DOCKER_SOCKET = process.env.DOCKER_SOCKET  || "/var/run/docker.sock";
@@ -112,19 +113,30 @@ function runInDocker({
       return `'${s.replace(/'/g, "'\\''")}'`;
     }
 
-    // When measureMemory is true we wrap the user command with /usr/bin/time -v.
-    // GNU time writes its report to file descriptor 2 (stderr). To separate it
-    // from the program's own stderr we redirect time's output to a temp file,
-    // then emit a fixed sentinel line followed by the file contents. This way
-    // the combined stderr stream is always parseable regardless of what the
-    // program writes to its own stderr.
+    // TIME_REPORT_FILE — path inside the container where /usr/bin/time -v writes
+    // its report. Located in /workspace (the bind-mount) so the judge process
+    // can read the file from the host-side path after the container exits.
+    // Using the workspace instead of /tmp avoids the --read-only + tmpfs
+    // restrictions that would prevent writing, and ensures the file is
+    // accessible to Node after the container is gone.
     //
-    // Sentinel: "__TIME_REPORT__"  (unlikely to appear in program output)
-    const TIME_SENTINEL = "__TIME_REPORT__";
+    // The file is written only when measureMemory=true. It does NOT touch
+    // stdout, stderr, or the exit code pipeline in any way. The outer
+    // wrapperScript is completely unchanged — it still owns exit-code
+    // propagation exactly as it did before memory measurement was added.
+    const TIME_REPORT_FILE = ".time_report";
 
+    // When measureMemory=true: wrap the user command so that /usr/bin/time -v
+    // writes its report to TIME_REPORT_FILE in the working directory.
+    // The -o flag sends time's output to a file, not to stderr, so it never
+    // touches the stdout/stderr streams that the outer wrapper manages.
+    // No exit, no _UE variable, no sentinel — the outer wrapper's $? capture
+    // sees the user process exit code exactly as if /usr/bin/time were not there
+    // (time exits with the child's exit code, so $? is propagated correctly
+    // through the { ...; echo $? > "$RC_FILE"; } group unchanged).
     const baseUserCmd = [command, ...args].map(shQuote).join(" ");
     const userCmd = measureMemory
-      ? `TIME_OUT=$(mktemp /tmp/.time.XXXXXX); /usr/bin/time -v -o "$TIME_OUT" ${baseUserCmd}; _UE=$?; echo '${TIME_SENTINEL}'; cat "$TIME_OUT"; rm -f "$TIME_OUT"; exit $_UE`
+      ? `/usr/bin/time -v -o ${TIME_REPORT_FILE} ${baseUserCmd}`
       : baseUserCmd;
 
     // Docker flags shared by both execution paths.
@@ -155,9 +167,9 @@ function runInDocker({
     //   Run the compiler directly so full error output is returned as-is and
     //   cannot be misidentified as output-limit-exceeded.
     //
-    // When measureMemory=true, userCmd already contains the /usr/bin/time -v
-    // wrapper so we always go through bash -c (checkOutputLimit path). The
-    // sentinel-based stderr parsing happens in the close handler below.
+    // This wrapperScript is identical regardless of measureMemory. The memory
+    // wrapper (userCmd) does not alter exit code flow — /usr/bin/time exits
+    // with the child process exit code, so $? inside the { } group is correct.
     const wrapperScript =
       `RC_FILE=$(mktemp /tmp/.rc.XXXXXX); ` +
       `{ ${userCmd}; echo $? > "$RC_FILE"; } 2>&1 | head -c ${headLimit}; ` +
@@ -235,38 +247,34 @@ function runInDocker({
       const didExceedOutputLimit =
         checkOutputLimit && (exitCode === OLE_EXIT_CODE || outputLimitExceeded);
 
-      // When measureMemory is true, the program's combined stdout+stderr
-      // (via the bash wrapper) contains a sentinel line followed by the
-      // /usr/bin/time -v report. We need to:
-      //   1. Split on the sentinel to extract the time report.
-      //   2. Strip the sentinel + report from the visible stderr.
-      //   3. Parse the memory value.
+      // Read the /usr/bin/time -v report from the workspace file written by
+      // the container. The file lives in hostMountDir (the bind-mount source)
+      // so it is directly accessible from the judge process after the container
+      // exits. We read it synchronously here — the container is already gone,
+      // the file is at most a few KB, and this is already inside an async
+      // pipeline so no concurrency concern.
       //
-      // The bash wrapper redirects time's output to a temp file then cats it
-      // to stderr AFTER the program exits, so the sentinel always appears
-      // at the end of combined output. When checkOutputLimit=true everything
-      // goes through the 2>&1 pipe so both stdout and the time report land
-      // in the `stdout` buffer (stdout and stderr are merged by the wrapper).
-      let programStdout  = stdout;
-      let programStderr  = stderr;
-      let memoryKB       = null;
-
-      if (measureMemory && !didExceedOutputLimit) {
-        // The wrapper merges stdout+stderr through the bash subshell.
-        // The time report sentinel appears in the merged output.
-        const sentinelIdx = programStdout.indexOf(TIME_SENTINEL);
-        if (sentinelIdx !== -1) {
-          const timeReport  = programStdout.slice(sentinelIdx + TIME_SENTINEL.length + 1);
-          programStdout     = programStdout.slice(0, sentinelIdx);
-          memoryKB          = parseMemoryKB(timeReport);
+      // On timeout or OLE the file may not exist (container was killed before
+      // time could write it) — readFileSync with a try/catch handles that.
+      let memoryKB = null;
+      if (measureMemory && !didExceedOutputLimit && !timedOut) {
+        try {
+          const reportPath = path.join(hostMountDir, TIME_REPORT_FILE);
+          const report = fs.readFileSync(reportPath, "utf8");
+          memoryKB = parseMemoryKB(report);
+          // Clean up the report file — it was only needed for this read.
+          try { fs.unlinkSync(reportPath); } catch (_) { /* best-effort */ }
+        } catch (_) {
+          // File not written (crash before time could flush, OOM kill, etc.)
+          memoryKB = null;
         }
       }
 
       finish({
         exitCode,
         signal,
-        stdout:              didExceedOutputLimit ? ""                      : programStdout,
-        stderr:              didExceedOutputLimit ? "Output limit exceeded" : programStderr,
+        stdout:              didExceedOutputLimit ? ""                      : stdout,
+        stderr:              didExceedOutputLimit ? "Output limit exceeded" : stderr,
         timedOut:            didExceedOutputLimit ? false                   : timedOut,
         outputLimitExceeded: didExceedOutputLimit,
         memoryKB,
