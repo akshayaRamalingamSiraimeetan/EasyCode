@@ -1,0 +1,129 @@
+{
+    "title": "Maximal Rectangle",
+    "slug": "maximal-rectangle",
+    "difficulty": "Hard",
+    "statement": "Given a N x M binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.\n\nYou should build a histogram for each row and apply the `Largest Rectangle in Histogram` algorithm, giving an O(N * M) solution.",
+    "constraints": "1 <= N, M <= 500\nmatrix[i][j] is either 0 or 1.",
+    "inputFormat": "Line 1: two integers N and M.\nNext N lines: M space-separated integers (0 or 1) representing the matrix.",
+    "outputFormat": "A single integer: the area of the maximum rectangle.",
+    "examples": [
+        {
+            "input": "4 5\n1 0 1 0 0\n1 0 1 1 1\n1 1 1 1 1\n1 0 0 1 0",
+            "output": "6",
+            "explanation": "The maximum rectangle of 1s in the matrix is in rows 1 and 2, spanning columns 2 to 4."
+        },
+        {
+            "input": "1 1\n0",
+            "output": "0",
+            "explanation": "No rectangle of 1s."
+        },
+        {
+            "input": "1 1\n1",
+            "output": "1",
+            "explanation": "Area is 1."
+        }
+    ],
+    "starterCode": {
+        "python": "n, m = map(int, input().split())\nmatrix = []\nfor _ in range(n):\n    matrix.append(list(map(int, input().split())))\n# Write your solution here\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n, m; cin >> n >> m;\n    vector<vector<int>> matrix(n, vector<int>(m));\n    for (int i = 0; i < n; i++) \n        for (int j = 0; j < m; j++) cin >> matrix[i][j];\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(tz.nextToken());\n        int m = Integer.parseInt(tz.nextToken());\n        int[][] matrix = new int[n][m];\n        for (int i=0; i<n; i++) {\n            tz = new StringTokenizer(br.readLine());\n            for (int j=0; j<m; j++) matrix[i][j] = Integer.parseInt(tz.nextToken());\n        }\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4 5\n1 0 1 0 0\n1 0 1 1 1\n1 1 1 1 1\n1 0 0 1 0",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1 1\n0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 1\n1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2 2\n1 1\n1 1",
+            "expectedOutput": "4",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "3 3\n0 0 0\n0 0 0\n0 0 0",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4 4\n1 1 1 1\n0 1 1 1\n0 1 1 1\n0 1 1 1",
+            "expectedOutput": "12",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "2 3\n1 0 1\n1 0 1",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5 5\n1 1 0 1 1\n1 1 0 1 1\n0 0 0 0 0\n1 1 1 1 1\n1 1 1 1 1",
+            "expectedOutput": "10",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "4 6\n1 1 1 1 1 1\n1 0 1 1 1 1\n1 1 1 1 1 0\n1 1 1 0 1 1",
+            "expectedOutput": "8",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "3 4\n0 0 1 0\n0 0 1 0\n0 0 1 0",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "4 3\n1 1 1\n0 0 0\n1 1 1\n1 1 1",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "1 7\n1 0 1 1 1 0 1",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "6 2\n0 1\n1 1\n1 1\n1 0\n1 1\n0 0",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4 4\n1 0 0 1\n0 1 1 0\n0 1 1 0\n1 0 0 1",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "3 5\n1 1 1 0 0\n0 1 1 1 1\n1 1 1 1 0",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "5 5\n0 1 0 1 0\n1 1 1 1 1\n0 1 0 1 0\n1 1 1 1 1\n1 1 1 1 1",
+            "expectedOutput": "10",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "title": "Topological Sort (Kahn's Algorithm)",
+    "slug": "topological-sort-kahns",
+    "difficulty": "Medium",
+    "statement": "Given a Directed Acyclic Graph (DAG) with `n` nodes (0-indexed) and `e` edges, print a valid topological ordering of the nodes using BFS-based Kahn's algorithm.\nAmong all valid orderings, output the lexicographically smallest one.",
+    "constraints": "1 <= n <= 10^5\n0 <= e <= 2 * 10^5\nThe graph is guaranteed to be a DAG.",
+    "inputFormat": "Line 1: two integers n and e.\nNext e lines: two integers u and v (directed edge u -> v).",
+    "outputFormat": "Space-separated integers representing a topological ordering.",
+    "examples": [
+        {
+            "input": "6 6\n5 2\n5 0\n4 0\n4 1\n2 3\n3 1",
+            "output": "4 5 0 2 3 1",
+            "explanation": "Lexicographically smallest valid topological sort."
+        }
+    ],
+    "starterCode": {
+        "python": "import heapq\nn, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nindegree = [0] * n\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    indegree[v] += 1\n# Kahn's with min-heap for lex-smallest\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\nint main() {\n    int n,e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    vector<int> indegree(n, 0);\n    for(int i=0; i<e; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); indegree[v]++; }\n    // Kahn's with priority_queue for lex smallest\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        int[] indegree = new int[n];\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) { int u=sc.nextInt(),v=sc.nextInt(); adj.get(u).add(v); indegree[v]++; }\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "6 6\n5 2\n5 0\n4 0\n4 1\n2 3\n3 1",
+            "expectedOutput": "4 5 0 2 3 1",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3 2\n0 1\n0 2",
+            "expectedOutput": "0 1 2",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4 3\n3 0\n3 1\n3 2",
+            "expectedOutput": "3 0 1 2",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "5 4\n0 1\n0 2\n1 3\n2 4",
+            "expectedOutput": "0 1 2 3 4",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "6 4\n2 3\n3 1\n4 0\n4 1",
+            "expectedOutput": "2 4 0 3 5 1",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4 6\n0 1\n0 2\n0 3\n1 2\n1 3\n2 3",
+            "expectedOutput": "0 1 2 3",
+            "isHidden": true,
+            "orderIndex": 6
+        }
+    ]
+}

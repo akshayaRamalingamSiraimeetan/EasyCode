@@ -1,0 +1,44 @@
+{
+  "title": "Star Triangle Pattern",
+  "slug": "star-triangle-pattern",
+  "difficulty": "Medium",
+  "statement": "Given an integer N, print a right-angled triangle pattern of stars.\n\nThe i-th row (1-indexed) should contain exactly i stars, all separated by a single space.",
+  "constraints": "1 <= N <= 50",
+  "inputFormat": "A single line containing one integer N.",
+  "outputFormat": "N lines. The i-th line contains i stars separated by spaces.",
+  "examples": [
+    {
+      "input": "4",
+      "output": "*\n* *\n* * *\n* * * *",
+      "explanation": "Row 1 has 1 star, row 2 has 2 stars, ..., row 4 has 4 stars."
+    },
+    {
+      "input": "1",
+      "output": "*",
+      "explanation": "Only one row with one star."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\n# Write your solution here\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "4", "expectedOutput": "*\n* *\n* * *\n* * * *", "isHidden": false, "orderIndex": 0 },
+    { "input": "1", "expectedOutput": "*", "isHidden": false, "orderIndex": 1 },
+    { "input": "2", "expectedOutput": "*\n* *", "isHidden": false, "orderIndex": 2 },
+    { "input": "5", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *", "isHidden": false, "orderIndex": 3 },
+    { "input": "3", "expectedOutput": "*\n* *\n* * *", "isHidden": true, "orderIndex": 4 },
+    { "input": "6", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *", "isHidden": true, "orderIndex": 5 },
+    { "input": "7", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *", "isHidden": true, "orderIndex": 6 },
+    { "input": "10", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *", "isHidden": true, "orderIndex": 7 },
+    { "input": "8", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *", "isHidden": true, "orderIndex": 8 },
+    { "input": "9", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *", "isHidden": true, "orderIndex": 9 },
+    { "input": "15", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *\n* * * * * * * * * * * * * * *", "isHidden": true, "orderIndex": 10 },
+    { "input": "20", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *\n* * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * *", "isHidden": true, "orderIndex": 11 },
+    { "input": "11", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *", "isHidden": true, "orderIndex": 12 },
+    { "input": "12", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *", "isHidden": true, "orderIndex": 13 },
+    { "input": "13", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *", "isHidden": true, "orderIndex": 14 },
+    { "input": "50", "expectedOutput": "*\n* *\n* * *\n* * * *\n* * * * *\n* * * * * *\n* * * * * * *\n* * * * * * * *\n* * * * * * * * *\n* * * * * * * * * *\n* * * * * * * * * * *\n* * * * * * * * * * * *\n* * * * * * * * * * * * *\n* * * * * * * * * * * * * *\n* * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *", "isHidden": true, "orderIndex": 15 }
+  ]
+}

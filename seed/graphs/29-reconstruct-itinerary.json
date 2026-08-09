@@ -1,0 +1,58 @@
+{
+    "title": "Reconstruct Itinerary",
+    "slug": "reconstruct-itinerary",
+    "difficulty": "Medium",
+    "statement": "You are given a list of airline `tickets` where `tickets[i] = [fromi, toi]` represent the departure and the arrival airports of one flight. Reconstruct the itinerary in order and return it.\nAll of the tickets belong to a man who departs from `JFK`, thus, the itinerary must begin with `JFK`. If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order when read as a single string.\nAssume all tickets form at least one valid itinerary.",
+    "constraints": "1 <= tickets.length <= 300\ntickets[i].length == 2\nAi, Bi are 3-letter English uppercase strings.",
+    "inputFormat": "Line 1: N (number of tickets).\nNext N lines: two space-separated strings (from and to).",
+    "outputFormat": "Print the itinerary space-separated.",
+    "examples": [
+        {
+            "input": "4\nMUC LHR\nJFK MUC\nSFO SJC\nLHR SFO",
+            "output": "JFK MUC LHR SFO SJC",
+            "explanation": "The only possible itinerary."
+        },
+        {
+            "input": "5\nJFK SFO\nJFK ATL\nSFO ATL\nATL JFK\nATL SFO",
+            "output": "JFK ATL JFK SFO ATL SFO",
+            "explanation": "ATL is lexically smaller than SFO, so we visit ATL first."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\ntickets = [input().split() for _ in range(n)]\n# Hierholzer's Algorithm (Eulerian Path)\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <map>\n#include <set>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    // Read tickets and use Hierholzer's\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4\nMUC LHR\nJFK MUC\nSFO SJC\nLHR SFO",
+            "expectedOutput": "JFK MUC LHR SFO SJC",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5\nJFK SFO\nJFK ATL\nSFO ATL\nATL JFK\nATL SFO",
+            "expectedOutput": "JFK ATL JFK SFO ATL SFO",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "3\nJFK KUL\nJFK NRT\nNRT JFK",
+            "expectedOutput": "JFK NRT JFK KUL",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "6\nJFK A\nA C\nC D\nD A\nA B\nB C",
+            "expectedOutput": "JFK A B C D A C",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "5\nJFK ATL\nATL JFK\nJFK ATL\nATL JFK\nJFK ZZZ",
+            "expectedOutput": "JFK ATL JFK ATL JFK ZZZ",
+            "isHidden": true,
+            "orderIndex": 4
+        }
+    ]
+}

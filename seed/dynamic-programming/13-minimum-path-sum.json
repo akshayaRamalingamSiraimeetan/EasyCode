@@ -1,0 +1,76 @@
+{
+    "title": "Minimum Path Sum",
+    "slug": "minimum-path-sum",
+    "difficulty": "Medium",
+    "statement": "Given a `m x n` grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.\nNote: You can only move either down or right at any point in time.",
+    "constraints": "1 <= m, n <= 200\n0 <= grid[i][j] <= 200",
+    "inputFormat": "Line 1: two integers m and n.\nNext m lines: n space-separated integers representing the grid.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "3 3\n1 3 1\n1 5 1\n4 2 1",
+            "output": "7",
+            "explanation": "Path 1->3->1->1->1 = 7."
+        },
+        {
+            "input": "2 3\n1 2 3\n4 5 6",
+            "output": "12",
+            "explanation": "Path 1->2->3->6 = 12."
+        }
+    ],
+    "starterCode": {
+        "python": "m, n = map(int, input().split())\ngrid = [list(map(int, input().split())) for _ in range(m)]\n# Grid DP in-place or using dp table\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int m, n; cin >> m >> n;\n    vector<vector<int>> grid(m, vector<int>(n));\n    for(int i=0; i<m; i++) for(int j=0; j<n; j++) cin >> grid[i][j];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        int[][] grid = new int[m][n];\n        for(int i=0; i<m; i++) for(int j=0; j<n; j++) grid[i][j] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3 3\n1 3 1\n1 5 1\n4 2 1",
+            "expectedOutput": "7",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "2 3\n1 2 3\n4 5 6",
+            "expectedOutput": "12",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 1\n5",
+            "expectedOutput": "5",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1 5\n1 2 3 4 5",
+            "expectedOutput": "15",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "4 4\n1 2 1 2\n1 2 1 2\n1 2 1 2\n1 2 1 2",
+            "expectedOutput": "8",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "3 4\n0 0 0 0\n0 100 0 0\n0 0 0 0",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "3 3\n9 1 1\n1 9 1\n1 1 9",
+            "expectedOutput": "22",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5 5\n1 1 1 1 1\n1 9 9 9 1\n1 9 1 9 1\n1 9 9 9 1\n1 1 1 1 1",
+            "expectedOutput": "9",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

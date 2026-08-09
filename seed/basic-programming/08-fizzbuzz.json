@@ -1,0 +1,44 @@
+{
+  "title": "FizzBuzz",
+  "slug": "fizzbuzz",
+  "difficulty": "Easy",
+  "statement": "Given an integer N, print numbers from 1 to N with the following rules:\n- If a number is divisible by both 3 and 5, print \"FizzBuzz\".\n- If a number is divisible by only 3, print \"Fizz\".\n- If a number is divisible by only 5, print \"Buzz\".\n- Otherwise, print the number itself.",
+  "constraints": "1 <= N <= 10^4",
+  "inputFormat": "A single line containing one integer N.",
+  "outputFormat": "N lines, one for each number from 1 to N following the rules above.",
+  "examples": [
+    {
+      "input": "5",
+      "output": "1\n2\nFizz\n4\nBuzz",
+      "explanation": "3 is divisible by 3 → Fizz, 5 is divisible by 5 → Buzz."
+    },
+    {
+      "input": "15",
+      "output": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+      "explanation": "15 is divisible by both 3 and 5 → FizzBuzz."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\n# Write your solution here\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5", "expectedOutput": "1\n2\nFizz\n4\nBuzz", "isHidden": false, "orderIndex": 0 },
+    { "input": "15", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz", "isHidden": false, "orderIndex": 1 },
+    { "input": "1", "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
+    { "input": "3", "expectedOutput": "1\n2\nFizz", "isHidden": false, "orderIndex": 3 },
+    { "input": "6", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz", "isHidden": true, "orderIndex": 4 },
+    { "input": "10", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz", "isHidden": true, "orderIndex": 5 },
+    { "input": "20", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz", "isHidden": true, "orderIndex": 6 },
+    { "input": "2", "expectedOutput": "1\n2", "isHidden": true, "orderIndex": 7 },
+    { "input": "30", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\nFizz\n28\n29\nFizzBuzz", "isHidden": true, "orderIndex": 8 },
+    { "input": "4", "expectedOutput": "1\n2\nFizz\n4", "isHidden": true, "orderIndex": 9 },
+    { "input": "9", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz", "isHidden": true, "orderIndex": 10 },
+    { "input": "45", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\nFizz\n28\n29\nFizzBuzz\n31\n32\nFizz\n34\nBuzz\nFizz\n37\n38\nFizz\nBuzz\n41\nFizz\n43\n44\nFizzBuzz", "isHidden": true, "orderIndex": 11 },
+    { "input": "7", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7", "isHidden": true, "orderIndex": 12 },
+    { "input": "25", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz", "isHidden": true, "orderIndex": 13 },
+    { "input": "100", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\nFizz\n28\n29\nFizzBuzz\n31\n32\nFizz\n34\nBuzz\nFizz\n37\n38\nFizz\nBuzz\n41\nFizz\n43\n44\nFizzBuzz\n46\n47\nFizz\n49\nBuzz\nFizz\n52\n53\nFizz\nBuzz\n56\nFizz\n58\n59\nFizzBuzz\n61\n62\nFizz\n64\nBuzz\nFizz\n67\n68\nFizz\nBuzz\n71\nFizz\n73\n74\nFizzBuzz\n76\n77\nFizz\n79\nBuzz\nFizz\n82\n83\nFizz\nBuzz\n86\nFizz\n88\n89\nFizzBuzz\n91\n92\nFizz\n94\nBuzz\nFizz\n97\n98\nFizz\nBuzz", "isHidden": true, "orderIndex": 14 },
+    { "input": "50", "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\nFizz\n28\n29\nFizzBuzz\n31\n32\nFizz\n34\nBuzz\nFizz\n37\n38\nFizz\nBuzz\n41\nFizz\n43\n44\nFizzBuzz\n46\n47\nFizz\n49\nBuzz", "isHidden": true, "orderIndex": 15 }
+  ]
+}

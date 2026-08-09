@@ -1,0 +1,76 @@
+{
+    "title": "Min Cost Climbing Stairs",
+    "slug": "min-cost-climbing-stairs",
+    "difficulty": "Easy",
+    "statement": "You are given an integer array `cost` where `cost[i]` is the cost of the `i`th step on a staircase. Once you pay the cost, you can either climb one or two steps.\nYou can either start from the step with index 0, or the step with index 1.\nReturn the minimum cost to reach the top of the floor.",
+    "constraints": "2 <= cost.length <= 1000\n0 <= cost[i] <= 999",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `cost`.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "2\n10 15",
+            "output": "10",
+            "explanation": "Start at index 0, pay cost 10, jump to top."
+        },
+        {
+            "input": "6\n10 15 20 0 0 0",
+            "output": "15",
+            "explanation": "Start at index 1 (cost 15), jump to 3 (cost 0), jump to 5 (cost 0), reach top."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\ncost = list(map(int, input().split()))\n# dp[i] = min cost to reach step i from the top perspective\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> cost(n);\n    for(int i=0; i<n; i++) cin >> cost[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] cost = new int[n];\n        for(int i=0; i<n; i++) cost[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "2\n10 15",
+            "expectedOutput": "10",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "6\n10 15 20 0 0 0",
+            "expectedOutput": "15",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "9\n1 100 1 1 1 100 1 1 100",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2\n0 0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "5\n5 5 5 5 5",
+            "expectedOutput": "15",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "8\n1 2 3 4 5 6 7 8",
+            "expectedOutput": "16",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "6\n0 999 0 999 0 999",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "10\n10 20 30 40 50 60 70 80 90 100",
+            "expectedOutput": "250",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

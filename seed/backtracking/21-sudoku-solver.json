@@ -1,0 +1,44 @@
+{
+  "title": "Sudoku Solver",
+  "slug": "sudoku-solver",
+  "difficulty": "Hard",
+  "statement": "Given a partially filled 9×9 Sudoku grid, solve it and print the completed board.\n\nRules:\n- Each row must contain digits 1-9 exactly once.\n- Each column must contain digits 1-9 exactly once.\n- Each of the nine 3×3 sub-boxes must contain digits 1-9 exactly once.\n- Empty cells are represented by '.'.\n\nThere is always exactly one solution.",
+  "constraints": "The input is a valid, uniquely-solvable 9×9 Sudoku grid.\nEmpty cells are '.'.",
+  "inputFormat": "9 lines, each containing 9 characters (digits 1-9 or '.' for empty).",
+  "outputFormat": "9 lines of 9 characters each: the solved Sudoku grid.",
+  "examples": [
+    {
+      "input": "53..7....\n6..195...\n.98....6.\n8...6...3\n4..8.3..1\n7...2...6\n.6....28.\n...419..5\n....8..79",
+      "output": "534678912\n672195348\n198342567\n859761423\n426853791\n713924856\n961537284\n287419635\n345286179",
+      "explanation": "The completed Sudoku grid."
+    },
+    {
+      "input": ".........\n.........\n.........\n.........\n.........\n.........\n.........\n.........\n.........",
+      "output": "123456789\n456789123\n789123456\n214365897\n365897214\n897214365\n531642978\n642978531\n978531642",
+      "explanation": "One valid solution for an empty grid."
+    }
+  ],
+  "starterCode": {
+    "python": "board = [list(input()) for _ in range(9)]\n# Write your solution here\n# Hint: find empty cell, try digits 1-9, validate row/col/box, recurse\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nint main() {\n    vector<string> board(9);\n    for (int i = 0; i < 9; i++) cin >> board[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        char[][] board = new char[9][9];\n        for (int i = 0; i < 9; i++) {\n            String row = sc.next();\n            for (int j = 0; j < 9; j++) board[i][j] = row.charAt(j);\n        }\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "53..7....\n6..195...\n.98....6.\n8...6...3\n4..8.3..1\n7...2...6\n.6....28.\n...419..5\n....8..79", "expectedOutput": "534678912\n672195348\n198342567\n859761423\n426853791\n713924856\n961537284\n287419635\n345286179", "isHidden": false, "orderIndex": 0 },
+    { "input": ".........\n.........\n.........\n.........\n.........\n.........\n.........\n.........\n.........", "expectedOutput": "123456789\n456789123\n789123456\n214365897\n365897214\n897214365\n531642978\n642978531\n978531642", "isHidden": false, "orderIndex": 1 },
+    { "input": "1........\n.........\n.........\n.........\n.........\n.........\n.........\n.........\n.........", "expectedOutput": "123456789\n456789123\n789123456\n214365897\n365897214\n897214365\n531642978\n642978531\n978531642", "isHidden": false, "orderIndex": 2 },
+    { "input": ".2.......\n...6.....\n....1....\n......8..\n.......3.\n..4......\n.....5...\n.......7.\n........6", "expectedOutput": "123789456\n789456123\n456123789\n214365897\n365897214\n897214365\n531642978\n642978531\n978531642", "isHidden": false, "orderIndex": 3 },
+    { "input": "8........\n..36.....\n.7..9.2..\n.5...7...\n....457..\n...1...3.\n..1....68\n..85...1.\n.9....4..", "expectedOutput": "812753649\n943682175\n675491283\n154237896\n369845721\n287169534\n521974368\n438526917\n796318452", "isHidden": true,  "orderIndex": 4 },
+    { "input": "..9748...\n7........\n.2.1.9...\n..7...24.\n.64.1.59.\n.98...3..\n...8.3.2.\n........6\n...2759..", "expectedOutput": "519748632\n783652419\n426139875\n357986241\n264317598\n198524367\n975863124\n832491756\n641275983", "isHidden": true,  "orderIndex": 5 },
+    { "input": "..3.2.6..\n9..3.5..1\n..18.64..\n..81.29..\n7.......8\n..67.82..\n..26.95..\n8..2.3..9\n..5.1.3..", "expectedOutput": "483921657\n967345821\n251876493\n548132976\n729564138\n136798245\n372689514\n814253769\n695417382", "isHidden": true,  "orderIndex": 6 },
+    { "input": ".......1.\n4........\n.2.......\n....5.4.7\n..8...3..\n..1.9....\n3..4..2..\n.5.1.....\n...8.6...", "expectedOutput": "693784512\n487512936\n125963874\n932651487\n568247391\n741398625\n319476258\n856129743\n274835169", "isHidden": true,  "orderIndex": 7 },
+    { "input": "1......2.\n.5......3\n..2...4..\n...5.3...\n..8.9.2..\n...1.5...\n..7...8..\n5......3.\n.9......6", "expectedOutput": "163495827\n754862193\n892731465\n479523681\n318649257\n226178349\n637254918\n541986732\n985317642", "isHidden": true,  "orderIndex": 8 },
+    { "input": "7.....4..\n.2..7..8.\n..3...6..\n..2.....7\n.5.......\n....5.4.8\n......2..\n.9......6\n...1..3..", "expectedOutput": "716359482\n524176983\n893824657\n962418375\n157263849\n348957426\n435782169\n289541736\n671695328", "isHidden": true,  "orderIndex": 9 },
+    { "input": ".6.5.4.3.\n.2.4.5.7.\n.......6.\n.......1.\n.4.2.3.9.\n.1.......\n.9.......\n.7.3.4.5.\n.3.5.2.4.", "expectedOutput": "167584239\n328495176\n495213867\n253879614\n741263598\n819647352\n596138427\n872394561\n634521489", "isHidden": true,  "orderIndex": 10 },
+    { "input": "...4...3.\n..2.8....\n4..1...6.\n.5.....2.\n..9...5..\n.1.....7.\n.3...5..9\n....3.2..\n.2...4...", "expectedOutput": "591472638\n762983145\n483156762\n357648921\n829317546\n614295873\n136825479\n948731256\n275694318", "isHidden": true,  "orderIndex": 11 },
+    { "input": "9.4..5...\n...1.6...\n8.......7\n.7....4.5\n....9....\n3.2....6.\n6.......8\n...3.7...\n...5..1.9", "expectedOutput": "914375682\n237186495\n865294317\n179628453\n458931276\n392547861\n621459738\n589317624\n743862159", "isHidden": true,  "orderIndex": 12 },
+    { "input": "...7...4.\n..1.5.9..\n.5.....3.\n...27....\n..3...5..\n....69...\n.7.....1.\n..2.4.6..\n.8...3...", "expectedOutput": "893712645\n421653987\n756489132\n549271368\n167348592\n238965714\n374596821\n912847653\n685123479", "isHidden": true,  "orderIndex": 13 },
+    { "input": ".4..9....\n..3.1....\n...5...8.\n..7..4...\n.2.....6.\n...8..3..\n.1...5...\n....8.2..\n....6..7.", "expectedOutput": "148693572\n963712845\n572584193\n637254918\n821937654\n495861327\n716345289\n354178296\n289426731", "isHidden": true,  "orderIndex": 14 },
+    { "input": "....2....\n...6..5..\n3.......7\n6..7...5.\n..5...2..\n.4...9..6\n5.......4\n..1..4...\n....7....", "expectedOutput": "518427963\n479683521\n362951847\n693714258\n785369214\n241598376\n527836149\n831245697\n954172438", "isHidden": true,  "orderIndex": 15 }
+  ]
+}

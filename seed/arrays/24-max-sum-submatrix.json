@@ -1,0 +1,124 @@
+{
+    "title": "Maximum Sum Submatrix",
+    "slug": "maximum-sum-submatrix",
+    "difficulty": "Hard",
+    "statement": "Given an N×M matrix of integers, find the maximum sum of any rectangular submatrix.\n\nApproach:\n1. Fix the top row r1 and bottom row r2. Compress each column into a 1D array by summing elements from row r1 to r2.\n2. Apply Kadane's algorithm on this 1D compressed array to find the maximum subarray sum.\n3. Repeat for all (r1, r2) pairs. Overall complexity: O(N^2 * M).",
+    "constraints": "1 <= N, M <= 100\n-10^9 <= A[i][j] <= 10^9",
+    "inputFormat": "Line 1: two integers N and M.\nNext N lines: each contains M space-separated integers.",
+    "outputFormat": "A single integer: the maximum sum of any rectangular submatrix.",
+    "examples": [
+        {
+            "input": "4 5\n1 2 -1 -4 -20\n-8 -3 4 2 1\n3 8 10 1 3\n-4 -1 1 7 -6",
+            "output": "29",
+            "explanation": "The submatrix from rows 1-2 (0-indexed) and cols 1-3 has elements: -3 4 2 / 8 10 1 → sum = 22. Actually the submatrix rows[1..2] cols[1..3]: (-3+8)+(4+10)+(2+1) = 5+14+3 = 22. Max includes row 2 to 3 col 1 to 3: 8+10+1 + (-1+1+7) = 19+7 = 26. Rows 1-2, cols 2-3: 4+2+10+1 = 17. Rows 1-2 all: -3+4+2+1+8+10+1+3=26. Rows 1-3 cols 1-3: (-3+4+2)+(8+10+1)+(-1+1+7) = 3+19+7 = 29."
+        },
+        {
+            "input": "2 2\n-1 -2\n-3 -4",
+            "output": "-1",
+            "explanation": "All negative; the best is a single element -1."
+        }
+    ],
+    "starterCode": {
+        "python": "n, m = map(int, input().split())\nmatrix = []\nfor _ in range(n):\n    row = list(map(int, input().split()))\n    matrix.append(row)\n\ndef kadane(arr):\n    best = arr[0]\n    cur = arr[0]\n    for x in arr[1:]:\n        cur = max(x, cur + x)\n        best = max(best, cur)\n    return best\n\n# Write your solution here\n# Fix r1, r2; compress columns; apply kadane\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <climits>\nusing namespace std;\nlong long kadane(vector<long long>& arr) {\n    long long best = arr[0], cur = arr[0];\n    for (int i = 1; i < (int)arr.size(); i++) {\n        cur = max(arr[i], cur + arr[i]);\n        best = max(best, cur);\n    }\n    return best;\n}\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<long long>> a(n, vector<long long>(m));\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    static long kadane(long[] arr) {\n        long best = arr[0], cur = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            cur = Math.max(arr[i], cur + arr[i]);\n            best = Math.max(best, cur);\n        }\n        return best;\n    }\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(st.nextToken()), m = Integer.parseInt(st.nextToken());\n        long[][] a = new long[n][m];\n        for (int i = 0; i < n; i++) {\n            st = new StringTokenizer(br.readLine());\n            for (int j = 0; j < m; j++) a[i][j] = Long.parseLong(st.nextToken());\n        }\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4 5\n1 2 -1 -4 -20\n-8 -3 4 2 1\n3 8 10 1 3\n-4 -1 1 7 -6",
+            "expectedOutput": "29",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "2 2\n-1 -2\n-3 -4",
+            "expectedOutput": "-1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 1\n5",
+            "expectedOutput": "5",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2 3\n1 2 3\n4 5 6",
+            "expectedOutput": "21",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "3 3\n-5 -5 -5\n-5 100 -5\n-5 -5 -5",
+            "expectedOutput": "100",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "3 3\n1 2 3\n4 5 6\n7 8 9",
+            "expectedOutput": "45",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "2 2\n1 -2\n-3 4",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "3 3\n0 0 0\n0 0 0\n0 0 0",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "3 4\n-1 -2 -3 -4\n-5 6 7 -8\n-9 -10 -11 -12",
+            "expectedOutput": "13",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "2 4\n1 2 -1 3\n-1 3 2 -2",
+            "expectedOutput": "9",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "1 5\n-3 4 -1 2 1",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "3 3\n1 -1 1\n-1 1 -1\n1 -1 1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "4 4\n0 -2 -7 0\n9 2 -6 2\n-4 1 -4 1\n-1 8 0 -2",
+            "expectedOutput": "15",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "2 2\n1000000000 1000000000\n1000000000 1000000000",
+            "expectedOutput": "4000000000",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "3 3\n5 -2 5\n-2 5 -2\n5 -2 5",
+            "expectedOutput": "19",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "3 5\n-1 3 -2 4 -1\n2 -3 5 -2 3\n-1 4 -3 2 -1",
+            "expectedOutput": "12",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

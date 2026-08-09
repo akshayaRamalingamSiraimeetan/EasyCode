@@ -1,0 +1,44 @@
+{
+  "title": "Rearrange String K Distance Apart",
+  "slug": "rearrange-string-k-distance-apart",
+  "difficulty": "Hard",
+  "statement": "Given a string S and an integer K, rearrange the characters of S such that the same characters are at least K distance apart.\n\nIf it is possible, print any valid rearrangement. If impossible, print \"IMPOSSIBLE\".\n\nWhen K = 0, any arrangement is valid.\n\nNote: a valid output is accepted as long as no two identical characters are within K positions of each other and the character multiset matches the original.",
+  "constraints": "1 <= |S| <= 500\n0 <= K <= |S|\nS contains only lowercase English letters.",
+  "inputFormat": "The first line contains the string S.\nThe second line contains K.",
+  "outputFormat": "A valid rearrangement, or \"IMPOSSIBLE\".",
+  "examples": [
+    {
+      "input": "aabbcc\n3",
+      "output": "abcabc",
+      "explanation": "Each character is 3 positions apart from its next occurrence."
+    },
+    {
+      "input": "aaabc\n3",
+      "output": "IMPOSSIBLE",
+      "explanation": "'a' appears 3 times, |S|=5. We cannot space 3 a's with K=3 gap."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\nk = int(input())\n# Write your solution here\n# Hint: max-heap by freq; use a queue of size k as cooldown\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <queue>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    string s; int k;\n    cin >> s >> k;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(); int k = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "aabbcc\n3",       "expectedOutput": "abcabc",    "isHidden": false, "orderIndex": 0 },
+    { "input": "aaabc\n3",        "expectedOutput": "IMPOSSIBLE", "isHidden": false, "orderIndex": 1 },
+    { "input": "aaadbbcc\n2",     "expectedOutput": "abacabcd",  "isHidden": false, "orderIndex": 2 },
+    { "input": "aabbccd\n2",      "expectedOutput": "abcabcd",   "isHidden": false, "orderIndex": 3 },
+    { "input": "ab\n1",           "expectedOutput": "ab",        "isHidden": true,  "orderIndex": 4 },
+    { "input": "a\n1",            "expectedOutput": "a",         "isHidden": true,  "orderIndex": 5 },
+    { "input": "aaa\n0",          "expectedOutput": "aaa",       "isHidden": true,  "orderIndex": 6 },
+    { "input": "aabbccdd\n4",     "expectedOutput": "abcdabcd",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "aab\n1",          "expectedOutput": "aab",       "isHidden": true,  "orderIndex": 8 },
+    { "input": "aabc\n2",         "expectedOutput": "abac",      "isHidden": true,  "orderIndex": 9 },
+    { "input": "abacbc\n2",       "expectedOutput": "abcabc",    "isHidden": true,  "orderIndex": 10 },
+    { "input": "aabbcc\n2",       "expectedOutput": "abcabc",    "isHidden": true,  "orderIndex": 11 },
+    { "input": "aaabbbccc\n3",    "expectedOutput": "abcabcabc", "isHidden": true,  "orderIndex": 12 },
+    { "input": "abc\n2",          "expectedOutput": "abc",       "isHidden": true,  "orderIndex": 13 },
+    { "input": "aaabb\n3",        "expectedOutput": "IMPOSSIBLE", "isHidden": true,  "orderIndex": 14 },
+    { "input": "aabbccddee\n5",   "expectedOutput": "abcdeabcde","isHidden": true,  "orderIndex": 15 }
+  ]
+}

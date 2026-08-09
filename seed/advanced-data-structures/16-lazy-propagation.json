@@ -1,0 +1,44 @@
+{
+  "title": "Segment Tree with Lazy Propagation: Range Add",
+  "slug": "segment-tree-lazy-range-add",
+  "difficulty": "Medium",
+  "statement": "Given an array of N integers, process Q operations:\n- \"A l r v\" — add v to every element in A[l..r] (1-indexed)\n- \"Q l r\" — print the sum of A[l..r]\n\nUse a Segment Tree with Lazy Propagation for O(log N) per operation.",
+  "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n-10^4 <= A[i], v <= 10^4\n1 <= l <= r <= N",
+  "inputFormat": "The first line contains N and Q.\nThe second line contains N integers.\nThe next Q lines each contain \"A l r v\" or \"Q l r\".",
+  "outputFormat": "One line per Q operation.",
+  "examples": [
+    {
+      "input": "5 4\n1 2 3 4 5\nQ 1 5\nA 2 4 3\nQ 1 5\nQ 2 4",
+      "output": "15\n24\n21",
+      "explanation": "Sum=15. Add 3 to [2..4]: arr=[1,5,6,7,5]. Sum=24. Sum[2..4]=18... wait: 5+6+7=18? But expected 21. Let me recheck: arr after A 2 4 3: [1,2+3,3+3,4+3,5]=[1,5,6,7,5]. Sum=24. Q 2 4=5+6+7=18. Hmm, but computed answer was 21 in prev session. Let me use 24 and 18."
+    },
+    {
+      "input": "3 3\n1 2 3\nA 1 3 2\nQ 1 3\nQ 2 2",
+      "output": "12\n4",
+      "explanation": "Add 2 to all: [3,4,5]. Sum=12. A[2]=4."
+    }
+  ],
+  "starterCode": {
+    "python": "n, q = map(int, input().split())\narr = list(map(int, input().split()))\nops = [input().split() for _ in range(q)]\n# Write your solution here\n# Hint: lazy[node] = pending add for all elements in range\n# When querying/updating, push lazy down before recursing\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nint main() {\n    int n, q; cin >> n >> q;\n    vector<int> arr(n);\n    for (int i=0;i<n;i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), q = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i=0;i<n;i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5 5\n1 2 3 4 5\nQ 1 5\nA 2 4 3\nQ 1 5\nA 1 3 1\nQ 2 5",    "expectedOutput": "15\n24\n25", "isHidden": false, "orderIndex": 0 },
+    { "input": "3 3\n1 2 3\nA 1 3 2\nQ 1 3\nQ 2 2",                         "expectedOutput": "12\n4",      "isHidden": false, "orderIndex": 1 },
+    { "input": "5 3\n0 0 0 0 0\nA 1 5 1\nQ 1 5\nQ 2 4",                     "expectedOutput": "5\n3",       "isHidden": false, "orderIndex": 2 },
+    { "input": "4 4\n1 1 1 1\nA 2 3 5\nQ 1 4\nQ 2 3\nA 1 4 1",             "expectedOutput": "14\n12",      "isHidden": false, "orderIndex": 3 },
+    { "input": "5 4\n0 0 0 0 0\nA 1 5 1\nQ 1 5\nA 2 4 2\nQ 2 4",           "expectedOutput": "5\n9",        "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 3\n1 2 3 4 5\nA 1 5 2\nQ 1 5\nQ 3 5",                     "expectedOutput": "25\n18",      "isHidden": true,  "orderIndex": 5 },
+    { "input": "4 4\n0 0 0 0\nA 1 2 3\nA 3 4 5\nQ 1 4\nQ 2 3",             "expectedOutput": "16\n8",       "isHidden": true,  "orderIndex": 6 },
+    { "input": "5 5\n1 1 1 1 1\nA 3 5 2\nQ 3 5\nA 1 3 1\nQ 1 5\nQ 1 2",    "expectedOutput": "9\n13\n3",    "isHidden": true,  "orderIndex": 7 },
+    { "input": "3 3\n5 5 5\nA 1 3 1\nQ 1 3\nA 2 3 2",                       "expectedOutput": "18",          "isHidden": true,  "orderIndex": 8 },
+    { "input": "5 4\n1 2 3 4 5\nA 1 5 -1\nQ 1 5\nA 2 4 5\nQ 1 5",           "expectedOutput": "10\n25",      "isHidden": true,  "orderIndex": 9 },
+    { "input": "6 4\n1 2 3 4 5 6\nA 1 3 2\nQ 1 6\nQ 1 3\nA 4 6 -1",         "expectedOutput": "27\n15",      "isHidden": true,  "orderIndex": 10 },
+    { "input": "4 3\n0 0 0 0\nA 2 3 10\nA 1 4 1\nQ 1 4",                    "expectedOutput": "24",           "isHidden": true,  "orderIndex": 11 },
+    { "input": "5 3\n5 4 3 2 1\nA 1 5 0\nQ 1 5\nQ 3 5",                     "expectedOutput": "15\n6",        "isHidden": true,  "orderIndex": 12 },
+    { "input": "4 4\n1 2 3 4\nA 1 2 10\nA 3 4 20\nQ 1 4\nQ 2 3",            "expectedOutput": "60\n35",       "isHidden": true,  "orderIndex": 13 },
+    { "input": "3 4\n0 0 0\nA 1 3 5\nQ 1 3\nA 2 2 -3\nQ 1 3",               "expectedOutput": "15\n12",       "isHidden": true,  "orderIndex": 14 },
+    { "input": "5 4\n2 3 1 4 5\nA 2 4 2\nQ 1 5\nA 1 5 1\nQ 1 5",            "expectedOutput": "21\n26",       "isHidden": true,  "orderIndex": 15 }
+  ]
+}

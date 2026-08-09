@@ -1,0 +1,124 @@
+{
+    "title": "Lower Bound",
+    "slug": "lower-bound",
+    "difficulty": "Easy",
+    "statement": "Given a sorted array of N integers (may contain duplicates) and a target T, find the **lower bound** — the index of the first element that is **greater than or equal to** T.\n\nIf all elements are less than T, return N (off-the-end index).\n\nImplement using binary search in O(log N).",
+    "constraints": "1 <= N <= 10^7\n-10^9 <= A[i] <= 10^9\nArray is sorted in non-decreasing order.\n-10^9 <= T <= 10^9",
+    "inputFormat": "Line 1: two integers N and T.\nLine 2: N space-separated integers in non-decreasing order.",
+    "outputFormat": "A single integer: the 0-indexed lower bound position.",
+    "examples": [
+        {
+            "input": "8 5\n1 2 4 4 5 5 7 9",
+            "output": "4",
+            "explanation": "First index where A[i] >= 5 is index 4."
+        },
+        {
+            "input": "5 6\n1 2 4 4 5",
+            "output": "5",
+            "explanation": "No element is >= 6, so return N=5."
+        }
+    ],
+    "starterCode": {
+        "python": "n, t = map(int, input().split())\na = list(map(int, input().split()))\nlo, hi = 0, n\nwhile lo < hi:\n    mid = (lo + hi) // 2\n    # Write your solution here\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; long long t;\n    cin >> n >> t;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int lo = 0, hi = n;\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long t = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        int lo = 0, hi = n;\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "8 5\n1 2 4 4 5 5 7 9",
+            "expectedOutput": "4",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5 6\n1 2 4 4 5",
+            "expectedOutput": "5",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "4 1\n1 1 1 1",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3 0\n1 2 3",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "5 3\n1 2 2 3 3",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1 5\n5",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "1 6\n5",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "6 -5\n-10 -8 -5 -2 0 3",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "6 10\n-10 -8 -5 -2 0 3",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "5 2\n2 2 2 2 2",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "5 3\n2 2 2 2 2",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "7 4\n1 2 3 4 5 6 7",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "6 7\n1 3 5 7 9 11",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4 1000000000\n-1 0 1 2",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "4 -1000000000\n-1000000000 0 1 2",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "6 5\n1 3 5 5 5 9",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

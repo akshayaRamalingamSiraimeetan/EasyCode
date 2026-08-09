@@ -1,0 +1,82 @@
+{
+    "title": "Partition Labels",
+    "slug": "partition-labels",
+    "difficulty": "Medium",
+    "statement": "You are given a string `s`.\nWe want to partition the string into as many parts as possible so that each letter appears in at most one part.\nNote that the partition is done so that after concatenating all the parts in order, the resultant string should be `s`.\n\nReturn a list of integers representing the size of these parts.",
+    "constraints": "1 <= s.length <= 500\n`s` consists of lowercase English letters.",
+    "inputFormat": "A single line containing the string `s`.",
+    "outputFormat": "Space-separated integers denoting the sizes of the parts.",
+    "examples": [
+        {
+            "input": "ababcbacadefegdehijhklij",
+            "output": "9 7 8",
+            "explanation": "The partition is \"ababcbaca\", \"defegde\", \"hijhklij\". Each letter appears in at most one part."
+        },
+        {
+            "input": "eccbbbbdec",
+            "output": "10",
+            "explanation": "The entire string is one block since 'e' spans the whole ends."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Greedy: Store the last occurrence index of each character.\n# Scan through and expand the window up to the max last occurrence.\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // implement logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "ababcbacadefegdehijhklij",
+            "expectedOutput": "9 7 8",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "eccbbbbdec",
+            "expectedOutput": "10",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "abcdef",
+            "expectedOutput": "1 1 1 1 1 1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "aaaaaa",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "ababa",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "abccba",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "aebbedaddc",
+            "expectedOutput": "9 1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "xzyxxyzabc",
+            "expectedOutput": "7 1 1 1",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "qwerttyyq",
+            "expectedOutput": "9",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

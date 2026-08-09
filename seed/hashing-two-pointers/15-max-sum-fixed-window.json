@@ -1,0 +1,44 @@
+{
+  "title": "Maximum Sum of Fixed-Size Window",
+  "slug": "maximum-sum-fixed-window",
+  "difficulty": "Medium",
+  "statement": "Given an array of integers and a window size K, find the maximum sum among all contiguous subarrays of exactly K elements.",
+  "constraints": "1 <= K <= N <= 10^5\n-10^4 <= A[i] <= 10^4",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers.",
+  "outputFormat": "A single integer: the maximum sum of any contiguous subarray of size K.",
+  "examples": [
+    {
+      "input": "6 3\n2 1 5 1 3 2",
+      "output": "9",
+      "explanation": "Window [2,1,5]? no, [5,1,3] = 9. Actually [2,1,5]=8, [1,5,1]=7, [5,1,3]=9, [1,3,2]=6. Max is 9."
+    },
+    {
+      "input": "9 4\n1 4 2 10 23 3 1 0 20",
+      "output": "39",
+      "explanation": "Window [10,23,3,1]? = 37. [4,2,10,23] = 39. Max is 39."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: compute first window sum, then slide\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, k; cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6 3\n2 1 5 1 3 2",              "expectedOutput": "9",  "isHidden": false, "orderIndex": 0 },
+    { "input": "9 4\n1 4 2 10 23 3 1 0 20",      "expectedOutput": "39", "isHidden": false, "orderIndex": 1 },
+    { "input": "5 3\n1 2 3 4 5",                 "expectedOutput": "12", "isHidden": false, "orderIndex": 2 },
+    { "input": "5 2\n2 3 4 1 5",                 "expectedOutput": "7",  "isHidden": false, "orderIndex": 3 },
+    { "input": "5 3\n1 1 1 1 1",                 "expectedOutput": "3",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 2\n5 3 1 2 4",                 "expectedOutput": "8",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "6 4\n1 2 3 4 5 6",               "expectedOutput": "18", "isHidden": true,  "orderIndex": 6 },
+    { "input": "5 5\n3 3 3 3 3",                 "expectedOutput": "15", "isHidden": true,  "orderIndex": 7 },
+    { "input": "5 2\n10 20 30 40 50",             "expectedOutput": "90", "isHidden": true,  "orderIndex": 8 },
+    { "input": "7 3\n1 0 2 0 3 0 4",             "expectedOutput": "7",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "6 4\n5 2 3 4 1 6",               "expectedOutput": "14", "isHidden": true,  "orderIndex": 10 },
+    { "input": "5 1\n1 2 3 4 5",                 "expectedOutput": "5",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "5 5\n1 2 3 4 5",                 "expectedOutput": "15", "isHidden": true,  "orderIndex": 12 },
+    { "input": "5 3\n2 2 2 2 2",                 "expectedOutput": "6",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "6 3\n4 5 6 7 8 9",               "expectedOutput": "24", "isHidden": true,  "orderIndex": 14 },
+    { "input": "10 5\n1 1 1 1 1 1 1 1 1 1",      "expectedOutput": "5",  "isHidden": true,  "orderIndex": 15 }
+  ]
+}

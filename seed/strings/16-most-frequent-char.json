@@ -1,0 +1,44 @@
+{
+  "title": "Most Frequent Character",
+  "slug": "most-frequent-character",
+  "difficulty": "Medium",
+  "statement": "Given a string S of lowercase English letters, find the character that appears most frequently.\n\nIf there is a tie (multiple characters have the same maximum frequency), print the one that comes first in alphabetical order.",
+  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "A single character: the most frequent character (alphabetically first in case of tie).",
+  "examples": [
+    {
+      "input": "aabbbc",
+      "output": "b",
+      "explanation": "a appears 2 times, b appears 3 times, c appears 1 time. 'b' is the most frequent."
+    },
+    {
+      "input": "aabb",
+      "output": "a",
+      "explanation": "Both 'a' and 'b' appear 2 times. 'a' comes first alphabetically."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "aabbbc", "expectedOutput": "b", "isHidden": false, "orderIndex": 0 },
+    { "input": "aabb", "expectedOutput": "a", "isHidden": false, "orderIndex": 1 },
+    { "input": "z", "expectedOutput": "z", "isHidden": false, "orderIndex": 2 },
+    { "input": "abcabc", "expectedOutput": "a", "isHidden": false, "orderIndex": 3 },
+    { "input": "aaaaa", "expectedOutput": "a", "isHidden": true, "orderIndex": 4 },
+    { "input": "abcde", "expectedOutput": "a", "isHidden": true, "orderIndex": 5 },
+    { "input": "zzzzza", "expectedOutput": "z", "isHidden": true, "orderIndex": 6 },
+    { "input": "cccbbbaa", "expectedOutput": "b", "isHidden": true, "orderIndex": 7 },
+    { "input": "mississippi", "expectedOutput": "i", "isHidden": true, "orderIndex": 8 },
+    { "input": "abababab", "expectedOutput": "a", "isHidden": true, "orderIndex": 9 },
+    { "input": "aaabbb", "expectedOutput": "a", "isHidden": true, "orderIndex": 10 },
+    { "input": "bbbaaa", "expectedOutput": "a", "isHidden": true, "orderIndex": 11 },
+    { "input": "ddddcccbbba", "expectedOutput": "d", "isHidden": true, "orderIndex": 12 },
+    { "input": "zyxwvu", "expectedOutput": "u", "isHidden": true, "orderIndex": 13 },
+    { "input": "programming", "expectedOutput": "g", "isHidden": true, "orderIndex": 14 },
+    { "input": "banana", "expectedOutput": "a", "isHidden": true, "orderIndex": 15 }
+  ]
+}

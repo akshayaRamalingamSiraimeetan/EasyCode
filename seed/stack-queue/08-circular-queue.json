@@ -1,0 +1,119 @@
+{
+    "title": "Design Circular Queue",
+    "slug": "design-circular-queue",
+    "difficulty": "Easy",
+    "statement": "Implement a Circular Queue of a fixed size K. You are given Q operations. The queue supports:\n- `1 X` : Enqueue X (add to rear). Print `YES` if successful, `NO` if full.\n- `2` : Dequeue (remove from front). Print `YES` if successful, `NO` if empty.\n- `3` : Print the Front element. Print `-1` if empty.\n- `4` : Print the Rear element. Print `-1` if empty.\n- `5` : Print `YES` if empty, `NO` otherwise.\n- `6` : Print `YES` if full, `NO` otherwise.",
+    "constraints": "1 <= K, Q <= 10^5\n-10^9 <= X <= 10^9",
+    "inputFormat": "Line 1: two integers K and Q.\nNext Q lines: queries as described.",
+    "outputFormat": "Print the result of each query on a new line.",
+    "examples": [
+        {
+            "input": "3 9\n1 1\n1 2\n1 3\n1 4\n4\n6\n2\n1 4\n4",
+            "output": "YES\nYES\nYES\nNO\n3\nYES\nYES\nYES\n4",
+            "explanation": "Queue size 3. Add 1, 2, 3 (YES, YES, YES). Add 4 fails (NO, full). Rear is 3. Full is YES. Dequeue removes 1 (YES). Add 4 succeeds (YES). Rear is 4."
+        }
+    ],
+    "starterCode": {
+        "python": "k, q = map(int, input().split())\nqueue = [0] * k\nhead = 0\ntail = -1\ncount = 0\nfor _ in range(q):\n    query = list(map(int, input().split()))\n    type = query[0]\n    # Implement Circular Queue logic using array and count\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int k, q; cin >> k >> q;\n    vector<long long> queue(k);\n    int head = 0, tail = -1, count = 0;\n    while (q--) {\n        int type; cin >> type;\n        if (type == 1) {\n            long long x; cin >> x;\n            if (count == k) cout << \"NO\\n\";\n            else { tail = (tail + 1) % k; queue[tail] = x; count++; cout << \"YES\\n\"; }\n        } \n        // Implement 2, 3, 4, 5, 6\n    }\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        int k = Integer.parseInt(tz.nextToken());\n        int q = Integer.parseInt(tz.nextToken());\n        long[] queue = new long[k];\n        int head = 0, tail = -1, count = 0;\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < q; i++) {\n            tz = new StringTokenizer(br.readLine());\n            int type = Integer.parseInt(tz.nextToken());\n            // Implement logic and append to sb\n        }\n        System.out.print(sb);\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3 9\n1 1\n1 2\n1 3\n1 4\n4\n6\n2\n1 4\n4",
+            "expectedOutput": "YES\nYES\nYES\nNO\n3\nYES\nYES\nYES\n4",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "2 8\n5\n1 10\n1 20\n6\n3\n2\n2\n5",
+            "expectedOutput": "YES\nYES\nYES\nYES\n10\nYES\nYES\nYES",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 6\n1 10\n1 20\n3\n2\n2\n5",
+            "expectedOutput": "YES\nNO\n10\nYES\nNO\nYES",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3 4\n2\n3\n4\n5",
+            "expectedOutput": "NO\n-1\n-1\nYES",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "3 11\n1 10\n1 20\n1 30\n2\n1 40\n3\n4\n2\n3\n6\n5",
+            "expectedOutput": "YES\nYES\nYES\nYES\nYES\n20\n40\nYES\n30\nNO\nNO",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "2 10\n1 5\n2\n5\n6\n2\n1 10\n1 20\n1 30\n4\n3",
+            "expectedOutput": "YES\nYES\nYES\nNO\nNO\nYES\nYES\nNO\n20\n10",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4 12\n1 1\n1 2\n1 3\n1 4\n6\n2\n2\n1 5\n1 6\n3\n4\n6",
+            "expectedOutput": "YES\nYES\nYES\nYES\nYES\nYES\nYES\nYES\nYES\n3\n6\nYES",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "1 5\n1 99\n4\n3\n1 100\n6",
+            "expectedOutput": "YES\n99\n99\nNO\nYES",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "5 7\n1 1\n1 2\n2\n1 3\n3\n4\n5",
+            "expectedOutput": "YES\nYES\nYES\nYES\n2\n3\nNO",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "3 8\n1 -10\n1 -20\n3\n4\n2\n1 -30\n1 -40\n4",
+            "expectedOutput": "YES\nYES\n-10\n-20\nYES\nYES\nYES\n-40",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "4 10\n5\n6\n1 50\n5\n6\n3\n4\n2\n3\n4",
+            "expectedOutput": "YES\nNO\nYES\nNO\nNO\n50\n50\nYES\n-1\n-1",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "3 11\n1 1\n1 2\n1 3\n2\n2\n2\n2\n1 4\n3\n4\n5",
+            "expectedOutput": "YES\nYES\nYES\nYES\nYES\nYES\nNO\nYES\n4\n4\nNO",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "2 8\n1 10\n1 20\n2\n1 30\n2\n1 40\n3\n4",
+            "expectedOutput": "YES\nYES\nYES\nYES\nYES\nYES\n30\n40",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "5 5\n1 0\n2\n3\n5\n6",
+            "expectedOutput": "YES\nYES\n-1\nYES\nNO",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "3 10\n1 1\n1 2\n1 3\n1 4\n2\n2\n2\n5\n6\n1 5",
+            "expectedOutput": "YES\nYES\nYES\nNO\nYES\nYES\nYES\nYES\nNO\nYES",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "1 6\n2\n3\n4\n5\n6\n1 -100",
+            "expectedOutput": "NO\n-1\n-1\nYES\nNO\nYES",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

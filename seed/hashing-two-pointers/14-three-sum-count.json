@@ -1,0 +1,44 @@
+{
+  "title": "Count Triplets with Zero Sum",
+  "slug": "count-triplets-zero-sum",
+  "difficulty": "Medium",
+  "statement": "Given an array of integers, count the number of unique triplets (i, j, k) with i < j < k such that A[i] + A[j] + A[k] = 0.\n\nTwo triplets are the same if they contain the same multiset of values.",
+  "constraints": "3 <= N <= 3000\n-10^4 <= A[i] <= 10^4",
+  "inputFormat": "The first line contains N.\nThe second line contains N space-separated integers.",
+  "outputFormat": "A single integer: the number of unique triplets summing to zero.",
+  "examples": [
+    {
+      "input": "6\n-1 0 1 2 -1 -4",
+      "output": "3",
+      "explanation": "Sorted: -4,-1,-1,0,1,2. Unique triplets summing to 0: (-1,-1,2), (-1,0,1). With duplicates counted: 3 total triplet index-combos."
+    },
+    {
+      "input": "3\n0 0 0",
+      "output": "1",
+      "explanation": "The only triplet is (0,0,0)."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: sort, then two pointers for each fixed first element\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6\n-1 0 1 2 -1 -4",        "expectedOutput": "3",  "isHidden": false, "orderIndex": 0 },
+    { "input": "5\n-2 0 1 1 2",             "expectedOutput": "2",  "isHidden": false, "orderIndex": 1 },
+    { "input": "3\n0 0 0",                  "expectedOutput": "1",  "isHidden": false, "orderIndex": 2 },
+    { "input": "4\n1 2 3 4",                "expectedOutput": "0",  "isHidden": false, "orderIndex": 3 },
+    { "input": "3\n-1 0 1",                 "expectedOutput": "1",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "4\n0 0 0 0",                "expectedOutput": "4",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "5\n-2 -1 0 1 2",            "expectedOutput": "2",  "isHidden": true,  "orderIndex": 6 },
+    { "input": "6\n-4 -1 -1 0 1 2",         "expectedOutput": "3",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "4\n-1 -1 2 0",              "expectedOutput": "1",  "isHidden": true,  "orderIndex": 8 },
+    { "input": "6\n1 -1 -1 2 -2 0",         "expectedOutput": "4",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "5\n-2 0 0 2 2",             "expectedOutput": "4",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "4\n-1 0 0 1",               "expectedOutput": "2",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "5\n0 0 0 0 0",              "expectedOutput": "10", "isHidden": true,  "orderIndex": 12 },
+    { "input": "6\n-3 0 1 2 -2 1",          "expectedOutput": "4",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "6\n-1 1 0 0 -1 1",          "expectedOutput": "8",  "isHidden": true,  "orderIndex": 14 },
+    { "input": "6\n3 0 -2 -1 1 2",          "expectedOutput": "3",  "isHidden": true,  "orderIndex": 15 }
+  ]
+}

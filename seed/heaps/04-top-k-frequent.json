@@ -1,0 +1,44 @@
+{
+  "title": "Top K Frequent Elements",
+  "slug": "top-k-frequent-elements",
+  "difficulty": "Easy",
+  "statement": "Given an array of integers and a value K, return the K most frequent elements.\n\nIf two elements have the same frequency, the one with the smaller value comes first.\n\nOutput the K elements space-separated, ordered by frequency descending (then value ascending for ties).",
+  "constraints": "1 <= K <= number of distinct elements <= N <= 10^4\n-10^4 <= A[i] <= 10^4",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers.",
+  "outputFormat": "K space-separated integers: the K most frequent elements.",
+  "examples": [
+    {
+      "input": "6 2\n1 1 1 2 2 3",
+      "output": "1 2",
+      "explanation": "1 appears 3 times, 2 appears 2 times. Top 2 are 1 and 2."
+    },
+    {
+      "input": "1 1\n1",
+      "output": "1",
+      "explanation": "Only one element."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: count frequencies, use heap or sort by (-freq, value)\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <queue>\nusing namespace std;\nint main() {\n    int n, k; cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6 2\n1 1 1 2 2 3",                   "expectedOutput": "1 2",   "isHidden": false, "orderIndex": 0 },
+    { "input": "1 1\n1",                             "expectedOutput": "1",     "isHidden": false, "orderIndex": 1 },
+    { "input": "6 2\n1 2 2 3 3 3",                   "expectedOutput": "3 2",   "isHidden": false, "orderIndex": 2 },
+    { "input": "5 2\n1 1 2 2 3",                     "expectedOutput": "1 2",   "isHidden": false, "orderIndex": 3 },
+    { "input": "6 2\n4 4 4 1 1 2",                   "expectedOutput": "4 1",   "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 3\n1 2 3 4 5",                     "expectedOutput": "1 2 3", "isHidden": true,  "orderIndex": 5 },
+    { "input": "7 2\n7 7 7 7 5 5 3",                 "expectedOutput": "7 5",   "isHidden": true,  "orderIndex": 6 },
+    { "input": "10 3\n1 1 2 3 3 3 4 4 4 4",          "expectedOutput": "4 3 1", "isHidden": true,  "orderIndex": 7 },
+    { "input": "6 1\n2 2 2 3 3 1",                   "expectedOutput": "2",     "isHidden": true,  "orderIndex": 8 },
+    { "input": "10 4\n5 5 4 4 3 3 2 2 1 1",          "expectedOutput": "1 2 3 4","isHidden": true,  "orderIndex": 9 },
+    { "input": "9 2\n1 1 1 1 2 2 2 3 3",             "expectedOutput": "1 2",   "isHidden": true,  "orderIndex": 10 },
+    { "input": "5 2\n10 10 20 20 30",                "expectedOutput": "10 20", "isHidden": true,  "orderIndex": 11 },
+    { "input": "8 2\n1 2 3 4 4 5 5 5",              "expectedOutput": "5 4",   "isHidden": true,  "orderIndex": 12 },
+    { "input": "7 2\n3 3 2 2 1 1 1",                 "expectedOutput": "1 2",   "isHidden": true,  "orderIndex": 13 },
+    { "input": "6 2\n1 2 3 1 2 1",                   "expectedOutput": "1 2",   "isHidden": true,  "orderIndex": 14 },
+    { "input": "8 2\n6 6 6 5 5 4 4 4",              "expectedOutput": "4 6",   "isHidden": true,  "orderIndex": 15 }
+  ]
+}

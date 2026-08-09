@@ -1,0 +1,124 @@
+{
+    "title": "Array Total Sum",
+    "slug": "array-total-sum",
+    "difficulty": "Easy",
+    "statement": "Given an array of N integers, compute and print the sum of all its elements.\n\nBe careful: elements can be negative and the total sum may require a 64-bit integer.",
+    "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9",
+    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers A[1], A[2], ..., A[N].",
+    "outputFormat": "A single integer: the sum of all elements.",
+    "examples": [
+        {
+            "input": "5\n1 2 3 4 5",
+            "output": "15",
+            "explanation": "1+2+3+4+5 = 15"
+        },
+        {
+            "input": "4\n-1 -2 3 0",
+            "output": "0",
+            "explanation": "-1 + -2 + 3 + 0 = 0"
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n",
+        "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    long long sum = 0;\n    for (int i = 0; i < n; i++) {\n        long long x; cin >> x;\n        // Write your solution here\n    }\n    return 0;\n}\n",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n1 2 3 4 5",
+            "expectedOutput": "15",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "4\n-1 -2 3 0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n42",
+            "expectedOutput": "42",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3\n0 0 0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "2\n-1000000000 1000000000",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1\n-1000000000",
+            "expectedOutput": "-1000000000",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "6\n10 -10 20 -20 30 -30",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5\n1000000000 1000000000 1000000000 1000000000 1000000000",
+            "expectedOutput": "5000000000",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "3\n-999999999 -999999999 -999999999",
+            "expectedOutput": "-2999999997",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "7\n7 6 5 4 3 2 1",
+            "expectedOutput": "28",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "4\n100 200 300 400",
+            "expectedOutput": "1000",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "2\n0 -1",
+            "expectedOutput": "-1",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "6\n-5 -4 -3 -2 -1 0",
+            "expectedOutput": "-15",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "3\n1000000000 1000000000 -1",
+            "expectedOutput": "1999999999",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "5\n-100 200 -300 400 -500",
+            "expectedOutput": "-300",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "4\n999999999 999999999 999999999 999999999",
+            "expectedOutput": "3999999996",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Word Frequency Counter",
+  "slug": "word-frequency-counter",
+  "difficulty": "Medium",
+  "statement": "Given a sentence, count how many times each unique word appears.\n\nWords are separated by spaces. The comparison is case-insensitive (treat all words as lowercase).\n\nPrint each word and its count, sorted alphabetically.",
+  "constraints": "1 <= |S| <= 10^4\nS contains only lowercase English letters and spaces.\nWords are separated by single spaces with no leading or trailing spaces.",
+  "inputFormat": "A single line containing the sentence.",
+  "outputFormat": "For each unique word (alphabetical order), print: \"word count\".",
+  "examples": [
+    {
+      "input": "the cat sat on the mat the cat",
+      "output": "cat 2\nmat 1\non 1\nsat 1\nthe 3",
+      "explanation": "'the' appears 3 times, 'cat' twice, others once."
+    },
+    {
+      "input": "hello world hello",
+      "output": "hello 2\nworld 1",
+      "explanation": "'hello' appears twice."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <sstream>\n#include <string>\n#include <map>\nusing namespace std;\nint main() {\n    string s;\n    getline(cin, s);\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.nextLine();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "the cat sat on the mat the cat", "expectedOutput": "cat 2\nmat 1\non 1\nsat 1\nthe 3", "isHidden": false, "orderIndex": 0 },
+    { "input": "hello world hello", "expectedOutput": "hello 2\nworld 1", "isHidden": false, "orderIndex": 1 },
+    { "input": "a a a a", "expectedOutput": "a 4", "isHidden": false, "orderIndex": 2 },
+    { "input": "one two three", "expectedOutput": "one 1\nthree 1\ntwo 1", "isHidden": false, "orderIndex": 3 },
+    { "input": "apple banana apple cherry banana apple", "expectedOutput": "apple 3\nbanana 2\ncherry 1", "isHidden": true, "orderIndex": 4 },
+    { "input": "go go go", "expectedOutput": "go 3", "isHidden": true, "orderIndex": 5 },
+    { "input": "the the the", "expectedOutput": "the 3", "isHidden": true, "orderIndex": 6 },
+    { "input": "red blue green red blue red", "expectedOutput": "blue 2\ngreen 1\nred 3", "isHidden": true, "orderIndex": 7 },
+    { "input": "x y z x y x", "expectedOutput": "x 3\ny 2\nz 1", "isHidden": true, "orderIndex": 8 },
+    { "input": "to be or not to be", "expectedOutput": "be 2\nnot 1\nor 1\nto 2", "isHidden": true, "orderIndex": 9 },
+    { "input": "cat bat rat", "expectedOutput": "bat 1\ncat 1\nrat 1", "isHidden": true, "orderIndex": 10 },
+    { "input": "aa bb cc aa bb aa", "expectedOutput": "aa 3\nbb 2\ncc 1", "isHidden": true, "orderIndex": 11 },
+    { "input": "dog dog dog cat cat", "expectedOutput": "cat 2\ndog 3", "isHidden": true, "orderIndex": 12 },
+    { "input": "a b c d e f", "expectedOutput": "a 1\nb 1\nc 1\nd 1\ne 1\nf 1", "isHidden": true, "orderIndex": 13 },
+    { "input": "i am what i am", "expectedOutput": "am 2\ni 2\nwhat 1", "isHidden": true, "orderIndex": 14 },
+    { "input": "code code code review review test", "expectedOutput": "code 3\nreview 2\ntest 1", "isHidden": true, "orderIndex": 15 }
+  ]
+}

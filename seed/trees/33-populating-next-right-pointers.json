@@ -1,0 +1,69 @@
+{
+    "title": "Populating Next Right Pointers in Each Node",
+    "slug": "populating-next-right-pointers",
+    "difficulty": "Medium",
+    "statement": "You are given a perfect binary tree where all leaves are on the same level, and every parent has two children.\nPopulate each next pointer to point to its next right node. If there is no next right node, the next pointer should connect to nothing (or 'null').\n\nReturn the level-order traversal of the list following only the `next` pointers: `Val -> nextVal -> nextVal ... # ... `\nFor formatting, after pointing out every level across via next, append `#` marking the end of that level grouping.",
+    "constraints": "The number of nodes in the tree is in the range [0, 2^12 - 1].\n-1000 <= Node.val <= 1000",
+    "inputFormat": "A single line containing space-separated numbers mapping the level-order traversal of the perfect tree.",
+    "outputFormat": "Print a space-separated string showing traversal passing through `#` upon each level's next tracking.",
+    "examples": [
+        {
+            "input": "1 2 3 4 5 6 7",
+            "output": "1 # 2 3 # 4 5 6 7 #",
+            "explanation": "Next pointers connect 2->3, and 4->5->6->7. So layout reads: level 1 is 1 #, level 2 is 2 3 #, etc."
+        },
+        {
+            "input": "1",
+            "output": "1 #",
+            "explanation": "Single node."
+        }
+    ],
+    "starterCode": {
+        "python": "import sys\nline = sys.stdin.read().split()\n# Simulate next pointers on the level-order groupings\n# Since tree is perfect, grouping boundaries are clearly powers of two\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Write tree build and logic\n    return 0;\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "1 2 3 4 5 6 7",
+            "expectedOutput": "1 # 2 3 # 4 5 6 7 #",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1",
+            "expectedOutput": "1 #",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "",
+            "expectedOutput": "",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1 2 3",
+            "expectedOutput": "1 # 2 3 #",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "10 20 30 40 50 60 70",
+            "expectedOutput": "10 # 20 30 # 40 50 60 70 #",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15",
+            "expectedOutput": "1 # 2 3 # 4 5 6 7 # 8 9 10 11 12 13 14 15 #",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "-1 0 1 2 3 4 5",
+            "expectedOutput": "-1 # 0 1 # 2 3 4 5 #",
+            "isHidden": true,
+            "orderIndex": 6
+        }
+    ]
+}

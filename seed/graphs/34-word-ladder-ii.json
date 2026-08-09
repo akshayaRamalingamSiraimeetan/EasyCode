@@ -1,0 +1,53 @@
+{
+    "title": "Word Ladder II",
+    "slug": "word-ladder-ii",
+    "difficulty": "Hard",
+    "statement": "A transformation sequence from word `beginWord` to word `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that:\n- Every adjacent pair of words differs by a single letter.\n- Every `si` for `1 <= i <= k` is in `wordList`.\n- `sk == endWord`.\n\nReturn all the shortest transformation sequences from `beginWord` to `endWord`.\nPrint each sequence on a new line and sort the sequences lexicographically.",
+    "constraints": "1 <= beginWord.length <= 10\nendWord.length == beginWord.length\n1 <= wordList.length <= 500\nwordList[i].length == beginWord.length",
+    "inputFormat": "Line 1: beginWord and endWord.\nLine 2: an integer N (size of wordList).\nLine 3: N space-separated strings.",
+    "outputFormat": "Print all valid shortest paths, space-separated, lexicographically sorted.",
+    "examples": [
+        {
+            "input": "hit cog\n6\nhot dot dog lot log cog",
+            "output": "hit hot dot dog cog\nhit hot lot log cog",
+            "explanation": "There are 2 shortest sequences."
+        }
+    ],
+    "starterCode": {
+        "python": "beginWord, endWord = input().split()\nn = int(input())\nwordList = input().split()\n# BFS for shortest paths graph, then DFS backtracking to build paths\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string bw, ew; cin >> bw >> ew;\n    int n; cin >> n;\n    vector<string> wl(n);\n    for(int i=0; i<n; i++) cin >> wl[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String bw = sc.next(), ew = sc.next();\n        int n = sc.nextInt();\n        List<String> wl = new ArrayList<>();\n        for(int i=0; i<n; i++) wl.add(sc.next());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "hit cog\n6\nhot dot dog lot log cog",
+            "expectedOutput": "hit hot dot dog cog\nhit hot lot log cog",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "hit cog\n5\nhot dot dog lot log",
+            "expectedOutput": "",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "a c\n3\na b c",
+            "expectedOutput": "a c",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "red tax\n5\nted tex red tax tad",
+            "expectedOutput": "red ted tad tax\nred ted tex tax",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "magic pearl\n8\nmagix pxgix pxgil pzgil pzgrl pearl magpc magtc",
+            "expectedOutput": "",
+            "isHidden": true,
+            "orderIndex": 4
+        }
+    ]
+}

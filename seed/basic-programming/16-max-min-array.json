@@ -1,0 +1,44 @@
+{
+  "title": "Maximum and Minimum in Array",
+  "slug": "maximum-and-minimum-in-array",
+  "difficulty": "Medium",
+  "statement": "Given an array of N integers, find the maximum and minimum values.\n\nPrint the maximum on the first line and the minimum on the second line.",
+  "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+  "inputFormat": "The first line contains N.\nThe second line contains N space-separated integers.",
+  "outputFormat": "Two lines:\n- First line: the maximum value.\n- Second line: the minimum value.",
+  "examples": [
+    {
+      "input": "5\n3 1 4 1 5",
+      "output": "5\n1",
+      "explanation": "Maximum is 5, minimum is 1."
+    },
+    {
+      "input": "3\n-5 10 0",
+      "output": "10\n-5",
+      "explanation": "Maximum is 10, minimum is -5."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\narr = list(map(int, input().split()))\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] arr = new long[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5\n3 1 4 1 5", "expectedOutput": "5\n1", "isHidden": false, "orderIndex": 0 },
+    { "input": "3\n-5 10 0", "expectedOutput": "10\n-5", "isHidden": false, "orderIndex": 1 },
+    { "input": "1\n42", "expectedOutput": "42\n42", "isHidden": false, "orderIndex": 2 },
+    { "input": "4\n7 7 7 7", "expectedOutput": "7\n7", "isHidden": false, "orderIndex": 3 },
+    { "input": "2\n1000000000 -1000000000", "expectedOutput": "1000000000\n-1000000000", "isHidden": true, "orderIndex": 4 },
+    { "input": "6\n0 0 0 0 0 1", "expectedOutput": "1\n0", "isHidden": true, "orderIndex": 5 },
+    { "input": "5\n-1 -2 -3 -4 -5", "expectedOutput": "-1\n-5", "isHidden": true, "orderIndex": 6 },
+    { "input": "7\n10 20 30 40 50 60 70", "expectedOutput": "70\n10", "isHidden": true, "orderIndex": 7 },
+    { "input": "3\n100 100 99", "expectedOutput": "100\n99", "isHidden": true, "orderIndex": 8 },
+    { "input": "4\n-100 0 100 50", "expectedOutput": "100\n-100", "isHidden": true, "orderIndex": 9 },
+    { "input": "5\n5 4 3 2 1", "expectedOutput": "5\n1", "isHidden": true, "orderIndex": 10 },
+    { "input": "5\n1 2 3 4 5", "expectedOutput": "5\n1", "isHidden": true, "orderIndex": 11 },
+    { "input": "3\n0 0 0", "expectedOutput": "0\n0", "isHidden": true, "orderIndex": 12 },
+    { "input": "8\n15 3 9 7 4 12 1 8", "expectedOutput": "15\n1", "isHidden": true, "orderIndex": 13 },
+    { "input": "2\n-999999999 999999999", "expectedOutput": "999999999\n-999999999", "isHidden": true, "orderIndex": 14 },
+    { "input": "6\n3 3 3 3 3 4", "expectedOutput": "4\n3", "isHidden": true, "orderIndex": 15 }
+  ]
+}

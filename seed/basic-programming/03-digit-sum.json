@@ -1,0 +1,44 @@
+{
+  "title": "Digit Sum",
+  "slug": "digit-sum",
+  "difficulty": "Easy",
+  "statement": "Given a non-negative integer N, compute the sum of all its digits.\n\nFor example, if N = 1234, the digit sum is 1 + 2 + 3 + 4 = 10.",
+  "constraints": "0 <= N <= 10^12",
+  "inputFormat": "A single line containing one non-negative integer N.",
+  "outputFormat": "A single integer representing the sum of all digits of N.",
+  "examples": [
+    {
+      "input": "1234",
+      "output": "10",
+      "explanation": "1 + 2 + 3 + 4 = 10"
+    },
+    {
+      "input": "9999",
+      "output": "36",
+      "explanation": "9 + 9 + 9 + 9 = 36"
+    }
+  ],
+  "starterCode": {
+    "python": "n = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string n;\n    cin >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String n = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "1234", "expectedOutput": "10", "isHidden": false, "orderIndex": 0 },
+    { "input": "9999", "expectedOutput": "36", "isHidden": false, "orderIndex": 1 },
+    { "input": "0", "expectedOutput": "0", "isHidden": false, "orderIndex": 2 },
+    { "input": "100", "expectedOutput": "1", "isHidden": false, "orderIndex": 3 },
+    { "input": "5", "expectedOutput": "5", "isHidden": true, "orderIndex": 4 },
+    { "input": "99", "expectedOutput": "18", "isHidden": true, "orderIndex": 5 },
+    { "input": "123456789", "expectedOutput": "45", "isHidden": true, "orderIndex": 6 },
+    { "input": "1000000000000", "expectedOutput": "1", "isHidden": true, "orderIndex": 7 },
+    { "input": "999999999999", "expectedOutput": "108", "isHidden": true, "orderIndex": 8 },
+    { "input": "19", "expectedOutput": "10", "isHidden": true, "orderIndex": 9 },
+    { "input": "500", "expectedOutput": "5", "isHidden": true, "orderIndex": 10 },
+    { "input": "111111", "expectedOutput": "6", "isHidden": true, "orderIndex": 11 },
+    { "input": "987654321", "expectedOutput": "45", "isHidden": true, "orderIndex": 12 },
+    { "input": "10", "expectedOutput": "1", "isHidden": true, "orderIndex": 13 },
+    { "input": "205", "expectedOutput": "7", "isHidden": true, "orderIndex": 14 },
+    { "input": "7777777", "expectedOutput": "49", "isHidden": true, "orderIndex": 15 }
+  ]
+}

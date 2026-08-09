@@ -1,0 +1,36 @@
+{
+  "title": "Sparse Table: Range Minimum Query",
+  "slug": "sparse-table-range-minimum-query",
+  "difficulty": "Medium",
+  "statement": "Given an array of N integers and Q queries, for each query (L, R) (0-indexed) find the minimum value in the subarray A[L..R].\n\nUse a Sparse Table for O(1) per query after O(N log N) preprocessing.",
+  "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n-10^6 <= A[i] <= 10^6\n0 <= L <= R <= N-1",
+  "inputFormat": "The first line contains N and Q.\nThe second line contains N integers.\nThe next Q lines each contain L and R (0-indexed).",
+  "outputFormat": "Q lines, each the minimum of A[L..R].",
+  "examples": [
+    { "input": "10 3\n2 4 3 1 6 7 8 9 1 7\n0 9\n2 5\n0 3", "output": "1\n1\n1", "explanation": "Min over full range is 1. Min [2..5]={3,1,6,7}=1. Min [0..3]={2,4,3,1}=1." },
+    { "input": "5 2\n3 1 4 1 5\n0 4\n1 3",                  "output": "1\n1",   "explanation": "Both ranges contain 1." }
+  ],
+  "starterCode": {
+    "python": "n, q = map(int, input().split())\narr = list(map(int, input().split()))\nqueries = [tuple(map(int, input().split())) for _ in range(q)]\n# Write your solution here\n# Hint: sp[j][i] = min of arr[i..i+2^j-1]\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <cmath>\nusing namespace std;\nint main() {\n    int n, q; cin >> n >> q;\n    vector<int> arr(n);\n    for (int i=0;i<n;i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), q = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i=0;i<n;i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "10 3\n2 4 3 1 6 7 8 9 1 7\n0 9\n2 5\n0 3",       "expectedOutput": "1\n1\n1",       "isHidden": false, "orderIndex": 0 },
+    { "input": "5 2\n3 1 4 1 5\n0 4\n1 3",                       "expectedOutput": "1\n1",          "isHidden": false, "orderIndex": 1 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n5 9\n1 6",             "expectedOutput": "1\n1",          "isHidden": false, "orderIndex": 2 },
+    { "input": "10 3\n2 4 3 1 6 7 8 9 1 7\n0 0\n4 7\n2 8",        "expectedOutput": "2\n6\n1",       "isHidden": false, "orderIndex": 3 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n3 7\n6 9",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 4 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n0 4\n5 9",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 5 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n1 6\n4 8",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 6 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n6 9\n9 9",             "expectedOutput": "1\n7",          "isHidden": true,  "orderIndex": 7 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n0 4\n1 9",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 8 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n1 9\n0 5",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 9 },
+    { "input": "6 2\n5 3 1 4 2 6\n0 2\n3 5",                      "expectedOutput": "1\n2",          "isHidden": true,  "orderIndex": 10 },
+    { "input": "5 3\n10 5 3 8 1\n0 4\n0 2\n2 4",                  "expectedOutput": "1\n3\n1",       "isHidden": true,  "orderIndex": 11 },
+    { "input": "4 2\n4 2 6 1\n0 3\n1 2",                          "expectedOutput": "1\n2",          "isHidden": true,  "orderIndex": 12 },
+    { "input": "6 2\n7 2 5 1 8 3\n0 5\n2 4",                      "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 13 },
+    { "input": "5 2\n1 2 3 4 5\n0 4\n2 4",                        "expectedOutput": "1\n3",          "isHidden": true,  "orderIndex": 14 },
+    { "input": "10 2\n2 4 3 1 6 7 8 9 1 7\n0 4\n6 9",             "expectedOutput": "1\n1",          "isHidden": true,  "orderIndex": 15 }
+  ]
+}

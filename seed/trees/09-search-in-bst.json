@@ -1,0 +1,88 @@
+{
+    "title": "Search in a Binary Search Tree",
+    "slug": "search-in-bst",
+    "difficulty": "Easy",
+    "statement": "You are given the root of a binary search tree (BST) and an integer `val`.\n\nFind the node in the BST that the node's value equals `val` and return the level-order traversal of the subtree rooted with that node. If such a node does not exist, return `null`.",
+    "constraints": "1 <= The number of nodes in the tree <= 5000\n1 <= Node.val <= 10^7\nroot is a valid binary search tree.\n1 <= val <= 10^7",
+    "inputFormat": "Line 1: space-separated strings mapping the level-order traversal of the BST.\nLine 2: the integer `val`.",
+    "outputFormat": "Space-separated strings mapping the level-order traversal of the subtree, or `null`.",
+    "examples": [
+        {
+            "input": "4 2 7 1 3\n2",
+            "output": "2 1 3",
+            "explanation": "Node 2 is found -> its subtree is 2, 1, 3."
+        },
+        {
+            "input": "4 2 7 1 3\n5",
+            "output": "null",
+            "explanation": "Node 5 does not exist."
+        }
+    ],
+    "starterCode": {
+        "python": "import sys\nlines = sys.stdin.read().splitlines()\narr = lines[0].split()\nval = int(lines[1])\n# Implement search and output logic\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <sstream>\n#include <vector>\nusing namespace std;\nint main() {\n    string line; getline(cin, line);\n    // Read val, structure tree, search and serialize subtree\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String treeStr = br.readLine();\n        int val = Integer.parseInt(br.readLine().trim());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4 2 7 1 3\n2",
+            "expectedOutput": "2 1 3",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "4 2 7 1 3\n5",
+            "expectedOutput": "null",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "4 2 7 1 3\n4",
+            "expectedOutput": "4 2 7 1 3",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4 2 7 1 3\n7",
+            "expectedOutput": "7",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "10 5 20 null null 15 25\n20",
+            "expectedOutput": "20 15 25",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "10 5 20 null null 15 25\n15",
+            "expectedOutput": "15",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "10 5 20 null null 15 25\n99",
+            "expectedOutput": "null",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5000\n5000",
+            "expectedOutput": "5000",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "5000\n10",
+            "expectedOutput": "null",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "20 10 30 5 15\n10",
+            "expectedOutput": "10 5 15",
+            "isHidden": true,
+            "orderIndex": 9
+        }
+    ]
+}

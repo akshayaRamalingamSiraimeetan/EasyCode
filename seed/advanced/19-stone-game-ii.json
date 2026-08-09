@@ -1,0 +1,64 @@
+{
+    "title": "Stone Game II (Game Theory DP)",
+    "slug": "stone-game-ii",
+    "difficulty": "Medium",
+    "statement": "Alice and Bob continue their games with piles of stones. There are a number of piles arranged in a row, and each pile has a positive integer number of stones `piles[i]`. The objective of the game is to end with the most stones.\nAlice and Bob take turns, with Alice starting first. Initially, `M = 1`.\nOn each player's turn, that player can take all the stones in the first `X` remaining piles, where `1 <= X <= 2M`. Then, we set `M = max(M, X)`.\nThe game continues until all the stones have been taken.\nAssuming Alice and Bob play optimally, return the maximum number of stones Alice can get.",
+    "constraints": "1 <= piles.length <= 100\n1 <= piles[i] <= 10^4",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "5\n2 7 9 4 4",
+            "output": "10",
+            "explanation": "If Alice takes one pile (2), Bob takes (7,9). Alice gets 10. (Various optimal branches exist)"
+        },
+        {
+            "input": "6\n1 2 3 4 5 100",
+            "output": "104",
+            "explanation": "Alice gets the 100 somehow."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\npiles = list(map(int, input().split()))\n# Game theory DP with memoization on (index, M)\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> piles(n);\n    for(int i=0; i<n; i++) cin >> piles[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] piles = new int[n];\n        for(int i=0; i<n; i++) piles[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n2 7 9 4 4",
+            "expectedOutput": "10",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "6\n1 2 3 4 5 100",
+            "expectedOutput": "104",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n100",
+            "expectedOutput": "100",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3\n10 20 30",
+            "expectedOutput": "30",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "10\n1 1 1 1 1 1 1 1 1 1",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "7\n69 79 17 55 9 10 11",
+            "expectedOutput": "148",
+            "isHidden": true,
+            "orderIndex": 5
+        }
+    ]
+}

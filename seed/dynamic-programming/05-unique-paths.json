@@ -1,0 +1,76 @@
+{
+    "title": "Unique Paths",
+    "slug": "unique-paths",
+    "difficulty": "Easy",
+    "statement": "There is a robot on an `m x n` grid. The robot is initially located at the top-left corner (i.e., `grid[0][0]`). The robot tries to move to the bottom-right corner (i.e., `grid[m-1][n-1]`). The robot can only move either down or right at any point in time.\nGiven the two integers `m` and `n`, return the number of possible unique paths that the robot can take to reach the bottom-right corner.",
+    "constraints": "1 <= m, n <= 100",
+    "inputFormat": "A single line with two integers m and n.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "3 7",
+            "output": "28",
+            "explanation": "28 unique paths."
+        },
+        {
+            "input": "3 2",
+            "output": "3",
+            "explanation": "3 unique paths: Right->Down->Down, Down->Down->Right, Down->Right->Down."
+        }
+    ],
+    "starterCode": {
+        "python": "m, n = map(int, input().split())\n# Grid DP: dp[i][j] = paths to reach cell (i,j)\n",
+        "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int m, n; cin >> m >> n;\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3 7",
+            "expectedOutput": "28",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3 2",
+            "expectedOutput": "3",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1 100",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "7 3",
+            "expectedOutput": "28",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "10 10",
+            "expectedOutput": "48620",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "5 5",
+            "expectedOutput": "70",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "100 1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

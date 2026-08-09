@@ -1,0 +1,124 @@
+{
+    "title": "Find Peak Element",
+    "slug": "find-peak-element",
+    "difficulty": "Medium",
+    "statement": "Given a 0-indexed array of N integers, a peak element is an element that is strictly greater than its neighbors. For elements at the boundaries, we assume A[-1] = -∞ and A[N] = -∞.\n\nFind the 0-indexed position of any peak element. If the array contains multiple peaks, return the index to any of the peaks.\n\nYou must solve this in O(log N) using binary search by comparing A[mid] with A[mid+1].",
+    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9\nA[i] != A[i+1] for all valid i.",
+    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "A single integer: the index of a peak element.",
+    "examples": [
+        {
+            "input": "4\n1 2 3 1",
+            "output": "2",
+            "explanation": "3 is a peak since 3 > 2 and 3 > 1. Index is 2."
+        },
+        {
+            "input": "7\n1 2 1 3 5 6 4",
+            "output": "5",
+            "explanation": "6 is a peak (index 5). 2 is also a peak (index 1). Either 1 or 5 works (the checker will accept either, but for this problem, your binary search should naturally find one)."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n# If a[mid] < a[mid+1], peak is to the right\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your binary search here\n    return 0;\n}\n",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4\n1 2 3 1",
+            "expectedOutput": "2",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "7\n1 2 1 3 5 6 4",
+            "expectedOutput": "5",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n5",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2\n1 2",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "2\n2 1",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "3\n1 2 3",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "3\n3 2 1",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "3\n1 3 2",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "5\n1 5 1 5 1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "6\n10 9 8 7 6 5",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "6\n1 2 3 4 5 6",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "5\n2 4 6 5 3",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "9\n1 2 3 4 5 4 3 2 1",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4\n4 2 3 1",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "5\n1 4 2 5 3",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "7\n1 2 3 1 4 5 6",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

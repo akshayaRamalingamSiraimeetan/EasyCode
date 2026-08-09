@@ -1,0 +1,44 @@
+{
+  "title": "Edit Distance",
+  "slug": "edit-distance",
+  "difficulty": "Hard",
+  "statement": "The edit distance (Levenshtein distance) between two strings A and B is the minimum number of single-character operations needed to transform A into B.\n\nAllowed operations:\n1. Insert a character.\n2. Delete a character.\n3. Replace a character with another.\n\nGiven strings A and B, compute their edit distance.",
+  "constraints": "0 <= |A|, |B| <= 1000\nA and B contain only lowercase English letters.",
+  "inputFormat": "Two lines: the first contains A, the second contains B.",
+  "outputFormat": "A single integer: the edit distance between A and B.",
+  "examples": [
+    {
+      "input": "horse\nros",
+      "output": "3",
+      "explanation": "horse->rorse(replace h->r)->rose(delete r)->ros(delete e). 3 operations."
+    },
+    {
+      "input": "kitten\nsitting",
+      "output": "3",
+      "explanation": "kitten->sitten->sittin->sitting. 3 operations."
+    }
+  ],
+  "starterCode": {
+    "python": "a = input().strip()\nb = input().strip()\n# Write your solution here\n# Hint: use 2D DP table dp[i][j] = edit distance between a[:i] and b[:j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "horse\nros", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
+    { "input": "kitten\nsitting", "expectedOutput": "3", "isHidden": false, "orderIndex": 1 },
+    { "input": "abc\nabc", "expectedOutput": "0", "isHidden": false, "orderIndex": 2 },
+    { "input": "abc\n", "expectedOutput": "3", "isHidden": false, "orderIndex": 3 },
+    { "input": "\nabc", "expectedOutput": "3", "isHidden": true, "orderIndex": 4 },
+    { "input": "a\nb", "expectedOutput": "1", "isHidden": true, "orderIndex": 5 },
+    { "input": "abcde\nfghij", "expectedOutput": "5", "isHidden": true, "orderIndex": 6 },
+    { "input": "sunday\nsaturday", "expectedOutput": "3", "isHidden": true, "orderIndex": 7 },
+    { "input": "intention\nexecution", "expectedOutput": "5", "isHidden": true, "orderIndex": 8 },
+    { "input": "abcdef\nbcdef", "expectedOutput": "1", "isHidden": true, "orderIndex": 9 },
+    { "input": "abcdef\nabcde", "expectedOutput": "1", "isHidden": true, "orderIndex": 10 },
+    { "input": "abcdef\nabcgef", "expectedOutput": "1", "isHidden": true, "orderIndex": 11 },
+    { "input": "distance\ndistance", "expectedOutput": "0", "isHidden": true, "orderIndex": 12 },
+    { "input": "aa\na", "expectedOutput": "1", "isHidden": true, "orderIndex": 13 },
+    { "input": "ab\nba", "expectedOutput": "2", "isHidden": true, "orderIndex": 14 },
+    { "input": "algorithm\nalgorithm", "expectedOutput": "0", "isHidden": true, "orderIndex": 15 }
+  ]
+}

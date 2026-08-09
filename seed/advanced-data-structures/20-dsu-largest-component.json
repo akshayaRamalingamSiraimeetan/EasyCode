@@ -1,0 +1,44 @@
+{
+  "title": "DSU: Largest Connected Component After Each Union",
+  "slug": "dsu-largest-component-union",
+  "difficulty": "Medium",
+  "statement": "You are given N nodes (1-indexed) and M union operations. After each union operation, print the size of the largest connected component.\n\nUse Disjoint Set Union (Union-Find) with union-by-size and path compression for efficiency.",
+  "constraints": "1 <= N <= 10^5\n1 <= M <= 10^5\n1 <= u, v <= N",
+  "inputFormat": "The first line contains N and M.\nThe next M lines each contain two integers u and v (merge the components of u and v).",
+  "outputFormat": "M lines, each the size of the largest connected component after that union.",
+  "examples": [
+    {
+      "input": "5 4\n1 2\n3 4\n2 3\n4 5",
+      "output": "2\n2\n4\n5",
+      "explanation": "After 1-2: max=2. After 3-4: max=2. After 2-3: {1,2,3,4} size=4. After 4-5: {1,2,3,4,5} size=5."
+    },
+    {
+      "input": "3 2\n1 2\n2 3",
+      "output": "2\n3",
+      "explanation": "After 1-2: max=2. After 2-3: {1,2,3} size=3."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\ninput = sys.stdin.readline\n\nn, m = map(int, input().split())\nparent = list(range(n + 1))\nsize = [1] * (n + 1)\nmax_size = 1\n\ndef find(x):\n    while parent[x] != x:\n        parent[x] = parent[parent[x]]\n        x = parent[x]\n    return x\n\ndef union(a, b):\n    global max_size\n    ra, rb = find(a), find(b)\n    if ra == rb:\n        print(max_size)\n        return\n    if size[ra] < size[rb]:\n        ra, rb = rb, ra\n    parent[rb] = ra\n    size[ra] += size[rb]\n    max_size = max(max_size, size[ra])\n    print(max_size)\n\nfor _ in range(m):\n    u, v = map(int, input().split())\n    union(u, v)\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nvector<int> parent, sz;\nint find(int x) { while (parent[x]!=x) { parent[x]=parent[parent[x]]; x=parent[x]; } return x; }\nint main() {\n    int n, m; cin >> n >> m;\n    parent.resize(n+1); sz.assign(n+1,1);\n    for (int i=0;i<=n;i++) parent[i]=i;\n    int maxSz = 1;\n    while (m--) {\n        int u, v; cin >> u >> v;\n        int ru=find(u), rv=find(v);\n        if (ru != rv) {\n            if (sz[ru] < sz[rv]) swap(ru, rv);\n            parent[rv]=ru; sz[ru]+=sz[rv];\n            maxSz = max(maxSz, sz[ru]);\n        }\n        cout << maxSz << \"\\n\";\n    }\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    static int[] parent, size;\n    static int find(int x) { while(parent[x]!=x){parent[x]=parent[parent[x]];x=parent[x];}return x; }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), m=sc.nextInt();\n        parent=new int[n+1]; size=new int[n+1];\n        for(int i=0;i<=n;i++){parent[i]=i;size[i]=1;}\n        int maxSz=1;\n        while(m-->0){\n            int u=sc.nextInt(),v=sc.nextInt();\n            int ru=find(u),rv=find(v);\n            if(ru!=rv){\n                if(size[ru]<size[rv]){int t=ru;ru=rv;rv=t;}\n                parent[rv]=ru;size[ru]+=size[rv];\n                maxSz=Math.max(maxSz,size[ru]);\n            }\n            System.out.println(maxSz);\n        }\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5 4\n1 2\n3 4\n2 3\n4 5",     "expectedOutput": "2\n2\n4\n5",     "isHidden": false, "orderIndex": 0 },
+    { "input": "3 2\n1 2\n2 3",               "expectedOutput": "2\n3",           "isHidden": false, "orderIndex": 1 },
+    { "input": "4 3\n1 2\n1 2\n3 4",         "expectedOutput": "2\n2\n2",         "isHidden": false, "orderIndex": 2 },
+    { "input": "6 5\n1 2\n3 4\n5 6\n1 3\n2 5", "expectedOutput": "2\n2\n2\n4\n6", "isHidden": false, "orderIndex": 3 },
+    { "input": "2 1\n1 2",                    "expectedOutput": "2",              "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 5\n1 2\n2 3\n3 4\n4 5\n1 5", "expectedOutput": "2\n3\n4\n5\n5", "isHidden": true,  "orderIndex": 5 },
+    { "input": "4 4\n1 3\n2 4\n1 2\n3 4",     "expectedOutput": "2\n2\n4\n4",     "isHidden": true,  "orderIndex": 6 },
+    { "input": "6 6\n1 2\n2 3\n4 5\n5 6\n3 4\n1 6", "expectedOutput": "2\n3\n2\n3\n6\n6", "isHidden": true, "orderIndex": 7 },
+    { "input": "3 3\n1 1\n2 2\n3 3",          "expectedOutput": "1\n1\n1",         "isHidden": true,  "orderIndex": 8 },
+    { "input": "5 3\n1 5\n2 4\n1 4",          "expectedOutput": "2\n2\n4",         "isHidden": true,  "orderIndex": 9 },
+    { "input": "7 6\n1 2\n3 4\n5 6\n1 3\n2 5\n4 7", "expectedOutput": "2\n2\n2\n4\n6\n7", "isHidden": true, "orderIndex": 10 },
+    { "input": "1 1\n1 1",                    "expectedOutput": "1",              "isHidden": true,  "orderIndex": 11 },
+    { "input": "4 2\n2 3\n1 4",              "expectedOutput": "2\n2",            "isHidden": true,  "orderIndex": 12 },
+    { "input": "5 4\n1 3\n3 5\n2 4\n1 2",    "expectedOutput": "2\n3\n2\n5",     "isHidden": true,  "orderIndex": 13 },
+    { "input": "6 3\n2 5\n1 3\n4 6",         "expectedOutput": "2\n2\n2",         "isHidden": true,  "orderIndex": 14 },
+    { "input": "8 7\n1 2\n3 4\n5 6\n7 8\n1 3\n5 7\n1 5", "expectedOutput": "2\n2\n2\n2\n4\n4\n8", "isHidden": true, "orderIndex": 15 }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Longest Repeating Substring",
+  "slug": "longest-repeating-substring",
+  "difficulty": "Hard",
+  "statement": "Given a string S, find the length of the longest substring that appears at least twice in S (the two occurrences may overlap).\n\nIf no substring repeats, print 0.\n\nFor example, in \"banana\", the substring \"an\" appears at positions 1 and 3, and \"ana\" also appears twice (positions 1 and 3 with overlap). The longest is \"ana\" of length 3.",
+  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "A single integer: the length of the longest repeating substring.",
+  "examples": [
+    {
+      "input": "banana",
+      "output": "3",
+      "explanation": "'ana' appears at positions 1 and 3 (overlapping). Length 3."
+    },
+    {
+      "input": "abcd",
+      "output": "0",
+      "explanation": "No substring repeats. Output 0."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n# Hint: use DP similar to LCS of S with itself, but disallow same-index matches\n# Or use binary search + rolling hash\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "banana", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
+    { "input": "abcd", "expectedOutput": "0", "isHidden": false, "orderIndex": 1 },
+    { "input": "aaa", "expectedOutput": "2", "isHidden": false, "orderIndex": 2 },
+    { "input": "abab", "expectedOutput": "2", "isHidden": false, "orderIndex": 3 },
+    { "input": "a", "expectedOutput": "0", "isHidden": true, "orderIndex": 4 },
+    { "input": "aa", "expectedOutput": "1", "isHidden": true, "orderIndex": 5 },
+    { "input": "abcabc", "expectedOutput": "3", "isHidden": true, "orderIndex": 6 },
+    { "input": "aaaa", "expectedOutput": "3", "isHidden": true, "orderIndex": 7 },
+    { "input": "abcde", "expectedOutput": "0", "isHidden": true, "orderIndex": 8 },
+    { "input": "aababaa", "expectedOutput": "3", "isHidden": true, "orderIndex": 9 },
+    { "input": "xyxy", "expectedOutput": "2", "isHidden": true, "orderIndex": 10 },
+    { "input": "abcabcabc", "expectedOutput": "6", "isHidden": true, "orderIndex": 11 },
+    { "input": "mississippi", "expectedOutput": "4", "isHidden": true, "orderIndex": 12 },
+    { "input": "aabaab", "expectedOutput": "3", "isHidden": true, "orderIndex": 13 },
+    { "input": "abacabac", "expectedOutput": "4", "isHidden": true, "orderIndex": 14 },
+    { "input": "ababab", "expectedOutput": "4", "isHidden": true, "orderIndex": 15 }
+  ]
+}

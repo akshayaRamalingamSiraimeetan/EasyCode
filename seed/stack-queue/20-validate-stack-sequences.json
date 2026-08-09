@@ -1,0 +1,124 @@
+{
+    "title": "Validate Stack Sequences",
+    "slug": "validate-stack-sequences",
+    "difficulty": "Medium",
+    "statement": "Given two integer arrays `pushed` and `popped` each with distinct values, return `YES` if this could have been the result of a sequence of push and pop operations on an initially empty stack, or `NO` otherwise.",
+    "constraints": "1 <= N = |pushed| = |popped| <= 1000\n0 <= pushed[i], popped[i] <= 1000\nAll elements of pushed are distinct.\npopped is a permutation of pushed.",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers for the `pushed` array.\nLine 3: N space-separated integers for the `popped` array.",
+    "outputFormat": "`YES` or `NO`.",
+    "examples": [
+        {
+            "input": "5\n1 2 3 4 5\n4 5 3 2 1",
+            "output": "YES",
+            "explanation": "Push 1, 2, 3, 4. Pop 4. Push 5. Pop 5, 3, 2, 1."
+        },
+        {
+            "input": "5\n1 2 3 4 5\n4 3 5 1 2",
+            "output": "NO",
+            "explanation": "1 cannot be popped before 2."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\npushed = list(map(int, input().split()))\npopped = list(map(int, input().split()))\n# Write your stack simulation logic\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> pushed(n), popped(n);\n    for (int i = 0; i < n; i++) cin >> pushed[i];\n    for (int i = 0; i < n; i++) cin >> popped[i];\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] pushed = new int[n];\n        int[] popped = new int[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) pushed[i] = Integer.parseInt(st.nextToken());\n        st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) popped[i] = Integer.parseInt(st.nextToken());\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n1 2 3 4 5\n4 5 3 2 1",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5\n1 2 3 4 5\n4 3 5 1 2",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "5\n1 2 3 4 5\n1 2 3 4 5",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "5\n1 2 3 4 5\n5 4 3 2 1",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "1\n100\n100",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4\n1 2 3 4\n3 4 1 2",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "6\n1 2 3 4 5 6\n2 1 4 3 6 5",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "7\n6 7 8 1 2 3 4\n8 6 7 1 2 4 3",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "5\n10 20 30 40 50\n30 40 50 20 10",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "5\n10 20 30 40 50\n30 40 50 10 20",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "6\n0 1 2 3 4 5\n0 1 2 3 4 5",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "6\n0 1 2 3 4 5\n0 1 2 4 5 3",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "6\n0 1 2 3 4 5\n0 1 2 5 3 4",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4\n4 3 2 1\n4 3 2 1",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "4\n4 3 2 1\n3 4 2 1",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "4\n4 3 2 1\n3 4 1 2",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Restore IP Addresses",
+  "slug": "restore-ip-addresses",
+  "difficulty": "Medium",
+  "statement": "A valid IPv4 address consists of exactly four integers separated by dots, where each integer is between 0 and 255 (inclusive) and has no leading zeros (except \"0\" itself).\n\nGiven a string of digits, return the count of valid IP addresses that can be formed by inserting exactly three dots.",
+  "constraints": "1 <= |S| <= 12\nS contains only digits.",
+  "inputFormat": "A single line containing the digit string S.",
+  "outputFormat": "A single integer: the count of valid IPv4 addresses.",
+  "examples": [
+    {
+      "input": "25525511135",
+      "output": "2",
+      "explanation": "255.255.11.135 and 255.255.111.35 — 2 valid IPs."
+    },
+    {
+      "input": "0000",
+      "output": "1",
+      "explanation": "Only 0.0.0.0 is valid."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n# Hint: backtrack placing dots; each segment must be 1-3 chars, value 0-255, no leading zeros\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "25525511135",    "expectedOutput": "2",  "isHidden": false, "orderIndex": 0 },
+    { "input": "0000",           "expectedOutput": "1",  "isHidden": false, "orderIndex": 1 },
+    { "input": "1111111111",     "expectedOutput": "10", "isHidden": false, "orderIndex": 2 },
+    { "input": "010010",         "expectedOutput": "2",  "isHidden": false, "orderIndex": 3 },
+    { "input": "255255255255",   "expectedOutput": "1",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "1921680011",     "expectedOutput": "0",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "11111111",       "expectedOutput": "19", "isHidden": true,  "orderIndex": 6 },
+    { "input": "12345678",       "expectedOutput": "5",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "1",              "expectedOutput": "0",  "isHidden": true,  "orderIndex": 8 },
+    { "input": "1234567890",     "expectedOutput": "0",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "2222",           "expectedOutput": "1",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "999999999999",   "expectedOutput": "1",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "19216801",       "expectedOutput": "7",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "123",            "expectedOutput": "0",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "100200300",      "expectedOutput": "1",  "isHidden": true,  "orderIndex": 14 },
+    { "input": "101023",         "expectedOutput": "5",  "isHidden": true,  "orderIndex": 15 }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+    "title": "Jump Game",
+    "slug": "jump-game",
+    "difficulty": "Medium",
+    "statement": "You are given an integer array `nums`. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.\n\nReturn `YES` if you can reach the last index, or `NO` otherwise.",
+    "constraints": "1 <= nums.length <= 10^5\n0 <= nums[i] <= 10^5",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `nums`.",
+    "outputFormat": "Print `YES` or `NO`.",
+    "examples": [
+        {
+            "input": "5\n2 3 1 1 4",
+            "output": "YES",
+            "explanation": "Jump 1 step from index 0 to 1, then 3 steps to the last index."
+        },
+        {
+            "input": "5\n3 2 1 0 4",
+            "output": "NO",
+            "explanation": "You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Use Greedy to track max reachable index\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] nums = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) nums[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n2 3 1 1 4",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5\n3 2 1 0 4",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n0",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2\n0 1",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "7\n2 0 2 0 2 0 1",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "6\n5 4 3 2 1 0",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "7\n5 4 3 2 1 0 0",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "10\n1 1 1 1 1 1 1 1 1 1",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "4\n1 0 1 0",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

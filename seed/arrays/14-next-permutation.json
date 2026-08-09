@@ -1,0 +1,124 @@
+{
+    "title": "Next Permutation",
+    "slug": "next-permutation",
+    "difficulty": "Medium",
+    "statement": "Given an array of N distinct integers representing a permutation, rearrange it into the lexicographically next greater permutation of its elements.\n\nIf no next permutation exists (the array is in descending order), rearrange it to the smallest possible permutation (ascending order).\n\nAlgorithm:\n1. Find the largest index i such that A[i] < A[i+1]. If none, reverse the whole array.\n2. Find the largest index j such that A[j] > A[i].\n3. Swap A[i] and A[j].\n4. Reverse the suffix starting at A[i+1].",
+    "constraints": "1 <= N <= 10^5\n1 <= A[i] <= 10^9\nAll elements are distinct.",
+    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "N space-separated integers on a single line: the next permutation.",
+    "examples": [
+        {
+            "input": "3\n1 2 3",
+            "output": "1 3 2",
+            "explanation": "Next permutation after [1,2,3] is [1,3,2]."
+        },
+        {
+            "input": "3\n3 2 1",
+            "output": "1 2 3",
+            "explanation": "No next permutation; wrap around to [1,2,3]."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here (implement next_permutation manually)\n    return 0;\n}\n",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3\n1 2 3",
+            "expectedOutput": "1 3 2",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3\n3 2 1",
+            "expectedOutput": "1 2 3",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "3\n1 3 2",
+            "expectedOutput": "2 1 3",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1\n1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "4\n1 2 3 4",
+            "expectedOutput": "1 2 4 3",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "expectedOutput": "1 2 3 4",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4\n2 3 1 4",
+            "expectedOutput": "2 3 4 1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "4\n1 4 3 2",
+            "expectedOutput": "2 1 3 4",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "2\n2 1",
+            "expectedOutput": "1 2",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "2\n1 2",
+            "expectedOutput": "2 1",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "5\n1 2 3 4 5",
+            "expectedOutput": "1 2 3 5 4",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "5\n5 4 3 2 1",
+            "expectedOutput": "1 2 3 4 5",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "5\n1 5 4 3 2",
+            "expectedOutput": "2 1 3 4 5",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4\n2 1 4 3",
+            "expectedOutput": "2 3 1 4",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "6\n1 2 3 6 5 4",
+            "expectedOutput": "1 2 4 3 5 6",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "5\n3 2 5 4 1",
+            "expectedOutput": "3 4 1 2 5",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

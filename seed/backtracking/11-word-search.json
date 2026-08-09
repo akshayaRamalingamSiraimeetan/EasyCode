@@ -1,0 +1,44 @@
+{
+  "title": "Word Search in Grid",
+  "slug": "word-search-grid",
+  "difficulty": "Medium",
+  "statement": "Given an M×N character grid and a word W, determine if W exists in the grid.\n\nThe word can be formed by sequentially adjacent cells (horizontally or vertically). The same cell may not be used more than once in a single path.\n\nPrint \"Yes\" if the word exists, otherwise \"No\".",
+  "constraints": "1 <= M, N <= 6\n1 <= |W| <= 12\nGrid and word contain only uppercase English letters.",
+  "inputFormat": "The first line contains M and N.\nThe next M lines each contain N space-separated uppercase characters.\nThe last line contains the word W.",
+  "outputFormat": "Print \"Yes\" if the word exists in the grid, otherwise \"No\".",
+  "examples": [
+    {
+      "input": "3 4\nA B C E\nS F C S\nA D E E\nABCCED",
+      "output": "Yes",
+      "explanation": "ABCCED exists: A(0,0)->B(0,1)->C(0,2)->C(1,2)->E(2,2)->D(2,1)."
+    },
+    {
+      "input": "3 4\nA B C E\nS F C S\nA D E E\nABCB",
+      "output": "No",
+      "explanation": "ABCB would require revisiting B(0,1)."
+    }
+  ],
+  "starterCode": {
+    "python": "m, n = map(int, input().split())\ngrid = [input().split() for _ in range(m)]\nword = input().strip()\n# Write your solution here\n# Hint: DFS from each cell; mark visited; backtrack\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nint main() {\n    int m, n; cin >> m >> n;\n    vector<vector<char>> grid(m, vector<char>(n));\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < n; j++) cin >> grid[i][j];\n    string word; cin >> word;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m = sc.nextInt(), n = sc.nextInt();\n        char[][] grid = new char[m][n];\n        for (int i = 0; i < m; i++)\n            for (int j = 0; j < n; j++) grid[i][j] = sc.next().charAt(0);\n        String word = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "3 4\nA B C E\nS F C S\nA D E E\nABCCED", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 0 },
+    { "input": "3 4\nA B C E\nS F C S\nA D E E\nSEE",    "expectedOutput": "Yes", "isHidden": false, "orderIndex": 1 },
+    { "input": "3 4\nA B C E\nS F C S\nA D E E\nABCB",   "expectedOutput": "No",  "isHidden": false, "orderIndex": 2 },
+    { "input": "2 2\nA B\nC D\nABDC",                    "expectedOutput": "Yes", "isHidden": false, "orderIndex": 3 },
+    { "input": "2 2\nA B\nC D\nABCD",                    "expectedOutput": "No",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "1 1\nA\nA",                              "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 5 },
+    { "input": "3 3\nA A A\nA A A\nA A A\nAAAA",          "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 6 },
+    { "input": "3 3\nC A A\nA A A\nB C D\nAAB",           "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 7 },
+    { "input": "2 3\nA B C\nD E F\nABCFED",              "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 8 },
+    { "input": "2 3\nA B C\nD E F\nABCFEDA",             "expectedOutput": "No",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "3 3\nA B C\nD E F\nG H I\nAEI",          "expectedOutput": "No",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "3 3\nA B C\nD E F\nG H I\nABEFI",        "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 11 },
+    { "input": "2 2\nA A\nA A\nAAAA",                    "expectedOutput": "No",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "3 3\nA B C\nD E F\nG H I\nIHGDEF",       "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 13 },
+    { "input": "2 3\nA B C\nD E F\nCBA",                 "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 14 },
+    { "input": "3 3\nA B C\nD E F\nG H I\nABC",          "expectedOutput": "Yes", "isHidden": true,  "orderIndex": 15 }
+  ]
+}

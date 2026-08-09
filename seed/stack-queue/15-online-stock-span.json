@@ -1,0 +1,119 @@
+{
+    "title": "Online Stock Span",
+    "slug": "online-stock-span",
+    "difficulty": "Medium",
+    "statement": "You are given an array of prices representing the daily price of a stock. For each day, calculate the stock's span.\n\nThe span of the stock's price today is defined as the maximum number of consecutive days (starting from today and going backward) for which the stock price was less than or equal to today's price.\n\nReturn the space-separated spans for all days.\n\nUse a monotonic stack.",
+    "constraints": "1 <= N <= 10^5\n1 <= prices[i] <= 10^5",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing prices.",
+    "outputFormat": "N space-separated integers representing the span for each day.",
+    "examples": [
+        {
+            "input": "7\n100 80 60 70 60 75 85",
+            "output": "1 1 1 2 1 4 6",
+            "explanation": "Day 0: 100 -> 1. Day 1: 80 -> 1. Day 2: 60 -> 1. Day 3: 70 -> 2 (70, 60). Day 4: 60 -> 1. Day 5: 75 -> 4 (75, 60, 70, 60). Day 6: 85 -> 6."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nprices = list(map(int, input().split()))\nans = [0] * n\n# Write your solution using a stack tracking (price, span)\nprint(*ans)\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> prices(n);\n    for (int i = 0; i < n; i++) cin >> prices[i];\n    vector<int> ans(n);\n    // Write your solution here\n    for (int i = 0; i < n; i++) cout << ans[i] << (i == n-1 ? \"\" : \" \");\n    cout << '\\n';\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] prices = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) prices[i] = Integer.parseInt(tz.nextToken());\n        int[] ans = new int[n];\n        // Write your solution here\n        StringBuilder sb = new StringBuilder();\n        for(int i=0; i<n; i++) {\n            sb.append(ans[i]);\n            if (i < n - 1) sb.append(\" \");\n        }\n        System.out.println(sb);\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "7\n100 80 60 70 60 75 85",
+            "expectedOutput": "1 1 1 2 1 4 6",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5\n10 10 10 10 10",
+            "expectedOutput": "1 2 3 4 5",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "4\n1 2 3 4",
+            "expectedOutput": "1 2 3 4",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "expectedOutput": "1 1 1 1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "6\n10 20 10 20 10 20",
+            "expectedOutput": "1 2 1 4 1 6",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1\n50",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "8\n10 5 10 5 10 5 10 5",
+            "expectedOutput": "1 1 3 1 5 1 7 1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5\n90 80 70 60 50",
+            "expectedOutput": "1 1 1 1 1",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "6\n31 41 59 26 53 58",
+            "expectedOutput": "1 2 3 1 2 3",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "7\n11 3 9 5 6 4 14",
+            "expectedOutput": "1 1 2 1 2 1 7",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "4\n100 10 100 10",
+            "expectedOutput": "1 1 3 1",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "6\n5 5 5 10 10 10",
+            "expectedOutput": "1 2 3 6 7 8",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "5\n2 1 2 1 2",
+            "expectedOutput": "1 1 3 1 5",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "7\n50 40 30 35 45 60 10",
+            "expectedOutput": "1 1 1 2 4 6 1",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "5\n10 9 8 9 10",
+            "expectedOutput": "1 1 1 3 5",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "8\n5 10 5 10 5 10 5 10",
+            "expectedOutput": "1 2 1 4 1 6 1 8",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

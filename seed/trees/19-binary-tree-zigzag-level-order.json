@@ -1,0 +1,76 @@
+{
+    "title": "Binary Tree Zigzag Level Order Traversal",
+    "slug": "binary-tree-zigzag-level-order",
+    "difficulty": "Medium",
+    "statement": "Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).",
+    "constraints": "0 <= The number of nodes in the tree <= 2000\n-100 <= Node.val <= 100",
+    "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree (`null` for empty nodes).",
+    "outputFormat": "Print each level's space-separated integer values on a newline in zigzag order.",
+    "examples": [
+        {
+            "input": "3 9 20 null null 15 7",
+            "output": "3\n20 9\n15 7",
+            "explanation": "Root 3 is L->R. Level 1 is [9, 20], printed R->L as 20, 9. Level 2 is printed L->R."
+        },
+        {
+            "input": "1",
+            "output": "1",
+            "explanation": "Just 1."
+        }
+    ],
+    "starterCode": {
+        "python": "import sys\nline = sys.stdin.read().split()\n# Implement BFS grouping by level, reversing when necessary\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Implement zigzag BFS\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null || line.trim().isEmpty()) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3 9 20 null null 15 7",
+            "expectedOutput": "3\n20 9\n15 7",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "",
+            "expectedOutput": "",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1 2 3 4 5",
+            "expectedOutput": "1\n3 2\n4 5",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "1 2 3 4 5 6 7",
+            "expectedOutput": "1\n3 2\n4 5 6 7",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1 null 2 null 3",
+            "expectedOutput": "1\n2\n3",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "1 2 null 3 null 4",
+            "expectedOutput": "1\n2\n3\n4",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "10 20 30 40 50 60 70 80 90",
+            "expectedOutput": "10\n30 20\n40 50 60 70\n90 80",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

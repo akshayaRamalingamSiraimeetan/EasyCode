@@ -1,0 +1,44 @@
+{
+  "title": "K Pairs with Smallest Sums",
+  "slug": "k-pairs-smallest-sums",
+  "difficulty": "Medium",
+  "statement": "Given two sorted arrays nums1 and nums2, find the K pairs (u, v) with the smallest sums where u comes from nums1 and v comes from nums2.\n\nA pair (u, v) means one element from nums1 and one from nums2. Output the K pairs sorted by sum ascending. If sums are equal, order by first element ascending, then second element ascending.\n\nPrint each pair as \"u v\" on its own line.",
+  "constraints": "1 <= K <= 10^4\n1 <= |nums1|, |nums2| <= 10^3\n-10^6 <= nums1[i], nums2[j] <= 10^6\nBoth arrays sorted in non-decreasing order.",
+  "inputFormat": "The first line contains the sizes N1, N2, and K.\nThe second line contains N1 space-separated integers (nums1).\nThe third line contains N2 space-separated integers (nums2).",
+  "outputFormat": "K lines, each \"u v\" representing a pair.",
+  "examples": [
+    {
+      "input": "3 3 3\n1 7 11\n2 4 6",
+      "output": "1 2\n1 4\n1 6",
+      "explanation": "Pairs by sum: (1,2)=3, (1,4)=5, (1,6)=7. Top 3."
+    },
+    {
+      "input": "3 3 2\n1 1 2\n1 2 3",
+      "output": "1 1\n1 1",
+      "explanation": "Both (nums1[0],nums2[0]) and (nums1[1],nums2[0]) sum to 2."
+    }
+  ],
+  "starterCode": {
+    "python": "line = input().split()\nn1, n2, k = int(line[0]), int(line[1]), int(line[2])\nnums1 = list(map(int, input().split()))\nnums2 = list(map(int, input().split()))\n# Write your solution here\n# Hint: push (nums1[i]+nums2[0], i, 0) for all i < min(k, n1) into min-heap\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\nint main() {\n    int n1, n2, k; cin >> n1 >> n2 >> k;\n    vector<int> a(n1), b(n2);\n    for (int i = 0; i < n1; i++) cin >> a[i];\n    for (int i = 0; i < n2; i++) cin >> b[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n1 = sc.nextInt(), n2 = sc.nextInt(), k = sc.nextInt();\n        int[] a = new int[n1], b = new int[n2];\n        for (int i = 0; i < n1; i++) a[i] = sc.nextInt();\n        for (int i = 0; i < n2; i++) b[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "3 3 3\n1 7 11\n2 4 6",          "expectedOutput": "1 2\n1 4\n1 6",                     "isHidden": false, "orderIndex": 0 },
+    { "input": "3 3 2\n1 1 2\n1 2 3",            "expectedOutput": "1 1\n1 1",                       "isHidden": false, "orderIndex": 1 },
+    { "input": "2 1 1\n1 2\n3",                  "expectedOutput": "1 3",                             "isHidden": false, "orderIndex": 2 },
+    { "input": "3 3 3\n1 2 3\n4 5 6",            "expectedOutput": "1 4\n1 5\n2 4",                   "isHidden": false, "orderIndex": 3 },
+    { "input": "2 2 2\n1 1\n1 1",                "expectedOutput": "1 1\n1 1",                       "isHidden": true,  "orderIndex": 4 },
+    { "input": "4 4 4\n1 3 5 7\n2 4 6 8",        "expectedOutput": "1 2\n1 4\n3 2\n1 6",             "isHidden": true,  "orderIndex": 5 },
+    { "input": "3 3 5\n1 2 3\n1 2 3",            "expectedOutput": "1 1\n1 2\n2 1\n1 3\n2 2",         "isHidden": true,  "orderIndex": 6 },
+    { "input": "3 2 3\n1 10 100\n2 5",           "expectedOutput": "1 2\n1 5\n10 2",                  "isHidden": true,  "orderIndex": 7 },
+    { "input": "2 2 4\n1 2\n1 2",                "expectedOutput": "1 1\n1 2\n2 1\n2 2",             "isHidden": true,  "orderIndex": 8 },
+    { "input": "4 4 4\n1 2 3 4\n1 2 3 4",        "expectedOutput": "1 1\n1 2\n2 1\n1 3",             "isHidden": true,  "orderIndex": 9 },
+    { "input": "3 3 2\n1 2 3\n4 5 6",            "expectedOutput": "1 4\n1 5",                       "isHidden": true,  "orderIndex": 10 },
+    { "input": "3 3 4\n1 5 9\n2 6 10",           "expectedOutput": "1 2\n1 6\n5 2\n1 10",             "isHidden": true,  "orderIndex": 11 },
+    { "input": "3 3 3\n1 2 3\n100 200 300",      "expectedOutput": "1 100\n2 100\n3 100",             "isHidden": true,  "orderIndex": 12 },
+    { "input": "2 2 4\n1 3\n2 4",                "expectedOutput": "1 2\n1 4\n3 2\n3 4",             "isHidden": true,  "orderIndex": 13 },
+    { "input": "5 1 3\n1 2 3 4 5\n1",            "expectedOutput": "1 1\n2 1\n3 1",                  "isHidden": true,  "orderIndex": 14 },
+    { "input": "3 3 2\n1 2 3\n1 2 3",            "expectedOutput": "1 1\n1 2",                       "isHidden": true,  "orderIndex": 15 }
+  ]
+}

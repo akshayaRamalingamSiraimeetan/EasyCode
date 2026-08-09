@@ -1,0 +1,124 @@
+{
+    "title": "Decode String",
+    "slug": "decode-string",
+    "difficulty": "Medium",
+    "statement": "Given an encoded string, return its decoded string.\n\nThe encoding rule is: `k[encoded_string]`, where the encoded_string inside the square brackets is being repeated exactly k times. k is guaranteed to be a positive integer.\n\nYou may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.",
+    "constraints": "1 <= |S| <= 100\nS contains only lowercase English letters, digits, and square brackets '[]'.\nThe decoded string will not exceed 10^5 characters.",
+    "inputFormat": "A single line containing the string S.",
+    "outputFormat": "The decoded string on a single line.",
+    "examples": [
+        {
+            "input": "3[a]2[bc]",
+            "output": "aaabcbc",
+            "explanation": "3 times 'a' and 2 times 'bc'."
+        },
+        {
+            "input": "3[a2[c]]",
+            "output": "accaccacc",
+            "explanation": "Inner is 'c' repeated 2 times giving 'acc', repeating 3 times gives 'accaccacc'."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Write your stack-based decoding logic\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3[a]2[bc]",
+            "expectedOutput": "aaabcbc",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3[a2[c]]",
+            "expectedOutput": "accaccacc",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "2[abc]3[cd]ef",
+            "expectedOutput": "abcabccdcdcdef",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "abc3[cd]xyz",
+            "expectedOutput": "abccdcdcdxyz",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "a",
+            "expectedOutput": "a",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "10[a]",
+            "expectedOutput": "aaaaaaaaaa",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "2[2[2[b]]]",
+            "expectedOutput": "bbbbbbbb",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "2[2[y]pq4[2[jk]e1[f]]]3[v]",
+            "expectedOutput": "yypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefvvv",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "3[z]2[2[y]pq4[2[jk]e1[f]]]ef",
+            "expectedOutput": "zzzyypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "1[a1[b1[c]]]",
+            "expectedOutput": "abc",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "10[leet]",
+            "expectedOutput": "leetleetleetleetleetleetleetleetleetleet",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "3[a]2[b4[F]c]",
+            "expectedOutput": "aaaabFFFFcbFFFFc",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "3[a2[b1[c]]]",
+            "expectedOutput": "abcbabcbcabcbabcbcabcbabcbc",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "2[ab3[cd]]4[xy]",
+            "expectedOutput": "abcdcdcdabcdcdcdxyxyxyxy",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "xyz",
+            "expectedOutput": "xyz",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "1[a]",
+            "expectedOutput": "a",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

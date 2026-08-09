@@ -1,0 +1,82 @@
+{
+    "title": "Minimum Cost to Hire K Workers",
+    "slug": "minimum-cost-hire-k-workers",
+    "difficulty": "Hard",
+    "statement": "There are `n` workers. You are given two integer arrays `quality` and `wage` where `quality[i]` is the quality of the `i`th worker and `wage[i]` is the minimum wage expectation for the `i`th worker.\n\nWe want to hire exactly `k` workers to form a paid group. To hire a group of `k` workers, we must pay them according to the following rules:\n1. Every worker in the paid group must be paid at least their minimum wage expectation.\n2. In the group, each worker's pay must be proportional to their quality relative to the other workers in the group.\n\nGiven the two integer arrays `quality` and `wage` and an integer `k`, return the least amount of money needed to form a paid group satisfying the above conditions.\nAnswers within `10^-5` of the actual answer will be accepted.",
+    "constraints": "1 <= k <= n <= 10^4\n1 <= quality[i], wage[i] <= 10^4",
+    "inputFormat": "Line 1: two integers N and `k`.\nLine 2: N space-separated integers for `quality`.\nLine 3: N space-separated integers for `wage`.",
+    "outputFormat": "The minimum cost rounded to 5 decimal places.",
+    "examples": [
+        {
+            "input": "3 2\n10 20 5\n70 50 30",
+            "output": "105.00000",
+            "explanation": "We pay the 0th worker $70 and the 2nd worker $35."
+        },
+        {
+            "input": "3 2\n3 1 10\n3 8 10",
+            "output": "30.66667",
+            "explanation": "We pay the 0th worker $4 and the 1st worker $13.33333."
+        }
+    ],
+    "starterCode": {
+        "python": "n, k = map(int, input().split())\nquality = list(map(int, input().split()))\nwage = list(map(int, input().split()))\n# Greedy: Sort by wage/quality ratio. For each worker as the 'captain',\n# pick the k-1 lowest quality workers. Use Max Heap to maintain sum of qualities.\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\n#include <iomanip>\nusing namespace std;\nint main() {\n    int n, k; if (!(cin >> n >> k)) return 0;\n    vector<int> quality(n), wage(n);\n    for(int i=0; i<n; i++) cin >> quality[i];\n    for(int i=0; i<n; i++) cin >> wage[i];\n    // Sort by ratio wage/quality, sliding window with max heap for quality sums\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(tz.nextToken());\n        int k = Integer.parseInt(tz.nextToken());\n        int[] quality = new int[n], wage = new int[n];\n        tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) quality[i] = Integer.parseInt(tz.nextToken());\n        tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) wage[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3 2\n10 20 5\n70 50 30",
+            "expectedOutput": "105.00000",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3 2\n3 1 10\n3 8 10",
+            "expectedOutput": "30.66667",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 1\n5\n10",
+            "expectedOutput": "10.00000",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4 1\n10 5 1 4\n14 13 12 11",
+            "expectedOutput": "11.00000",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "6 3\n2 1 5 10 6 5\n22 13 12 30 20 14",
+            "expectedOutput": "26.40000",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "5 5\n10 10 10 10 10\n10 10 10 10 10",
+            "expectedOutput": "50.00000",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4 2\n5 5 5 5\n5 10 15 20",
+            "expectedOutput": "10.00000",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5 3\n1 1 1 1 1\n100 1 1 1 1",
+            "expectedOutput": "3.00000",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "4 3\n4 8 3 2\n16 24 12 12",
+            "expectedOutput": "48.00000",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

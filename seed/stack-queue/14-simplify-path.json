@@ -1,0 +1,134 @@
+{
+    "title": "Simplify Path",
+    "slug": "simplify-path",
+    "difficulty": "Medium",
+    "statement": "Given a string path, which is an absolute path (starting with a slash '/') to a file or directory in a Unix-style file system, convert it to the simplified canonical path.\n\nIn a Unix-style file system:\n- A period `.` refers to the current directory.\n- A double period `..` refers to the directory up a level.\n- Multiple consecutive slashes (e.g., `//`) are treated as a single slash `/`.\n- Any other format of periods such as `...` are treated as file/directory names.\n\nThe resulting path should always begin with a slash, only have single slashes, and not end with a trailing slash unless it is just `/`.",
+    "constraints": "1 <= |path| <= 3000\npath consists of English letters, digits, period '.', slash '/' or '_'.\npath is a valid absolute Unix path.",
+    "inputFormat": "A single line containing the string `path`.",
+    "outputFormat": "The simplified canonical path on a single line.",
+    "examples": [
+        {
+            "input": "/home/",
+            "output": "/home",
+            "explanation": "Trailing slash removed."
+        },
+        {
+            "input": "/../",
+            "output": "/",
+            "explanation": "Going one level up from root is a no-op, returns root."
+        },
+        {
+            "input": "/home//foo/",
+            "output": "/home/foo",
+            "explanation": "Multiple slashes merged, trailing removed."
+        },
+        {
+            "input": "/a/./b/../../c/",
+            "output": "/c",
+            "explanation": "a -> b -> up to a -> up to root -> c."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Write your solution using splitting and stack logic\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <sstream>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "/home/",
+            "expectedOutput": "/home",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "/../",
+            "expectedOutput": "/",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "/home//foo/",
+            "expectedOutput": "/home/foo",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "/a/./b/../../c/",
+            "expectedOutput": "/c",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "/a/../../b/../c//.//",
+            "expectedOutput": "/c",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "/a//b////c/d//././/..",
+            "expectedOutput": "/a/b/c",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "/...",
+            "expectedOutput": "/...",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "/.../a/../b/c/../d/./",
+            "expectedOutput": "/.../b/d",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "/.",
+            "expectedOutput": "/",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "/abc/...",
+            "expectedOutput": "/abc/...",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "/..hidden",
+            "expectedOutput": "/..hidden",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "/hello../world",
+            "expectedOutput": "/hello../world",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "/a/b/c/d/e/../../f/g/..",
+            "expectedOutput": "/a/b/c/f",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "////",
+            "expectedOutput": "/",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "/usr/local/bin/../../src/../lib",
+            "expectedOutput": "/usr/lib",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "/a///b/.///c",
+            "expectedOutput": "/a/b/c",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+{
+    "title": "Longest Palindromic Substring",
+    "slug": "longest-palindromic-substring",
+    "difficulty": "Medium",
+    "statement": "Given a string `s`, return the longest palindromic substring in `s`.\nIf there are multiple answers, return the one that appears first in the string.",
+    "constraints": "1 <= s.length <= 1000\ns consists of only digits and English letters.",
+    "inputFormat": "A single string s.",
+    "outputFormat": "A single string.",
+    "examples": [
+        {
+            "input": "babad",
+            "output": "bab",
+            "explanation": "'bab' is a valid answer. 'aba' is also valid, but 'bab' is first."
+        },
+        {
+            "input": "cbbd",
+            "output": "bb",
+            "explanation": "The longest palindrome is 'bb'."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Expand around center or Manacher's algorithm\n",
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "babad",
+            "expectedOutput": "bab",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "cbbd",
+            "expectedOutput": "bb",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "a",
+            "expectedOutput": "a",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "ac",
+            "expectedOutput": "a",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "racecar",
+            "expectedOutput": "racecar",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "zzzzzzzz",
+            "expectedOutput": "zzzzzzzz",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "abacdfgdcaba",
+            "expectedOutput": "aba",
+            "isHidden": true,
+            "orderIndex": 6
+        }
+    ]
+}

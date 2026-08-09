@@ -1,0 +1,36 @@
+{
+  "title": "Segment Tree: Point Update and Range Sum",
+  "slug": "segment-tree-point-update-range-sum",
+  "difficulty": "Medium",
+  "statement": "Given an array of N integers, process Q operations:\n- \"U i v\" — set A[i] = v (1-indexed)\n- \"Q l r\" — print the sum of A[l..r]\n\nBuild a Segment Tree for O(log N) updates and queries.",
+  "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n-10^4 <= A[i], v <= 10^4\n1 <= i, l, r <= N",
+  "inputFormat": "The first line contains N and Q.\nThe second line contains N integers.\nThe next Q lines each contain \"U i v\" or \"Q l r\".",
+  "outputFormat": "One line per Q operation.",
+  "examples": [
+    { "input": "5 6\n1 2 3 4 5\nQ 1 3\nU 2 10\nQ 1 3\nQ 2 5\nU 5 1\nQ 1 5", "output": "6\n14\n22\n19", "explanation": "Q[1,3]=6. Update A[2]=10. Q[1,3]=14. Q[2,5]=22. Update A[5]=1. Q[1,5]=19." },
+    { "input": "3 3\n5 5 5\nQ 1 3\nU 2 0\nQ 1 3",                            "output": "15\n10",             "explanation": "Sum=15. A[2]=0. Sum=10." }
+  ],
+  "starterCode": {
+    "python": "n, q = map(int, input().split())\narr = list(map(int, input().split()))\nops = [input().split() for _ in range(q)]\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nint main() {\n    int n, q; cin >> n >> q;\n    vector<int> arr(n);\n    for (int i=0;i<n;i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), q = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i=0;i<n;i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5 6\n1 2 3 4 5\nQ 1 3\nU 2 10\nQ 1 3\nQ 2 5\nU 5 1\nQ 1 5",    "expectedOutput": "6\n14\n22\n19",   "isHidden": false, "orderIndex": 0 },
+    { "input": "3 3\n5 5 5\nQ 1 3\nU 2 0\nQ 1 3",                               "expectedOutput": "15\n10",          "isHidden": false, "orderIndex": 1 },
+    { "input": "4 4\n1 2 3 4\nQ 1 4\nU 2 0\nQ 1 4\nQ 2 3",                      "expectedOutput": "10\n8\n3",        "isHidden": false, "orderIndex": 2 },
+    { "input": "5 3\n2 2 2 2 2\nQ 1 5\nU 3 8\nQ 1 5",                          "expectedOutput": "10\n16",          "isHidden": false, "orderIndex": 3 },
+    { "input": "8 6\n3 1 4 1 5 9 2 6\nQ 1 8\nU 4 7\nQ 1 8\nQ 3 6\nU 1 0\nQ 1 4","expectedOutput": "31\n37\n25\n12", "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 4\n10 20 30 40 50\nQ 1 3\nU 2 0\nQ 1 3\nQ 1 5",               "expectedOutput": "60\n40\n130",    "isHidden": true,  "orderIndex": 5 },
+    { "input": "4 5\n4 3 2 1\nU 1 0\nQ 1 4\nQ 1 2\nU 4 10\nQ 1 4",              "expectedOutput": "6\n3\n15",       "isHidden": true,  "orderIndex": 6 },
+    { "input": "5 4\n1 1 1 1 1\nQ 1 5\nU 3 5\nQ 1 5\nQ 3 5",                    "expectedOutput": "5\n9\n7",        "isHidden": true,  "orderIndex": 7 },
+    { "input": "3 4\n0 0 0\nU 1 5\nU 2 5\nU 3 5\nQ 1 3",                        "expectedOutput": "15",             "isHidden": true,  "orderIndex": 8 },
+    { "input": "5 4\n5 4 3 2 1\nQ 2 4\nU 3 0\nQ 2 4\nQ 1 5",                    "expectedOutput": "9\n6\n12",       "isHidden": true,  "orderIndex": 9 },
+    { "input": "4 4\n1 2 3 4\nU 1 10\nQ 1 4\nU 4 1\nQ 1 4",                     "expectedOutput": "19\n16",         "isHidden": true,  "orderIndex": 10 },
+    { "input": "5 3\n3 1 4 1 5\nQ 1 5\nU 5 0\nQ 1 5",                           "expectedOutput": "14\n9",          "isHidden": true,  "orderIndex": 11 },
+    { "input": "6 4\n1 3 5 7 9 11\nQ 1 6\nU 4 1\nQ 1 6\nQ 3 5",                 "expectedOutput": "36\n30\n15",     "isHidden": true,  "orderIndex": 12 },
+    { "input": "5 3\n0 0 0 0 0\nU 2 3\nU 4 7\nQ 1 5",                          "expectedOutput": "10",             "isHidden": true,  "orderIndex": 13 },
+    { "input": "5 6\n1 2 3 4 5\nU 1 7\nQ 1 3\nQ 3 5\nU 3 0\nQ 1 5\nQ 2 4",     "expectedOutput": "12\n12\n18\n10", "isHidden": true,  "orderIndex": 14 },
+    { "input": "3 4\n1 2 3\nQ 1 2\nU 1 5\nQ 1 2\nQ 1 3",                        "expectedOutput": "3\n7\n10",       "isHidden": true,  "orderIndex": 15 }
+  ]
+}

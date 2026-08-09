@@ -1,0 +1,44 @@
+{
+  "title": "Longest Subarray with All Distinct Elements",
+  "slug": "longest-subarray-all-distinct",
+  "difficulty": "Medium",
+  "statement": "Given an array of integers, find the length of the longest contiguous subarray in which all elements are distinct (no repeats).\n\nUse a sliding window with a hash map to achieve O(N) time.",
+  "constraints": "1 <= N <= 10^5\n1 <= A[i] <= 10^6",
+  "inputFormat": "The first line contains N.\nThe second line contains N space-separated integers.",
+  "outputFormat": "A single integer: the length of the longest subarray with all distinct elements.",
+  "examples": [
+    {
+      "input": "5\n1 2 3 4 5",
+      "output": "5",
+      "explanation": "The entire array has all distinct elements."
+    },
+    {
+      "input": "5\n1 2 1 3 4",
+      "output": "4",
+      "explanation": "Longest window with distinct elements is [2,1,3,4] of length 4."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: sliding window + hash map tracking last-seen index\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5\n1 2 3 4 5",            "expectedOutput": "5", "isHidden": false, "orderIndex": 0 },
+    { "input": "5\n1 2 1 3 4",            "expectedOutput": "4", "isHidden": false, "orderIndex": 1 },
+    { "input": "4\n1 1 1 1",             "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
+    { "input": "6\n1 2 3 1 2 3",         "expectedOutput": "3", "isHidden": false, "orderIndex": 3 },
+    { "input": "6\n1 2 3 4 1 5",         "expectedOutput": "5", "isHidden": true,  "orderIndex": 4 },
+    { "input": "8\n5 1 3 5 2 3 4 1",     "expectedOutput": "5", "isHidden": true,  "orderIndex": 5 },
+    { "input": "1\n1",                   "expectedOutput": "1", "isHidden": true,  "orderIndex": 6 },
+    { "input": "2\n1 2",                 "expectedOutput": "2", "isHidden": true,  "orderIndex": 7 },
+    { "input": "6\n1 2 3 4 5 1",         "expectedOutput": "5", "isHidden": true,  "orderIndex": 8 },
+    { "input": "5\n1 2 3 2 1",           "expectedOutput": "3", "isHidden": true,  "orderIndex": 9 },
+    { "input": "5\n2 2 2 2 2",           "expectedOutput": "1", "isHidden": true,  "orderIndex": 10 },
+    { "input": "7\n1 3 5 7 9 2 4",       "expectedOutput": "7", "isHidden": true,  "orderIndex": 11 },
+    { "input": "6\n1 2 3 4 3 5",         "expectedOutput": "4", "isHidden": true,  "orderIndex": 12 },
+    { "input": "7\n1 2 3 4 5 6 7",       "expectedOutput": "7", "isHidden": true,  "orderIndex": 13 },
+    { "input": "8\n4 3 2 1 4 3 2 1",     "expectedOutput": "4", "isHidden": true,  "orderIndex": 14 },
+    { "input": "6\n1 2 3 1 4 2",         "expectedOutput": "4", "isHidden": true,  "orderIndex": 15 }
+  ]
+}

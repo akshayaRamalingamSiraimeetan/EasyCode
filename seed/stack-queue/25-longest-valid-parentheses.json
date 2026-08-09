@@ -1,0 +1,129 @@
+{
+    "title": "Longest Valid Parentheses",
+    "slug": "longest-valid-parentheses",
+    "difficulty": "Hard",
+    "statement": "Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.\n\nA stack can be used to keep track of indices of invalid characters, allowing you to find lengths of valid sections between them.",
+    "constraints": "0 <= |S| <= 10^5\nS consists of '(' and ')'.",
+    "inputFormat": "A single line containing the string S.",
+    "outputFormat": "A single integer: the length of the longest valid parentheses substring.",
+    "examples": [
+        {
+            "input": "(()",
+            "output": "2",
+            "explanation": "The longest valid substring is \"()\"."
+        },
+        {
+            "input": ")()())",
+            "output": "4",
+            "explanation": "The longest valid substring is \"()()\"."
+        },
+        {
+            "input": ")(",
+            "output": "0",
+            "explanation": "No valid substring."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Write your solution here\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\nint main() {\n    string s;\n    if (!(cin >> s)) {\n        cout << 0 << '\\n';\n        return 0; \n    }\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine();\n        if (s == null) s = \"\";\n        s = s.trim();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "(()",
+            "expectedOutput": "2",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": ")()())",
+            "expectedOutput": "4",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": ")(",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "((()))",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "()(()",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "(((()))))",
+            "expectedOutput": "8",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "()()()()",
+            "expectedOutput": "8",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": ")(()())(",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "))))((((",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "(((())",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "))()(())()",
+            "expectedOutput": "8",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "()(())",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "((())()",
+            "expectedOutput": "6",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": ")",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "(",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "()())()()",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

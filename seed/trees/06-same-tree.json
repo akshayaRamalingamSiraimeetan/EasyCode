@@ -1,0 +1,88 @@
+{
+    "title": "Same Tree",
+    "slug": "same-tree",
+    "difficulty": "Easy",
+    "statement": "Given the roots of two binary trees p and q, write a function to check if they are the same or not.\n\nTwo binary trees are considered the same if they are structurally identical, and the nodes have the same value.",
+    "constraints": "0 <= The number of nodes in both trees <= 100\n-10^4 <= Node.val <= 10^4",
+    "inputFormat": "Line 1: space-separated level-order string for tree p.\nLine 2: space-separated level-order string for tree q.\n(If a tree is empty, the line will be completely empty).",
+    "outputFormat": "Print `YES` if they are the same, `NO` otherwise.",
+    "examples": [
+        {
+            "input": "1 2 3\n1 2 3",
+            "output": "YES",
+            "explanation": "Structurally identical with same values."
+        },
+        {
+            "input": "1 2\n1 null 2",
+            "output": "NO",
+            "explanation": "Structurally different, even though same values."
+        }
+    ],
+    "starterCode": {
+        "python": "import sys\nlines = sys.stdin.read().splitlines()\np = lines[0].split() if len(lines) > 0 else []\nq = lines[1].split() if len(lines) > 1 else []\n# Implement same tree logic\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <sstream>\n#include <vector>\nusing namespace std;\nint main() {\n    string line1, line2;\n    getline(cin, line1);\n    getline(cin, line2);\n    // parse arrays appropriately and compare\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String pStr = br.readLine();\n        String qStr = br.readLine();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "1 2 3\n1 2 3",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1 2\n1 null 2",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1 2 1\n1 1 2",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "\n\n",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "1\n1",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1\n2",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "\n1",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "2 3 4\n2 3 4 null null null null",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "4 2 7 1 3\n4 2 7 1 3",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "1 2 3 4 5\n1 2 3 4 5",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 9
+        }
+    ]
+}

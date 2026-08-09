@@ -1,0 +1,129 @@
+{
+    "title": "Backspace String Compare",
+    "slug": "backspace-string-compare",
+    "difficulty": "Easy",
+    "statement": "Given two strings S and T containing lowercase letters and `#` characters, return `YES` if they are equal when both are typed into empty text editors. `#` means a backspace character (deletes the preceding character, if any).\n\nIf they are not equal, return `NO`.",
+    "constraints": "1 <= |S|, |T| <= 10^5\nS and T only contain lowercase letters and '#'.",
+    "inputFormat": "Line 1: string S.\nLine 2: string T.",
+    "outputFormat": "`YES` or `NO`.",
+    "examples": [
+        {
+            "input": "ab#c\nad#c",
+            "output": "YES",
+            "explanation": "Both strings become \"ac\"."
+        },
+        {
+            "input": "ab##\nc#d#",
+            "output": "YES",
+            "explanation": "Both become \"\" (empty string)."
+        },
+        {
+            "input": "a#c\nb",
+            "output": "NO",
+            "explanation": "S becomes \"c\", T becomes \"b\"."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\nt = input().strip()\n# Write your solution using stacks to build final strings\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nstring build(string str) {\n    string res = \"\";\n    for (char c : str) {\n        // Write backspace logic\n    }\n    return res;\n}\nint main() {\n    string s, t; cin >> s >> t;\n    if (build(s) == build(t)) cout << \"YES\\n\";\n    else cout << \"NO\\n\";\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    static String build(String str) {\n        StringBuilder sb = new StringBuilder();\n        for (char c : str.toCharArray()) {\n            // Write backspace logic\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        String t = br.readLine().trim();\n        if (build(s).equals(build(t))) System.out.println(\"YES\");\n        else System.out.println(\"NO\");\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "ab#c\nad#c",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "ab##\nc#d#",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "a#c\nb",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "a##c\n#a#c",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "#\n#",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "abc#d\nabd",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "xy#z\nxzz#",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "bxj##tw\nbxow###tw",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "y#fo##f\ny#f#o##f",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "a#b#c#\nd#e#f#",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "abc\nabc#",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "abcd##\nab",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "a###\n#",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "ab#c#\nab##",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "xy#z\nx#y#z",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "a#b#c#d#e\n#e",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

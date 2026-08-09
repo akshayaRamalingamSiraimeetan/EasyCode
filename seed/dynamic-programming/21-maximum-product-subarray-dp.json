@@ -1,0 +1,76 @@
+{
+    "title": "Maximum Product Subarray (DP)",
+    "slug": "maximum-product-subarray-dp",
+    "difficulty": "Medium",
+    "statement": "Given an integer array `nums`, find a subarray that has the largest product, and return the product.\nUse a DP approach tracking both the minimum and maximum product ending at each index to handle negative numbers.",
+    "constraints": "1 <= nums.length <= 2 * 10^4\n-10 <= nums[i] <= 10\nThe product of any subarray of nums is guaranteed to fit in a 32-bit integer.",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "6\n2 3 -2 4",
+            "output": "6",
+            "explanation": "[2,3] has the largest product 6."
+        },
+        {
+            "input": "3\n-2 0 -1",
+            "output": "0",
+            "explanation": "Cannot get product > 0, but 0 from single element 0."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# dp_max[i] and dp_min[i] — track both extremes due to negatives\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] nums = new int[n];\n        for(int i=0; i<n; i++) nums[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4\n2 3 -2 4",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3\n-2 0 -1",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n-2",
+            "expectedOutput": "-2",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3\n-2 -3 4",
+            "expectedOutput": "24",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "5\n2 -5 -2 -4 3",
+            "expectedOutput": "24",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "6\n-1 -2 -3 0 5 6",
+            "expectedOutput": "30",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "5\n0 0 0 0 0",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5\n-1 -1 -1 -1 -1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Count Vowels",
+  "slug": "count-vowels",
+  "difficulty": "Easy",
+  "statement": "Given a string S consisting of lowercase English letters, count the number of vowels in it.\n\nThe vowels are: a, e, i, o, u.",
+  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "A single integer representing the count of vowels in S.",
+  "examples": [
+    {
+      "input": "hello",
+      "output": "2",
+      "explanation": "The vowels in 'hello' are 'e' and 'o', so the count is 2."
+    },
+    {
+      "input": "programming",
+      "output": "3",
+      "explanation": "The vowels in 'programming' are 'o', 'a', 'i', so the count is 3."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "hello", "expectedOutput": "2", "isHidden": false, "orderIndex": 0 },
+    { "input": "programming", "expectedOutput": "3", "isHidden": false, "orderIndex": 1 },
+    { "input": "aeiou", "expectedOutput": "5", "isHidden": false, "orderIndex": 2 },
+    { "input": "bcdfg", "expectedOutput": "0", "isHidden": false, "orderIndex": 3 },
+    { "input": "a", "expectedOutput": "1", "isHidden": true, "orderIndex": 4 },
+    { "input": "z", "expectedOutput": "0", "isHidden": true, "orderIndex": 5 },
+    { "input": "education", "expectedOutput": "5", "isHidden": true, "orderIndex": 6 },
+    { "input": "rhythm", "expectedOutput": "0", "isHidden": true, "orderIndex": 7 },
+    { "input": "abcdefghijklmnopqrstuvwxyz", "expectedOutput": "5", "isHidden": true, "orderIndex": 8 },
+    { "input": "aaaa", "expectedOutput": "4", "isHidden": true, "orderIndex": 9 },
+    { "input": "queue", "expectedOutput": "4", "isHidden": true, "orderIndex": 10 },
+    { "input": "sky", "expectedOutput": "0", "isHidden": true, "orderIndex": 11 },
+    { "input": "interview", "expectedOutput": "4", "isHidden": true, "orderIndex": 12 },
+    { "input": "gymnasium", "expectedOutput": "4", "isHidden": true, "orderIndex": 13 },
+    { "input": "strength", "expectedOutput": "1", "isHidden": true, "orderIndex": 14 },
+    { "input": "sequoia", "expectedOutput": "5", "isHidden": true, "orderIndex": 15 }
+  ]
+}

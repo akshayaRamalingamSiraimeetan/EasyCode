@@ -1,0 +1,44 @@
+{
+  "title": "Sliding Window Maximum",
+  "slug": "sliding-window-maximum",
+  "difficulty": "Hard",
+  "statement": "Given an array of integers and a window size K, find the maximum value in each contiguous window of size K as the window slides from left to right.\n\nThere are N-K+1 windows. Use a monotonic deque for O(N) time.",
+  "constraints": "1 <= K <= N <= 10^5\n-10^4 <= A[i] <= 10^4",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers.",
+  "outputFormat": "N-K+1 space-separated integers: the maximum in each window.",
+  "examples": [
+    {
+      "input": "8 3\n1 3 -1 -3 5 3 6 7",
+      "output": "3 3 5 5 6 7",
+      "explanation": "Windows: [1,3,-1]->3, [3,-1,-3]->3, [-1,-3,5]->5, [-3,5,3]->5, [5,3,6]->6, [3,6,7]->7."
+    },
+    {
+      "input": "5 3\n1 2 3 4 5",
+      "output": "3 4 5",
+      "explanation": "Windows: [1,2,3]->3, [2,3,4]->4, [3,4,5]->5."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: monotonic deque storing indices of candidates for maximum\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <deque>\nusing namespace std;\nint main() {\n    int n, k; cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "8 3\n1 3 -1 -3 5 3 6 7",           "expectedOutput": "3 3 5 5 6 7",     "isHidden": false, "orderIndex": 0 },
+    { "input": "5 3\n1 2 3 4 5",                   "expectedOutput": "3 4 5",           "isHidden": false, "orderIndex": 1 },
+    { "input": "5 3\n5 4 3 2 1",                   "expectedOutput": "5 4 3",           "isHidden": false, "orderIndex": 2 },
+    { "input": "4 2\n1 1 1 1",                     "expectedOutput": "1 1 1",           "isHidden": false, "orderIndex": 3 },
+    { "input": "8 3\n2 1 5 3 6 4 8 7",             "expectedOutput": "5 5 6 6 8 8",     "isHidden": true,  "orderIndex": 4 },
+    { "input": "3 2\n1 3 2",                       "expectedOutput": "3 3",             "isHidden": true,  "orderIndex": 5 },
+    { "input": "3 1\n1 2 3",                       "expectedOutput": "1 2 3",           "isHidden": true,  "orderIndex": 6 },
+    { "input": "5 3\n3 3 3 3 3",                   "expectedOutput": "3 3 3",           "isHidden": true,  "orderIndex": 7 },
+    { "input": "5 2\n1 5 2 4 3",                   "expectedOutput": "5 5 4 4",         "isHidden": true,  "orderIndex": 8 },
+    { "input": "6 3\n1 2 1 2 1 2",                 "expectedOutput": "2 2 2 2",         "isHidden": true,  "orderIndex": 9 },
+    { "input": "5 3\n4 2 1 3 5",                   "expectedOutput": "4 3 5",           "isHidden": true,  "orderIndex": 10 },
+    { "input": "6 2\n1 1 2 2 3 3",                 "expectedOutput": "1 2 2 3 3",       "isHidden": true,  "orderIndex": 11 },
+    { "input": "5 2\n9 5 3 7 1",                   "expectedOutput": "9 5 7 7",         "isHidden": true,  "orderIndex": 12 },
+    { "input": "6 4\n2 3 4 5 6 1",                 "expectedOutput": "5 6 6",           "isHidden": true,  "orderIndex": 13 },
+    { "input": "9 3\n1 2 3 4 5 4 3 2 1",           "expectedOutput": "3 4 5 5 5 4 3",   "isHidden": true,  "orderIndex": 14 },
+    { "input": "6 4\n10 5 2 7 8 7",                "expectedOutput": "10 8 8",          "isHidden": true,  "orderIndex": 15 }
+  ]
+}

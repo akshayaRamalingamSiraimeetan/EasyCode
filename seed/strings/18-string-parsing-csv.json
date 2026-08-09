@@ -1,0 +1,44 @@
+{
+  "title": "CSV Field Parser",
+  "slug": "csv-field-parser",
+  "difficulty": "Medium",
+  "statement": "Given a single CSV (Comma-Separated Values) line, parse it and print each field on a separate line.\n\nRules:\n- Fields are separated by commas.\n- A field may be quoted with double-quotes (\"). Inside a quoted field, a literal double-quote is represented as two consecutive double-quotes (\"\").\n- Leading and trailing spaces outside quotes are preserved as part of the field.\n- There are no newlines inside fields.",
+  "constraints": "1 <= |S| <= 10^4\nS contains printable ASCII characters.",
+  "inputFormat": "A single line containing the CSV record.",
+  "outputFormat": "Each field on its own line, with surrounding quotes removed and \"\"\" sequences replaced by single \".",
+  "examples": [
+    {
+      "input": "John,25,\"New York\"",
+      "output": "John\n25\nNew York",
+      "explanation": "Three fields: 'John', '25', and 'New York' (quotes stripped)."
+    },
+    {
+      "input": "\"He said \"\"hello\"\"\",42",
+      "output": "He said \"hello\"\n42",
+      "explanation": "\"\"\"\"hello\"\"\"\" inside quotes decodes to '\"hello\"'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    getline(cin, s);\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.nextLine();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "John,25,\"New York\"", "expectedOutput": "John\n25\nNew York", "isHidden": false, "orderIndex": 0 },
+    { "input": "\"He said \"\"hello\"\"\",42", "expectedOutput": "He said \"hello\"\n42", "isHidden": false, "orderIndex": 1 },
+    { "input": "a,b,c", "expectedOutput": "a\nb\nc", "isHidden": false, "orderIndex": 2 },
+    { "input": "\"one\",\"two\",\"three\"", "expectedOutput": "one\ntwo\nthree", "isHidden": false, "orderIndex": 3 },
+    { "input": "hello", "expectedOutput": "hello", "isHidden": true, "orderIndex": 4 },
+    { "input": "1,2,3,4,5", "expectedOutput": "1\n2\n3\n4\n5", "isHidden": true, "orderIndex": 5 },
+    { "input": "\"\",empty,\"\"", "expectedOutput": "\nempty\n", "isHidden": true, "orderIndex": 6 },
+    { "input": "\"comma,inside\",normal", "expectedOutput": "comma,inside\nnormal", "isHidden": true, "orderIndex": 7 },
+    { "input": "plain,\"quoted field\",end", "expectedOutput": "plain\nquoted field\nend", "isHidden": true, "orderIndex": 8 },
+    { "input": "\"\"\"quoted\"\"\",value", "expectedOutput": "\"quoted\"\nvalue", "isHidden": true, "orderIndex": 9 },
+    { "input": "a, b ,c", "expectedOutput": "a\n b \nc", "isHidden": true, "orderIndex": 10 },
+    { "input": "first,last,age,city", "expectedOutput": "first\nlast\nage\ncity", "isHidden": true, "orderIndex": 11 },
+    { "input": "\"Alice\",\"Bob\",\"Charlie\"", "expectedOutput": "Alice\nBob\nCharlie", "isHidden": true, "orderIndex": 12 },
+    { "input": "x,,z", "expectedOutput": "x\n\nz", "isHidden": true, "orderIndex": 13 },
+    { "input": "\"say \"\"hi\"\"\",bye", "expectedOutput": "say \"hi\"\nbye", "isHidden": true, "orderIndex": 14 },
+    { "input": "100,200,300,400", "expectedOutput": "100\n200\n300\n400", "isHidden": true, "orderIndex": 15 }
+  ]
+}

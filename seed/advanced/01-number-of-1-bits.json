@@ -1,0 +1,70 @@
+{
+    "title": "Number of 1 Bits (Hamming Weight)",
+    "slug": "number-of-1-bits",
+    "difficulty": "Easy",
+    "statement": "Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).",
+    "constraints": "0 <= n <= 2^31 - 1",
+    "inputFormat": "A single positive integer n.",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "11",
+            "output": "3",
+            "explanation": "11 is 1011 in binary, which contains three 1s."
+        },
+        {
+            "input": "128",
+            "output": "1",
+            "explanation": "128 is 10000000 in binary, which contains one 1."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\n# Brian Kernighan's Algorithm or bitwise shift\n",
+        "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    long long n; cin >> n;\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "11",
+            "expectedOutput": "3",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "128",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "0",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "2147483647",
+            "expectedOutput": "31",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "2147483646",
+            "expectedOutput": "30",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4294967295",
+            "expectedOutput": "32",
+            "isHidden": true,
+            "orderIndex": 6
+        }
+    ]
+}

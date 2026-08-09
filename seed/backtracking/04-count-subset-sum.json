@@ -1,0 +1,44 @@
+{
+  "title": "Count Subsets with Given Sum",
+  "slug": "count-subsets-given-sum",
+  "difficulty": "Easy",
+  "statement": "Given an array of non-negative integers and a target T, count the number of subsets whose elements sum to exactly T.\n\nEach element can be included or excluded. Two subsets are different if they differ in which elements are chosen (by index, not value).",
+  "constraints": "1 <= N <= 20\n0 <= A[i] <= 100\n0 <= T <= 1000",
+  "inputFormat": "The first line contains N and T.\nThe second line contains N space-separated non-negative integers.",
+  "outputFormat": "A single integer: the count of subsets summing to T.",
+  "examples": [
+    {
+      "input": "5 5\n1 2 3 4 5",
+      "output": "3",
+      "explanation": "Subsets: {1,4}, {2,3}, {5} — all sum to 5."
+    },
+    {
+      "input": "3 3\n3 1 2",
+      "output": "2",
+      "explanation": "Subsets: {3} and {1,2} both sum to 3."
+    }
+  ],
+  "starterCode": {
+    "python": "n, t = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: backtrack with include/exclude at each index\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, t; cin >> n >> t;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), t = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5 5\n1 2 3 4 5",     "expectedOutput": "3",  "isHidden": false, "orderIndex": 0 },
+    { "input": "3 3\n3 1 2",          "expectedOutput": "2",  "isHidden": false, "orderIndex": 1 },
+    { "input": "4 2\n1 1 1 1",        "expectedOutput": "6",  "isHidden": false, "orderIndex": 2 },
+    { "input": "4 10\n2 4 6 8",       "expectedOutput": "2",  "isHidden": false, "orderIndex": 3 },
+    { "input": "3 6\n1 2 3",          "expectedOutput": "1",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "3 15\n5 10 15",       "expectedOutput": "2",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "4 4\n1 2 3 4",        "expectedOutput": "2",  "isHidden": true,  "orderIndex": 6 },
+    { "input": "4 10\n2 3 5 7",       "expectedOutput": "2",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "4 35\n1 5 10 25",     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 8 },
+    { "input": "4 12\n3 5 7 9",       "expectedOutput": "2",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "4 8\n1 2 4 8",        "expectedOutput": "1",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "5 9\n1 3 5 7 9",      "expectedOutput": "2",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "4 4\n2 2 2 2",        "expectedOutput": "6",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "5 10\n1 2 3 4 5",     "expectedOutput": "3",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "3 12\n4 8 12",        "expectedOutput": "2",  "isHidden": true,  "orderIndex": 14 },
+    { "input": "5 15\n1 2 3 4 5",     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 15 }
+  ]
+}

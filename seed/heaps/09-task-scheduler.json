@@ -1,0 +1,44 @@
+{
+  "title": "Task Scheduler",
+  "slug": "task-scheduler",
+  "difficulty": "Medium",
+  "statement": "You are given a list of tasks represented as uppercase letters, and a non-negative cooldown integer N.\n\nThe CPU must wait at least N intervals between two executions of the same task. During the wait, it can execute other tasks or sit idle.\n\nFind the minimum number of intervals needed to finish all tasks.\n\nHint: the answer is max(total tasks, (max_freq - 1) * (N + 1) + count_of_max_freq_tasks).",
+  "constraints": "1 <= |tasks| <= 10^4\n0 <= N <= 100\nTasks are uppercase English letters.",
+  "inputFormat": "The first line contains the task string (no spaces).\nThe second line contains N.",
+  "outputFormat": "A single integer: the minimum number of intervals.",
+  "examples": [
+    {
+      "input": "AAABBB\n2",
+      "output": "8",
+      "explanation": "A->B->idle->A->B->idle->A->B = 8 intervals."
+    },
+    {
+      "input": "AAAAABCD\n2",
+      "output": "13",
+      "explanation": "A appears 5 times. (5-1)*(2+1)+1 = 13."
+    }
+  ],
+  "starterCode": {
+    "python": "tasks = list(input().strip())\nn = int(input())\n# Write your solution here\n# Hint: count task frequencies; use the formula or greedy heap simulation\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    string s; int n;\n    cin >> s >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(); int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "AAABBB\n2",        "expectedOutput": "8",  "isHidden": false, "orderIndex": 0 },
+    { "input": "AAAAABCD\n2",      "expectedOutput": "13", "isHidden": false, "orderIndex": 1 },
+    { "input": "A\n0",             "expectedOutput": "1",  "isHidden": false, "orderIndex": 2 },
+    { "input": "AB\n2",            "expectedOutput": "2",  "isHidden": false, "orderIndex": 3 },
+    { "input": "AAABBBCCC\n2",     "expectedOutput": "9",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "AAABC\n3",         "expectedOutput": "9",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "AAAA\n3",          "expectedOutput": "13", "isHidden": true,  "orderIndex": 6 },
+    { "input": "AABB\n2",          "expectedOutput": "5",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "ABCDE\n1",         "expectedOutput": "5",  "isHidden": true,  "orderIndex": 8 },
+    { "input": "AAABBBCCC\n1",     "expectedOutput": "9",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "AAABBB\n1",        "expectedOutput": "6",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "AABBCC\n2",        "expectedOutput": "6",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "AAAB\n2",          "expectedOutput": "7",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "AAAABBBC\n2",      "expectedOutput": "10", "isHidden": true,  "orderIndex": 13 },
+    { "input": "ABC\n0",           "expectedOutput": "3",  "isHidden": true,  "orderIndex": 14 },
+    { "input": "AAAABBBBCCCC\n3",  "expectedOutput": "15", "isHidden": true,  "orderIndex": 15 }
+  ]
+}

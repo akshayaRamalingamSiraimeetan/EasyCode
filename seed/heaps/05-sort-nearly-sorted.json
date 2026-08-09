@@ -1,0 +1,44 @@
+{
+  "title": "Sort a Nearly Sorted Array",
+  "slug": "sort-nearly-sorted-array",
+  "difficulty": "Easy",
+  "statement": "A nearly sorted array (also called a K-sorted array) is one where every element is at most K positions away from its sorted position.\n\nGiven such an array and K, sort it efficiently using a min-heap of size K+1.\n\nPrint the sorted array.",
+  "constraints": "1 <= K < N <= 10^5\n-10^6 <= A[i] <= 10^6",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers (nearly sorted, each element at most K away from sorted position).",
+  "outputFormat": "N space-separated integers in sorted order.",
+  "examples": [
+    {
+      "input": "7 3\n6 5 3 2 8 10 9",
+      "output": "2 3 5 6 8 9 10",
+      "explanation": "Each element is at most 3 positions away from its sorted position."
+    },
+    {
+      "input": "8 4\n10 9 8 7 4 70 60 50",
+      "output": "4 7 8 9 10 50 60 70",
+      "explanation": "Sorted using a size-5 min-heap window."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: maintain a min-heap of size k+1; pop when heap size exceeds k\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\nint main() {\n    int n, k; cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "7 3\n6 5 3 2 8 10 9",          "expectedOutput": "2 3 5 6 8 9 10",          "isHidden": false, "orderIndex": 0 },
+    { "input": "8 4\n10 9 8 7 4 70 60 50",      "expectedOutput": "4 7 8 9 10 50 60 70",     "isHidden": false, "orderIndex": 1 },
+    { "input": "5 1\n1 2 3 4 5",               "expectedOutput": "1 2 3 4 5",               "isHidden": false, "orderIndex": 2 },
+    { "input": "6 1\n2 1 4 3 6 5",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": false, "orderIndex": 3 },
+    { "input": "6 5\n5 4 3 2 1 0",             "expectedOutput": "0 1 2 3 4 5",             "isHidden": true,  "orderIndex": 4 },
+    { "input": "6 2\n3 2 1 6 5 4",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": true,  "orderIndex": 5 },
+    { "input": "6 1\n1 3 2 5 4 6",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": true,  "orderIndex": 6 },
+    { "input": "4 3\n4 3 2 1",                 "expectedOutput": "1 2 3 4",                 "isHidden": true,  "orderIndex": 7 },
+    { "input": "6 2\n1 4 2 5 3 6",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": true,  "orderIndex": 8 },
+    { "input": "6 2\n2 3 1 4 5 6",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": true,  "orderIndex": 9 },
+    { "input": "7 6\n7 6 5 4 3 2 1",           "expectedOutput": "1 2 3 4 5 6 7",           "isHidden": true,  "orderIndex": 10 },
+    { "input": "6 2\n3 1 2 5 4 6",             "expectedOutput": "1 2 3 4 5 6",             "isHidden": true,  "orderIndex": 11 },
+    { "input": "9 8\n9 8 7 1 2 3 6 5 4",       "expectedOutput": "1 2 3 4 5 6 7 8 9",       "isHidden": true,  "orderIndex": 12 },
+    { "input": "5 4\n5 3 4 1 2",               "expectedOutput": "1 2 3 4 5",               "isHidden": true,  "orderIndex": 13 },
+    { "input": "9 2\n2 4 3 1 6 5 7 9 8",       "expectedOutput": "1 2 3 4 5 6 7 8 9",       "isHidden": true,  "orderIndex": 14 },
+    { "input": "8 2\n10 8 9 7 5 6 4 3",        "expectedOutput": "3 4 5 6 7 8 9 10",        "isHidden": true,  "orderIndex": 15 }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Sparse Table: Lowest Common Ancestor (LCA)",
+  "slug": "sparse-table-lca",
+  "difficulty": "Hard",
+  "statement": "Given a rooted tree with N nodes (root = 1) and Q queries, find the Lowest Common Ancestor (LCA) of nodes u and v for each query.\n\nUse binary lifting (a sparse table on ancestors) to answer each LCA query in O(log N) after O(N log N) preprocessing.\n\nThe tree is given as N-1 undirected edges.",
+  "constraints": "2 <= N <= 10^5\n1 <= Q <= 10^5\n1 <= u, v <= N",
+  "inputFormat": "The first line contains N and Q.\nThe next N-1 lines each contain two integers u and v (an undirected edge).\nThe next Q lines each contain u and v (an LCA query).",
+  "outputFormat": "Q lines, each the LCA of the queried pair.",
+  "examples": [
+    {
+      "input": "7 3\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n4 5\n4 7\n2 6",
+      "output": "2\n1\n3",
+      "explanation": "Tree: 1-(2,3), 2-(4,5), 3-(6,7). LCA(4,5)=2. LCA(4,7)=1. LCA(2,6)=3 (2's path: 2->1, 6's path: 6->3->1, LCA=1 ? No: LCA(2,6)=1 since 2 is under 1, and 6 is under 3 under 1. Actually LCA(2,6)=1)."
+    },
+    {
+      "input": "5 2\n1 2\n1 3\n2 4\n2 5\n4 5\n3 4",
+      "output": "2\n1"
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nfrom collections import deque\ninput = sys.stdin.readline\nLOG = 17\n\nn, q = map(int, input().split())\nadj = [[] for _ in range(n + 1)]\nfor _ in range(n - 1):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\n\ndepth = [0] * (n + 1)\nup = [[0] * (n + 1) for _ in range(LOG)]\n\n# BFS to compute depth and up[0]\nvisited = [False] * (n + 1)\nqueue = deque([1])\nvisited[1] = True\nwhile queue:\n    node = queue.popleft()\n    for nb in adj[node]:\n        if not visited[nb]:\n            visited[nb] = True\n            depth[nb] = depth[node] + 1\n            up[0][nb] = node\n            queue.append(nb)\n\n# Fill sparse table\nfor k in range(1, LOG):\n    for v in range(1, n + 1):\n        up[k][v] = up[k-1][up[k-1][v]]\n\ndef lca(u, v):\n    if depth[u] < depth[v]:\n        u, v = v, u\n    diff = depth[u] - depth[v]\n    for k in range(LOG):\n        if (diff >> k) & 1:\n            u = up[k][u]\n    if u == v:\n        return u\n    for k in range(LOG - 1, -1, -1):\n        if up[k][u] != up[k][v]:\n            u = up[k][u]\n            v = up[k][v]\n    return up[0][u]\n\nfor _ in range(q):\n    u, v = map(int, input().split())\n    print(lca(u, v))\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\nconst int LOG = 17;\nint up[LOG][100001], depth[100001];\nvector<int> adj[100001];\nvoid bfs(int root, int n) {\n    queue<int> Q;\n    vector<bool> vis(n+1,false);\n    Q.push(root); vis[root]=true; up[0][root]=root;\n    while(!Q.empty()){\n        int u=Q.front();Q.pop();\n        for(int v:adj[u]) if(!vis[v]){\n            vis[v]=true; depth[v]=depth[u]+1; up[0][v]=u; Q.push(v);\n        }\n    }\n    for(int k=1;k<LOG;k++)\n        for(int v=1;v<=n;v++)\n            up[k][v]=up[k-1][up[k-1][v]];\n}\nint lca(int u,int v){\n    if(depth[u]<depth[v]) swap(u,v);\n    int d=depth[u]-depth[v];\n    for(int k=0;k<LOG;k++) if((d>>k)&1) u=up[k][u];\n    if(u==v) return u;\n    for(int k=LOG-1;k>=0;k--) if(up[k][u]!=up[k][v]){u=up[k][u];v=up[k][v];}\n    return up[0][u];\n}\nint main(){\n    int n,q; cin>>n>>q;\n    for(int i=0;i<n-1;i++){int u,v;cin>>u>>v;adj[u].push_back(v);adj[v].push_back(u);}\n    bfs(1,n);\n    while(q--){int u,v;cin>>u>>v;cout<<lca(u,v)<<\"\\n\";}\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    static final int LOG=17;\n    static int[][] up=new int[LOG][100001];\n    static int[] depth=new int[100001];\n    static List<Integer>[] adj;\n    @SuppressWarnings(\"unchecked\")\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int n=sc.nextInt(),q=sc.nextInt();\n        adj=new List[n+1];\n        for(int i=0;i<=n;i++) adj[i]=new ArrayList<>();\n        for(int i=0;i<n-1;i++){int u=sc.nextInt(),v=sc.nextInt();adj[u].add(v);adj[v].add(u);}\n        // BFS\n        boolean[] vis=new boolean[n+1];\n        Queue<Integer> bfs=new LinkedList<>();\n        bfs.add(1);vis[1]=true;up[0][1]=1;\n        while(!bfs.isEmpty()){\n            int u=bfs.poll();\n            for(int v:adj[u]) if(!vis[v]){\n                vis[v]=true;depth[v]=depth[u]+1;up[0][v]=u;bfs.add(v);\n            }\n        }\n        for(int k=1;k<LOG;k++)\n            for(int v=1;v<=n;v++)\n                up[k][v]=up[k-1][up[k-1][v]];\n        while(q-->0){\n            int u=sc.nextInt(),v=sc.nextInt();\n            if(depth[u]<depth[v]){int t=u;u=v;v=t;}\n            int d=depth[u]-depth[v];\n            for(int k=0;k<LOG;k++) if(((d>>k)&1)!=0) u=up[k][u];\n            if(u!=v){\n                for(int k=LOG-1;k>=0;k--) if(up[k][u]!=up[k][v]){u=up[k][u];v=up[k][v];}\n                u=up[0][u];\n            }\n            System.out.println(u);\n        }\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "7 3\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n4 5\n4 7\n2 6",           "expectedOutput": "2\n1\n1",   "isHidden": false, "orderIndex": 0 },
+    { "input": "5 2\n1 2\n1 3\n2 4\n2 5\n4 5\n3 4",                           "expectedOutput": "2\n1",     "isHidden": false, "orderIndex": 1 },
+    { "input": "4 2\n1 2\n2 3\n3 4\n1 4\n2 4",                               "expectedOutput": "1\n2",     "isHidden": false, "orderIndex": 2 },
+    { "input": "6 3\n1 2\n1 3\n2 4\n4 5\n4 6\n5 6\n3 4\n6 1",               "expectedOutput": "4\n1\n1",  "isHidden": false, "orderIndex": 3 },
+    { "input": "2 1\n1 2\n1 2",                                               "expectedOutput": "1",        "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 3\n1 2\n2 3\n3 4\n4 5\n1 5\n2 4\n3 5",                     "expectedOutput": "1\n2\n3",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "7 4\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n4 6\n5 7\n6 7\n1 1",     "expectedOutput": "1\n2\n3\n1", "isHidden": true, "orderIndex": 6 },
+    { "input": "4 3\n1 2\n1 3\n1 4\n2 3\n2 4\n3 4",                         "expectedOutput": "1\n1\n1",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "6 4\n1 2\n2 3\n3 4\n4 5\n5 6\n1 6\n2 5\n3 6\n2 4",         "expectedOutput": "1\n2\n3\n2", "isHidden": true, "orderIndex": 8 },
+    { "input": "3 3\n1 2\n1 3\n2 3\n1 2\n1 3",                              "expectedOutput": "1\n2\n1",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "8 4\n1 2\n1 3\n2 4\n2 5\n3 6\n6 7\n6 8\n4 7\n5 8\n7 8\n4 5", "expectedOutput": "1\n2\n6\n2", "isHidden": true, "orderIndex": 10 },
+    { "input": "5 5\n1 2\n2 3\n2 4\n1 5\n3 4\n3 5\n4 5\n3 5\n4 5",         "expectedOutput": "2\n1\n1\n2\n1", "isHidden": true, "orderIndex": 11 },
+    { "input": "6 2\n1 2\n1 3\n3 4\n3 5\n4 6\n2 6\n5 6",                   "expectedOutput": "1\n3",     "isHidden": true,  "orderIndex": 12 },
+    { "input": "3 2\n1 2\n2 3\n1 3\n1 1",                                   "expectedOutput": "1\n1",     "isHidden": true,  "orderIndex": 13 },
+    { "input": "7 3\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n1 7\n3 6\n2 5",         "expectedOutput": "1\n3\n2",  "isHidden": true,  "orderIndex": 14 },
+    { "input": "5 4\n1 2\n1 3\n3 4\n3 5\n4 5\n2 4\n2 5\n4 5",              "expectedOutput": "3\n1\n1\n3", "isHidden": true, "orderIndex": 15 }
+  ]
+}

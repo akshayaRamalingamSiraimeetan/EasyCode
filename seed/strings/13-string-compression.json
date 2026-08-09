@@ -1,0 +1,44 @@
+{
+  "title": "String Compression",
+  "slug": "string-compression",
+  "difficulty": "Medium",
+  "statement": "Compress a string S using run-length encoding: replace each run of consecutive identical characters with the character followed by its count.\n\nIf the compressed string is not shorter than the original, return the original string unchanged.\n\nFor example, \"aabcccdddd\" compresses to \"a2b1c3d4\" (length 8 < 10), so output \"a2b1c3d4\".\nBut \"abc\" compresses to \"a1b1c1\" (length 6 > 3), so output \"abc\".",
+  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "The compressed string if shorter, otherwise the original string.",
+  "examples": [
+    {
+      "input": "aabcccdddd",
+      "output": "a2b1c3d4",
+      "explanation": "Compressed length 8 < original length 10, so output compressed."
+    },
+    {
+      "input": "abc",
+      "output": "abc",
+      "explanation": "Compressed 'a1b1c1' has length 6 > 3, so output original."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "aabcccdddd", "expectedOutput": "a2b1c3d4", "isHidden": false, "orderIndex": 0 },
+    { "input": "abc", "expectedOutput": "abc", "isHidden": false, "orderIndex": 1 },
+    { "input": "aaaaaa", "expectedOutput": "a6", "isHidden": false, "orderIndex": 2 },
+    { "input": "aabb", "expectedOutput": "aabb", "isHidden": false, "orderIndex": 3 },
+    { "input": "a", "expectedOutput": "a", "isHidden": true, "orderIndex": 4 },
+    { "input": "aaabbbccc", "expectedOutput": "a3b3c3", "isHidden": true, "orderIndex": 5 },
+    { "input": "aaaaaaaaaa", "expectedOutput": "a10", "isHidden": true, "orderIndex": 6 },
+    { "input": "abcd", "expectedOutput": "abcd", "isHidden": true, "orderIndex": 7 },
+    { "input": "aabbccddeeff", "expectedOutput": "aabbccddeeff", "isHidden": true, "orderIndex": 8 },
+    { "input": "aaabbc", "expectedOutput": "a3b2c1", "isHidden": true, "orderIndex": 9 },
+    { "input": "zzzzzzzzzz", "expectedOutput": "z10", "isHidden": true, "orderIndex": 10 },
+    { "input": "aaaaabbbbbccccc", "expectedOutput": "a5b5c5", "isHidden": true, "orderIndex": 11 },
+    { "input": "ab", "expectedOutput": "ab", "isHidden": true, "orderIndex": 12 },
+    { "input": "aabc", "expectedOutput": "aabc", "isHidden": true, "orderIndex": 13 },
+    { "input": "aaabbbcccddd", "expectedOutput": "a3b3c3d3", "isHidden": true, "orderIndex": 14 },
+    { "input": "aaabbbbcccccdddddd", "expectedOutput": "a3b4c5d6", "isHidden": true, "orderIndex": 15 }
+  ]
+}

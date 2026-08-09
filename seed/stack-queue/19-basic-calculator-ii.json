@@ -1,0 +1,129 @@
+{
+    "title": "Basic Calculator II",
+    "slug": "basic-calculator-ii",
+    "difficulty": "Medium",
+    "statement": "Given a string `s` which represents an expression, evaluate this expression and return its value. \n\nThe integer division should truncate toward zero.\n\nYou may assume that the given expression is always valid. All intermediate results will be in the range of `[-2^31, 2^31 - 1]`.\n\nThe expression contains only non-negative integers, '+', '-', '*', '/' operators and empty spaces ' '. There are no parentheses.",
+    "constraints": "1 <= |s| <= 10^5",
+    "inputFormat": "A single line containing the string `s`.",
+    "outputFormat": "A single integer: the evaluated value.",
+    "examples": [
+        {
+            "input": "3+2*2",
+            "output": "7",
+            "explanation": "3 + (2 * 2) = 7."
+        },
+        {
+            "input": " 3/2 ",
+            "output": "1",
+            "explanation": "3 / 2 = 1."
+        },
+        {
+            "input": " 3+5 / 2 ",
+            "output": "5",
+            "explanation": "3 + (5 / 2) = 5."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Write your solution here\n# Use a stack to keep track of numbers to be summed\n",
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    getline(cin, s);\n    // Write your solution here\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine();\n        // Write your solution here\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3+2*2",
+            "expectedOutput": "7",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": " 3/2 ",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": " 3+5 / 2 ",
+            "expectedOutput": "5",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "14-3/2",
+            "expectedOutput": "13",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "100",
+            "expectedOutput": "100",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "1-1+1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "1000/10/10",
+            "expectedOutput": "10",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "0",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "0/10",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "100*2-50*4",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "234+66-100",
+            "expectedOutput": "200",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "999999",
+            "expectedOutput": "999999",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "1*2*3*4*5",
+            "expectedOutput": "120",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": " 12 +  34 * 56 / 7 - 8 ",
+            "expectedOutput": "276",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "2-3*4+5",
+            "expectedOutput": "-5",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "200/3*4/5*10",
+            "expectedOutput": "100",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

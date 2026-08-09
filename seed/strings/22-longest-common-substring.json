@@ -1,0 +1,44 @@
+{
+  "title": "Longest Common Substring",
+  "slug": "longest-common-substring",
+  "difficulty": "Hard",
+  "statement": "Given two strings A and B, find the length of their longest common substring.\n\nA substring is a contiguous sequence of characters. The common substring must appear as a contiguous block in both A and B.",
+  "constraints": "1 <= |A|, |B| <= 1000\nA and B contain only lowercase English letters.",
+  "inputFormat": "Two lines: the first contains A, the second contains B.",
+  "outputFormat": "A single integer: the length of the longest common substring.",
+  "examples": [
+    {
+      "input": "abcdef\nbcdfgh",
+      "output": "3",
+      "explanation": "'bcd' is the longest common substring (length 3)."
+    },
+    {
+      "input": "abc\nxyz",
+      "output": "0",
+      "explanation": "No common characters in contiguous sequence."
+    }
+  ],
+  "starterCode": {
+    "python": "a = input().strip()\nb = input().strip()\n# Write your solution here\n# Hint: use DP table dp[i][j] = length of common suffix ending at a[i-1] and b[j-1]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "abcdef\nbcdfgh", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
+    { "input": "abc\nxyz", "expectedOutput": "0", "isHidden": false, "orderIndex": 1 },
+    { "input": "abc\nabc", "expectedOutput": "3", "isHidden": false, "orderIndex": 2 },
+    { "input": "abcd\ncd", "expectedOutput": "2", "isHidden": false, "orderIndex": 3 },
+    { "input": "abcxyz\nxyzabc", "expectedOutput": "3", "isHidden": true, "orderIndex": 4 },
+    { "input": "aaa\naa", "expectedOutput": "2", "isHidden": true, "orderIndex": 5 },
+    { "input": "hello\nworld", "expectedOutput": "1", "isHidden": true, "orderIndex": 6 },
+    { "input": "abcde\nfghij", "expectedOutput": "0", "isHidden": true, "orderIndex": 7 },
+    { "input": "abcde\nabcde", "expectedOutput": "5", "isHidden": true, "orderIndex": 8 },
+    { "input": "xabcz\nwabcy", "expectedOutput": "3", "isHidden": true, "orderIndex": 9 },
+    { "input": "aababab\nabababa", "expectedOutput": "6", "isHidden": true, "orderIndex": 10 },
+    { "input": "agtabxy\nbentagex", "expectedOutput": "2", "isHidden": true, "orderIndex": 11 },
+    { "input": "zxabcdezy\nabcde", "expectedOutput": "5", "isHidden": true, "orderIndex": 12 },
+    { "input": "abcbc\nbcbca", "expectedOutput": "4", "isHidden": true, "orderIndex": 13 },
+    { "input": "aaaa\naa", "expectedOutput": "2", "isHidden": true, "orderIndex": 14 },
+    { "input": "programming\ngramming", "expectedOutput": "8", "isHidden": true, "orderIndex": 15 }
+  ]
+}

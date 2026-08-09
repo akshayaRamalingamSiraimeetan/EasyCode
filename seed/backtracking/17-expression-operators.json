@@ -1,0 +1,44 @@
+{
+  "title": "Expression Operators",
+  "slug": "expression-operators",
+  "difficulty": "Medium",
+  "statement": "Given a string of digits and a target value, count the number of ways to insert +, -, or * operators between the digits (without rearranging them) such that the resulting expression evaluates to the target.\n\nYou may also group multiple digits into a single number (e.g., \"123\" can be split as 1+23 or 12+3 or 1+2+3, etc.), but numbers cannot have leading zeros unless the number itself is 0.",
+  "constraints": "1 <= |num| <= 10\n-2^31 <= target <= 2^31 - 1\nnum contains only digits.",
+  "inputFormat": "The first line contains the digit string.\nThe second line contains the target integer.",
+  "outputFormat": "A single integer: the count of valid expressions that equal the target.",
+  "examples": [
+    {
+      "input": "123\n6",
+      "output": "2",
+      "explanation": "1+2+3=6 and 1*2*3=6 — 2 expressions."
+    },
+    {
+      "input": "232\n8",
+      "output": "2",
+      "explanation": "2*3+2=8 and 2+3*2=8 — 2 expressions."
+    }
+  ],
+  "starterCode": {
+    "python": "num = input().strip()\ntarget = int(input())\n# Write your solution here\n# Hint: DFS with position, current value, and previous operand for * handling\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string num; long long target;\n    cin >> num >> target;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String num = sc.next(); long target = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "123\n6",     "expectedOutput": "2",  "isHidden": false, "orderIndex": 0 },
+    { "input": "232\n8",     "expectedOutput": "2",  "isHidden": false, "orderIndex": 1 },
+    { "input": "105\n5",     "expectedOutput": "2",  "isHidden": false, "orderIndex": 2 },
+    { "input": "00\n0",      "expectedOutput": "3",  "isHidden": false, "orderIndex": 3 },
+    { "input": "123456\n12", "expectedOutput": "7",  "isHidden": true,  "orderIndex": 4 },
+    { "input": "12\n3",      "expectedOutput": "1",  "isHidden": true,  "orderIndex": 5 },
+    { "input": "11\n2",      "expectedOutput": "1",  "isHidden": true,  "orderIndex": 6 },
+    { "input": "2\n2",       "expectedOutput": "1",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "1\n1",       "expectedOutput": "1",  "isHidden": true,  "orderIndex": 8 },
+    { "input": "999\n9",     "expectedOutput": "2",  "isHidden": true,  "orderIndex": 9 },
+    { "input": "12345\n5",   "expectedOutput": "4",  "isHidden": true,  "orderIndex": 10 },
+    { "input": "100\n1",     "expectedOutput": "6",  "isHidden": true,  "orderIndex": 11 },
+    { "input": "1234\n10",   "expectedOutput": "2",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "2345\n24",   "expectedOutput": "1",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "0000\n0",    "expectedOutput": "27", "isHidden": true,  "orderIndex": 14 },
+    { "input": "123\n12",    "expectedOutput": "1",  "isHidden": true,  "orderIndex": 15 }
+  ]
+}

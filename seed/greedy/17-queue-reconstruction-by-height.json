@@ -1,0 +1,71 @@
+{
+    "title": "Queue Reconstruction by Height",
+    "slug": "queue-reconstruction-by-height",
+    "difficulty": "Medium",
+    "statement": "You are given an array of people, `people`, which are the attributes of some people in a queue (not necessarily in order). Each `people[i] = [hi, ki]` represents a person of height `h_i` with exactly `k_i` other people in front who have a height greater than or equal to `h_i`.\n\nReconstruct and return the queue that is represented by the input array `people`. The returned queue should be formatted as an array of pairs.",
+    "constraints": "1 <= people.length <= 2000\n0 <= hi <= 10^6\n0 <= ki < people.length",
+    "inputFormat": "Line 1: an integer N.\nNext N lines: two space-separated integers `h` and `k`.",
+    "outputFormat": "Print exactly N lines, each having `h k`.",
+    "examples": [
+        {
+            "input": "6\n7 0\n4 4\n7 1\n5 0\n6 1\n5 2",
+            "output": "5 0\n7 0\n5 2\n6 1\n4 4\n7 1",
+            "explanation": "Person (5,0) has no taller ahead. Person (7,0) has no taller ahead. Person (5,2) has two taller (5 and 7). And so on."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\npeople = [tuple(map(int, input().split())) for _ in range(n)]\n# Greedy: Sort tallest first, then insert into array by k index\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<pair<int, int>> people(n);\n    for(int i=0; i<n; i++) cin >> people[i].first >> people[i].second;\n    // implement logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[][] people = new int[n][2];\n        for (int i=0; i<n; i++) {\n            StringTokenizer tz = new StringTokenizer(br.readLine());\n            people[i][0] = Integer.parseInt(tz.nextToken());\n            people[i][1] = Integer.parseInt(tz.nextToken());\n        }\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "6\n7 0\n4 4\n7 1\n5 0\n6 1\n5 2",
+            "expectedOutput": "5 0\n7 0\n5 2\n6 1\n4 4\n7 1",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "6\n9 0\n7 0\n1 9\n3 0\n2 7\n5 3\n1 4\n6 0\n0 8",
+            "expectedOutput": "3 0\n6 0\n7 0\n5 3\n2 7\n1 4\n9 0\n0 8\n1 9",
+            "isHidden": true,
+            "orderIndex": 1
+        },
+        {
+            "input": "3\n1 0\n2 0\n3 0",
+            "expectedOutput": "1 0\n2 0\n3 0",
+            "isHidden": true,
+            "orderIndex": 2
+        },
+        {
+            "input": "4\n10 0\n10 1\n10 2\n10 3",
+            "expectedOutput": "10 0\n10 1\n10 2\n10 3",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "4\n10 3\n10 1\n10 0\n10 2",
+            "expectedOutput": "10 0\n10 1\n10 2\n10 3",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "5\n8 0\n4 4\n8 1\n5 0\n6 1",
+            "expectedOutput": "5 0\n8 0\n6 1\n8 1\n4 4",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "1\n150 0",
+            "expectedOutput": "150 0",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "3\n100 0\n10 2\n5 1",
+            "expectedOutput": "100 0\n5 1\n10 2",
+            "isHidden": true,
+            "orderIndex": 7
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+{
+    "title": "Reorganize String",
+    "slug": "reorganize-string",
+    "difficulty": "Medium",
+    "statement": "Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same.\n\nReturn any possible rearrangement of `s` or return an empty string (print `\"\"`) if not possible.",
+    "constraints": "1 <= s.length <= 500\n`s` consists of lowercase English letters.",
+    "inputFormat": "A single string `s`.",
+    "outputFormat": "A valid reorganized string, or an empty string if impossible. Any valid string is accepted.",
+    "examples": [
+        {
+            "input": "aab",
+            "output": "aba",
+            "explanation": "No two identical characters are adjacent."
+        },
+        {
+            "input": "aaab",
+            "output": "\"\"",
+            "explanation": "Impossible to completely separate three 'a's using one 'b'."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\n# Greedy: ALWAYS place the most frequent characters first (e.g. using Max Heap or sorting).\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <queue>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // implement logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "aab",
+            "expectedOutput": "aba",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "aaab",
+            "expectedOutput": "\"\"",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "vvvlo",
+            "expectedOutput": "vlvov",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "z",
+            "expectedOutput": "z",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "aabbcc",
+            "expectedOutput": "abcabc",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "cxxcxc",
+            "expectedOutput": "cxcxcx",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "xxxxyyyyzzzz",
+            "expectedOutput": "xyzxyzxyzxyz",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "ppppqqqqqrrrrr",
+            "expectedOutput": "rqprqprqprqprq",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "eeeeeeeef",
+            "expectedOutput": "\"\"",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

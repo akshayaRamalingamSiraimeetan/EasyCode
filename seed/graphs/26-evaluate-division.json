@@ -1,0 +1,53 @@
+{
+    "title": "Evaluate Division",
+    "slug": "evaluate-division",
+    "difficulty": "Medium",
+    "statement": "You are given an array of variable pairs `equations` and an array of real numbers `values`, where `equations[i] = [Ai, Bi]` and `values[i]` represent the equation `Ai / Bi = values[i]`. Each `Ai` or `Bi` is a string that represents a single variable.\nYou are also given some `queries`, where `queries[j] = [Cj, Dj]` represents the `j`th query where you must find the answer for `Cj / Dj`.\nReturn the answers to all queries. If a single answer cannot be determined, return `-1.0`.\nThe answers should be rounded to 5 decimal places.",
+    "constraints": "1 <= equations.length <= 20\nequations[i].length == 2\n1 <= queries.length <= 20\nAi, Bi, Cj, Dj consist of lowercase English letters and digits.",
+    "inputFormat": "Line 1: N (number of equations).\nNext N lines: A B value.\nNext line: Q (number of queries).\nNext Q lines: C D.",
+    "outputFormat": "Print exactly Q lines with the answer as a float to 5 decimal places (or -1.00000).",
+    "examples": [
+        {
+            "input": "2\na b 2.0\nb c 3.0\n2\na c\nb a",
+            "output": "6.00000\n0.50000",
+            "explanation": "a/c = a/b * b/c = 2 * 3 = 6. b/a = 1/2 = 0.5."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nequations = []\nfor _ in range(n):\n    parts = input().split()\n    equations.append((parts[0], parts[1], float(parts[2])))\nq = int(input())\nqueries = [input().split() for _ in range(q)]\n# Use DFS/BFS or Union-Find on strings\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <unordered_map>\n#include <iomanip>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    // Read equations\n    int q; cin >> q;\n    // Read queries and logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        for(int i=0; i<n; i++) {\n            String a=sc.next(), b=sc.next();\n            double v=sc.nextDouble();\n        }\n        int q = sc.nextInt();\n        for(int i=0; i<q; i++) {\n            String c=sc.next(), d=sc.next();\n        }\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "2\na b 2.0\nb c 3.0\n2\na c\nb a",
+            "expectedOutput": "6.00000\n0.50000",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1\na b 0.5\n2\na a\na c",
+            "expectedOutput": "1.00000\n-1.00000",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "3\na b 1.5\nb c 2.5\nb c 2.5\n3\na c\nc b\nx x",
+            "expectedOutput": "3.75000\n0.40000\n-1.00000",
+            "isHidden": true,
+            "orderIndex": 2
+        },
+        {
+            "input": "4\na b 2.0\nb c 3.0\nc d 4.0\nd e 5.0\n2\na e\ne a",
+            "expectedOutput": "120.00000\n0.00833",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "2\na b 1.0\nc d 2.0\n1\na c",
+            "expectedOutput": "-1.00000",
+            "isHidden": true,
+            "orderIndex": 4
+        }
+    ]
+}

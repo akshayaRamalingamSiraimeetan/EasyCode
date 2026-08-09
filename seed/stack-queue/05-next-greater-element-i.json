@@ -1,0 +1,124 @@
+{
+    "title": "Next Greater Element I",
+    "slug": "next-greater-element-i",
+    "difficulty": "Easy",
+    "statement": "Given an array A of N integers, for each element find the first greater element to its right. If no such element exists, output -1 for that element.\n\nPrint the space-separated output array.\n\nUse a monotonic stack to solve this in O(N) time.",
+    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "N space-separated integers on a single line.",
+    "examples": [
+        {
+            "input": "4\n4 5 2 10",
+            "output": "5 10 10 -1",
+            "explanation": "Right of 4 is 5. Right of 5 is 10. Right of 2 is 10. Right of 10 is none (-1)."
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "output": "-1 -1 -1 -1",
+            "explanation": "No elements have a greater element to their right."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\na = list(map(int, input().split()))\nans = [-1] * n\n# Write your solution using a monotonic stack\nprint(*ans)\n",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    vector<long long> ans(n, -1);\n    // Write your solution here\n    for (int i = 0; i < n; i++) cout << ans[i] << (i == n-1 ? \"\" : \" \");\n    cout << '\\n';\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        long[] a = new long[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) a[i] = Long.parseLong(st.nextToken());\n        long[] ans = new long[n];\n        Arrays.fill(ans, -1);\n        // Write your solution here\n        StringBuilder sb = new StringBuilder();\n        for (int i=0; i<n; i++) {\n            sb.append(ans[i]);\n            if (i < n-1) sb.append(\" \");\n        }\n        System.out.println(sb);\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "4\n4 5 2 10",
+            "expectedOutput": "5 10 10 -1",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "expectedOutput": "-1 -1 -1 -1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "5\n1 2 3 4 5",
+            "expectedOutput": "2 3 4 5 -1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "3\n1 1 1",
+            "expectedOutput": "-1 -1 -1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "1\n5",
+            "expectedOutput": "-1",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "6\n9 8 7 3 2 1",
+            "expectedOutput": "-1 -1 -1 -1 -1 -1",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "5\n1 5 1 5 1",
+            "expectedOutput": "5 -1 5 -1 -1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "6\n10 1 2 3 4 5",
+            "expectedOutput": "-1 2 3 4 5 -1",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "7\n7 6 5 4 3 2 1",
+            "expectedOutput": "-1 -1 -1 -1 -1 -1 -1",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "7\n1 2 3 4 5 6 7",
+            "expectedOutput": "2 3 4 5 6 7 -1",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "6\n3 1 2 4 1 5",
+            "expectedOutput": "4 2 4 5 5 -1",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "5\n5 1 2 3 10",
+            "expectedOutput": "10 2 3 10 -1",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "4\n-1 -2 -3 -4",
+            "expectedOutput": "-1 -1 -1 -1",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "4\n-4 -3 -2 -1",
+            "expectedOutput": "-3 -2 -1 -1",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "6\n1 2 1 2 1 2",
+            "expectedOutput": "2 -1 2 -1 2 -1",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "8\n10 20 1 2 3 4 5 6",
+            "expectedOutput": "20 -1 2 3 4 5 6 -1",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

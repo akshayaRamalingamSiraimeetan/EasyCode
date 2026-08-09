@@ -1,0 +1,44 @@
+{
+  "title": "Lexicographically Smallest Rotation",
+  "slug": "lexicographically-smallest-rotation",
+  "difficulty": "Easy",
+  "statement": "Given a string S of lowercase letters, find the lexicographically smallest rotation of S.\n\nA rotation of S is obtained by moving some prefix of S to the end. For example, rotations of \"bca\" are: \"bca\", \"cab\", \"abc\".\n\nPrint the lexicographically smallest among all rotations.",
+  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "A single line: the lexicographically smallest rotation of S.",
+  "examples": [
+    {
+      "input": "bca",
+      "output": "abc",
+      "explanation": "Rotations are 'bca', 'cab', 'abc'. The smallest is 'abc'."
+    },
+    {
+      "input": "dcba",
+      "output": "abcd",
+      "explanation": "The rotation starting at 'd' going to end and wrapping gives 'abcd'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "bca", "expectedOutput": "abc", "isHidden": false, "orderIndex": 0 },
+    { "input": "dcba", "expectedOutput": "adcb", "isHidden": false, "orderIndex": 1 },
+    { "input": "a", "expectedOutput": "a", "isHidden": false, "orderIndex": 2 },
+    { "input": "abcd", "expectedOutput": "abcd", "isHidden": false, "orderIndex": 3 },
+    { "input": "cab", "expectedOutput": "abc", "isHidden": true, "orderIndex": 4 },
+    { "input": "zab", "expectedOutput": "abz", "isHidden": true, "orderIndex": 5 },
+    { "input": "ba", "expectedOutput": "ab", "isHidden": true, "orderIndex": 6 },
+    { "input": "aaaa", "expectedOutput": "aaaa", "isHidden": true, "orderIndex": 7 },
+    { "input": "cbad", "expectedOutput": "adcb", "isHidden": true, "orderIndex": 8 },
+    { "input": "bcda", "expectedOutput": "abcd", "isHidden": true, "orderIndex": 9 },
+    { "input": "edcba", "expectedOutput": "aedcb", "isHidden": true, "orderIndex": 10 },
+    { "input": "aab", "expectedOutput": "aab", "isHidden": true, "orderIndex": 11 },
+    { "input": "baa", "expectedOutput": "aab", "isHidden": true, "orderIndex": 12 },
+    { "input": "xyz", "expectedOutput": "xyz", "isHidden": true, "orderIndex": 13 },
+    { "input": "zyx", "expectedOutput": "xzy", "isHidden": true, "orderIndex": 14 },
+    { "input": "bcabc", "expectedOutput": "abcbc", "isHidden": true, "orderIndex": 15 }
+  ]
+}

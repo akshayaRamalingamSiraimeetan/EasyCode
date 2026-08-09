@@ -1,0 +1,44 @@
+{
+  "title": "Trie: Maximum XOR of Two Numbers",
+  "slug": "trie-maximum-xor-pair",
+  "difficulty": "Hard",
+  "statement": "Given an array of N non-negative integers, find the maximum XOR value of any two elements in the array.\n\nUse a Binary Trie (Prefix Tree on binary representation) to efficiently find, for each number, the number that produces the maximum XOR with it.\n\nPrint the maximum XOR value.",
+  "constraints": "2 <= N <= 10^5\n0 <= A[i] <= 10^9",
+  "inputFormat": "The first line contains N.\nThe second line contains N non-negative integers.",
+  "outputFormat": "A single integer: the maximum XOR of any two elements.",
+  "examples": [
+    {
+      "input": "4\n3 10 5 25",
+      "output": "28",
+      "explanation": "3 XOR 25 = 26, 5 XOR 25 = 28, 10 XOR 25 = 19. Maximum is 28."
+    },
+    {
+      "input": "5\n0 1 2 3 4",
+      "output": "7",
+      "explanation": "3 XOR 4 = 7 is the maximum."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: Insert each number bit by bit into a binary trie (MSB first, 30 bits)\n# For each number, traverse the trie greedily choosing the opposite bit\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nconst int BITS = 30;\nstruct TrieNode { int ch[2] = {-1,-1}; };\nvector<TrieNode> trie;\nvoid insert(int x) {\n    int cur = 0;\n    for (int i = BITS; i >= 0; i--) {\n        int bit = (x >> i) & 1;\n        if (trie[cur].ch[bit] == -1) { trie.push_back({}); trie[cur].ch[bit] = trie.size()-1; }\n        cur = trie[cur].ch[bit];\n    }\n}\nint maxXor(int x) {\n    int cur = 0, res = 0;\n    for (int i = BITS; i >= 0; i--) {\n        int bit = (x >> i) & 1, want = 1 - bit;\n        if (trie[cur].ch[want] != -1) { res |= (1 << i); cur = trie[cur].ch[want]; }\n        else cur = trie[cur].ch[bit];\n    }\n    return res;\n}\nint main() {\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    trie.push_back({});\n    for (int x : a) insert(x);\n    int ans = 0;\n    for (int x : a) ans = max(ans, maxXor(x));\n    cout << ans << \"\\n\";\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    static int[][] trie = new int[3200000][2];\n    static int sz = 1;\n    static { for(int[] r:trie) Arrays.fill(r,-1); }\n    static void insert(int x) {\n        int cur=0;\n        for(int i=30;i>=0;i--){\n            int b=(x>>i)&1;\n            if(trie[cur][b]==-1){trie[cur][b]=sz++;}\n            cur=trie[cur][b];\n        }\n    }\n    static int maxXor(int x){\n        int cur=0,res=0;\n        for(int i=30;i>=0;i--){\n            int b=(x>>i)&1, w=1-b;\n            if(trie[cur][w]!=-1){res|=(1<<i);cur=trie[cur][w];}\n            else cur=trie[cur][b];\n        }\n        return res;\n    }\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int n=sc.nextInt();\n        int[] a=new int[n];\n        for(int i=0;i<n;i++){a[i]=sc.nextInt();insert(a[i]);}\n        int ans=0;\n        for(int x:a) ans=Math.max(ans,maxXor(x));\n        System.out.println(ans);\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "4\n3 10 5 25",           "expectedOutput": "28",        "isHidden": false, "orderIndex": 0 },
+    { "input": "5\n0 1 2 3 4",           "expectedOutput": "7",         "isHidden": false, "orderIndex": 1 },
+    { "input": "2\n0 0",                 "expectedOutput": "0",         "isHidden": false, "orderIndex": 2 },
+    { "input": "3\n1 2 3",               "expectedOutput": "3",         "isHidden": false, "orderIndex": 3 },
+    { "input": "2\n0 1073741823",        "expectedOutput": "1073741823","isHidden": true,  "orderIndex": 4 },
+    { "input": "4\n8 4 2 1",             "expectedOutput": "12",        "isHidden": true,  "orderIndex": 5 },
+    { "input": "5\n7 6 5 4 3",           "expectedOutput": "7",         "isHidden": true,  "orderIndex": 6 },
+    { "input": "6\n0 2 4 6 8 10",        "expectedOutput": "14",        "isHidden": true,  "orderIndex": 7 },
+    { "input": "3\n5 5 5",               "expectedOutput": "0",         "isHidden": true,  "orderIndex": 8 },
+    { "input": "4\n1 3 7 15",            "expectedOutput": "14",        "isHidden": true,  "orderIndex": 9 },
+    { "input": "4\n14 70 53 2",          "expectedOutput": "127",       "isHidden": true,  "orderIndex": 10 },
+    { "input": "5\n1 2 4 8 16",          "expectedOutput": "24",        "isHidden": true,  "orderIndex": 11 },
+    { "input": "2\n1000000000 0",        "expectedOutput": "1000000000","isHidden": true,  "orderIndex": 12 },
+    { "input": "3\n15 8 3",              "expectedOutput": "15",        "isHidden": true,  "orderIndex": 13 },
+    { "input": "5\n100 200 300 400 500", "expectedOutput": "508",       "isHidden": true,  "orderIndex": 14 },
+    { "input": "4\n6 12 3 9",            "expectedOutput": "15",        "isHidden": true,  "orderIndex": 15 }
+  ]
+}

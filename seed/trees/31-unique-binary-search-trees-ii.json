@@ -1,0 +1,47 @@
+{
+    "title": "Unique Binary Search Trees II",
+    "slug": "unique-binary-search-trees-ii",
+    "difficulty": "Medium",
+    "statement": "Given an integer `n`, generate all structurally unique BST's (binary search trees) that have exactly `n` nodes of unique values from `1` to `n`.\n\nPrint the Level-order traversal mapping corresponding to each valid BST. To ensure deterministic outputs, you must print them in lexicographical order by their Level-order array layout (i.e. smallest nodes or 'null' acting as smaller element strings).",
+    "constraints": "1 <= n <= 8",
+    "inputFormat": "A single integer n.",
+    "outputFormat": "Print each tree's level-order string (separated by spaces) on a new line, sorted lexicographically across all the trees.",
+    "examples": [
+        {
+            "input": "3",
+            "output": "1 null 2 null 3\n1 null 3 2\n2 1 3\n3 1 null null 2\n3 2 null 1",
+            "explanation": "All 5 unique BSTs for n = 3 printed lexicographically."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\n# Use recursion to build the valid BSTs \n# Serialize to array formats, sort string forms, then print.\n",
+        "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int n; \n    if (!(cin >> n)) return 0;\n    // implement DP recursion and string sorting\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner s = new Scanner(System.in);\n        if (!s.hasNextInt()) return;\n        int n = s.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3",
+            "expectedOutput": "1 null 2 null 3\n1 null 3 2\n2 1 3\n3 1 null null 2\n3 2 null 1",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "2",
+            "expectedOutput": "1 null 2\n2 1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4",
+            "expectedOutput": "1 null 2 null 3 null 4\n1 null 2 null 4 3\n1 null 3 2 4\n1 null 4 2 null null 3\n1 null 4 3 null 2\n2 1 3 null null null 4\n2 1 4 3\n3 1 4 null 2\n3 2 4 1\n4 1 null null 2 null 3\n4 1 null null 3 2\n4 2 null 1 3\n4 3 null 1 null null 2\n4 3 null 2 null 1",
+            "isHidden": true,
+            "orderIndex": 3
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "All Distinct Permutations of a String",
+  "slug": "all-distinct-permutations-string",
+  "difficulty": "Medium",
+  "statement": "Given a string S (possibly with duplicate characters), generate all distinct permutations and print them in lexicographic order, one per line.",
+  "constraints": "1 <= |S| <= 7\nS contains only lowercase English letters.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "All distinct permutations of S in lexicographic order, one per line.",
+  "examples": [
+    {
+      "input": "abc",
+      "output": "abc\nacb\nbac\nbca\ncab\ncba",
+      "explanation": "All 6 permutations of 'abc' in sorted order."
+    },
+    {
+      "input": "aab",
+      "output": "aab\naba\nbaa",
+      "explanation": "3 distinct permutations (duplicates removed)."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here\n# Hint: sort s, backtrack with a used[] flag; skip duplicates\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\n#include <set>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    sort(s.begin(), s.end());\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        char[] s = sc.next().toCharArray();\n        Arrays.sort(s);\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "abc", "expectedOutput": "abc\nacb\nbac\nbca\ncab\ncba",   "isHidden": false, "orderIndex": 0 },
+    { "input": "aab", "expectedOutput": "aab\naba\nbaa",                  "isHidden": false, "orderIndex": 1 },
+    { "input": "ab",  "expectedOutput": "ab\nba",                        "isHidden": false, "orderIndex": 2 },
+    { "input": "a",   "expectedOutput": "a",                             "isHidden": false, "orderIndex": 3 },
+    { "input": "ba",  "expectedOutput": "ab\nba",                        "isHidden": true,  "orderIndex": 4 },
+    { "input": "aa",  "expectedOutput": "aa",                            "isHidden": true,  "orderIndex": 5 },
+    { "input": "aaa", "expectedOutput": "aaa",                           "isHidden": true,  "orderIndex": 6 },
+    { "input": "bca", "expectedOutput": "abc\nacb\nbac\nbca\ncab\ncba",  "isHidden": true,  "orderIndex": 7 },
+    { "input": "abb", "expectedOutput": "abb\nbab\nbba",                 "isHidden": true,  "orderIndex": 8 },
+    { "input": "cd",  "expectedOutput": "cd\ndc",                        "isHidden": true,  "orderIndex": 9 },
+    { "input": "aabb","expectedOutput": "aabb\nabab\nabba\nbaab\nbaba\nbbaa", "isHidden": true, "orderIndex": 10 },
+    { "input": "xyz", "expectedOutput": "xyz\nxzy\nyxz\nyzx\nzxy\nzyx", "isHidden": true,  "orderIndex": 11 },
+    { "input": "aba", "expectedOutput": "aab\naba\nbaa",                 "isHidden": true,  "orderIndex": 12 },
+    { "input": "cba", "expectedOutput": "abc\nacb\nbac\nbca\ncab\ncba",  "isHidden": true,  "orderIndex": 13 },
+    { "input": "bab", "expectedOutput": "abb\nbab\nbba",                 "isHidden": true,  "orderIndex": 14 },
+    { "input": "z",   "expectedOutput": "z",                             "isHidden": true,  "orderIndex": 15 }
+  ]
+}

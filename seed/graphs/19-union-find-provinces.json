@@ -1,0 +1,64 @@
+{
+    "title": "Union Find – Number of Provinces",
+    "slug": "union-find-provinces",
+    "difficulty": "Medium",
+    "statement": "There are `n` cities. Some of them are connected, while some are not. If city `a` is connected directly with city `b`, and city `b` is connected directly with city `c`, then city `a` is connected indirectly with city `c`.\nA province is a group of directly or indirectly connected cities and no other cities outside of the group.\nYou are given an `n x n` matrix `isConnected` where `isConnected[i][j] = 1` if the `i`th city and the `j`th city are directly connected, and `isConnected[i][j] = 0` otherwise.\nReturn the total number of provinces.",
+    "constraints": "1 <= n <= 200\nisConnected[i][i] == 1\nisConnected[i][j] == isConnected[j][i]",
+    "inputFormat": "Line 1: an integer n.\nNext n lines: n space-separated integers (0 or 1).",
+    "outputFormat": "A single integer.",
+    "examples": [
+        {
+            "input": "3\n1 1 0\n1 1 0\n0 0 1",
+            "output": "2",
+            "explanation": "Province 1: {0,1}. Province 2: {2}."
+        },
+        {
+            "input": "3\n1 0 0\n0 1 0\n0 0 1",
+            "output": "3",
+            "explanation": "Each city is its own province."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nmatrix = [list(map(int, input().split())) for _ in range(n)]\n# Union-Find or DFS/BFS for connected components\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> m(n, vector<int>(n));\n    for(int i=0; i<n; i++) for(int j=0; j<n; j++) cin >> m[i][j];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] m = new int[n][n];\n        for(int i=0; i<n; i++) for(int j=0; j<n; j++) m[i][j] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "3\n1 1 0\n1 1 0\n0 0 1",
+            "expectedOutput": "2",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3\n1 0 0\n0 1 0\n0 0 1",
+            "expectedOutput": "3",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n1",
+            "expectedOutput": "1",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "4\n1 1 1 1\n1 1 1 1\n1 1 1 1\n1 1 1 1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 3
+        },
+        {
+            "input": "5\n1 1 0 0 0\n1 1 0 0 0\n0 0 1 1 0\n0 0 1 1 0\n0 0 0 0 1",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4\n1 0 0 1\n0 1 1 0\n0 1 1 0\n1 0 0 1",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 5
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Longest Subarray with Equal 0s and 1s",
+  "slug": "longest-subarray-equal-zeros-ones",
+  "difficulty": "Medium",
+  "statement": "Given a binary array (containing only 0s and 1s), find the length of the longest contiguous subarray with an equal number of 0s and 1s.\n\nUse the prefix-sum trick: replace each 0 with -1, then find the longest subarray with sum 0.",
+  "constraints": "1 <= N <= 10^5\nA[i] is either 0 or 1.",
+  "inputFormat": "The first line contains N.\nThe second line contains N space-separated integers (0 or 1).",
+  "outputFormat": "A single integer: the length of the longest subarray with equal 0s and 1s.",
+  "examples": [
+    {
+      "input": "2\n0 1",
+      "output": "2",
+      "explanation": "The entire array has one 0 and one 1."
+    },
+    {
+      "input": "5\n0 0 1 1 0",
+      "output": "4",
+      "explanation": "Subarray [0,0,1,1] has 2 zeros and 2 ones."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: replace 0 with -1; find longest subarray with prefix sum = 0\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "2\n0 1",                   "expectedOutput": "2", "isHidden": false, "orderIndex": 0 },
+    { "input": "3\n0 1 0",                 "expectedOutput": "2", "isHidden": false, "orderIndex": 1 },
+    { "input": "5\n0 0 1 1 0",             "expectedOutput": "4", "isHidden": false, "orderIndex": 2 },
+    { "input": "4\n1 1 1 1",               "expectedOutput": "0", "isHidden": false, "orderIndex": 3 },
+    { "input": "4\n0 0 0 0",               "expectedOutput": "0", "isHidden": true,  "orderIndex": 4 },
+    { "input": "6\n0 1 0 1 0 1",           "expectedOutput": "6", "isHidden": true,  "orderIndex": 5 },
+    { "input": "8\n1 0 1 0 1 0 1 0",       "expectedOutput": "8", "isHidden": true,  "orderIndex": 6 },
+    { "input": "8\n0 0 1 1 0 0 1 1",       "expectedOutput": "8", "isHidden": true,  "orderIndex": 7 },
+    { "input": "6\n1 0 0 1 1 0",           "expectedOutput": "6", "isHidden": true,  "orderIndex": 8 },
+    { "input": "4\n0 1 1 0",               "expectedOutput": "4", "isHidden": true,  "orderIndex": 9 },
+    { "input": "5\n1 1 0 0 1",             "expectedOutput": "4", "isHidden": true,  "orderIndex": 10 },
+    { "input": "2\n1 0",                   "expectedOutput": "2", "isHidden": true,  "orderIndex": 11 },
+    { "input": "3\n0 0 1",                 "expectedOutput": "2", "isHidden": true,  "orderIndex": 12 },
+    { "input": "9\n1 1 1 0 0 0 1 0 1",     "expectedOutput": "8", "isHidden": true,  "orderIndex": 13 },
+    { "input": "7\n0 1 0 0 1 1 0",         "expectedOutput": "6", "isHidden": true,  "orderIndex": 14 },
+    { "input": "8\n1 0 1 1 0 1 0 0",       "expectedOutput": "8", "isHidden": true,  "orderIndex": 15 }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+    "title": "Find All Anagrams in a String",
+    "slug": "find-all-anagrams",
+    "difficulty": "Medium",
+    "statement": "Given two strings `s` and `p`, return an array of all the start indices of `p`'s anagrams in `s`.\nYou may return the answer in any order (but conventionally sorted small to large).",
+    "constraints": "1 <= s.length, p.length <= 3 * 10^4\ns and p consist of lowercase English letters.",
+    "inputFormat": "Line 1: string s.\nLine 2: string p.",
+    "outputFormat": "Space-separated start indices. If none, output an empty line.",
+    "examples": [
+        {
+            "input": "cbaebabacd\nabc",
+            "output": "0 6",
+            "explanation": "Anagrams of 'abc' start at 0 ('cba') and 6 ('bac')."
+        },
+        {
+            "input": "abab\nab",
+            "output": "0 1 2",
+            "explanation": "Anagrams of 'ab' start at 0 ('ab'), 1 ('ba'), 2 ('ab')."
+        }
+    ],
+    "starterCode": {
+        "python": "s = input().strip()\np = input().strip()\n# Sliding window over character counts\n",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s, p; cin >> s >> p;\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(), p = sc.next();\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "cbaebabacd\nabc",
+            "expectedOutput": "0 6",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "abab\nab",
+            "expectedOutput": "0 1 2",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "a\na",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "a\nb",
+            "expectedOutput": "",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "aaaaaa\naa",
+            "expectedOutput": "0 1 2 3 4",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "abacbabc\nabc",
+            "expectedOutput": "1 2 3 5",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "abc\nabcd",
+            "expectedOutput": "",
+            "isHidden": true,
+            "orderIndex": 6
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Kth Smallest Element",
+  "slug": "kth-smallest-element",
+  "difficulty": "Easy",
+  "statement": "Given an unsorted array of N integers and a value K, find the Kth smallest element in the array.\n\nThe Kth smallest element is the element that would be at index K-1 if the array were sorted in ascending order.",
+  "constraints": "1 <= K <= N <= 10^5\n-10^6 <= A[i] <= 10^6",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers.",
+  "outputFormat": "A single integer: the Kth smallest element.",
+  "examples": [
+    {
+      "input": "6 2\n3 2 1 5 6 4",
+      "output": "2",
+      "explanation": "Sorted: [1,2,3,4,5,6]. The 2nd smallest is 2."
+    },
+    {
+      "input": "9 4\n3 2 3 1 2 4 5 5 6",
+      "output": "3",
+      "explanation": "Sorted: [1,2,2,3,3,4,5,5,6]. The 4th smallest is 3."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: use a max-heap of size k\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\nint main() {\n    int n, k; cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6 2\n3 2 1 5 6 4",                          "expectedOutput": "2",   "isHidden": false, "orderIndex": 0 },
+    { "input": "9 4\n3 2 3 1 2 4 5 5 6",                    "expectedOutput": "3",   "isHidden": false, "orderIndex": 1 },
+    { "input": "1 1\n1",                                    "expectedOutput": "1",   "isHidden": false, "orderIndex": 2 },
+    { "input": "6 3\n7 10 4 3 20 15",                       "expectedOutput": "7",   "isHidden": false, "orderIndex": 3 },
+    { "input": "5 5\n1 2 3 4 5",                            "expectedOutput": "5",   "isHidden": true,  "orderIndex": 4 },
+    { "input": "5 1\n5 4 3 2 1",                            "expectedOutput": "1",   "isHidden": true,  "orderIndex": 5 },
+    { "input": "9 6\n1 3 5 7 9 2 4 6 8",                   "expectedOutput": "6",   "isHidden": true,  "orderIndex": 6 },
+    { "input": "10 3\n10 9 8 7 6 5 4 3 2 1",               "expectedOutput": "3",   "isHidden": true,  "orderIndex": 7 },
+    { "input": "5 2\n1 1 1 1 2",                           "expectedOutput": "1",   "isHidden": true,  "orderIndex": 8 },
+    { "input": "3 2\n100 200 300",                         "expectedOutput": "200", "isHidden": true,  "orderIndex": 9 },
+    { "input": "5 3\n5 5 5 5 5",                           "expectedOutput": "5",   "isHidden": true,  "orderIndex": 10 },
+    { "input": "10 7\n1 2 3 4 5 6 7 8 9 10",               "expectedOutput": "7",   "isHidden": true,  "orderIndex": 11 },
+    { "input": "5 3\n-5 -3 -1 -4 -2",                     "expectedOutput": "-3",  "isHidden": true,  "orderIndex": 12 },
+    { "input": "4 2\n0 0 1 1",                             "expectedOutput": "0",   "isHidden": true,  "orderIndex": 13 },
+    { "input": "4 4\n100 50 75 25",                        "expectedOutput": "100", "isHidden": true,  "orderIndex": 14 },
+    { "input": "8 1\n3 1 4 1 5 9 2 6",                    "expectedOutput": "1",   "isHidden": true,  "orderIndex": 15 }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "Fenwick Tree: Prefix Sum Queries",
+  "slug": "fenwick-tree-prefix-sum",
+  "difficulty": "Medium",
+  "statement": "Given an array of N integers, answer Q range sum queries using a Fenwick Tree (Binary Indexed Tree).\n\nFor each query (L, R), print the sum of elements from index L to R (1-indexed, inclusive).\n\nA Fenwick Tree supports prefix queries in O(log N).",
+  "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n-10^4 <= A[i] <= 10^4\n1 <= L <= R <= N",
+  "inputFormat": "The first line contains N and Q.\nThe second line contains N integers.\nThe next Q lines each contain L and R.",
+  "outputFormat": "Q lines, each the sum of A[L..R].",
+  "examples": [
+    { "input": "6 3\n1 3 5 7 9 11\n1 3\n2 4\n1 6", "output": "9\n15\n36", "explanation": "Range sums using BIT." },
+    { "input": "5 2\n5 3 1 2 4\n1 3\n2 5",          "output": "9\n10",      "explanation": "5+3+1=9, 3+1+2+4=10." }
+  ],
+  "starterCode": {
+    "python": "n, q = map(int, input().split())\narr = list(map(int, input().split()))\nqueries = [tuple(map(int, input().split())) for _ in range(q)]\n# Write your solution here\n# Hint: BIT[i] covers sum of a range ending at i\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, q; cin >> n >> q;\n    vector<int> arr(n);\n    for (int i=0;i<n;i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), q = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i=0;i<n;i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6 3\n1 3 5 7 9 11\n1 3\n2 4\n1 6",          "expectedOutput": "9\n15\n36",       "isHidden": false, "orderIndex": 0 },
+    { "input": "5 2\n5 3 1 2 4\n1 3\n2 5",                  "expectedOutput": "9\n10",           "isHidden": false, "orderIndex": 1 },
+    { "input": "6 2\n1 3 5 7 9 11\n3 5\n4 6",               "expectedOutput": "21\n27",          "isHidden": false, "orderIndex": 2 },
+    { "input": "4 3\n1 2 3 4\n1 1\n2 2\n3 4",               "expectedOutput": "1\n2\n7",          "isHidden": false, "orderIndex": 3 },
+    { "input": "6 4\n1 3 5 7 9 11\n1 1\n6 6\n2 6\n1 4",     "expectedOutput": "1\n11\n35\n16",   "isHidden": true,  "orderIndex": 4 },
+    { "input": "6 2\n1 3 5 7 9 11\n2 3\n5 6",               "expectedOutput": "8\n20",            "isHidden": true,  "orderIndex": 5 },
+    { "input": "6 2\n1 3 5 7 9 11\n1 2\n3 6",               "expectedOutput": "4\n32",            "isHidden": true,  "orderIndex": 6 },
+    { "input": "6 2\n1 3 5 7 9 11\n1 4\n3 6",               "expectedOutput": "16\n32",           "isHidden": true,  "orderIndex": 7 },
+    { "input": "6 2\n1 3 5 7 9 11\n2 6\n1 3",               "expectedOutput": "35\n9",            "isHidden": true,  "orderIndex": 8 },
+    { "input": "6 2\n1 3 5 7 9 11\n3 6\n2 5",               "expectedOutput": "32\n24",           "isHidden": true,  "orderIndex": 9 },
+    { "input": "5 3\n-1 2 -3 4 -5\n1 5\n2 4\n1 3",          "expectedOutput": "-3\n3\n-2",        "isHidden": true,  "orderIndex": 10 },
+    { "input": "1 1\n100\n1 1",                             "expectedOutput": "100",              "isHidden": true,  "orderIndex": 11 },
+    { "input": "5 2\n10 20 30 40 50\n1 5\n3 5",             "expectedOutput": "150\n120",          "isHidden": true,  "orderIndex": 12 },
+    { "input": "6 2\n1 3 5 7 9 11\n2 3\n2 3",               "expectedOutput": "8\n8",             "isHidden": true,  "orderIndex": 13 },
+    { "input": "6 2\n1 3 5 7 9 11\n5 6\n1 2",               "expectedOutput": "20\n4",            "isHidden": true,  "orderIndex": 14 },
+    { "input": "6 2\n1 3 5 7 9 11\n4 5\n1 5",               "expectedOutput": "16\n25",           "isHidden": true,  "orderIndex": 15 }
+  ]
+}

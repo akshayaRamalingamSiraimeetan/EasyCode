@@ -1,0 +1,44 @@
+{
+  "title": "Collatz Sequence Length",
+  "slug": "collatz-sequence-length",
+  "difficulty": "Medium",
+  "statement": "The Collatz sequence starting from N is defined by repeatedly applying the following rules until reaching 1:\n- If N is even: next = N / 2\n- If N is odd: next = 3 * N + 1\n\nGiven a starting integer N, print the total number of steps (including the starting value) until the sequence reaches 1.\n\nFor example, starting from 6: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1, which is 9 values, so the answer is 9.",
+  "constraints": "1 <= N <= 10^6",
+  "inputFormat": "A single line containing one positive integer N.",
+  "outputFormat": "A single integer: the number of values in the Collatz sequence starting from N until reaching 1 (inclusive of both N and 1).",
+  "examples": [
+    {
+      "input": "6",
+      "output": "9",
+      "explanation": "6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 has 9 values."
+    },
+    {
+      "input": "1",
+      "output": "1",
+      "explanation": "Starting from 1, we are already at 1, so the sequence length is 1."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\n# Write your solution here\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "6", "expectedOutput": "9", "isHidden": false, "orderIndex": 0 },
+    { "input": "1", "expectedOutput": "1", "isHidden": false, "orderIndex": 1 },
+    { "input": "2", "expectedOutput": "2", "isHidden": false, "orderIndex": 2 },
+    { "input": "4", "expectedOutput": "3", "isHidden": false, "orderIndex": 3 },
+    { "input": "3", "expectedOutput": "8", "isHidden": true, "orderIndex": 4 },
+    { "input": "5", "expectedOutput": "6", "isHidden": true, "orderIndex": 5 },
+    { "input": "10", "expectedOutput": "7", "isHidden": true, "orderIndex": 6 },
+    { "input": "27", "expectedOutput": "112", "isHidden": true, "orderIndex": 7 },
+    { "input": "100", "expectedOutput": "26", "isHidden": true, "orderIndex": 8 },
+    { "input": "1000", "expectedOutput": "112", "isHidden": true, "orderIndex": 9 },
+    { "input": "871", "expectedOutput": "179", "isHidden": true, "orderIndex": 10 },
+    { "input": "837799", "expectedOutput": "525", "isHidden": true, "orderIndex": 11 },
+    { "input": "1000000", "expectedOutput": "153", "isHidden": true, "orderIndex": 12 },
+    { "input": "16", "expectedOutput": "5", "isHidden": true, "orderIndex": 13 },
+    { "input": "7", "expectedOutput": "17", "isHidden": true, "orderIndex": 14 },
+    { "input": "9", "expectedOutput": "20", "isHidden": true, "orderIndex": 15 }
+  ]
+}

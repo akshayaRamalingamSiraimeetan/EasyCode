@@ -1,0 +1,82 @@
+{
+    "title": "Gas Station",
+    "slug": "gas-station",
+    "difficulty": "Medium",
+    "statement": "There are `n` gas stations along a circular route, where the amount of gas at the `i`th station is `gas[i]`.\n\nYou have a car with an unlimited gas tank and it costs `cost[i]` of gas to travel from the `i`th station to its next `(i + 1)`th station. You begin the journey with an empty tank at one of the gas stations.\n\nGiven two integer arrays `gas` and `cost`, return the starting gas station's index if you can travel around the circuit once in the clockwise direction, otherwise return `-1`. If there exists a solution, it is guaranteed to be unique.",
+    "constraints": "1 <= n <= 10^5\n0 <= gas[i], cost[i] <= 10^4",
+    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `gas`.\nLine 3: N space-separated integers representing `cost`.",
+    "outputFormat": "A single integer denoting the starting index, or -1.",
+    "examples": [
+        {
+            "input": "5\n1 2 3 4 5\n3 4 5 1 2",
+            "output": "3",
+            "explanation": "Start at station 3 (index 3) and fill up with 4 unit of gas. Path: 3 -> 4 -> 0 -> 1 -> 2 -> 3."
+        },
+        {
+            "input": "3\n2 3 4\n3 4 3",
+            "output": "-1",
+            "explanation": "You can't start at station 0 or 1. If you start at station 2, you run out of gas at station 1."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\ngas = list(map(int, input().split()))\ncost = list(map(int, input().split()))\n# Use Greedy accumulating gas delta\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> gas(n), cost(n);\n    for(int i=0; i<n; i++) cin >> gas[i];\n    for(int i=0; i<n; i++) cin >> cost[i];\n    // Write logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] gas = new int[n];\n        int[] cost = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) gas[i] = Integer.parseInt(tz.nextToken());\n        tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) cost[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n1 2 3 4 5\n3 4 5 1 2",
+            "expectedOutput": "3",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "3\n2 3 4\n3 4 3",
+            "expectedOutput": "-1",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n5\n4",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1\n4\n5",
+            "expectedOutput": "-1",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "5\n5 1 2 3 4\n4 4 1 5 1",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4\n1 2 3 4\n2 2 2 2",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "3\n10 10 10\n15 5 5",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "6\n0 0 0 0 0 10\n1 1 1 1 1 5",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "2\n100 0\n0 100",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

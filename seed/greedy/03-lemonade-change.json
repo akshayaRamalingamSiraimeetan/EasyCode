@@ -1,0 +1,82 @@
+{
+    "title": "Lemonade Change",
+    "slug": "lemonade-change",
+    "difficulty": "Easy",
+    "statement": "At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you and order one at a time.\nEach customer will only buy one lemonade and pay with either a $5, $10, or $20 bill. You must provide the correct change to each customer so that the net transaction is that the customer pays $5.\nNote that you don't have any change in hand at first.\nReturn `YES` if you can provide every customer with the correct change, or `NO` otherwise.",
+    "constraints": "1 <= bills.length <= 10^5\nbills[i] is either 5, 10, or 20.",
+    "inputFormat": "Line 1: integer N.\nLine 2: N space-separated integers representing `bills`.",
+    "outputFormat": "Print `YES` or `NO`.",
+    "examples": [
+        {
+            "input": "5\n5 5 5 10 20",
+            "output": "YES",
+            "explanation": "Collect three 5s. On 10, give a 5. On 20, give a 10 and a 5. All good."
+        },
+        {
+            "input": "5\n5 5 10 10 20",
+            "output": "NO",
+            "explanation": "For 20, we don't have change."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\nbills = list(map(int, input().split()))\n# Write logic keeping track of 5s and 10s\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; \n    if (!(cin >> n)) return 0;\n    vector<int> bills(n);\n    for(int i=0; i<n; i++) cin >> bills[i];\n    // Implement logic\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if(line == null) return;\n        int n = Integer.parseInt(line.trim());\n        int[] bills = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) bills[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n5 5 5 10 20",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "5\n5 5 10 10 20",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "1\n5",
+            "expectedOutput": "YES",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1\n10",
+            "expectedOutput": "NO",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "10\n5 5 10 20 5 5 5 5 5 5",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "10\n5 5 5 5 20 20 5 5 5 5",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "6\n5 10 5 20 5 20",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "7\n5 5 5 10 5 20 5",
+            "expectedOutput": "YES",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "5\n5 5 5 20 20",
+            "expectedOutput": "NO",
+            "isHidden": true,
+            "orderIndex": 8
+        }
+    ]
+}

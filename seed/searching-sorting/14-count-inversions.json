@@ -1,0 +1,124 @@
+{
+    "title": "Count Inversions Using Merge Sort",
+    "slug": "count-inversions-merge-sort",
+    "difficulty": "Medium",
+    "statement": "Given an array of N integers, count the number of **inversions**: pairs (i, j) where i < j and A[i] > A[j].\n\nAn inversion is a measure of how far the array is from being sorted.\n\n**Algorithm**: Modify merge sort — during the merge step, when an element from the right half is placed before remaining elements of the left half, those are all inversions. Add the count of remaining left-half elements at that point.\n\nTotal complexity: O(N log N).",
+    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+    "outputFormat": "A single integer: the total number of inversions.",
+    "examples": [
+        {
+            "input": "5\n2 4 1 3 5",
+            "output": "3",
+            "explanation": "Inversions: (2,1), (4,1), (4,3). Count = 3."
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "output": "6",
+            "explanation": "All pairs are inverted: C(4,2) = 6."
+        }
+    ],
+    "starterCode": {
+        "python": "n = int(input())\na = list(map(int, input().split()))\n\ndef merge_count(arr):\n    if len(arr) <= 1:\n        return arr, 0\n    mid = len(arr) // 2\n    left, lc = merge_count(arr[:mid])\n    right, rc = merge_count(arr[mid:])\n    # Write merge step here, counting cross inversions\n    merged = []\n    count = lc + rc\n    i = j = 0\n    while i < len(left) and j < len(right):\n        pass  # your logic here\n    return merged + left[i:] + right[j:], count\n\n_, total = merge_count(a)\nprint(total)\n",
+        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nlong long mergeCount(vector<long long>& arr, int lo, int hi) {\n    if (hi - lo <= 1) return 0;\n    int mid = (lo + hi) / 2;\n    long long cnt = mergeCount(arr, lo, mid) + mergeCount(arr, mid, hi);\n    // Write merge step here\n    return cnt;\n}\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    cout << mergeCount(a, 0, n) << '\\n';\n    return 0;\n}\n",
+        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    static long mergeCount(long[] arr, int lo, int hi) {\n        if (hi - lo <= 1) return 0;\n        int mid = (lo + hi) / 2;\n        long cnt = mergeCount(arr, lo, mid) + mergeCount(arr, mid, hi);\n        // Write merge step here\n        return cnt;\n    }\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = Long.parseLong(st.nextToken());\n        System.out.println(mergeCount(a, 0, n));\n    }\n}\n"
+    },
+    "testCases": [
+        {
+            "input": "5\n2 4 1 3 5",
+            "expectedOutput": "3",
+            "isHidden": false,
+            "orderIndex": 0
+        },
+        {
+            "input": "4\n4 3 2 1",
+            "expectedOutput": "6",
+            "isHidden": false,
+            "orderIndex": 1
+        },
+        {
+            "input": "5\n1 2 3 4 5",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 2
+        },
+        {
+            "input": "1\n5",
+            "expectedOutput": "0",
+            "isHidden": false,
+            "orderIndex": 3
+        },
+        {
+            "input": "3\n3 1 2",
+            "expectedOutput": "2",
+            "isHidden": true,
+            "orderIndex": 4
+        },
+        {
+            "input": "4\n1 2 3 4",
+            "expectedOutput": "0",
+            "isHidden": true,
+            "orderIndex": 5
+        },
+        {
+            "input": "4\n2 1 3 4",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 6
+        },
+        {
+            "input": "5\n5 4 3 2 1",
+            "expectedOutput": "10",
+            "isHidden": true,
+            "orderIndex": 7
+        },
+        {
+            "input": "6\n1 3 2 4 5 6",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 8
+        },
+        {
+            "input": "4\n2 3 4 1",
+            "expectedOutput": "3",
+            "isHidden": true,
+            "orderIndex": 9
+        },
+        {
+            "input": "6\n6 5 4 3 2 1",
+            "expectedOutput": "15",
+            "isHidden": true,
+            "orderIndex": 10
+        },
+        {
+            "input": "5\n1 5 2 4 3",
+            "expectedOutput": "4",
+            "isHidden": true,
+            "orderIndex": 11
+        },
+        {
+            "input": "6\n10 1 2 9 3 8",
+            "expectedOutput": "9",
+            "isHidden": true,
+            "orderIndex": 12
+        },
+        {
+            "input": "2\n2 1",
+            "expectedOutput": "1",
+            "isHidden": true,
+            "orderIndex": 13
+        },
+        {
+            "input": "7\n7 5 3 1 6 4 2",
+            "expectedOutput": "14",
+            "isHidden": true,
+            "orderIndex": 14
+        },
+        {
+            "input": "5\n3 1 2 4 2",
+            "expectedOutput": "5",
+            "isHidden": true,
+            "orderIndex": 15
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Rolling Hash: Count Distinct Substrings of Length K",
+  "slug": "rolling-hash-distinct-substrings-k",
+  "difficulty": "Hard",
+  "statement": "Given a string S and an integer K, count the number of distinct substrings of S that have length exactly K.\n\nUse a rolling hash (polynomial hashing with double hashing to reduce collisions) to compute hashes of all length-K windows in O(N) time, then count distinct values using a hash set.\n\nPrint the count of distinct length-K substrings.",
+  "constraints": "1 <= K <= |S| <= 10^6\nS consists of lowercase English letters.",
+  "inputFormat": "Line 1: the string S.\nLine 2: the integer K.",
+  "outputFormat": "A single integer: the number of distinct substrings of S with length K.",
+  "examples": [
+    {
+      "input": "abcabc\n3",
+      "output": "3",
+      "explanation": "Length-3 substrings: abc, bca, cab, abc. Distinct: {abc, bca, cab} = 3."
+    },
+    {
+      "input": "aaaaaa\n2",
+      "output": "1",
+      "explanation": "All length-2 substrings are 'aa'. Distinct count = 1."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\ninput = sys.stdin.readline\n\ns = input().strip()\nk = int(input())\nn = len(s)\nif k > n:\n    print(0)\nelse:\n    MOD1, BASE1 = (1 << 61) - 1, 131\n    MOD2, BASE2 = (1 << 31) - 1, 137\n    # Precompute initial window hash\n    h1 = h2 = 0\n    p1 = p2 = 1\n    for i in range(k):\n        h1 = (h1 * BASE1 + ord(s[i])) % MOD1\n        h2 = (h2 * BASE2 + ord(s[i])) % MOD2\n        if i > 0:\n            p1 = p1 * BASE1 % MOD1\n            p2 = p2 * BASE2 % MOD2\n    seen = set()\n    seen.add((h1, h2))\n    for i in range(1, n - k + 1):\n        h1 = (h1 - ord(s[i-1]) * p1 % MOD1 + MOD1) * BASE1 % MOD1\n        h1 = (h1 + ord(s[i+k-1])) % MOD1\n        h2 = (h2 - ord(s[i-1]) * p2 % MOD2 + MOD2) * BASE2 % MOD2\n        h2 = (h2 + ord(s[i+k-1])) % MOD2\n        seen.add((h1, h2))\n    print(len(seen))\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <unordered_set>\nusing namespace std;\ntypedef unsigned long long ull;\nconst ull B1=131, M1=(1ULL<<61)-1, B2=137, M2=(1ULL<<31)-1;\null addmod(ull a,ull b,ull m){a+=b;return a>=m?a-m:a;}\null mulmod61(ull a,ull b){\n    __uint128_t r=(__uint128_t)a*b;\n    ull res=(ull)(r>>61)+(ull)(r&M1);\n    return res>=M1?res-M1:res;\n}\nint main(){\n    ios_base::sync_with_stdio(false);cin.tie(NULL);\n    string s;int k; cin>>s>>k;\n    int n=s.size();\n    if(k>n){cout<<0;return 0;}\n    ull h1=0,h2=0,p1=1,p2=1;\n    for(int i=0;i<k;i++){\n        h1=addmod(mulmod61(h1,B1),s[i],M1);\n        h2=(h2*B2+s[i])%M2;\n        if(i>0){p1=mulmod61(p1,B1);p2=p2*B2%M2;}\n    }\n    unordered_set<ull> seen;\n    seen.insert(h1^(h2<<32));\n    for(int i=1;i<=n-k;i++){\n        h1=mulmod61(addmod(h1,M1-mulmod61(p1,(ull)s[i-1]),M1),B1);\n        h1=addmod(h1,(ull)s[i+k-1],M1);\n        h2=(h2-p2*(ull)s[i-1]%M2+M2)*B2%M2;\n        h2=(h2+(ull)s[i+k-1])%M2;\n        seen.insert(h1^(h2<<32));\n    }\n    cout<<seen.size()<<\"\\n\";\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));\n        String s=br.readLine().trim();\n        int k=Integer.parseInt(br.readLine().trim());\n        int n=s.length();\n        if(k>n){System.out.println(0);return;}\n        final long B1=131,M1=(1L<<31)-1,B2=137,M2=(1L<<29)-3;\n        long h1=0,h2=0,p1=1,p2=1;\n        for(int i=0;i<k;i++){\n            h1=(h1*B1+s.charAt(i))%M1;\n            h2=(h2*B2+s.charAt(i))%M2;\n            if(i>0){p1=p1*B1%M1;p2=p2*B2%M2;}\n        }\n        Set<Long> seen=new HashSet<>();\n        seen.add(h1*M2+h2);\n        for(int i=1;i<=n-k;i++){\n            h1=((h1-p1*s.charAt(i-1)%M1+M1)*B1+s.charAt(i+k-1))%M1;\n            h2=((h2-p2*s.charAt(i-1)%M2+M2)*B2+s.charAt(i+k-1))%M2;\n            seen.add(h1*M2+h2);\n        }\n        System.out.println(seen.size());\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "abcabc\n3",           "expectedOutput": "3",   "isHidden": false, "orderIndex": 0 },
+    { "input": "aaaaaa\n2",           "expectedOutput": "1",   "isHidden": false, "orderIndex": 1 },
+    { "input": "abcdef\n1",           "expectedOutput": "6",   "isHidden": false, "orderIndex": 2 },
+    { "input": "abab\n2",             "expectedOutput": "2",   "isHidden": false, "orderIndex": 3 },
+    { "input": "a\n1",                "expectedOutput": "1",   "isHidden": true,  "orderIndex": 4 },
+    { "input": "abcd\n4",             "expectedOutput": "1",   "isHidden": true,  "orderIndex": 5 },
+    { "input": "abcabcabc\n3",        "expectedOutput": "3",   "isHidden": true,  "orderIndex": 6 },
+    { "input": "abcdef\n2",           "expectedOutput": "5",   "isHidden": true,  "orderIndex": 7 },
+    { "input": "aaabbb\n3",           "expectedOutput": "4",   "isHidden": true,  "orderIndex": 8 },
+    { "input": "abcba\n2",            "expectedOutput": "3",   "isHidden": true,  "orderIndex": 9 },
+    { "input": "zzzz\n1",             "expectedOutput": "1",   "isHidden": true,  "orderIndex": 10 },
+    { "input": "abcabc\n1",           "expectedOutput": "3",   "isHidden": true,  "orderIndex": 11 },
+    { "input": "aababc\n2",           "expectedOutput": "4",   "isHidden": true,  "orderIndex": 12 },
+    { "input": "abcdefghij\n5",       "expectedOutput": "6",   "isHidden": true,  "orderIndex": 13 },
+    { "input": "aabaab\n3",           "expectedOutput": "3",   "isHidden": true,  "orderIndex": 14 },
+    { "input": "abcdeabcde\n4",       "expectedOutput": "5",   "isHidden": true,  "orderIndex": 15 }
+  ]
+}

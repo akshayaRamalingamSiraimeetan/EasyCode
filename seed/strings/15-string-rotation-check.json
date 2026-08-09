@@ -1,0 +1,44 @@
+{
+  "title": "String Rotation Check",
+  "slug": "string-rotation-check",
+  "difficulty": "Medium",
+  "statement": "String B is a rotation of string A if B can be obtained by rotating A some number of positions to the left or right.\n\nFor example, \"erbottl\" is a rotation of \"bottler\" (rotate left by 3: \"ler\" moves to front giving \"lerbott\"... actually: rotate left by 4: \"bottler\" → \"tlerbot\"... use substring check: B is a rotation of A iff B is a substring of A+A).\n\nGiven two strings A and B, print \"Yes\" if B is a rotation of A, otherwise print \"No\".",
+  "constraints": "1 <= |A|, |B| <= 10^5\nA and B contain only lowercase English letters.",
+  "inputFormat": "Two lines: the first contains A, the second contains B.",
+  "outputFormat": "Print \"Yes\" if B is a rotation of A, otherwise \"No\".",
+  "examples": [
+    {
+      "input": "abcde\ncdeab",
+      "output": "Yes",
+      "explanation": "'cdeab' is 'abcde' rotated left by 2."
+    },
+    {
+      "input": "abcde\nabced",
+      "output": "No",
+      "explanation": "'abced' is not any rotation of 'abcde'."
+    }
+  ],
+  "starterCode": {
+    "python": "a = input().strip()\nb = input().strip()\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "abcde\ncdeab", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 0 },
+    { "input": "abcde\nabced", "expectedOutput": "No", "isHidden": false, "orderIndex": 1 },
+    { "input": "a\na", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 2 },
+    { "input": "abc\nabc", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 3 },
+    { "input": "abc\nbca", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 4 },
+    { "input": "abc\ncab", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 5 },
+    { "input": "abc\nbac", "expectedOutput": "No", "isHidden": true, "orderIndex": 6 },
+    { "input": "hello\nlohel", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 7 },
+    { "input": "hello\nllheo", "expectedOutput": "No", "isHidden": true, "orderIndex": 8 },
+    { "input": "abcd\nabcd", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 9 },
+    { "input": "abcde\nabcde", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 10 },
+    { "input": "ab\nba", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 11 },
+    { "input": "ab\nab", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 12 },
+    { "input": "ab\nba", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 13 },
+    { "input": "abc\nabc", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 14 },
+    { "input": "abcde\ndeabc", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 15 }
+  ]
+}

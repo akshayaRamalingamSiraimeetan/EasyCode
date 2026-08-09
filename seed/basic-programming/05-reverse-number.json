@@ -1,0 +1,44 @@
+{
+  "title": "Reverse a Number",
+  "slug": "reverse-a-number",
+  "difficulty": "Easy",
+  "statement": "Given a positive integer N, print its digits in reverse order as a number (without leading zeros).\n\nFor example, reversing 1230 gives 321 (not 0321).",
+  "constraints": "1 <= N <= 10^9",
+  "inputFormat": "A single line containing one positive integer N.",
+  "outputFormat": "A single integer: N with its digits reversed, with no leading zeros.",
+  "examples": [
+    {
+      "input": "12345",
+      "output": "54321",
+      "explanation": "Reversing digits of 12345 gives 54321."
+    },
+    {
+      "input": "1200",
+      "output": "21",
+      "explanation": "Reversing 1200 gives 0021, which as an integer is 21."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\n# Write your solution here\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    long long n;\n    cin >> n;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "12345", "expectedOutput": "54321", "isHidden": false, "orderIndex": 0 },
+    { "input": "1200", "expectedOutput": "21", "isHidden": false, "orderIndex": 1 },
+    { "input": "7", "expectedOutput": "7", "isHidden": false, "orderIndex": 2 },
+    { "input": "100", "expectedOutput": "1", "isHidden": false, "orderIndex": 3 },
+    { "input": "1", "expectedOutput": "1", "isHidden": true, "orderIndex": 4 },
+    { "input": "9", "expectedOutput": "9", "isHidden": true, "orderIndex": 5 },
+    { "input": "1000000000", "expectedOutput": "1", "isHidden": true, "orderIndex": 6 },
+    { "input": "987654321", "expectedOutput": "123456789", "isHidden": true, "orderIndex": 7 },
+    { "input": "1001", "expectedOutput": "1001", "isHidden": true, "orderIndex": 8 },
+    { "input": "9900", "expectedOutput": "99", "isHidden": true, "orderIndex": 9 },
+    { "input": "123000", "expectedOutput": "321", "isHidden": true, "orderIndex": 10 },
+    { "input": "10", "expectedOutput": "1", "isHidden": true, "orderIndex": 11 },
+    { "input": "56789", "expectedOutput": "98765", "isHidden": true, "orderIndex": 12 },
+    { "input": "100200300", "expectedOutput": "3002001", "isHidden": true, "orderIndex": 13 },
+    { "input": "11", "expectedOutput": "11", "isHidden": true, "orderIndex": 14 },
+    { "input": "305", "expectedOutput": "503", "isHidden": true, "orderIndex": 15 }
+  ]
+}

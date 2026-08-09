@@ -1,0 +1,44 @@
+{
+  "title": "Longest Subarray with Bounded Difference",
+  "slug": "longest-subarray-bounded-difference",
+  "difficulty": "Hard",
+  "statement": "Given an array of integers and a non-negative integer K, find the length of the longest contiguous subarray such that the difference between the maximum and minimum element in that subarray is at most K.\n\nUse two monotonic deques (one for max, one for min) with a sliding window for O(N) time.",
+  "constraints": "1 <= N <= 10^5\n0 <= K <= 10^9\n-10^9 <= A[i] <= 10^9",
+  "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated integers.",
+  "outputFormat": "A single integer: the length of the longest valid subarray.",
+  "examples": [
+    {
+      "input": "5 0\n2 2 2 2 2",
+      "output": "5",
+      "explanation": "All elements are equal, so max-min=0 <= 0 for the full array."
+    },
+    {
+      "input": "5 2\n1 3 2 5 4",
+      "output": "3",
+      "explanation": "Longest valid subarray: [1,3,2] or [3,2,5]? [1,3,2]: max-min=2<=2, length 3. [3,2,5]: 5-2=3>2. Best is 3."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\narr = list(map(int, input().split()))\n# Write your solution here\n# Hint: maintain two deques for max and min; shrink left when max-min > k\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <deque>\nusing namespace std;\nint main() {\n    int n; long long k;\n    cin >> n >> k;\n    vector<long long> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long k = sc.nextLong();\n        long[] arr = new long[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    { "input": "5 0\n2 2 2 2 2",          "expectedOutput": "5", "isHidden": false, "orderIndex": 0 },
+    { "input": "5 2\n1 3 2 5 4",          "expectedOutput": "3", "isHidden": false, "orderIndex": 1 },
+    { "input": "5 2\n1 2 3 4 5",          "expectedOutput": "3", "isHidden": false, "orderIndex": 2 },
+    { "input": "6 1\n1 1 1 2 2 2",        "expectedOutput": "6", "isHidden": false, "orderIndex": 3 },
+    { "input": "5 3\n1 5 3 4 2",          "expectedOutput": "4", "isHidden": true,  "orderIndex": 4 },
+    { "input": "4 0\n2 2 2 2",            "expectedOutput": "4", "isHidden": true,  "orderIndex": 5 },
+    { "input": "5 3\n3 3 3 3 3",          "expectedOutput": "5", "isHidden": true,  "orderIndex": 6 },
+    { "input": "5 3\n5 4 3 2 1",          "expectedOutput": "4", "isHidden": true,  "orderIndex": 7 },
+    { "input": "6 3\n1 2 3 4 5 6",        "expectedOutput": "4", "isHidden": true,  "orderIndex": 8 },
+    { "input": "4 3\n4 8 5 1",            "expectedOutput": "2", "isHidden": true,  "orderIndex": 9 },
+    { "input": "6 1\n10 1 2 3 4 5",       "expectedOutput": "2", "isHidden": true,  "orderIndex": 10 },
+    { "input": "6 1\n1 2 3 10 11 12",     "expectedOutput": "2", "isHidden": true,  "orderIndex": 11 },
+    { "input": "7 2\n1 2 3 2 1 2 3",      "expectedOutput": "7", "isHidden": true,  "orderIndex": 12 },
+    { "input": "7 2\n4 2 2 2 4 4 2",      "expectedOutput": "7", "isHidden": true,  "orderIndex": 13 },
+    { "input": "4 2\n1 2 4 7",            "expectedOutput": "2", "isHidden": true,  "orderIndex": 14 },
+    { "input": "5 4\n1 3 5 7 9",          "expectedOutput": "3", "isHidden": true,  "orderIndex": 15 }
+  ]
+}
