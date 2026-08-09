@@ -9,7 +9,7 @@
  *   actions    — optional ReactNode rendered on the right side before the user menu
  *
  * The navbar always shows:
- *   • EasyCode logo (links to /dashboard)
+ *   • COdessey logo (links to /dashboard)
  *   • Optional breadcrumb: "title" segment
  *   • Nav links: Problems · Submissions (highlighted when active)
  *   • ThemeToggle
@@ -57,10 +57,10 @@ export default function AppNavbar({ title, backTo, backLabel = "Go back", action
         <button
           className="app-nav-logo"
           onClick={() => navigate("/dashboard")}
-          aria-label="EasyCode — go to dashboard"
+          aria-label="COdessey — go to dashboard"
         >
           <FiCode size={17} />
-          <span>EasyCode</span>
+          <span>COdessey</span>
         </button>
 
         {/* breadcrumb title */}

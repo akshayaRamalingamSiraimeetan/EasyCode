@@ -57,7 +57,7 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>EasyCode</h1>
+        <h1>COdessey</h1>
 
         <p>Welcome back</p>
 

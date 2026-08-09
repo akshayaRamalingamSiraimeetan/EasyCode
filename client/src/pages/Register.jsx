@@ -60,7 +60,7 @@ function Register() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>EasyCode</h1>
+        <h1>COdessey</h1>
 
         <p>Create your account</p>
 

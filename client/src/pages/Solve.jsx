@@ -378,14 +378,14 @@ function ProblemPanel({ problem, language, currentCode }) {
  * localStorage with one entry per problem.
  *
  * Shape:
- *   easycode_drafts = {
+ *   codessey_drafts = {
  *     [problemId]: {
  *       [language]: code   // e.g. { python: "...", cpp: "..." }
  *     }
  *   }
  * ─────────────────────────────────────────────────────── */
 
-const DRAFTS_KEY = "easycode_drafts";
+const DRAFTS_KEY = "codessey_drafts";
 
 function readDraftsStore() {
   try {

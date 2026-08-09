@@ -12,7 +12,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext({ theme: "dark", toggleTheme: () => {} });
 
-const STORAGE_KEY = "easycode-theme";
+const STORAGE_KEY = "codessey-theme";
 
 function resolveInitialTheme() {
   const saved = localStorage.getItem(STORAGE_KEY);
