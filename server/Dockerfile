@@ -21,8 +21,10 @@ RUN npm ci --omit=dev
 
 # Copy application source
 # Paths are relative to the repo root (the build context)
-COPY server/src/ ./src/
 
+COPY server/src/ ./src/
+COPY server/scripts/ ./scripts/
+COPY seed/ /app/seed/
 # Embed a build timestamp as an image label so you can verify which image
 # is running in ECS via CloudWatch or `docker inspect`
 ARG BUILD_DATE=unknown
@@ -34,4 +36,4 @@ USER appuser
 
 EXPOSE 5000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "seed"]
