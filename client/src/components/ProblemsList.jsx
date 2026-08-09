@@ -1,19 +1,20 @@
 /**
- * ProblemsList — Flat list of problems with inline search, difficulty filter,
- * and tag filters. Works both in "All Problems" mode and inside a topic view.
+ * ProblemsList — Flat problem table with smart search, difficulty tabs,
+ * and tag filter pills. Theme-aware via CSS custom properties.
  *
  * Props:
- *   problems    — array of problem objects
- *   isAdmin     — boolean, show edit/delete controls
- *   onEdit      — (problem) => void
- *   onDelete    — (problem) => void
+ *   problems  — array of problem objects
+ *   isAdmin   — boolean, shows edit / delete controls
+ *   onEdit    — (problem) => void
+ *   onDelete  — (problem) => void
+ *   loading   — boolean
  */
 
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiEdit2, FiTrash2, FiSearch, FiX } from "react-icons/fi";
+import { FiEdit2, FiTrash2, FiSearch, FiX, FiCheck } from "react-icons/fi";
 
-/* ── difficulty config ─────────────────────────────────── */
+/* ── difficulty config ──────────────────────────────────── */
 const DIFF_ORDER = { Easy: 1, Medium: 2, Hard: 3 };
 
 const DIFF_STYLE = {
@@ -22,7 +23,7 @@ const DIFF_STYLE = {
   Hard:   { label: "Hard",   cls: "pb-badge--hard" },
 };
 
-/* ── fuzzy multi-token search ──────────────────────────── */
+/* ── multi-token fuzzy search ───────────────────────────── */
 function matchesSearch(problem, query) {
   if (!query.trim()) return true;
   const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -37,17 +38,18 @@ function matchesSearch(problem, query) {
     .join(" ")
     .toLowerCase();
 
+  // All tokens must match somewhere in haystack
   return tokens.every((t) => haystack.includes(t));
 }
 
-/* ── collect all unique tags across problem set ─────────── */
+/* ── collect all unique tags ─────────────────────────────── */
 function collectTags(problems) {
   const set = new Set();
   problems.forEach((p) => (p.tags ?? []).forEach((t) => set.add(t)));
   return Array.from(set).sort();
 }
 
-/* ── single problem row ────────────────────────────────── */
+/* ── single problem row ─────────────────────────────────── */
 function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
   const navigate = useNavigate();
   const diff = DIFF_STYLE[problem.difficulty] ?? { label: problem.difficulty, cls: "" };
@@ -91,18 +93,18 @@ function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
               <button
                 className="pb-icon-btn"
                 onClick={() => onEdit(problem)}
-                title="Edit Problem"
+                title="Edit problem"
                 aria-label="Edit problem"
               >
-                <FiEdit2 size={14} />
+                <FiEdit2 size={13} />
               </button>
               <button
                 className="pb-icon-btn pb-icon-btn--del"
                 onClick={() => onDelete(problem)}
-                title="Delete Problem"
+                title="Delete problem"
                 aria-label="Delete problem"
               >
-                <FiTrash2 size={14} />
+                <FiTrash2 size={13} />
               </button>
             </>
           )}
@@ -112,41 +114,38 @@ function ProblemRow({ index, problem, isAdmin, onEdit, onDelete }) {
   );
 }
 
-/* ── skeleton loader ───────────────────────────────────── */
+/* ── skeleton rows ──────────────────────────────────────── */
 function SkeletonRows({ count = 8 }) {
   return Array.from({ length: count }, (_, i) => (
     <tr key={i} className="pb-row">
-      <td className="pb-td pb-td--num">
-        <span className="pb-skeleton pb-skeleton--num" />
-      </td>
-      <td className="pb-td pb-td--title">
-        <span className="pb-skeleton pb-skeleton--title" />
-      </td>
-      <td className="pb-td pb-td--diff">
-        <span className="pb-skeleton pb-skeleton--badge" />
-      </td>
-      <td className="pb-td pb-td--actions">
-        <span className="pb-skeleton pb-skeleton--btn" />
-      </td>
+      <td className="pb-td pb-td--num"><span className="pb-skel pb-skel--num" /></td>
+      <td className="pb-td pb-td--title"><span className="pb-skel pb-skel--title" /></td>
+      <td className="pb-td pb-td--diff"><span className="pb-skel pb-skel--badge" /></td>
+      <td className="pb-td pb-td--actions"><span className="pb-skel pb-skel--btn" /></td>
     </tr>
   ));
 }
 
-/* ── main component ────────────────────────────────────── */
-function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = false }) {
-  const [search, setSearch] = useState("");
+/* ── main component ─────────────────────────────────────── */
+export default function ProblemsList({
+  problems,
+  isAdmin = false,
+  onEdit,
+  onDelete,
+  loading = false,
+}) {
+  const [search,     setSearch]     = useState("");
   const [diffFilter, setDiffFilter] = useState("All");
   const [activeTags, setActiveTags] = useState(new Set());
 
   const allTags = useMemo(() => collectTags(problems), [problems]);
 
-  const toggleTag = (tag) => {
+  const toggleTag = (tag) =>
     setActiveTags((prev) => {
       const next = new Set(prev);
       next.has(tag) ? next.delete(tag) : next.add(tag);
       return next;
     });
-  };
 
   const clearFilters = () => {
     setSearch("");
@@ -154,7 +153,7 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
     setActiveTags(new Set());
   };
 
-  const hasFilters = search || diffFilter !== "All" || activeTags.size > 0;
+  const hasFilters = !!search || diffFilter !== "All" || activeTags.size > 0;
 
   const filtered = useMemo(() => {
     return problems
@@ -163,25 +162,23 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
         if (diffFilter !== "All" && p.difficulty !== diffFilter) return false;
         if (activeTags.size > 0) {
           const pTags = new Set(p.tags ?? []);
-          for (const t of activeTags) {
-            if (!pTags.has(t)) return false;
-          }
+          for (const t of activeTags) if (!pTags.has(t)) return false;
         }
         return true;
       })
       .sort((a, b) => {
-        // Sort by difficulty order, then title
-        const dDiff = DIFF_ORDER[a.difficulty] - DIFF_ORDER[b.difficulty];
-        return dDiff !== 0 ? dDiff : a.title.localeCompare(b.title);
+        const d = DIFF_ORDER[a.difficulty] - DIFF_ORDER[b.difficulty];
+        return d !== 0 ? d : a.title.localeCompare(b.title);
       });
   }, [problems, search, diffFilter, activeTags]);
 
   return (
     <div className="pb-list">
-      {/* ── sticky toolbar ──────────────────────────────── */}
+
+      {/* ── sticky toolbar ────────────────────────────────── */}
       <div className="pb-toolbar">
         <div className="pb-search-wrap">
-          <FiSearch className="pb-search-icon" size={14} />
+          <FiSearch className="pb-search-icon" size={14} aria-hidden="true" />
           <input
             type="text"
             className="pb-search"
@@ -191,8 +188,12 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
             aria-label="Search problems"
           />
           {search && (
-            <button className="pb-search-clear" onClick={() => setSearch("")} aria-label="Clear search">
-              <FiX size={12} />
+            <button
+              className="pb-search-clear"
+              onClick={() => setSearch("")}
+              aria-label="Clear search"
+            >
+              <FiX size={11} />
             </button>
           )}
         </div>
@@ -201,7 +202,11 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
           {["All", "Easy", "Medium", "Hard"].map((d) => (
             <button
               key={d}
-              className={`pb-diff-tab ${diffFilter === d ? "pb-diff-tab--active" : ""} ${d !== "All" ? `pb-diff-tab--${d.toLowerCase()}` : ""}`}
+              className={[
+                "pb-diff-tab",
+                diffFilter === d ? "pb-diff-tab--active" : "",
+                d !== "All" ? `pb-diff-tab--${d.toLowerCase()}` : "",
+              ].join(" ")}
               onClick={() => setDiffFilter(d)}
               aria-pressed={diffFilter === d}
             >
@@ -211,42 +216,49 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
         </div>
 
         {hasFilters && (
-          <button className="pb-clear-btn" onClick={clearFilters} title="Clear all filters">
-            <FiX size={12} />
+          <button className="pb-clear-btn" onClick={clearFilters} aria-label="Clear all filters">
+            <FiX size={11} />
             Clear
           </button>
         )}
       </div>
 
-      {/* ── tag filter pills ─────────────────────────────── */}
+      {/* ── tag filter strip ──────────────────────────────── */}
       {allTags.length > 0 && (
         <div className="pb-tag-filters" role="group" aria-label="Filter by tag">
-          <span className="pb-tag-label">Tags:</span>
+          <span className="pb-tag-label" aria-hidden="true">Tags</span>
           <div className="pb-tag-list">
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                className={`pb-tag-filter ${activeTags.has(tag) ? "pb-tag-filter--active" : ""}`}
-                onClick={() => toggleTag(tag)}
-                aria-pressed={activeTags.has(tag)}
-              >
-                {activeTags.has(tag) && <span className="pb-tag-check">✓ </span>}
-                {tag}
-              </button>
-            ))}
+            {allTags.map((tag) => {
+              const active = activeTags.has(tag);
+              return (
+                <button
+                  key={tag}
+                  className={`pb-tag-filter${active ? " pb-tag-filter--active" : ""}`}
+                  onClick={() => toggleTag(tag)}
+                  aria-pressed={active}
+                >
+                  {active && <FiCheck size={10} aria-hidden="true" />}
+                  {tag}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* ── result count ─────────────────────────────────── */}
+      {/* ── result count ──────────────────────────────────── */}
       {!loading && (
-        <div className="pb-result-count">
+        <p className="pb-result-count">
           {filtered.length} problem{filtered.length !== 1 ? "s" : ""}
-          {hasFilters && ` (filtered from ${problems.length})`}
-        </div>
+          {hasFilters && (
+            <span className="pb-result-count-secondary">
+              {" "}of {problems.length}
+            </span>
+          )}
+        </p>
       )}
 
-      {/* ── table ────────────────────────────────────────── */}
+      {/* ── table ─────────────────────────────────────────── */}
       <div className="pb-table-wrap">
         <table className="pb-table">
           <thead>
@@ -265,7 +277,7 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
                 <td colSpan={4} className="pb-td--empty">
                   <div className="pb-empty-state">
                     <div className="pb-empty-icon">
-                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                       </svg>
@@ -297,5 +309,3 @@ function ProblemsList({ problems, isAdmin = false, onEdit, onDelete, loading = f
     </div>
   );
 }
-
-export default ProblemsList;

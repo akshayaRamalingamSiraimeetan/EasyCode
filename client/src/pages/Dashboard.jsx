@@ -17,6 +17,7 @@ import {
   FiBookOpen,
   FiCalendar,
 } from "react-icons/fi";
+import ThemeToggle from "../components/ThemeToggle";
 
 /* ── helpers ─────────────────────────────────────────────── */
 
@@ -197,6 +198,7 @@ function Dashboard() {
         </div>
         <div className="db-header-right">
           <span className="db-header-date">{formatDate()}</span>
+          <ThemeToggle />
           <button className="db-logout-btn" onClick={handleLogout} title="Logout">
             <FiLogOut size={15} />
             <span>Logout</span>
