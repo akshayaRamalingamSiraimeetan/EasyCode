@@ -36,4 +36,4 @@ USER appuser
 
 EXPOSE 5000
 
-CMD ["npm", "run", "seed"]
+CMD ["npm", "start"]
