@@ -1,124 +1,128 @@
 {
-    "title": "Sum of Subarray Minimums",
-    "slug": "sum-of-subarray-minimums",
-    "difficulty": "Hard",
-    "statement": "Given an array of integers A, find the sum of `min(B)`, where `B` ranges over every (contiguous) subarray of A.\n\nSince the answer may be large, return the answer modulo `10^9 + 7`.\n\nUse a monotonic stack to find the number of subarrays for which A[i] is the minimum element (by finding the next smaller and previous smaller elements).",
-    "constraints": "1 <= N <= 10^5\n1 <= A[i] <= 10^5",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "A single integer: the sum of structural minimums modulo 10^9 + 7.",
-    "examples": [
-        {
-            "input": "4\n3 1 2 4",
-            "output": "17",
-            "explanation": "Subarrays: \n[3] (min=3)\n[1] (1)\n[2] (2)\n[4] (4)\n[3,1] (1)\n[1,2] (1)\n[2,4] (2)\n[3,1,2] (1)\n[1,2,4] (1)\n[3,1,2,4] (1)\nSum: 3+1+2+4+1+1+2+1+1+1 = 17."
-        },
-        {
-            "input": "5\n11 81 94 43 3",
-            "output": "444",
-            "explanation": "Sum of min of all 15 subarrays."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] a = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for (int i=0; i<n; i++) a[i] = Integer.parseInt(tz.nextToken());\n        // Write your solution here\n    }\n}\n"
+  "title": "Sum of Subarray Minimums",
+  "slug": "sum-of-subarray-minimums",
+  "difficulty": "Hard",
+  "topic": "Stack & Queue",
+  "tags": [
+    "Stack"
+  ],
+  "statement": "Given an array of integers A, find the sum of `min(B)`, where `B` ranges over every (contiguous) subarray of A.\n\nSince the answer may be large, return the answer modulo `10^9 + 7`.\n\nUse a monotonic stack to find the number of subarrays for which A[i] is the minimum element (by finding the next smaller and previous smaller elements).",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "A single integer: the sum of structural minimums modulo 10^9 + 7.",
+  "constraints": "1 <= N <= 10^5\n1 <= A[i] <= 10^5",
+  "examples": [
+    {
+      "input": "4\n3 1 2 4",
+      "output": "17",
+      "explanation": "Subarrays: \n[3] (min=3)\n[1] (1)\n[2] (2)\n[4] (4)\n[3,1] (1)\n[1,2] (1)\n[2,4] (2)\n[3,1,2] (1)\n[1,2,4] (1)\n[3,1,2,4] (1)\nSum: 3+1+2+4+1+1+2+1+1+1 = 17."
     },
-    "testCases": [
-        {
-            "input": "4\n3 1 2 4",
-            "expectedOutput": "17",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5\n11 81 94 43 3",
-            "expectedOutput": "444",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1\n50",
-            "expectedOutput": "50",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n1 2 3",
-            "expectedOutput": "10",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "3\n3 2 1",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5\n1 1 1 1 1",
-            "expectedOutput": "15",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "4\n4 2 2 4",
-            "expectedOutput": "24",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "4\n10 10 10 10",
-            "expectedOutput": "100",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "7\n7 6 5 4 3 2 1",
-            "expectedOutput": "84",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "6\n1 2 4 8 16 32",
-            "expectedOutput": "129",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4\n5 1 5 1",
-            "expectedOutput": "22",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5\n1 3 2 5 4",
-            "expectedOutput": "45",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "10\n100 90 80 70 60 50 40 30 20 10",
-            "expectedOutput": "2200",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "6\n71 55 82 55 71 55",
-            "expectedOutput": "1589",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5\n99999 99999 99999 99999 99999",
-            "expectedOutput": "1499985",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "4\n2 3 4 5",
-            "expectedOutput": "34",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "5\n11 81 94 43 3",
+      "output": "444",
+      "explanation": "Sum of min of all 15 subarrays."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] a = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for (int i=0; i<n; i++) a[i] = Integer.parseInt(tz.nextToken());\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4\n3 1 2 4",
+      "expectedOutput": "17",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5\n11 81 94 43 3",
+      "expectedOutput": "444",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1\n50",
+      "expectedOutput": "50",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n1 2 3",
+      "expectedOutput": "10",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3\n3 2 1",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5\n1 1 1 1 1",
+      "expectedOutput": "15",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4\n4 2 2 4",
+      "expectedOutput": "24",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "4\n10 10 10 10",
+      "expectedOutput": "100",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "7\n7 6 5 4 3 2 1",
+      "expectedOutput": "84",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6\n1 2 4 8 16 32",
+      "expectedOutput": "129",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\n5 1 5 1",
+      "expectedOutput": "22",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\n1 3 2 5 4",
+      "expectedOutput": "45",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "10\n100 90 80 70 60 50 40 30 20 10",
+      "expectedOutput": "2200",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "6\n71 55 82 55 71 55",
+      "expectedOutput": "1589",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5\n99999 99999 99999 99999 99999",
+      "expectedOutput": "1499985",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "4\n2 3 4 5",
+      "expectedOutput": "34",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

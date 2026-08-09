@@ -2,10 +2,14 @@
   "title": "Isomorphic Strings",
   "slug": "isomorphic-strings",
   "difficulty": "Easy",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Two strings A and B are isomorphic if the characters in A can be replaced to get B, such that:\n- Each character in A maps to exactly one character in B.\n- No two characters in A map to the same character in B.\n- The mapping is consistent throughout.\n\nGiven strings A and B of equal length, print \"Yes\" if they are isomorphic, otherwise print \"No\".",
-  "constraints": "1 <= |A| = |B| <= 10^5\nA and B contain only lowercase English letters.",
   "inputFormat": "Two lines: the first contains A, the second contains B.",
   "outputFormat": "Print \"Yes\" if A and B are isomorphic, otherwise \"No\".",
+  "constraints": "1 <= |A| = |B| <= 10^5\nA and B contain only lowercase English letters.",
   "examples": [
     {
       "input": "egg\nadd",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "egg\nadd", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 0 },
-    { "input": "foo\nbar", "expectedOutput": "No", "isHidden": false, "orderIndex": 1 },
-    { "input": "paper\ntitle", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 2 },
-    { "input": "ab\naa", "expectedOutput": "No", "isHidden": false, "orderIndex": 3 },
-    { "input": "abc\nxyz", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 4 },
-    { "input": "aab\nxxy", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 5 },
-    { "input": "aab\nxyz", "expectedOutput": "No", "isHidden": true, "orderIndex": 6 },
-    { "input": "a\nb", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 7 },
-    { "input": "abcabc\nxyzxyz", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 8 },
-    { "input": "abcabc\nxyzxya", "expectedOutput": "No", "isHidden": true, "orderIndex": 9 },
-    { "input": "aaaa\nbbbb", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 10 },
-    { "input": "abcd\nabcd", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 11 },
-    { "input": "aabb\nccdd", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 12 },
-    { "input": "aabb\nccde", "expectedOutput": "No", "isHidden": true, "orderIndex": 13 },
-    { "input": "abba\ncddc", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 14 },
-    { "input": "abba\ncdde", "expectedOutput": "No", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "egg\nadd",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "foo\nbar",
+      "expectedOutput": "No",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "paper\ntitle",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "ab\naa",
+      "expectedOutput": "No",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abc\nxyz",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aab\nxxy",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aab\nxyz",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "a\nb",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abcabc\nxyzxyz",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcabc\nxyzxya",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "aaaa\nbbbb",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcd\nabcd",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aabb\nccdd",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "aabb\nccde",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "abba\ncddc",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abba\ncdde",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

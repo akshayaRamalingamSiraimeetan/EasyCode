@@ -2,10 +2,14 @@
   "title": "Count Palindrome Partitions",
   "slug": "count-palindrome-partitions",
   "difficulty": "Easy",
+  "topic": "Backtracking",
+  "tags": [
+    "Backtracking"
+  ],
   "statement": "Given a string S, count the number of ways to partition it into substrings where every substring is a palindrome.\n\nFor example, \"aab\" can be partitioned as [\"a\",\"a\",\"b\"] or [\"aa\",\"b\"] — both are palindrome partitions, so the answer is 2.",
-  "constraints": "1 <= |S| <= 15\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single integer: the number of palindrome partitions.",
+  "constraints": "1 <= |S| <= 15\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "aab",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "aab",     "expectedOutput": "2",  "isHidden": false, "orderIndex": 0 },
-    { "input": "aaa",     "expectedOutput": "4",  "isHidden": false, "orderIndex": 1 },
-    { "input": "abcd",    "expectedOutput": "1",  "isHidden": false, "orderIndex": 2 },
-    { "input": "abba",    "expectedOutput": "3",  "isHidden": false, "orderIndex": 3 },
-    { "input": "aabb",    "expectedOutput": "4",  "isHidden": true,  "orderIndex": 4 },
-    { "input": "aaaa",    "expectedOutput": "8",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "abc",     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 6 },
-    { "input": "abcba",   "expectedOutput": "3",  "isHidden": true,  "orderIndex": 7 },
-    { "input": "aa",      "expectedOutput": "2",  "isHidden": true,  "orderIndex": 8 },
-    { "input": "a",       "expectedOutput": "1",  "isHidden": true,  "orderIndex": 9 },
-    { "input": "aba",     "expectedOutput": "2",  "isHidden": true,  "orderIndex": 10 },
-    { "input": "abbc",    "expectedOutput": "2",  "isHidden": true,  "orderIndex": 11 },
-    { "input": "aaab",    "expectedOutput": "4",  "isHidden": true,  "orderIndex": 12 },
-    { "input": "abcabc",  "expectedOutput": "1",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "aabbaa",  "expectedOutput": "10", "isHidden": true,  "orderIndex": 14 },
-    { "input": "abcbad",  "expectedOutput": "3",  "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "aab",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaa",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abcd",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abba",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aabb",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aaaa",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abc",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abcba",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "aa",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "a",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "aba",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abbc",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aaab",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "abcabc",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aabbaa",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abcbad",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

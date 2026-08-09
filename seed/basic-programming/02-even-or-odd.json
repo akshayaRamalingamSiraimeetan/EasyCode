@@ -2,10 +2,14 @@
   "title": "Even or Odd",
   "slug": "even-or-odd",
   "difficulty": "Easy",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given an integer N, determine whether it is even or odd.\n\nPrint \"Even\" if N is divisible by 2, otherwise print \"Odd\".",
-  "constraints": "-10^9 <= N <= 10^9",
   "inputFormat": "A single line containing one integer N.",
   "outputFormat": "Print \"Even\" if N is even, or \"Odd\" if N is odd.",
+  "constraints": "-10^9 <= N <= 10^9",
   "examples": [
     {
       "input": "4",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4", "expectedOutput": "Even", "isHidden": false, "orderIndex": 0 },
-    { "input": "7", "expectedOutput": "Odd", "isHidden": false, "orderIndex": 1 },
-    { "input": "0", "expectedOutput": "Even", "isHidden": false, "orderIndex": 2 },
-    { "input": "-3", "expectedOutput": "Odd", "isHidden": false, "orderIndex": 3 },
-    { "input": "1", "expectedOutput": "Odd", "isHidden": true, "orderIndex": 4 },
-    { "input": "2", "expectedOutput": "Even", "isHidden": true, "orderIndex": 5 },
-    { "input": "-8", "expectedOutput": "Even", "isHidden": true, "orderIndex": 6 },
-    { "input": "1000000000", "expectedOutput": "Even", "isHidden": true, "orderIndex": 7 },
-    { "input": "-1000000000", "expectedOutput": "Even", "isHidden": true, "orderIndex": 8 },
-    { "input": "999999999", "expectedOutput": "Odd", "isHidden": true, "orderIndex": 9 },
-    { "input": "100", "expectedOutput": "Even", "isHidden": true, "orderIndex": 10 },
-    { "input": "101", "expectedOutput": "Odd", "isHidden": true, "orderIndex": 11 },
-    { "input": "-1", "expectedOutput": "Odd", "isHidden": true, "orderIndex": 12 },
-    { "input": "-2", "expectedOutput": "Even", "isHidden": true, "orderIndex": 13 },
-    { "input": "13", "expectedOutput": "Odd", "isHidden": true, "orderIndex": 14 },
-    { "input": "256", "expectedOutput": "Even", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "4",
+      "expectedOutput": "Even",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "7",
+      "expectedOutput": "Odd",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "0",
+      "expectedOutput": "Even",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "-3",
+      "expectedOutput": "Odd",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1",
+      "expectedOutput": "Odd",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "2",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "-8",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1000000000",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "-1000000000",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "999999999",
+      "expectedOutput": "Odd",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "100",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "101",
+      "expectedOutput": "Odd",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "-1",
+      "expectedOutput": "Odd",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "-2",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "13",
+      "expectedOutput": "Odd",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "256",
+      "expectedOutput": "Even",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -2,10 +2,14 @@
   "title": "Dynamic Median with Queries",
   "slug": "dynamic-median-queries",
   "difficulty": "Hard",
+  "topic": "Heaps",
+  "tags": [
+    "Heaps"
+  ],
   "statement": "Process a sequence of queries on a dynamic multiset:\n- \"A x\" — add integer x to the multiset.\n- \"M\" — print the current median.\n\nThe median rules:\n- If the count is odd, the median is the middle value.\n- If the count is even, the median is the average of the two middle values. Print as X.5 if not a whole number.\n\nYou must use two heaps (max-heap for lower half, min-heap for upper half) to answer each M query in O(log N).",
-  "constraints": "1 <= Q <= 2*10^4\n-10^6 <= x <= 10^6\nAt least one A query appears before any M query.\nThe multiset is never empty when M is called.",
   "inputFormat": "The first line contains Q (total queries).\nThe next Q lines are either \"A x\" or \"M\".",
   "outputFormat": "For each M query, print the current median on its own line.",
+  "constraints": "1 <= Q <= 2*10^4\n-10^6 <= x <= 10^6\nAt least one A query appears before any M query.\nThe multiset is never empty when M is called.",
   "examples": [
     {
       "input": "7\nA 5\nA 15\nM\nA 1\nM\nA 3\nM",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt(); sc.nextLine();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "7\nA 5\nA 15\nM\nA 1\nM\nA 3\nM",                       "expectedOutput": "10\n5\n4",       "isHidden": false, "orderIndex": 0 },
-    { "input": "5\nA 2\nA 4\nM\nA 6\nM",                               "expectedOutput": "3\n4",          "isHidden": false, "orderIndex": 1 },
-    { "input": "2\nA 1\nM",                                            "expectedOutput": "1",             "isHidden": false, "orderIndex": 2 },
-    { "input": "4\nA 3\nA 1\nA 2\nM",                                  "expectedOutput": "2",             "isHidden": false, "orderIndex": 3 },
-    { "input": "6\nA 10\nA 20\nA 30\nM\nA 5\nM",                       "expectedOutput": "20\n15",        "isHidden": true,  "orderIndex": 4 },
-    { "input": "6\nA 1\nA 2\nA 3\nA 4\nA 5\nM",                        "expectedOutput": "3",             "isHidden": true,  "orderIndex": 5 },
-    { "input": "5\nA 100\nA 200\nM\nA 50\nM",                          "expectedOutput": "150\n100",      "isHidden": true,  "orderIndex": 6 },
-    { "input": "4\nA 5\nA 5\nA 5\nM",                                  "expectedOutput": "5",             "isHidden": true,  "orderIndex": 7 },
-    { "input": "9\nA 1\nA 3\nM\nA 5\nM\nA 7\nM\nA 9\nM",              "expectedOutput": "2\n3\n4\n5",    "isHidden": true,  "orderIndex": 8 },
-    { "input": "6\nA 7\nA 3\nA 5\nM\nA 1\nM",                          "expectedOutput": "5\n4",          "isHidden": true,  "orderIndex": 9 },
-    { "input": "5\nA 1\nA 1\nA 1\nA 2\nM",                             "expectedOutput": "1",             "isHidden": true,  "orderIndex": 10 },
-    { "input": "5\nA 3\nA 3\nA 3\nA 3\nM",                             "expectedOutput": "3",             "isHidden": true,  "orderIndex": 11 },
-    { "input": "5\nA 4\nA 2\nA 6\nM\nA 1\nM",                          "expectedOutput": "4\n3",          "isHidden": true,  "orderIndex": 12 },
-    { "input": "7\nA 5\nA 1\nA 9\nM\nA 3\nM\nA 7\nM",                 "expectedOutput": "5\n4\n5",       "isHidden": true,  "orderIndex": 13 },
-    { "input": "6\nA 1\nA 100\nA 2\nA 99\nA 3\nM",                     "expectedOutput": "3",             "isHidden": true,  "orderIndex": 14 },
-    { "input": "6\nA 9\nA 8\nA 7\nA 6\nA 5\nM",                        "expectedOutput": "7",             "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "7\nA 5\nA 15\nM\nA 1\nM\nA 3\nM",
+      "expectedOutput": "10\n5\n4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5\nA 2\nA 4\nM\nA 6\nM",
+      "expectedOutput": "3\n4",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2\nA 1\nM",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4\nA 3\nA 1\nA 2\nM",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6\nA 10\nA 20\nA 30\nM\nA 5\nM",
+      "expectedOutput": "20\n15",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6\nA 1\nA 2\nA 3\nA 4\nA 5\nM",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5\nA 100\nA 200\nM\nA 50\nM",
+      "expectedOutput": "150\n100",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "4\nA 5\nA 5\nA 5\nM",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9\nA 1\nA 3\nM\nA 5\nM\nA 7\nM\nA 9\nM",
+      "expectedOutput": "2\n3\n4\n5",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6\nA 7\nA 3\nA 5\nM\nA 1\nM",
+      "expectedOutput": "5\n4",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5\nA 1\nA 1\nA 1\nA 2\nM",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\nA 3\nA 3\nA 3\nA 3\nM",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5\nA 4\nA 2\nA 6\nM\nA 1\nM",
+      "expectedOutput": "4\n3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "7\nA 5\nA 1\nA 9\nM\nA 3\nM\nA 7\nM",
+      "expectedOutput": "5\n4\n5",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "6\nA 1\nA 100\nA 2\nA 99\nA 3\nM",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6\nA 9\nA 8\nA 7\nA 6\nA 5\nM",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

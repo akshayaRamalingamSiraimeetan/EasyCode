@@ -2,10 +2,14 @@
   "title": "Largest of Three Numbers",
   "slug": "largest-of-three-numbers",
   "difficulty": "Easy",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given three integers A, B, and C, find and print the largest among them.",
-  "constraints": "-10^9 <= A, B, C <= 10^9\nAll three numbers may be distinct or some may be equal.",
   "inputFormat": "A single line containing three space-separated integers A, B, and C.",
   "outputFormat": "A single integer: the largest of the three numbers.",
+  "constraints": "-10^9 <= A, B, C <= 10^9\nAll three numbers may be distinct or some may be equal.",
   "examples": [
     {
       "input": "3 7 2",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long a = sc.nextLong(), b = sc.nextLong(), c = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "3 7 2", "expectedOutput": "7", "isHidden": false, "orderIndex": 0 },
-    { "input": "-1 -5 -3", "expectedOutput": "-1", "isHidden": false, "orderIndex": 1 },
-    { "input": "5 5 5", "expectedOutput": "5", "isHidden": false, "orderIndex": 2 },
-    { "input": "0 0 1", "expectedOutput": "1", "isHidden": false, "orderIndex": 3 },
-    { "input": "1000000000 999999999 999999998", "expectedOutput": "1000000000", "isHidden": true, "orderIndex": 4 },
-    { "input": "-1000000000 -1000000000 -1000000000", "expectedOutput": "-1000000000", "isHidden": true, "orderIndex": 5 },
-    { "input": "0 0 0", "expectedOutput": "0", "isHidden": true, "orderIndex": 6 },
-    { "input": "100 200 150", "expectedOutput": "200", "isHidden": true, "orderIndex": 7 },
-    { "input": "7 7 3", "expectedOutput": "7", "isHidden": true, "orderIndex": 8 },
-    { "input": "-10 5 0", "expectedOutput": "5", "isHidden": true, "orderIndex": 9 },
-    { "input": "1 2 3", "expectedOutput": "3", "isHidden": true, "orderIndex": 10 },
-    { "input": "3 2 1", "expectedOutput": "3", "isHidden": true, "orderIndex": 11 },
-    { "input": "2 3 1", "expectedOutput": "3", "isHidden": true, "orderIndex": 12 },
-    { "input": "-100 -200 -50", "expectedOutput": "-50", "isHidden": true, "orderIndex": 13 },
-    { "input": "42 42 41", "expectedOutput": "42", "isHidden": true, "orderIndex": 14 },
-    { "input": "0 -1 1", "expectedOutput": "1", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "3 7 2",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "-1 -5 -3",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5 5 5",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "0 0 1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1000000000 999999999 999999998",
+      "expectedOutput": "1000000000",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "-1000000000 -1000000000 -1000000000",
+      "expectedOutput": "-1000000000",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "0 0 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "100 200 150",
+      "expectedOutput": "200",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "7 7 3",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "-10 5 0",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "1 2 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "3 2 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "2 3 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "-100 -200 -50",
+      "expectedOutput": "-50",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "42 42 41",
+      "expectedOutput": "42",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "0 -1 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

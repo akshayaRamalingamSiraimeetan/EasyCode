@@ -1,70 +1,74 @@
 {
-    "title": "Shortest Palindrome (KMP)",
-    "slug": "shortest-palindrome",
-    "difficulty": "Hard",
-    "statement": "You are given a string `s`. You can convert `s` to a palindrome by adding characters in front of it.\nReturn the shortest palindrome you can find by performing this transformation.",
-    "constraints": "0 <= s.length <= 5 * 10^4\ns consists of lowercase English letters only.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single string.",
-    "examples": [
-        {
-            "input": "aacecaaa",
-            "output": "aaacecaaa",
-            "explanation": "Add 'a' to the front."
-        },
-        {
-            "input": "abcd",
-            "output": "dcbabcd",
-            "explanation": "Add 'dcb'."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# Create s + '#' + reversed(s), then compute KMP Pi array\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\nint main() {\n    string s; if(!(cin >> s)) return 0;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if(!sc.hasNext()) return;\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Shortest Palindrome (KMP)",
+  "slug": "shortest-palindrome",
+  "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "You are given a string `s`. You can convert `s` to a palindrome by adding characters in front of it.\nReturn the shortest palindrome you can find by performing this transformation.",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single string.",
+  "constraints": "0 <= s.length <= 5 * 10^4\ns consists of lowercase English letters only.",
+  "examples": [
+    {
+      "input": "aacecaaa",
+      "output": "aaacecaaa",
+      "explanation": "Add 'a' to the front."
     },
-    "testCases": [
-        {
-            "input": "aacecaaa",
-            "expectedOutput": "aaacecaaa",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "abcd",
-            "expectedOutput": "dcbabcd",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "\n",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "a",
-            "expectedOutput": "a",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "ab",
-            "expectedOutput": "bab",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "aba",
-            "expectedOutput": "aba",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "abacabac",
-            "expectedOutput": "cabacabac",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "abcd",
+      "output": "dcbabcd",
+      "explanation": "Add 'dcb'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Create s + '#' + reversed(s), then compute KMP Pi array\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\nint main() {\n    string s; if(!(cin >> s)) return 0;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if(!sc.hasNext()) return;\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "aacecaaa",
+      "expectedOutput": "aaacecaaa",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "abcd",
+      "expectedOutput": "dcbabcd",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "\n",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "a",
+      "expectedOutput": "a",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "ab",
+      "expectedOutput": "bab",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aba",
+      "expectedOutput": "aba",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abacabac",
+      "expectedOutput": "cabacabac",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

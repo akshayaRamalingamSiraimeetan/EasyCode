@@ -2,10 +2,14 @@
   "title": "Reverse a String",
   "slug": "reverse-a-string",
   "difficulty": "Easy",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S, print it in reverse order.\n\nFor example, reversing \"hello\" gives \"olleh\".",
-  "constraints": "1 <= |S| <= 10^5\nS contains only printable ASCII characters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single line: the reverse of S.",
+  "constraints": "1 <= |S| <= 10^5\nS contains only printable ASCII characters.",
   "examples": [
     {
       "input": "hello",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.nextLine();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "hello", "expectedOutput": "olleh", "isHidden": false, "orderIndex": 0 },
-    { "input": "abcde", "expectedOutput": "edcba", "isHidden": false, "orderIndex": 1 },
-    { "input": "a", "expectedOutput": "a", "isHidden": false, "orderIndex": 2 },
-    { "input": "racecar", "expectedOutput": "racecar", "isHidden": false, "orderIndex": 3 },
-    { "input": "12345", "expectedOutput": "54321", "isHidden": true, "orderIndex": 4 },
-    { "input": "OpenAI", "expectedOutput": "IAnepO", "isHidden": true, "orderIndex": 5 },
-    { "input": "ab", "expectedOutput": "ba", "isHidden": true, "orderIndex": 6 },
-    { "input": "stressed", "expectedOutput": "desserts", "isHidden": true, "orderIndex": 7 },
-    { "input": "Z", "expectedOutput": "Z", "isHidden": true, "orderIndex": 8 },
-    { "input": "abcdefghij", "expectedOutput": "jihgfedcba", "isHidden": true, "orderIndex": 9 },
-    { "input": "madam", "expectedOutput": "madam", "isHidden": true, "orderIndex": 10 },
-    { "input": "Hello World", "expectedOutput": "dlroW olleH", "isHidden": true, "orderIndex": 11 },
-    { "input": "123abc", "expectedOutput": "cba321", "isHidden": true, "orderIndex": 12 },
-    { "input": "zyxwvutsrqponmlkjihgfedcba", "expectedOutput": "abcdefghijklmnopqrstuvwxyz", "isHidden": true, "orderIndex": 13 },
-    { "input": "aabbcc", "expectedOutput": "ccbbaa", "isHidden": true, "orderIndex": 14 },
-    { "input": "Never odd or even", "expectedOutput": "neve ro ddo reveN", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "hello",
+      "expectedOutput": "olleh",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "abcde",
+      "expectedOutput": "edcba",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "a",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "racecar",
+      "expectedOutput": "racecar",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "12345",
+      "expectedOutput": "54321",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "OpenAI",
+      "expectedOutput": "IAnepO",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "ab",
+      "expectedOutput": "ba",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "stressed",
+      "expectedOutput": "desserts",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "Z",
+      "expectedOutput": "Z",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcdefghij",
+      "expectedOutput": "jihgfedcba",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "madam",
+      "expectedOutput": "madam",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "Hello World",
+      "expectedOutput": "dlroW olleH",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "123abc",
+      "expectedOutput": "cba321",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "zyxwvutsrqponmlkjihgfedcba",
+      "expectedOutput": "abcdefghijklmnopqrstuvwxyz",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aabbcc",
+      "expectedOutput": "ccbbaa",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "Never odd or even",
+      "expectedOutput": "neve ro ddo reveN",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

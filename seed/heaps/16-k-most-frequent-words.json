@@ -2,10 +2,14 @@
   "title": "K Most Frequent Words",
   "slug": "k-most-frequent-words",
   "difficulty": "Medium",
+  "topic": "Heaps",
+  "tags": [
+    "Heaps"
+  ],
   "statement": "Given a list of words and an integer K, return the K most frequent words.\n\nIf two words have the same frequency, sort them alphabetically.\n\nPrint the words one per line, ordered by frequency descending (then alphabetically for ties).",
-  "constraints": "1 <= K <= number of distinct words\n1 <= total words <= 10^4\n1 <= |word| <= 20\nAll words are lowercase English letters only.",
   "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated words.",
   "outputFormat": "K lines, one word per line.",
+  "constraints": "1 <= K <= number of distinct words\n1 <= total words <= 10^4\n1 <= |word| <= 20\nAll words are lowercase English letters only.",
   "examples": [
     {
       "input": "8 2\nthe day is cool the weather is hot",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        String[] words = new String[n];\n        for (int i = 0; i < n; i++) words[i] = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "8 2\nthe day is cool the weather is hot",   "expectedOutput": "is\nthe",         "isHidden": false, "orderIndex": 0 },
-    { "input": "6 2\ni love leetcode i love coding",         "expectedOutput": "i\nlove",         "isHidden": false, "orderIndex": 1 },
-    { "input": "1 1\na",                                     "expectedOutput": "a",              "isHidden": false, "orderIndex": 2 },
-    { "input": "6 2\na b a c b a",                           "expectedOutput": "a\nb",            "isHidden": false, "orderIndex": 3 },
-    { "input": "3 1\nhello hello world",                     "expectedOutput": "hello",           "isHidden": true,  "orderIndex": 4 },
-    { "input": "3 2\naa aa ab",                              "expectedOutput": "aa\nab",          "isHidden": true,  "orderIndex": 5 },
-    { "input": "1 1\nword",                                  "expectedOutput": "word",            "isHidden": true,  "orderIndex": 6 },
-    { "input": "7 2\na b c a b c a",                         "expectedOutput": "a\nb",            "isHidden": true,  "orderIndex": 7 },
-    { "input": "6 2\none two three two three three",          "expectedOutput": "three\ntwo",     "isHidden": true,  "orderIndex": 8 },
-    { "input": "5 2\nhello world hello world hello",          "expectedOutput": "hello\nworld",   "isHidden": true,  "orderIndex": 9 },
-    { "input": "4 1\nabc bca cab abc",                       "expectedOutput": "abc",             "isHidden": true,  "orderIndex": 10 },
-    { "input": "6 2\ndog cat dog mouse cat cat",              "expectedOutput": "cat\ndog",        "isHidden": true,  "orderIndex": 11 },
-    { "input": "6 2\nred blue red green blue red",            "expectedOutput": "red\nblue",       "isHidden": true,  "orderIndex": 12 },
-    { "input": "4 2\na b c d",                               "expectedOutput": "a\nb",            "isHidden": true,  "orderIndex": 13 },
-    { "input": "5 2\nok ok ok yes yes",                      "expectedOutput": "ok\nyes",         "isHidden": true,  "orderIndex": 14 },
-    { "input": "5 2\nx x y y z",                             "expectedOutput": "x\ny",            "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "8 2\nthe day is cool the weather is hot",
+      "expectedOutput": "is\nthe",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "6 2\ni love leetcode i love coding",
+      "expectedOutput": "i\nlove",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 1\na",
+      "expectedOutput": "a",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "6 2\na b a c b a",
+      "expectedOutput": "a\nb",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 1\nhello hello world",
+      "expectedOutput": "hello",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3 2\naa aa ab",
+      "expectedOutput": "aa\nab",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "1 1\nword",
+      "expectedOutput": "word",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "7 2\na b c a b c a",
+      "expectedOutput": "a\nb",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "6 2\none two three two three three",
+      "expectedOutput": "three\ntwo",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5 2\nhello world hello world hello",
+      "expectedOutput": "hello\nworld",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4 1\nabc bca cab abc",
+      "expectedOutput": "abc",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "6 2\ndog cat dog mouse cat cat",
+      "expectedOutput": "cat\ndog",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6 2\nred blue red green blue red",
+      "expectedOutput": "red\nblue",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 2\na b c d",
+      "expectedOutput": "a\nb",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5 2\nok ok ok yes yes",
+      "expectedOutput": "ok\nyes",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "5 2\nx x y y z",
+      "expectedOutput": "x\ny",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

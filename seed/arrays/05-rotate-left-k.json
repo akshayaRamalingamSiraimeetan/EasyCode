@@ -1,124 +1,128 @@
 {
-    "title": "Rotate Array Left by K",
-    "slug": "rotate-array-left-by-k",
-    "difficulty": "Easy",
-    "statement": "Given an array of N integers and a non-negative integer K, rotate the array to the left by K positions and print the result.\n\nA left rotation by 1 moves the first element to the last position.\n\nFor example, rotating [1,2,3,4,5] left by 2 gives [3,4,5,1,2].\n\nNote: K may be larger than N; use K mod N.",
-    "constraints": "1 <= N <= 10^5\n0 <= K <= 10^9\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: two integers N and K.\nLine 2: N space-separated integers.",
-    "outputFormat": "N space-separated integers on a single line representing the rotated array.",
-    "examples": [
-        {
-            "input": "5 2\n1 2 3 4 5",
-            "output": "3 4 5 1 2",
-            "explanation": "Left rotate by 2: first two elements (1,2) move to the end."
-        },
-        {
-            "input": "4 4\n10 20 30 40",
-            "output": "10 20 30 40",
-            "explanation": "Rotating by N is the same as no rotation."
-        }
-    ],
-    "starterCode": {
-        "python": "n, k = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution here (handle k >= n)\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    long long k;\n    cin >> n >> k;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long k = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  "title": "Rotate Array Left by K",
+  "slug": "rotate-array-left-by-k",
+  "difficulty": "Easy",
+  "topic": "Arrays",
+  "tags": [
+    "Arrays"
+  ],
+  "statement": "Given an array of N integers and a non-negative integer K, rotate the array to the left by K positions and print the result.\n\nA left rotation by 1 moves the first element to the last position.\n\nFor example, rotating [1,2,3,4,5] left by 2 gives [3,4,5,1,2].\n\nNote: K may be larger than N; use K mod N.",
+  "inputFormat": "Line 1: two integers N and K.\nLine 2: N space-separated integers.",
+  "outputFormat": "N space-separated integers on a single line representing the rotated array.",
+  "constraints": "1 <= N <= 10^5\n0 <= K <= 10^9\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "5 2\n1 2 3 4 5",
+      "output": "3 4 5 1 2",
+      "explanation": "Left rotate by 2: first two elements (1,2) move to the end."
     },
-    "testCases": [
-        {
-            "input": "5 2\n1 2 3 4 5",
-            "expectedOutput": "3 4 5 1 2",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4 4\n10 20 30 40",
-            "expectedOutput": "10 20 30 40",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5 0\n1 2 3 4 5",
-            "expectedOutput": "1 2 3 4 5",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3 1\n7 8 9",
-            "expectedOutput": "8 9 7",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1\n1 0\n42",
-            "expectedOutput": "42",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5 7\n1 2 3 4 5",
-            "expectedOutput": "3 4 5 1 2",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6 2\n-3 -2 -1 0 1 2",
-            "expectedOutput": "-1 0 1 2 -3 -2",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "4 1\n4 3 2 1",
-            "expectedOutput": "3 2 1 4",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "3 1000000000\n1 2 3",
-            "expectedOutput": "2 3 1",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "5 5\n5 4 3 2 1",
-            "expectedOutput": "5 4 3 2 1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "6 3\n10 20 30 40 50 60",
-            "expectedOutput": "40 50 60 10 20 30",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "4 2\n-1 -2 -3 -4",
-            "expectedOutput": "-3 -4 -1 -2",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "7 3\n1 2 3 4 5 6 7",
-            "expectedOutput": "4 5 6 7 1 2 3",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "2 1\n100 200",
-            "expectedOutput": "200 100",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5 10\n1 2 3 4 5",
-            "expectedOutput": "1 2 3 4 5",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "6 13\n6 5 4 3 2 1",
-            "expectedOutput": "5 4 3 2 1 6",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4 4\n10 20 30 40",
+      "output": "10 20 30 40",
+      "explanation": "Rotating by N is the same as no rotation."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution here (handle k >= n)\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    long long k;\n    cin >> n >> k;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long k = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5 2\n1 2 3 4 5",
+      "expectedOutput": "3 4 5 1 2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4 4\n10 20 30 40",
+      "expectedOutput": "10 20 30 40",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5 0\n1 2 3 4 5",
+      "expectedOutput": "1 2 3 4 5",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3 1\n7 8 9",
+      "expectedOutput": "8 9 7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1\n1 0\n42",
+      "expectedOutput": "42",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5 7\n1 2 3 4 5",
+      "expectedOutput": "3 4 5 1 2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6 2\n-3 -2 -1 0 1 2",
+      "expectedOutput": "-1 0 1 2 -3 -2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "4 1\n4 3 2 1",
+      "expectedOutput": "3 2 1 4",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3 1000000000\n1 2 3",
+      "expectedOutput": "2 3 1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5 5\n5 4 3 2 1",
+      "expectedOutput": "5 4 3 2 1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "6 3\n10 20 30 40 50 60",
+      "expectedOutput": "40 50 60 10 20 30",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4 2\n-1 -2 -3 -4",
+      "expectedOutput": "-3 -4 -1 -2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "7 3\n1 2 3 4 5 6 7",
+      "expectedOutput": "4 5 6 7 1 2 3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "2 1\n100 200",
+      "expectedOutput": "200 100",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5 10\n1 2 3 4 5",
+      "expectedOutput": "1 2 3 4 5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6 13\n6 5 4 3 2 1",
+      "expectedOutput": "5 4 3 2 1 6",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

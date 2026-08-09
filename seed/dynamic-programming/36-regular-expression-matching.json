@@ -1,81 +1,85 @@
 {
-    "title": "Regular Expression Matching",
-    "slug": "regular-expression-matching",
-    "difficulty": "Hard",
-    "statement": "Given an input string `s` and a pattern `p`, implement regular expression matching with support for `.` and `*` where:\n- `.` Matches any single character.\n- `*` Matches zero or more of the preceding element.\nThe matching should cover the entire input string (not partial).",
-    "constraints": "1 <= s.length <= 20\n1 <= p.length <= 30\ns contains only lowercase English letters.\np contains only lowercase English letters, `.`, and `*`.\nIt is guaranteed that at least one valid answer exists for each test case.",
-    "inputFormat": "Line 1: string s.\nLine 2: pattern p.",
-    "outputFormat": "Print `YES` or `NO`.",
-    "examples": [
-        {
-            "input": "aa\na",
-            "output": "NO",
-            "explanation": "'a' does not match 'aa'."
-        },
-        {
-            "input": "aa\na*",
-            "output": "YES",
-            "explanation": "'a*' matches 'aa'."
-        },
-        {
-            "input": "ab\n.*",
-            "output": "YES",
-            "explanation": "'.*' matches any string."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\np = input().strip()\n# dp[i][j] = s[:i] matches p[:j]\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s, p; cin >> s >> p;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(), p = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Regular Expression Matching",
+  "slug": "regular-expression-matching",
+  "difficulty": "Hard",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given an input string `s` and a pattern `p`, implement regular expression matching with support for `.` and `*` where:\n- `.` Matches any single character.\n- `*` Matches zero or more of the preceding element.\nThe matching should cover the entire input string (not partial).",
+  "inputFormat": "Line 1: string s.\nLine 2: pattern p.",
+  "outputFormat": "Print `YES` or `NO`.",
+  "constraints": "1 <= s.length <= 20\n1 <= p.length <= 30\ns contains only lowercase English letters.\np contains only lowercase English letters, `.`, and `*`.\nIt is guaranteed that at least one valid answer exists for each test case.",
+  "examples": [
+    {
+      "input": "aa\na",
+      "output": "NO",
+      "explanation": "'a' does not match 'aa'."
     },
-    "testCases": [
-        {
-            "input": "aa\na",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "aa\na*",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "ab\n.*",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "aab\nc*a*b",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "mississippi\nmis*is*p*.",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abc\na.c",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aaa\na*a",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "aaa\nab*a",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "aa\na*",
+      "output": "YES",
+      "explanation": "'a*' matches 'aa'."
+    },
+    {
+      "input": "ab\n.*",
+      "output": "YES",
+      "explanation": "'.*' matches any string."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\np = input().strip()\n# dp[i][j] = s[:i] matches p[:j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s, p; cin >> s >> p;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(), p = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "aa\na",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aa\na*",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "ab\n.*",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "aab\nc*a*b",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "mississippi\nmis*is*p*.",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abc\na.c",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aaa\na*a",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aaa\nab*a",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

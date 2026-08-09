@@ -2,10 +2,14 @@
   "title": "Rolling Hash: Count Distinct Substrings of Length K",
   "slug": "rolling-hash-distinct-substrings-k",
   "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
   "statement": "Given a string S and an integer K, count the number of distinct substrings of S that have length exactly K.\n\nUse a rolling hash (polynomial hashing with double hashing to reduce collisions) to compute hashes of all length-K windows in O(N) time, then count distinct values using a hash set.\n\nPrint the count of distinct length-K substrings.",
-  "constraints": "1 <= K <= |S| <= 10^6\nS consists of lowercase English letters.",
   "inputFormat": "Line 1: the string S.\nLine 2: the integer K.",
   "outputFormat": "A single integer: the number of distinct substrings of S with length K.",
+  "constraints": "1 <= K <= |S| <= 10^6\nS consists of lowercase English letters.",
   "examples": [
     {
       "input": "abcabc\n3",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));\n        String s=br.readLine().trim();\n        int k=Integer.parseInt(br.readLine().trim());\n        int n=s.length();\n        if(k>n){System.out.println(0);return;}\n        final long B1=131,M1=(1L<<31)-1,B2=137,M2=(1L<<29)-3;\n        long h1=0,h2=0,p1=1,p2=1;\n        for(int i=0;i<k;i++){\n            h1=(h1*B1+s.charAt(i))%M1;\n            h2=(h2*B2+s.charAt(i))%M2;\n            if(i>0){p1=p1*B1%M1;p2=p2*B2%M2;}\n        }\n        Set<Long> seen=new HashSet<>();\n        seen.add(h1*M2+h2);\n        for(int i=1;i<=n-k;i++){\n            h1=((h1-p1*s.charAt(i-1)%M1+M1)*B1+s.charAt(i+k-1))%M1;\n            h2=((h2-p2*s.charAt(i-1)%M2+M2)*B2+s.charAt(i+k-1))%M2;\n            seen.add(h1*M2+h2);\n        }\n        System.out.println(seen.size());\n    }\n}\n"
   },
   "testCases": [
-    { "input": "abcabc\n3",           "expectedOutput": "3",   "isHidden": false, "orderIndex": 0 },
-    { "input": "aaaaaa\n2",           "expectedOutput": "1",   "isHidden": false, "orderIndex": 1 },
-    { "input": "abcdef\n1",           "expectedOutput": "6",   "isHidden": false, "orderIndex": 2 },
-    { "input": "abab\n2",             "expectedOutput": "2",   "isHidden": false, "orderIndex": 3 },
-    { "input": "a\n1",                "expectedOutput": "1",   "isHidden": true,  "orderIndex": 4 },
-    { "input": "abcd\n4",             "expectedOutput": "1",   "isHidden": true,  "orderIndex": 5 },
-    { "input": "abcabcabc\n3",        "expectedOutput": "3",   "isHidden": true,  "orderIndex": 6 },
-    { "input": "abcdef\n2",           "expectedOutput": "5",   "isHidden": true,  "orderIndex": 7 },
-    { "input": "aaabbb\n3",           "expectedOutput": "4",   "isHidden": true,  "orderIndex": 8 },
-    { "input": "abcba\n2",            "expectedOutput": "3",   "isHidden": true,  "orderIndex": 9 },
-    { "input": "zzzz\n1",             "expectedOutput": "1",   "isHidden": true,  "orderIndex": 10 },
-    { "input": "abcabc\n1",           "expectedOutput": "3",   "isHidden": true,  "orderIndex": 11 },
-    { "input": "aababc\n2",           "expectedOutput": "4",   "isHidden": true,  "orderIndex": 12 },
-    { "input": "abcdefghij\n5",       "expectedOutput": "6",   "isHidden": true,  "orderIndex": 13 },
-    { "input": "aabaab\n3",           "expectedOutput": "3",   "isHidden": true,  "orderIndex": 14 },
-    { "input": "abcdeabcde\n4",       "expectedOutput": "5",   "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "abcabc\n3",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaaaaa\n2",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abcdef\n1",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abab\n2",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "a\n1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcd\n4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abcabcabc\n3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abcdef\n2",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "aaabbb\n3",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcba\n2",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "zzzz\n1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcabc\n1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aababc\n2",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "abcdefghij\n5",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aabaab\n3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abcdeabcde\n4",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

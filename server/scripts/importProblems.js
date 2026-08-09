@@ -185,13 +185,17 @@ async function importFile(filePath) {
   const topic = topicFromPath(filePath);
 
   // ── 3. Build the problem document fields ──────────────────────────────
+  const folderTopic = topicFromPath(filePath);
+
   const problemFields = {
     slug: data.slug.trim().toLowerCase(),
     title: data.title.trim(),
     description: data.statement,        // seed uses "statement", schema uses "description"
     difficulty: data.difficulty,
     constraints: data.constraints ?? "",
-    topic,
+    // Prefer an explicit topic in the JSON; fall back to the folder name
+    topic: data.topic ? data.topic.trim() : folderTopic,
+    tags: Array.isArray(data.tags) ? data.tags.map((t) => String(t).trim()).filter(Boolean) : [],
     inputFormat: data.inputFormat ?? "",
     outputFormat: data.outputFormat ?? "",
     examples: (data.examples ?? []).map((ex) => ({

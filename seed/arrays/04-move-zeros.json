@@ -1,124 +1,128 @@
 {
-    "title": "Move Zeros to End",
-    "slug": "move-zeros-to-end",
-    "difficulty": "Easy",
-    "statement": "Given an array of N integers, move all zeros to the end while preserving the relative order of all non-zero elements. Print the resulting array.\n\nDo this without using an extra array (in-place).",
-    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "N space-separated integers on a single line representing the rearranged array.",
-    "examples": [
-        {
-            "input": "6\n0 1 0 3 12 0",
-            "output": "1 3 12 0 0 0",
-            "explanation": "Non-zero elements 1, 3, 12 retain their order; zeros are pushed to the end."
-        },
-        {
-            "input": "4\n1 0 0 2",
-            "output": "1 2 0 0",
-            "explanation": "Non-zero elements 1, 2 stay in order; zeros move to end."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here (in-place preferred)\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  "title": "Move Zeros to End",
+  "slug": "move-zeros-to-end",
+  "difficulty": "Easy",
+  "topic": "Arrays",
+  "tags": [
+    "Arrays"
+  ],
+  "statement": "Given an array of N integers, move all zeros to the end while preserving the relative order of all non-zero elements. Print the resulting array.\n\nDo this without using an extra array (in-place).",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "N space-separated integers on a single line representing the rearranged array.",
+  "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "6\n0 1 0 3 12 0",
+      "output": "1 3 12 0 0 0",
+      "explanation": "Non-zero elements 1, 3, 12 retain their order; zeros are pushed to the end."
     },
-    "testCases": [
-        {
-            "input": "6\n0 1 0 3 12 0",
-            "expectedOutput": "1 3 12 0 0 0",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n1 0 0 2",
-            "expectedOutput": "1 2 0 0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3\n0 0 0",
-            "expectedOutput": "0 0 0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n1 2 3",
-            "expectedOutput": "1 2 3",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1\n0",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1\n5",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "5\n0 0 0 0 1",
-            "expectedOutput": "1 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5\n1 0 0 0 0",
-            "expectedOutput": "1 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "6\n-1 0 2 0 -3 0",
-            "expectedOutput": "-1 2 -3 0 0 0",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "4\n0 1 2 3",
-            "expectedOutput": "1 2 3 0",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4\n1 2 3 0",
-            "expectedOutput": "1 2 3 0",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "7\n0 -7 0 0 3 0 9",
-            "expectedOutput": "-7 3 9 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "5\n5 4 3 2 1",
-            "expectedOutput": "5 4 3 2 1",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "6\n100 0 -100 0 0 200",
-            "expectedOutput": "100 -100 200 0 0 0",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "4\n0 0 1 0",
-            "expectedOutput": "1 0 0 0",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "8\n0 2 0 4 0 6 0 8",
-            "expectedOutput": "2 4 6 8 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n1 0 0 2",
+      "output": "1 2 0 0",
+      "explanation": "Non-zero elements 1, 2 stay in order; zeros move to end."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here (in-place preferred)\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "6\n0 1 0 3 12 0",
+      "expectedOutput": "1 3 12 0 0 0",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n1 0 0 2",
+      "expectedOutput": "1 2 0 0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3\n0 0 0",
+      "expectedOutput": "0 0 0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n1 2 3",
+      "expectedOutput": "1 2 3",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1\n0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1\n5",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5\n0 0 0 0 1",
+      "expectedOutput": "1 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5\n1 0 0 0 0",
+      "expectedOutput": "1 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "6\n-1 0 2 0 -3 0",
+      "expectedOutput": "-1 2 -3 0 0 0",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4\n0 1 2 3",
+      "expectedOutput": "1 2 3 0",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\n1 2 3 0",
+      "expectedOutput": "1 2 3 0",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "7\n0 -7 0 0 3 0 9",
+      "expectedOutput": "-7 3 9 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5\n5 4 3 2 1",
+      "expectedOutput": "5 4 3 2 1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "6\n100 0 -100 0 0 200",
+      "expectedOutput": "100 -100 200 0 0 0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "4\n0 0 1 0",
+      "expectedOutput": "1 0 0 0",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "8\n0 2 0 4 0 6 0 8",
+      "expectedOutput": "2 4 6 8 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

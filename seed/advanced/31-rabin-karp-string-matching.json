@@ -2,10 +2,14 @@
   "title": "Rabin-Karp: All Pattern Occurrences",
   "slug": "rabin-karp-all-occurrences",
   "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
   "statement": "Given a text string T and a pattern string P, find all starting indices (0-indexed) where P occurs as a substring in T using the Rabin-Karp rolling hash algorithm.\n\nRabin-Karp computes a polynomial hash for the pattern and slides a same-length window across the text, recomputing the hash in O(1) per step. On a hash match, verify with a direct character comparison to avoid false positives.\n\nPrint all starting indices in ascending order, one per line. If no occurrence exists, print -1.",
-  "constraints": "1 <= |P| <= |T| <= 10^5\nBoth strings consist of lowercase English letters only.",
   "inputFormat": "Line 1: the text T.\nLine 2: the pattern P.",
   "outputFormat": "All 0-indexed starting positions where P occurs in T, one per line, in ascending order. Print -1 if none.",
+  "constraints": "1 <= |P| <= |T| <= 10^5\nBoth strings consist of lowercase English letters only.",
   "examples": [
     {
       "input": "ababcabab\nab",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    static final long BASE=131, MOD=(1L<<31)-1;\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        String T=sc.next(), P=sc.next();\n        int n=T.length(), m=P.length();\n        if(m>n){System.out.println(-1);return;}\n        long ph=0,th=0,pw=1;\n        for(int i=0;i<m;i++){\n            ph=(ph*BASE+P.charAt(i))%MOD;\n            th=(th*BASE+T.charAt(i))%MOD;\n            if(i>0) pw=pw*BASE%MOD;\n        }\n        List<Integer> res=new ArrayList<>();\n        for(int i=0;i<=n-m;i++){\n            if(th==ph && T.substring(i,i+m).equals(P)) res.add(i);\n            if(i<n-m) th=((th-pw*T.charAt(i)%MOD+MOD)*BASE+T.charAt(i+m))%MOD;\n        }\n        if(res.isEmpty()) System.out.println(-1);\n        else for(int x:res) System.out.println(x);\n    }\n}\n"
   },
   "testCases": [
-    { "input": "ababcabab\nab",          "expectedOutput": "0\n2\n5\n7", "isHidden": false, "orderIndex": 0 },
-    { "input": "aaaaaa\naaa",            "expectedOutput": "0\n1\n2\n3","isHidden": false, "orderIndex": 1 },
-    { "input": "hello\nll",             "expectedOutput": "2",          "isHidden": false, "orderIndex": 2 },
-    { "input": "abcde\nfg",             "expectedOutput": "-1",         "isHidden": false, "orderIndex": 3 },
-    { "input": "aaaa\na",               "expectedOutput": "0\n1\n2\n3", "isHidden": true,  "orderIndex": 4 },
-    { "input": "abcabc\nabc",           "expectedOutput": "0\n3",       "isHidden": true,  "orderIndex": 5 },
-    { "input": "mississippi\nissi",     "expectedOutput": "1\n4",       "isHidden": true,  "orderIndex": 6 },
-    { "input": "abcdef\nabcdef",        "expectedOutput": "0",          "isHidden": true,  "orderIndex": 7 },
-    { "input": "a\na",                  "expectedOutput": "0",          "isHidden": true,  "orderIndex": 8 },
-    { "input": "abababab\nababab",      "expectedOutput": "0\n2",       "isHidden": true,  "orderIndex": 9 },
-    { "input": "zzzzzz\nzz",           "expectedOutput": "0\n1\n2\n3\n4", "isHidden": true, "orderIndex": 10 },
-    { "input": "abcdef\nz",             "expectedOutput": "-1",         "isHidden": true,  "orderIndex": 11 },
-    { "input": "aababaa\naba",          "expectedOutput": "1\n4",       "isHidden": true,  "orderIndex": 12 },
-    { "input": "codeforces\nfor",       "expectedOutput": "4",          "isHidden": true,  "orderIndex": 13 },
-    { "input": "aabaab\naab",           "expectedOutput": "0\n3",       "isHidden": true,  "orderIndex": 14 },
-    { "input": "abcabcabc\nabc",        "expectedOutput": "0\n3\n6",    "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "ababcabab\nab",
+      "expectedOutput": "0\n2\n5\n7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaaaaa\naaa",
+      "expectedOutput": "0\n1\n2\n3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "hello\nll",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abcde\nfg",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aaaa\na",
+      "expectedOutput": "0\n1\n2\n3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcabc\nabc",
+      "expectedOutput": "0\n3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "mississippi\nissi",
+      "expectedOutput": "1\n4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abcdef\nabcdef",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "a\na",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abababab\nababab",
+      "expectedOutput": "0\n2",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "zzzzzz\nzz",
+      "expectedOutput": "0\n1\n2\n3\n4",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcdef\nz",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aababaa\naba",
+      "expectedOutput": "1\n4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "codeforces\nfor",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aabaab\naab",
+      "expectedOutput": "0\n3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abcabcabc\nabc",
+      "expectedOutput": "0\n3\n6",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

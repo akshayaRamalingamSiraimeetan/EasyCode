@@ -1,76 +1,141 @@
 {
-    "title": "Edit Distance",
-    "slug": "edit-distance",
-    "difficulty": "Medium",
-    "statement": "Given two strings `word1` and `word2`, return the minimum number of operations required to convert `word1` to `word2`.\nYou have the following three operations permitted on a word:\n- Insert a character\n- Delete a character\n- Replace a character",
-    "constraints": "0 <= word1.length, word2.length <= 500\nword1 and word2 consist of lowercase English letters.",
-    "inputFormat": "Line 1: string `word1`.\nLine 2: string `word2`.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "horse\nros",
-            "output": "3",
-            "explanation": "horse -> rorse (replace h with r), rorse -> rose (delete r), rose -> ros (delete e)."
-        },
-        {
-            "input": "intention\nexecution",
-            "output": "5",
-            "explanation": "5 operations."
-        }
-    ],
-    "starterCode": {
-        "python": "word1 = input().strip()\nword2 = input().strip()\n# Classic Levenshtein DP table\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string word1, word2; cin >> word1 >> word2;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String word1 = sc.next(), word2 = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Edit Distance",
+  "slug": "edit-distance",
+  "difficulty": "Hard",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming",
+    "Strings"
+  ],
+  "statement": "The edit distance (Levenshtein distance) between two strings A and B is the minimum number of single-character operations needed to transform A into B.\n\nAllowed operations:\n1. Insert a character.\n2. Delete a character.\n3. Replace a character with another.\n\nGiven strings A and B, compute their edit distance.",
+  "inputFormat": "Two lines: the first contains A, the second contains B.",
+  "outputFormat": "A single integer: the edit distance between A and B.",
+  "constraints": "0 <= |A|, |B| <= 1000\nA and B contain only lowercase English letters.",
+  "examples": [
+    {
+      "input": "horse\nros",
+      "output": "3",
+      "explanation": "horse->rorse(replace h->r)->rose(delete r)->ros(delete e). 3 operations."
     },
-    "testCases": [
-        {
-            "input": "horse\nros",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "intention\nexecution",
-            "expectedOutput": "5",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "abc\nabc",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "abc\n",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "\nabc",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "kitten\nsitting",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "abcdefghijklmnop\nponmlkjihgfedcba",
-            "expectedOutput": "14",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "law\nawl",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "kitten\nsitting",
+      "output": "3",
+      "explanation": "kitten->sitten->sittin->sitting. 3 operations."
+    }
+  ],
+  "starterCode": {
+    "python": "a = input().strip()\nb = input().strip()\n# Write your solution here\n# Hint: use 2D DP table dp[i][j] = edit distance between a[:i] and b[:j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "horse\nros",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "kitten\nsitting",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc\nabc",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abc\n",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "\nabc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "a\nb",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abcde\nfghij",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "sunday\nsaturday",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "intention\nexecution",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcdef\nbcdef",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "abcdef\nabcde",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcdef\nabcgef",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "distance\ndistance",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "aa\na",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "ab\nba",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "law\nawl",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 15
+    },
+    {
+      "input": "abcdefghijklmnop\nponmlkjihgfedcba",
+      "expectedOutput": "14",
+      "isHidden": true,
+      "orderIndex": 16
+    },
+    {
+      "input": "algorithm\nalgorithm",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 17
+    }
+  ]
 }

@@ -1,119 +1,123 @@
 {
-    "title": "Min Stack",
-    "slug": "min-stack",
-    "difficulty": "Easy",
-    "statement": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.\n\nYou are given Q queries of types:\n- `1 X` : Push X onto the stack.\n- `2` : Pop the top element.\n- `3` : Print the top element.\n- `4` : Print the minimum element in the stack.\n\nType 2, 3, and 4 will only be queried when the stack is not empty.",
-    "constraints": "1 <= Q <= 10^5\n-10^9 <= X <= 10^9",
-    "inputFormat": "Line 1: an integer Q.\nNext Q lines: queries as described above.",
-    "outputFormat": "For every type 3 or type 4 query, print the requested element on a new line.",
-    "examples": [
-        {
-            "input": "7\n1 -2\n1 0\n1 -3\n4\n2\n3\n4",
-            "output": "-3\n0\n-2",
-            "explanation": "Push -2, 0, -3. Min is -3. Pop -3. Top is 0. Min is -2."
-        }
-    ],
-    "starterCode": {
-        "python": "q = int(input())\nst = []\nmin_st = []\nfor _ in range(q):\n    query = list(map(int, input().split()))\n    type = query[0]\n    # Implement push, pop, top, getMin in O(1)\n",
-        "cpp": "#include <iostream>\n#include <stack>\nusing namespace std;\nint main() {\n    int q; cin >> q;\n    stack<long long> st, min_st;\n    while (q--) {\n        int type; cin >> type;\n        if (type == 1) {\n            long long x; cin >> x;\n            // Push x\n        } else if (type == 2) {\n            // Pop\n        } else if (type == 3) {\n            // Print top\n        } else {\n            // Print min\n        }\n    }\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int q = Integer.parseInt(br.readLine().trim());\n        Stack<Long> st = new Stack<>();\n        Stack<Long> min_st = new Stack<>();\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < q; i++) {\n            StringTokenizer tz = new StringTokenizer(br.readLine());\n            int type = Integer.parseInt(tz.nextToken());\n            if (type == 1) {\n                long x = Long.parseLong(tz.nextToken());\n                // Push x\n            } else if (type == 2) {\n                // Pop\n            } else if (type == 3) {\n                // Apeend top\n            } else {\n                // Append min\n            }\n        }\n        System.out.print(sb);\n    }\n}\n"
+  "title": "Min Stack",
+  "slug": "min-stack",
+  "difficulty": "Easy",
+  "topic": "Stack & Queue",
+  "tags": [
+    "Stack"
+  ],
+  "statement": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.\n\nYou are given Q queries of types:\n- `1 X` : Push X onto the stack.\n- `2` : Pop the top element.\n- `3` : Print the top element.\n- `4` : Print the minimum element in the stack.\n\nType 2, 3, and 4 will only be queried when the stack is not empty.",
+  "inputFormat": "Line 1: an integer Q.\nNext Q lines: queries as described above.",
+  "outputFormat": "For every type 3 or type 4 query, print the requested element on a new line.",
+  "constraints": "1 <= Q <= 10^5\n-10^9 <= X <= 10^9",
+  "examples": [
+    {
+      "input": "7\n1 -2\n1 0\n1 -3\n4\n2\n3\n4",
+      "output": "-3\n0\n-2",
+      "explanation": "Push -2, 0, -3. Min is -3. Pop -3. Top is 0. Min is -2."
+    }
+  ],
+  "starterCode": {
+    "python": "q = int(input())\nst = []\nmin_st = []\nfor _ in range(q):\n    query = list(map(int, input().split()))\n    type = query[0]\n    # Implement push, pop, top, getMin in O(1)\n",
+    "cpp": "#include <iostream>\n#include <stack>\nusing namespace std;\nint main() {\n    int q; cin >> q;\n    stack<long long> st, min_st;\n    while (q--) {\n        int type; cin >> type;\n        if (type == 1) {\n            long long x; cin >> x;\n            // Push x\n        } else if (type == 2) {\n            // Pop\n        } else if (type == 3) {\n            // Print top\n        } else {\n            // Print min\n        }\n    }\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int q = Integer.parseInt(br.readLine().trim());\n        Stack<Long> st = new Stack<>();\n        Stack<Long> min_st = new Stack<>();\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < q; i++) {\n            StringTokenizer tz = new StringTokenizer(br.readLine());\n            int type = Integer.parseInt(tz.nextToken());\n            if (type == 1) {\n                long x = Long.parseLong(tz.nextToken());\n                // Push x\n            } else if (type == 2) {\n                // Pop\n            } else if (type == 3) {\n                // Apeend top\n            } else {\n                // Append min\n            }\n        }\n        System.out.print(sb);\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "7\n1 -2\n1 0\n1 -3\n4\n2\n3\n4",
+      "expectedOutput": "-3\n0\n-2",
+      "isHidden": false,
+      "orderIndex": 0
     },
-    "testCases": [
-        {
-            "input": "7\n1 -2\n1 0\n1 -3\n4\n2\n3\n4",
-            "expectedOutput": "-3\n0\n-2",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n1 5\n1 5\n4\n3",
-            "expectedOutput": "5\n5",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5\n1 -100\n4\n1 200\n4\n3",
-            "expectedOutput": "-100\n-100\n200",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "8\n1 1\n1 2\n4\n2\n4\n1 -5\n4\n3",
-            "expectedOutput": "1\n1\n-5\n-5",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "6\n1 10\n1 20\n1 30\n4\n2\n4",
-            "expectedOutput": "10\n10",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "9\n1 5\n1 2\n1 8\n1 1\n4\n2\n4\n2\n4",
-            "expectedOutput": "1\n2\n2",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "3\n1 0\n4\n3",
-            "expectedOutput": "0\n0",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "9\n1 10\n1 10\n4\n2\n4\n1 5\n4\n2\n4",
-            "expectedOutput": "10\n10\n5\n10",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "5\n1 -10\n1 -20\n4\n1 -30\n4",
-            "expectedOutput": "-20\n-30",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "7\n1 2\n1 3\n1 1\n4\n2\n4\n2",
-            "expectedOutput": "1\n2",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "7\n1 5\n4\n2\n1 10\n3\n4\n2",
-            "expectedOutput": "5\n10\n10",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "4\n1 999999999\n1 -999999999\n4\n3",
-            "expectedOutput": "-999999999\n-999999999",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "11\n1 1\n1 2\n1 3\n1 4\n4\n2\n4\n2\n4\n2\n4",
-            "expectedOutput": "1\n1\n1\n1",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "4\n1 7\n4\n1 7\n4",
-            "expectedOutput": "7\n7",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "8\n1 5\n3\n1 -5\n3\n4\n2\n3\n4",
-            "expectedOutput": "5\n-5\n-5\n5\n5",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "10\n1 -1\n1 -2\n1 -3\n4\n2\n4\n2\n4\n2\n1 100\n",
-            "expectedOutput": "-3\n-2\n-1",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n1 5\n1 5\n4\n3",
+      "expectedOutput": "5\n5",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5\n1 -100\n4\n1 200\n4\n3",
+      "expectedOutput": "-100\n-100\n200",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "8\n1 1\n1 2\n4\n2\n4\n1 -5\n4\n3",
+      "expectedOutput": "1\n1\n-5\n-5",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6\n1 10\n1 20\n1 30\n4\n2\n4",
+      "expectedOutput": "10\n10",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "9\n1 5\n1 2\n1 8\n1 1\n4\n2\n4\n2\n4",
+      "expectedOutput": "1\n2\n2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "3\n1 0\n4\n3",
+      "expectedOutput": "0\n0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "9\n1 10\n1 10\n4\n2\n4\n1 5\n4\n2\n4",
+      "expectedOutput": "10\n10\n5\n10",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "5\n1 -10\n1 -20\n4\n1 -30\n4",
+      "expectedOutput": "-20\n-30",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "7\n1 2\n1 3\n1 1\n4\n2\n4\n2",
+      "expectedOutput": "1\n2",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "7\n1 5\n4\n2\n1 10\n3\n4\n2",
+      "expectedOutput": "5\n10\n10",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4\n1 999999999\n1 -999999999\n4\n3",
+      "expectedOutput": "-999999999\n-999999999",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "11\n1 1\n1 2\n1 3\n1 4\n4\n2\n4\n2\n4\n2\n4",
+      "expectedOutput": "1\n1\n1\n1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4\n1 7\n4\n1 7\n4",
+      "expectedOutput": "7\n7",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "8\n1 5\n3\n1 -5\n3\n4\n2\n3\n4",
+      "expectedOutput": "5\n-5\n-5\n5\n5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "10\n1 -1\n1 -2\n1 -3\n4\n2\n4\n2\n4\n2\n1 100\n",
+      "expectedOutput": "-3\n-2\n-1",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

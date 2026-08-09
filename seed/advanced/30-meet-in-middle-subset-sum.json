@@ -2,10 +2,14 @@
   "title": "Meet in the Middle: Subset Sum Count",
   "slug": "meet-in-middle-subset-sum",
   "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
   "statement": "Given an array of N integers and a target T, count the number of subsets whose sum equals exactly T.\n\nWith N up to 40, brute-force O(2^N) is too slow. Split the array into two halves, enumerate all subset sums for each half, then use binary search (meet in the middle) to count valid pairs.\n\nPrint the count of subsets with sum equal to T.",
-  "constraints": "1 <= N <= 40\n-10^9 <= A[i] <= 10^9\n-10^18 <= T <= 10^18\nAnswer fits in a 64-bit integer.",
   "inputFormat": "The first line contains N and T.\nThe second line contains N integers.",
   "outputFormat": "A single integer: the number of subsets with sum T.",
+  "constraints": "1 <= N <= 40\n-10^9 <= A[i] <= 10^9\n-10^18 <= T <= 10^18\nAnswer fits in a 64-bit integer.",
   "examples": [
     {
       "input": "4 5\n1 2 3 4",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    static List<Long> gen(long[] a, int lo, int hi) {\n        List<Long> res = new ArrayList<>();\n        int sz = hi - lo;\n        for (int mask = 0; mask < (1 << sz); mask++) {\n            long s = 0;\n            for (int b = 0; b < sz; b++) if ((mask >> b & 1) == 1) s += a[lo + b];\n            res.add(s);\n        }\n        return res;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long T = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        int half = n / 2;\n        List<Long> L = gen(a, 0, half);\n        List<Long> R = gen(a, half, n);\n        Collections.sort(L);\n        long count = 0;\n        for (long s : R) {\n            long need = T - s;\n            int lo2 = Collections.binarySearch(L, need);\n            if (lo2 < 0) continue;\n            int i = lo2; while (i > 0 && L.get(i-1) == need) i--;\n            int j = lo2; while (j < L.size()-1 && L.get(j+1) == need) j++;\n            count += j - i + 1;\n        }\n        System.out.println(count);\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4 5\n1 2 3 4",              "expectedOutput": "2",  "isHidden": false, "orderIndex": 0 },
-    { "input": "5 0\n-3 -2 -1 1 2",         "expectedOutput": "3",  "isHidden": false, "orderIndex": 1 },
-    { "input": "3 6\n1 2 3",                 "expectedOutput": "1",  "isHidden": false, "orderIndex": 2 },
-    { "input": "4 0\n1 -1 2 -2",             "expectedOutput": "4",  "isHidden": false, "orderIndex": 3 },
-    { "input": "1 5\n5",                     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 4 },
-    { "input": "1 5\n4",                     "expectedOutput": "0",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "5 15\n1 2 3 4 5",            "expectedOutput": "1",  "isHidden": true,  "orderIndex": 6 },
-    { "input": "5 0\n0 0 0 0 0",             "expectedOutput": "32", "isHidden": true,  "orderIndex": 7 },
-    { "input": "4 10\n1 2 3 4",              "expectedOutput": "1",  "isHidden": true,  "orderIndex": 8 },
-    { "input": "6 7\n1 2 3 4 5 6",           "expectedOutput": "4",  "isHidden": true,  "orderIndex": 9 },
-    { "input": "4 100\n10 20 30 40",         "expectedOutput": "1",  "isHidden": true,  "orderIndex": 10 },
-    { "input": "3 0\n1 2 3",                 "expectedOutput": "1",  "isHidden": true,  "orderIndex": 11 },
-    { "input": "4 4\n1 1 1 1",               "expectedOutput": "6",  "isHidden": true,  "orderIndex": 12 },
-    { "input": "4 3\n1 1 1 1",               "expectedOutput": "4",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "5 5\n5 5 5 5 5",             "expectedOutput": "5",  "isHidden": true,  "orderIndex": 14 },
-    { "input": "6 0\n-3 -2 -1 0 1 2",        "expectedOutput": "8",  "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "4 5\n1 2 3 4",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5 0\n-3 -2 -1 1 2",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3 6\n1 2 3",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 0\n1 -1 2 -2",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 5\n5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 5\n4",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5 15\n1 2 3 4 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 0\n0 0 0 0 0",
+      "expectedOutput": "32",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4 10\n1 2 3 4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6 7\n1 2 3 4 5 6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4 100\n10 20 30 40",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "3 0\n1 2 3",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "4 4\n1 1 1 1",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 3\n1 1 1 1",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5 5\n5 5 5 5 5",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6 0\n-3 -2 -1 0 1 2",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

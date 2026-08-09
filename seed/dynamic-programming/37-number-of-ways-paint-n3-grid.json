@@ -1,76 +1,80 @@
 {
-    "title": "Number of Ways to Paint N×3 Grid",
-    "slug": "number-of-ways-paint-n3-grid",
-    "difficulty": "Hard",
-    "statement": "You have a `n x 3` grid. You want to paint all `3*n` cells with different colors. The available colors are: 1 (Red), 2 (Green), 3 (Blue), and 4 (Yellow). You can only use 3 colors, meaning you use a subset of size 3 from the above 4 colors for each row.\nEach cell must be painted such that no two adjacent cells (horizontally or vertically) share the same color.\nReturn the number of ways to paint the grid. Since the answer can be huge, return it modulo `10^9 + 7`.",
-    "constraints": "1 <= n <= 5000",
-    "inputFormat": "A single integer n.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "1",
-            "output": "12",
-            "explanation": "12 ways to paint a single row with 3 adjacent cells using 3 colors (no two adjacent same)."
-        },
-        {
-            "input": "2",
-            "output": "54",
-            "explanation": "54 valid colorings for a 2-row grid."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\nMOD = 10**9 + 7\n# DP tracking the pattern type of each row:\n# Pattern with 3 colors (aba-type) and patterns with alternating (abc-type)\ncolor3 = 12  # aba-type patterns for 1 row\ncolor2 = 6   # abc-type per row\n# Then transition: each row type transitions to certain counts of next row type.\n",
-        "cpp": "#include <iostream>\nusing namespace std;\nconst int MOD = 1e9 + 7;\nint main() {\n    long long n; cin >> n;\n    // Implement row coloring pattern transitions\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        final long MOD = 1_000_000_007L;\n        // Write logic\n    }\n}\n"
+  "title": "Number of Ways to Paint N×3 Grid",
+  "slug": "number-of-ways-paint-n3-grid",
+  "difficulty": "Hard",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "You have a `n x 3` grid. You want to paint all `3*n` cells with different colors. The available colors are: 1 (Red), 2 (Green), 3 (Blue), and 4 (Yellow). You can only use 3 colors, meaning you use a subset of size 3 from the above 4 colors for each row.\nEach cell must be painted such that no two adjacent cells (horizontally or vertically) share the same color.\nReturn the number of ways to paint the grid. Since the answer can be huge, return it modulo `10^9 + 7`.",
+  "inputFormat": "A single integer n.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= n <= 5000",
+  "examples": [
+    {
+      "input": "1",
+      "output": "12",
+      "explanation": "12 ways to paint a single row with 3 adjacent cells using 3 colors (no two adjacent same)."
     },
-    "testCases": [
-        {
-            "input": "1",
-            "expectedOutput": "12",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "2",
-            "expectedOutput": "54",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3",
-            "expectedOutput": "246",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "7",
-            "expectedOutput": "106494",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "100",
-            "expectedOutput": "975699710",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1000",
-            "expectedOutput": "540460971",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "5000",
-            "expectedOutput": "7781514",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "10",
-            "expectedOutput": "12117594",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "2",
+      "output": "54",
+      "explanation": "54 valid colorings for a 2-row grid."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\nMOD = 10**9 + 7\n# DP tracking the pattern type of each row:\n# Pattern with 3 colors (aba-type) and patterns with alternating (abc-type)\ncolor3 = 12  # aba-type patterns for 1 row\ncolor2 = 6   # abc-type per row\n# Then transition: each row type transitions to certain counts of next row type.\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nconst int MOD = 1e9 + 7;\nint main() {\n    long long n; cin >> n;\n    // Implement row coloring pattern transitions\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        final long MOD = 1_000_000_007L;\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "1",
+      "expectedOutput": "12",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "2",
+      "expectedOutput": "54",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3",
+      "expectedOutput": "246",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "7",
+      "expectedOutput": "106494",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "100",
+      "expectedOutput": "975699710",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1000",
+      "expectedOutput": "540460971",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5000",
+      "expectedOutput": "7781514",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "10",
+      "expectedOutput": "12117594",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

@@ -1,76 +1,80 @@
 {
-    "title": "Interleaving String",
-    "slug": "interleaving-string",
-    "difficulty": "Medium",
-    "statement": "Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an interleaving of `s1` and `s2`.\nAn interleaving of two strings `s` and `t` is a configuration where `s` and `t` are divided into `n` and `m` substrings respectively, such that they alternate.",
-    "constraints": "0 <= s1.length, s2.length <= 100\n0 <= s3.length <= 200\ns1, s2, and s3 consist of lowercase English letters.",
-    "inputFormat": "Line 1: string s1.\nLine 2: string s2.\nLine 3: string s3.",
-    "outputFormat": "Print `YES` or `NO`.",
-    "examples": [
-        {
-            "input": "aabcc\ndbbca\naadbbcbcac",
-            "output": "YES",
-            "explanation": "Valid interleaving exists."
-        },
-        {
-            "input": "aabcc\ndbbca\naadbbbaccc",
-            "output": "NO",
-            "explanation": "No valid interleaving."
-        }
-    ],
-    "starterCode": {
-        "python": "s1 = input().strip()\ns2 = input().strip()\ns3 = input().strip()\n# dp[i][j] = can s3[:(i+j)] be formed by s1[:i] and s2[:j]\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s1, s2, s3; cin >> s1 >> s2 >> s3;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s1 = sc.next(), s2 = sc.next(), s3 = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Interleaving String",
+  "slug": "interleaving-string",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an interleaving of `s1` and `s2`.\nAn interleaving of two strings `s` and `t` is a configuration where `s` and `t` are divided into `n` and `m` substrings respectively, such that they alternate.",
+  "inputFormat": "Line 1: string s1.\nLine 2: string s2.\nLine 3: string s3.",
+  "outputFormat": "Print `YES` or `NO`.",
+  "constraints": "0 <= s1.length, s2.length <= 100\n0 <= s3.length <= 200\ns1, s2, and s3 consist of lowercase English letters.",
+  "examples": [
+    {
+      "input": "aabcc\ndbbca\naadbbcbcac",
+      "output": "YES",
+      "explanation": "Valid interleaving exists."
     },
-    "testCases": [
-        {
-            "input": "aabcc\ndbbca\naadbbcbcac",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "aabcc\ndbbca\naadbbbaccc",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "\n\n",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "abc\ndef\nabcdef",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "abc\ndef\ndefabc",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abc\ndef\nabcghi",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aa\nab\naaba",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "aaa\naaa\naaaaaa",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "aabcc\ndbbca\naadbbbaccc",
+      "output": "NO",
+      "explanation": "No valid interleaving."
+    }
+  ],
+  "starterCode": {
+    "python": "s1 = input().strip()\ns2 = input().strip()\ns3 = input().strip()\n# dp[i][j] = can s3[:(i+j)] be formed by s1[:i] and s2[:j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s1, s2, s3; cin >> s1 >> s2 >> s3;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s1 = sc.next(), s2 = sc.next(), s3 = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "aabcc\ndbbca\naadbbcbcac",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aabcc\ndbbca\naadbbbaccc",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "\n\n",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abc\ndef\nabcdef",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abc\ndef\ndefabc",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abc\ndef\nabcghi",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aa\nab\naaba",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aaa\naaa\naaaaaa",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

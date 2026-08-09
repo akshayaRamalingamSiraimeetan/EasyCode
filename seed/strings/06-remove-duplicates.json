@@ -2,10 +2,14 @@
   "title": "Remove Consecutive Duplicates",
   "slug": "remove-consecutive-duplicates",
   "difficulty": "Easy",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S of lowercase English letters, remove all consecutive duplicate characters, keeping only the first occurrence of each run.\n\nFor example, \"aaabbbcc\" becomes \"abc\".",
-  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single line: S with consecutive duplicate characters removed.",
+  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "aaabbbcc",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "aaabbbcc", "expectedOutput": "abc", "isHidden": false, "orderIndex": 0 },
-    { "input": "abcd", "expectedOutput": "abcd", "isHidden": false, "orderIndex": 1 },
-    { "input": "a", "expectedOutput": "a", "isHidden": false, "orderIndex": 2 },
-    { "input": "aabbccdd", "expectedOutput": "abcd", "isHidden": false, "orderIndex": 3 },
-    { "input": "zzzzzz", "expectedOutput": "z", "isHidden": true, "orderIndex": 4 },
-    { "input": "abba", "expectedOutput": "aba", "isHidden": true, "orderIndex": 5 },
-    { "input": "aabbaabb", "expectedOutput": "abab", "isHidden": true, "orderIndex": 6 },
-    { "input": "mississippi", "expectedOutput": "misisipi", "isHidden": true, "orderIndex": 7 },
-    { "input": "aabbccaabbcc", "expectedOutput": "abcabc", "isHidden": true, "orderIndex": 8 },
-    { "input": "aaaa", "expectedOutput": "a", "isHidden": true, "orderIndex": 9 },
-    { "input": "abcabc", "expectedOutput": "abcabc", "isHidden": true, "orderIndex": 10 },
-    { "input": "aaabccc", "expectedOutput": "abc", "isHidden": true, "orderIndex": 11 },
-    { "input": "xxyyzz", "expectedOutput": "xyz", "isHidden": true, "orderIndex": 12 },
-    { "input": "ababab", "expectedOutput": "ababab", "isHidden": true, "orderIndex": 13 },
-    { "input": "aaabaaab", "expectedOutput": "abaab", "isHidden": true, "orderIndex": 14 },
-    { "input": "lleeettttssgooo", "expectedOutput": "letsgo", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "aaabbbcc",
+      "expectedOutput": "abc",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "abcd",
+      "expectedOutput": "abcd",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "a",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "aabbccdd",
+      "expectedOutput": "abcd",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "zzzzzz",
+      "expectedOutput": "z",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abba",
+      "expectedOutput": "aba",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aabbaabb",
+      "expectedOutput": "abab",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "mississippi",
+      "expectedOutput": "misisipi",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "aabbccaabbcc",
+      "expectedOutput": "abcabc",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "aaaa",
+      "expectedOutput": "a",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "abcabc",
+      "expectedOutput": "abcabc",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "aaabccc",
+      "expectedOutput": "abc",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "xxyyzz",
+      "expectedOutput": "xyz",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "ababab",
+      "expectedOutput": "ababab",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aaabaaab",
+      "expectedOutput": "abaab",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "lleeettttssgooo",
+      "expectedOutput": "letsgo",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

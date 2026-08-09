@@ -1,88 +1,92 @@
 {
-    "title": "Diameter of Binary Tree",
-    "slug": "diameter-of-binary-tree",
-    "difficulty": "Easy",
-    "statement": "Given the root of a binary tree, return the length of the diameter of the tree.\n\nThe diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.\n\nThe length of a path between two nodes is represented by the number of edges between them.",
-    "constraints": "1 <= The number of nodes in the tree <= 10^4\n-100 <= Node.val <= 100",
-    "inputFormat": "A single line containing space-separated strings representing the level-order traversal of the tree.",
-    "outputFormat": "A single integer representing the diameter.",
-    "examples": [
-        {
-            "input": "1 2 3 4 5",
-            "output": "3",
-            "explanation": "3 is the length of the path [4,2,1,3] or [5,2,1,3]."
-        },
-        {
-            "input": "1 2",
-            "output": "1",
-            "explanation": "Length of path [1,2] is 1."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nline = sys.stdin.read().split()\n# Implement diameter logic\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  "title": "Diameter of Binary Tree",
+  "slug": "diameter-of-binary-tree",
+  "difficulty": "Easy",
+  "topic": "Trees",
+  "tags": [
+    "Trees"
+  ],
+  "statement": "Given the root of a binary tree, return the length of the diameter of the tree.\n\nThe diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.\n\nThe length of a path between two nodes is represented by the number of edges between them.",
+  "inputFormat": "A single line containing space-separated strings representing the level-order traversal of the tree.",
+  "outputFormat": "A single integer representing the diameter.",
+  "constraints": "1 <= The number of nodes in the tree <= 10^4\n-100 <= Node.val <= 100",
+  "examples": [
+    {
+      "input": "1 2 3 4 5",
+      "output": "3",
+      "explanation": "3 is the length of the path [4,2,1,3] or [5,2,1,3]."
     },
-    "testCases": [
-        {
-            "input": "1 2 3 4 5",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "1 2",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1 2 null 3 null 4 null 5",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1 2 3 null null 4 5",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 2 3 4 5 6 7 8 9",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "4 -7 -3 null null -9 -3 9 -7 -4 null 6 null -6 -6 null null 0 6 5 null 9 null null -1 -4 null null null -2",
-            "expectedOutput": "8",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "1 null 2 3 4 5 null null 6",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "0 0 0 0 0 0 0",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "100 50 150 25 null null 200",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 9
-        }
-    ]
+    {
+      "input": "1 2",
+      "output": "1",
+      "explanation": "Length of path [1,2] is 1."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nline = sys.stdin.read().split()\n# Implement diameter logic\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "1 2 3 4 5",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1 2",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1 2 null 3 null 4 null 5",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 2 3 null null 4 5",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 2 3 4 5 6 7 8 9",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4 -7 -3 null null -9 -3 9 -7 -4 null 6 null -6 -6 null null 0 6 5 null 9 null null -1 -4 null null null -2",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1 null 2 3 4 5 null null 6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "0 0 0 0 0 0 0",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "100 50 150 25 null null 200",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 9
+    }
+  ]
 }

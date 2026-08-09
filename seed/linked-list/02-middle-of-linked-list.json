@@ -1,100 +1,104 @@
 {
-    "title": "Middle of the Linked List",
-    "slug": "middle-of-linked-list",
-    "difficulty": "Easy",
-    "statement": "Given the head of a singly linked list represented as an array of values, return the values of the list starting from the middle node.\n\nIf there are two middle nodes, return the second middle node.\n\nYou should implement the Linked List data structure, populate it, and use the **fast and slow pointer** technique to find the middle in a single pass.",
-    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing the list.",
-    "outputFormat": "Space-separated integers from the middle node to the end.",
-    "examples": [
-        {
-            "input": "5\n1 2 3 4 5",
-            "output": "3 4 5",
-            "explanation": "The middle node is 3."
-        },
-        {
-            "input": "6\n1 2 3 4 5 6",
-            "output": "4 5 6",
-            "explanation": "Since the list has two middle nodes (3 and 4), return the second one."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n# Build the list\n# Write fast and slow pointer logic to find middle\n# Print from middle to end\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nstruct ListNode {\n    long long val;\n    ListNode *next;\n    ListNode(long long x) : val(x), next(NULL) {}\n};\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Build the list and write fast/slow pointer logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\nclass ListNode {\n    long val;\n    ListNode next;\n    ListNode(long x) { val = x; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        // Build the list and write fast/slow pointer logic\n    }\n}\n"
+  "title": "Middle of the Linked List",
+  "slug": "middle-of-linked-list",
+  "difficulty": "Easy",
+  "topic": "Linked List",
+  "tags": [
+    "Linked List"
+  ],
+  "statement": "Given the head of a singly linked list represented as an array of values, return the values of the list starting from the middle node.\n\nIf there are two middle nodes, return the second middle node.\n\nYou should implement the Linked List data structure, populate it, and use the **fast and slow pointer** technique to find the middle in a single pass.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing the list.",
+  "outputFormat": "Space-separated integers from the middle node to the end.",
+  "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "5\n1 2 3 4 5",
+      "output": "3 4 5",
+      "explanation": "The middle node is 3."
     },
-    "testCases": [
-        {
-            "input": "5\n1 2 3 4 5",
-            "expectedOutput": "3 4 5",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "6\n1 2 3 4 5 6",
-            "expectedOutput": "4 5 6",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1\n42",
-            "expectedOutput": "42",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "2\n10 20",
-            "expectedOutput": "20",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "3\n10 20 30",
-            "expectedOutput": "20 30",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4\n1 2 3 4",
-            "expectedOutput": "3 4",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "7\n9 8 7 6 5 4 3",
-            "expectedOutput": "6 5 4 3",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "8\n1 1 1 1 2 2 2 2",
-            "expectedOutput": "2 2 2 2",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "9\n10 20 30 40 50 60 70 80 90",
-            "expectedOutput": "50 60 70 80 90",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "10\n1 2 3 4 5 6 7 8 9 10",
-            "expectedOutput": "6 7 8 9 10",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "5\n0 0 0 0 0",
-            "expectedOutput": "0 0 0",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "2\n-1 -2",
-            "expectedOutput": "-2",
-            "isHidden": true,
-            "orderIndex": 11
-        }
-    ]
+    {
+      "input": "6\n1 2 3 4 5 6",
+      "output": "4 5 6",
+      "explanation": "Since the list has two middle nodes (3 and 4), return the second one."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n# Build the list\n# Write fast and slow pointer logic to find middle\n# Print from middle to end\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nstruct ListNode {\n    long long val;\n    ListNode *next;\n    ListNode(long long x) : val(x), next(NULL) {}\n};\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Build the list and write fast/slow pointer logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\nclass ListNode {\n    long val;\n    ListNode next;\n    ListNode(long x) { val = x; next = null; }\n}\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        // Build the list and write fast/slow pointer logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5\n1 2 3 4 5",
+      "expectedOutput": "3 4 5",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "6\n1 2 3 4 5 6",
+      "expectedOutput": "4 5 6",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1\n42",
+      "expectedOutput": "42",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2\n10 20",
+      "expectedOutput": "20",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3\n10 20 30",
+      "expectedOutput": "20 30",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4\n1 2 3 4",
+      "expectedOutput": "3 4",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "7\n9 8 7 6 5 4 3",
+      "expectedOutput": "6 5 4 3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "8\n1 1 1 1 2 2 2 2",
+      "expectedOutput": "2 2 2 2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9\n10 20 30 40 50 60 70 80 90",
+      "expectedOutput": "50 60 70 80 90",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "10\n1 2 3 4 5 6 7 8 9 10",
+      "expectedOutput": "6 7 8 9 10",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5\n0 0 0 0 0",
+      "expectedOutput": "0 0 0",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "2\n-1 -2",
+      "expectedOutput": "-2",
+      "isHidden": true,
+      "orderIndex": 11
+    }
+  ]
 }

@@ -2,10 +2,14 @@
   "title": "Minimum Cost Path in Matrix with Obstacles",
   "slug": "minimum-cost-path-matrix-obstacles",
   "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
   "statement": "You are given an N×M grid where each cell contains either a non-negative cost or -1 (obstacle). Starting from cell (0,0), reach cell (N-1,M-1) moving only right or down. You cannot pass through obstacles (-1 cells).\n\nFind the minimum total cost path. The cost of a path is the sum of costs of all cells visited (including start and end).\n\nIf no valid path exists, print -1.\n\nThis is a company-style interview problem combining dynamic programming, matrix traversal, and edge-case handling.",
-  "constraints": "1 <= N, M <= 500\n-1 <= grid[i][j] <= 10^4\ngrid[0][0] != -1 and grid[N-1][M-1] != -1",
   "inputFormat": "Line 1: N and M.\nNext N lines: M space-separated integers per row (-1 for obstacles).",
   "outputFormat": "A single integer: the minimum cost, or -1 if no path exists.",
+  "constraints": "1 <= N, M <= 500\n-1 <= grid[i][j] <= 10^4\ngrid[0][0] != -1 and grid[N-1][M-1] != -1",
   "examples": [
     {
       "input": "3 3\n1 3 1\n1 5 1\n4 2 1",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int n=sc.nextInt(),m=sc.nextInt();\n        int[][] g=new int[n][m];\n        for(int i=0;i<n;i++) for(int j=0;j<m;j++) g[i][j]=sc.nextInt();\n        long INF=Long.MAX_VALUE/2;\n        long[][] dp=new long[n][m];\n        for(long[] r:dp) Arrays.fill(r,INF);\n        dp[0][0]=g[0][0];\n        for(int i=0;i<n;i++) for(int j=0;j<m;j++){\n            if(i==0&&j==0) continue;\n            if(g[i][j]==-1) continue;\n            long best=INF;\n            if(i>0&&dp[i-1][j]<INF) best=Math.min(best,dp[i-1][j]);\n            if(j>0&&dp[i][j-1]<INF) best=Math.min(best,dp[i][j-1]);\n            dp[i][j]=(best==INF)?INF:best+g[i][j];\n        }\n        System.out.println(dp[n-1][m-1]>=INF?-1:dp[n-1][m-1]);\n    }\n}\n"
   },
   "testCases": [
-    { "input": "3 3\n1 3 1\n1 5 1\n4 2 1",           "expectedOutput": "7",  "isHidden": false, "orderIndex": 0 },
-    { "input": "3 3\n1 -1 1\n1 -1 1\n1 1 1",           "expectedOutput": "5",  "isHidden": false, "orderIndex": 1 },
-    { "input": "1 1\n5",                                "expectedOutput": "5",  "isHidden": false, "orderIndex": 2 },
-    { "input": "2 2\n1 2\n3 4",                         "expectedOutput": "7",  "isHidden": false, "orderIndex": 3 },
-    { "input": "2 2\n0 -1\n-1 0",                       "expectedOutput": "-1", "isHidden": true,  "orderIndex": 4 },
-    { "input": "3 3\n0 0 0\n0 0 0\n0 0 0",              "expectedOutput": "0",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "2 3\n1 2 3\n4 5 6",                     "expectedOutput": "12", "isHidden": true,  "orderIndex": 6 },
-    { "input": "3 2\n1 2\n-1 3\n5 1",                  "expectedOutput": "7",  "isHidden": true,  "orderIndex": 7 },
-    { "input": "3 3\n1 2 3\n-1 -1 4\n-1 -1 5",          "expectedOutput": "13", "isHidden": true,  "orderIndex": 8 },
-    { "input": "4 4\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16", "expectedOutput": "73", "isHidden": true, "orderIndex": 9 },
-    { "input": "3 3\n5 -1 -1\n5 -1 -1\n5 5 5",          "expectedOutput": "25", "isHidden": true,  "orderIndex": 10 },
-    { "input": "1 5\n1 2 3 4 5",                        "expectedOutput": "15", "isHidden": true,  "orderIndex": 11 },
-    { "input": "5 1\n1\n2\n3\n4\n5",                   "expectedOutput": "15", "isHidden": true,  "orderIndex": 12 },
-    { "input": "3 4\n1 1 1 1\n-1 -1 -1 1\n1 1 1 1",    "expectedOutput": "8",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "2 2\n0 0\n0 0",                         "expectedOutput": "0",  "isHidden": true,  "orderIndex": 14 },
-    { "input": "3 3\n1 1 1\n-1 1 -1\n1 1 1",            "expectedOutput": "6",  "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "3 3\n1 3 1\n1 5 1\n4 2 1",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3 3\n1 -1 1\n1 -1 1\n1 1 1",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 1\n5",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2 2\n1 2\n3 4",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "2 2\n0 -1\n-1 0",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3 3\n0 0 0\n0 0 0\n0 0 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "2 3\n1 2 3\n4 5 6",
+      "expectedOutput": "12",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "3 2\n1 2\n-1 3\n5 1",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3 3\n1 2 3\n-1 -1 4\n-1 -1 5",
+      "expectedOutput": "13",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4 4\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
+      "expectedOutput": "73",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "3 3\n5 -1 -1\n5 -1 -1\n5 5 5",
+      "expectedOutput": "25",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "1 5\n1 2 3 4 5",
+      "expectedOutput": "15",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5 1\n1\n2\n3\n4\n5",
+      "expectedOutput": "15",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3 4\n1 1 1 1\n-1 -1 -1 1\n1 1 1 1",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "2 2\n0 0\n0 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "3 3\n1 1 1\n-1 1 -1\n1 1 1",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

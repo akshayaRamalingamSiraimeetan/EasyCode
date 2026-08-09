@@ -1,87 +1,91 @@
 {
-    "title": "Binary Tree Level Order Traversal",
-    "slug": "level-order-traversal",
-    "difficulty": "Medium",
-    "statement": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).\n\nThe input tree is given in a level-order serialized array format, but you must group the output such that each level of the tree prints on a separate line.",
-    "constraints": "0 <= The number of nodes in the tree <= 2000\n-1000 <= Node.val <= 1000",
-    "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree (`null` for empty nodes).",
-    "outputFormat": "Print each level's space-separated integer values on a newline.",
-    "examples": [
-        {
-            "input": "3 9 20 null null 15 7",
-            "output": "3\n9 20\n15 7",
-            "explanation": "Root is 3. Level 1 is 9, 20. Level 2 is 15, 7."
-        },
-        {
-            "input": "1",
-            "output": "1",
-            "explanation": "A single root."
-        },
-        {
-            "input": "",
-            "output": "\n",
-            "explanation": "Empty tree, empty output."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nline = sys.stdin.read().split()\n# Implement BFS grouping elements by level\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Implement level order grouping\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null || line.trim().isEmpty()) { System.out.println(); return; }\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  "title": "Binary Tree Level Order Traversal",
+  "slug": "level-order-traversal",
+  "difficulty": "Medium",
+  "topic": "Trees",
+  "tags": [
+    "Trees"
+  ],
+  "statement": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).\n\nThe input tree is given in a level-order serialized array format, but you must group the output such that each level of the tree prints on a separate line.",
+  "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree (`null` for empty nodes).",
+  "outputFormat": "Print each level's space-separated integer values on a newline.",
+  "constraints": "0 <= The number of nodes in the tree <= 2000\n-1000 <= Node.val <= 1000",
+  "examples": [
+    {
+      "input": "3 9 20 null null 15 7",
+      "output": "3\n9 20\n15 7",
+      "explanation": "Root is 3. Level 1 is 9, 20. Level 2 is 15, 7."
     },
-    "testCases": [
-        {
-            "input": "3 9 20 null null 15 7",
-            "expectedOutput": "3\n9 20\n15 7",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1 2 null 3 null 4",
-            "expectedOutput": "1\n2\n3\n4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1 null 2 null 3",
-            "expectedOutput": "1\n2\n3",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 2 3 4 5 6 7",
-            "expectedOutput": "1\n2 3\n4 5 6 7",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "10 5 15 3 7 13 18 1 null 6",
-            "expectedOutput": "10\n5 15\n3 7 13 18\n1 6",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5 4 8 11 null 13 4 7 2 null null 5 1",
-            "expectedOutput": "5\n4 8\n11 13 4\n7 2 5 1",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "1 2 3 null null 4 5 null null 6",
-            "expectedOutput": "1\n2 3\n4 5\n6",
-            "isHidden": true,
-            "orderIndex": 8
-        }
-    ]
+    {
+      "input": "1",
+      "output": "1",
+      "explanation": "A single root."
+    },
+    {
+      "input": "",
+      "output": "\n",
+      "explanation": "Empty tree, empty output."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nline = sys.stdin.read().split()\n# Implement BFS grouping elements by level\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Implement level order grouping\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null || line.trim().isEmpty()) { System.out.println(); return; }\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "3 9 20 null null 15 7",
+      "expectedOutput": "3\n9 20\n15 7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1 2 null 3 null 4",
+      "expectedOutput": "1\n2\n3\n4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 null 2 null 3",
+      "expectedOutput": "1\n2\n3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 2 3 4 5 6 7",
+      "expectedOutput": "1\n2 3\n4 5 6 7",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "10 5 15 3 7 13 18 1 null 6",
+      "expectedOutput": "10\n5 15\n3 7 13 18\n1 6",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 4 8 11 null 13 4 7 2 null null 5 1",
+      "expectedOutput": "5\n4 8\n11 13 4\n7 2 5 1",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "1 2 3 null null 4 5 null null 6",
+      "expectedOutput": "1\n2 3\n4 5\n6",
+      "isHidden": true,
+      "orderIndex": 8
+    }
+  ]
 }

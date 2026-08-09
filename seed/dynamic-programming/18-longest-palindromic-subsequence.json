@@ -1,76 +1,80 @@
 {
-    "title": "Longest Palindromic Subsequence",
-    "slug": "longest-palindromic-subsequence",
-    "difficulty": "Medium",
-    "statement": "Given a string `s`, find the longest palindromic subsequence's length in `s`. A palindromic subsequence is a subsequence that reads the same forwards and backwards.",
-    "constraints": "1 <= s.length <= 1000\ns consists only of lowercase English letters.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "bbbab",
-            "output": "4",
-            "explanation": "LPS is 'bbbb' (subsequence of bbbab)."
-        },
-        {
-            "input": "cbbd",
-            "output": "2",
-            "explanation": "LPS is 'bb'."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# LPS(s) = LCS(s, reverse(s))\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Longest Palindromic Subsequence",
+  "slug": "longest-palindromic-subsequence",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given a string `s`, find the longest palindromic subsequence's length in `s`. A palindromic subsequence is a subsequence that reads the same forwards and backwards.",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= s.length <= 1000\ns consists only of lowercase English letters.",
+  "examples": [
+    {
+      "input": "bbbab",
+      "output": "4",
+      "explanation": "LPS is 'bbbb' (subsequence of bbbab)."
     },
-    "testCases": [
-        {
-            "input": "bbbab",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "cbbd",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "abcba",
-            "expectedOutput": "5",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "aabaa",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "agbdba",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "racecar",
-            "expectedOutput": "7",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "abcdefgh",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "cbbd",
+      "output": "2",
+      "explanation": "LPS is 'bb'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# LPS(s) = LCS(s, reverse(s))\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "bbbab",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "cbbd",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abcba",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aabaa",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "agbdba",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "racecar",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abcdefgh",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

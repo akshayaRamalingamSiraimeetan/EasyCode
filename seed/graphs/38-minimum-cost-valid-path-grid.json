@@ -1,64 +1,68 @@
 {
-    "title": "Minimum Cost to Make at Least One Valid Path in a Grid",
-    "slug": "minimum-cost-valid-path-grid",
-    "difficulty": "Hard",
-    "statement": "Given an `m x n` grid. Each cell of the grid has a sign pointing to the next cell you should visit if you are currently in this cell. The sign of `grid[i][j]` can be:\n- 1 (Right)\n- 2 (Left)\n- 3 (Down)\n- 4 (Up)\nYou can modify the sign on a cell to any other sign at a cost of `1`.\nReturn the minimum cost to make the grid have at least one valid path from the upper left cell `(0, 0)` to the bottom right cell `(m - 1, n - 1)`.",
-    "constraints": "1 <= m, n <= 100\ngrid[i][j] is 1, 2, 3, or 4.",
-    "inputFormat": "Line 1: two integers m and n.\nNext m lines: n space-separated integers.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "4 4\n1 1 1 1\n2 2 2 2\n1 1 1 1\n2 2 2 2",
-            "output": "3",
-            "explanation": "Modify signs at (0,3), (1,0), (2,3) to point appropriately to form a path."
-        },
-        {
-            "input": "2 2\n1 1\n3 3",
-            "output": "0",
-            "explanation": "Valid path already exists."
-        }
-    ],
-    "starterCode": {
-        "python": "import collections\nm, n = map(int, input().split())\ngrid = [list(map(int, input().split())) for _ in range(m)]\n# 0-1 BFS with deque\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <deque>\nusing namespace std;\nint main() {\n    int m,n; cin >> m >> n;\n    vector<vector<int>> grid(m, vector<int>(n));\n    for(int i=0; i<m; i++) for(int j=0; j<n; j++) cin >> grid[i][j];\n    // 0-1 BFS\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        int[][] grid = new int[m][n];\n        for(int i=0; i<m; i++) for(int j=0; j<n; j++) grid[i][j]=sc.nextInt();\n        // 0-1 BFS\n    }\n}\n"
+  "title": "Minimum Cost to Make at Least One Valid Path in a Grid",
+  "slug": "minimum-cost-valid-path-grid",
+  "difficulty": "Hard",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given an `m x n` grid. Each cell of the grid has a sign pointing to the next cell you should visit if you are currently in this cell. The sign of `grid[i][j]` can be:\n- 1 (Right)\n- 2 (Left)\n- 3 (Down)\n- 4 (Up)\nYou can modify the sign on a cell to any other sign at a cost of `1`.\nReturn the minimum cost to make the grid have at least one valid path from the upper left cell `(0, 0)` to the bottom right cell `(m - 1, n - 1)`.",
+  "inputFormat": "Line 1: two integers m and n.\nNext m lines: n space-separated integers.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= m, n <= 100\ngrid[i][j] is 1, 2, 3, or 4.",
+  "examples": [
+    {
+      "input": "4 4\n1 1 1 1\n2 2 2 2\n1 1 1 1\n2 2 2 2",
+      "output": "3",
+      "explanation": "Modify signs at (0,3), (1,0), (2,3) to point appropriately to form a path."
     },
-    "testCases": [
-        {
-            "input": "4 4\n1 1 1 1\n2 2 2 2\n1 1 1 1\n2 2 2 2",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "2 2\n1 1\n3 3",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "2 2\n1 2\n4 3",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1 1\n1",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "3 3\n1 1 3\n3 2 2\n1 1 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5 5\n1 1 1 1 3\n4 2 2 2 2\n1 1 1 1 3\n4 2 2 2 2\n1 1 1 1 1",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "2 2\n1 1\n3 3",
+      "output": "0",
+      "explanation": "Valid path already exists."
+    }
+  ],
+  "starterCode": {
+    "python": "import collections\nm, n = map(int, input().split())\ngrid = [list(map(int, input().split())) for _ in range(m)]\n# 0-1 BFS with deque\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <deque>\nusing namespace std;\nint main() {\n    int m,n; cin >> m >> n;\n    vector<vector<int>> grid(m, vector<int>(n));\n    for(int i=0; i<m; i++) for(int j=0; j<n; j++) cin >> grid[i][j];\n    // 0-1 BFS\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        int[][] grid = new int[m][n];\n        for(int i=0; i<m; i++) for(int j=0; j<n; j++) grid[i][j]=sc.nextInt();\n        // 0-1 BFS\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4 4\n1 1 1 1\n2 2 2 2\n1 1 1 1\n2 2 2 2",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "2 2\n1 1\n3 3",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2 2\n1 2\n4 3",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1 1\n1",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 3\n1 1 3\n3 2 2\n1 1 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5 5\n1 1 1 1 3\n4 2 2 2 2\n1 1 1 1 3\n4 2 2 2 2\n1 1 1 1 1",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

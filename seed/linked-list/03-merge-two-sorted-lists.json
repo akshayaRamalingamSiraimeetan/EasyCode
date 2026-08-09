@@ -1,100 +1,104 @@
 {
-    "title": "Merge Two Sorted Lists",
-    "slug": "merge-two-sorted-lists",
-    "difficulty": "Easy",
-    "statement": "Given the heads of two sorted linked lists (represented as arrays), merge the two lists into one sorted linked list and return its array representation.\n\nThe list should be made by splicing together the nodes of the first two lists.",
-    "constraints": "0 <= N, M <= 10^5\n-10^9 <= A[i], B[i] <= 10^9\nBoth arrays are sorted in non-decreasing order.",
-    "inputFormat": "Line 1: two integers N and M.\nLine 2: N space-separated integers (List A).\nLine 3: M space-separated integers (List B).\n(If a length is 0, the corresponding line may be empty).",
-    "outputFormat": "N + M space-separated integers representing the merged list.",
-    "examples": [
-        {
-            "input": "3 3\n1 2 4\n1 3 4",
-            "output": "1 1 2 3 4 4",
-            "explanation": "The merged sorted items."
-        },
-        {
-            "input": "0 1\n\n0",
-            "output": "0",
-            "explanation": "One list is empty."
-        }
-    ],
-    "starterCode": {
-        "python": "n, m = map(int, input().split())\na = list(map(int, input().split())) if n > 0 else []\nb = list(map(int, input().split())) if m > 0 else []\n# You can merge the arrays directly or build linked lists to merge\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, m; \n    if (!(cin >> n >> m)) return 0;\n    vector<long long> a(n), b(m);\n    for(int i = 0; i < n; i++) cin >> a[i];\n    for(int i = 0; i < m; i++) cin >> b[i];\n    // Write logic here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if(line == null) return;\n        StringTokenizer st = new StringTokenizer(line);\n        int n = Integer.parseInt(st.nextToken()), m = Integer.parseInt(st.nextToken());\n        // Write logic here\n    }\n}\n"
+  "title": "Merge Two Sorted Lists",
+  "slug": "merge-two-sorted-lists",
+  "difficulty": "Easy",
+  "topic": "Linked List",
+  "tags": [
+    "Linked List"
+  ],
+  "statement": "Given the heads of two sorted linked lists (represented as arrays), merge the two lists into one sorted linked list and return its array representation.\n\nThe list should be made by splicing together the nodes of the first two lists.",
+  "inputFormat": "Line 1: two integers N and M.\nLine 2: N space-separated integers (List A).\nLine 3: M space-separated integers (List B).\n(If a length is 0, the corresponding line may be empty).",
+  "outputFormat": "N + M space-separated integers representing the merged list.",
+  "constraints": "0 <= N, M <= 10^5\n-10^9 <= A[i], B[i] <= 10^9\nBoth arrays are sorted in non-decreasing order.",
+  "examples": [
+    {
+      "input": "3 3\n1 2 4\n1 3 4",
+      "output": "1 1 2 3 4 4",
+      "explanation": "The merged sorted items."
     },
-    "testCases": [
-        {
-            "input": "3 3\n1 2 4\n1 3 4",
-            "expectedOutput": "1 1 2 3 4 4",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "0 1\n\n0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "0 0\n\n\n",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "4 3\n-9 3 5 7\n-2 0 6",
-            "expectedOutput": "-9 -2 0 3 5 6 7",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5 1\n1 2 3 4 5\n6",
-            "expectedOutput": "1 2 3 4 5 6",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 5\n10\n1 2 3 4 5",
-            "expectedOutput": "1 2 3 4 5 10",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6 6\n1 1 1 1 1 1\n1 1 1 1 1 1",
-            "expectedOutput": "1 1 1 1 1 1 1 1 1 1 1 1",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "3 3\n10 20 30\n15 25 35",
-            "expectedOutput": "10 15 20 25 30 35",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "4 4\n-10 -5 0 5\n-8 -6 -4 -2",
-            "expectedOutput": "-10 -8 -6 -5 -4 -2 0 5",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "1 1\n-1000000000\n1000000000",
-            "expectedOutput": "-1000000000 1000000000",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "5 2\n-5 -2 1 4 7\n-6 -3",
-            "expectedOutput": "-6 -5 -3 -2 1 4 7",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5 5\n2 4 6 8 10\n1 3 5 7 9",
-            "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
-            "isHidden": true,
-            "orderIndex": 11
-        }
-    ]
+    {
+      "input": "0 1\n\n0",
+      "output": "0",
+      "explanation": "One list is empty."
+    }
+  ],
+  "starterCode": {
+    "python": "n, m = map(int, input().split())\na = list(map(int, input().split())) if n > 0 else []\nb = list(map(int, input().split())) if m > 0 else []\n# You can merge the arrays directly or build linked lists to merge\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, m; \n    if (!(cin >> n >> m)) return 0;\n    vector<long long> a(n), b(m);\n    for(int i = 0; i < n; i++) cin >> a[i];\n    for(int i = 0; i < m; i++) cin >> b[i];\n    // Write logic here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if(line == null) return;\n        StringTokenizer st = new StringTokenizer(line);\n        int n = Integer.parseInt(st.nextToken()), m = Integer.parseInt(st.nextToken());\n        // Write logic here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "3 3\n1 2 4\n1 3 4",
+      "expectedOutput": "1 1 2 3 4 4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "0 1\n\n0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "0 0\n\n\n",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 3\n-9 3 5 7\n-2 0 6",
+      "expectedOutput": "-9 -2 0 3 5 6 7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5 1\n1 2 3 4 5\n6",
+      "expectedOutput": "1 2 3 4 5 6",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 5\n10\n1 2 3 4 5",
+      "expectedOutput": "1 2 3 4 5 10",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6 6\n1 1 1 1 1 1\n1 1 1 1 1 1",
+      "expectedOutput": "1 1 1 1 1 1 1 1 1 1 1 1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "3 3\n10 20 30\n15 25 35",
+      "expectedOutput": "10 15 20 25 30 35",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4 4\n-10 -5 0 5\n-8 -6 -4 -2",
+      "expectedOutput": "-10 -8 -6 -5 -4 -2 0 5",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "1 1\n-1000000000\n1000000000",
+      "expectedOutput": "-1000000000 1000000000",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5 2\n-5 -2 1 4 7\n-6 -3",
+      "expectedOutput": "-6 -5 -3 -2 1 4 7",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5 5\n2 4 6 8 10\n1 3 5 7 9",
+      "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
+      "isHidden": true,
+      "orderIndex": 11
+    }
+  ]
 }

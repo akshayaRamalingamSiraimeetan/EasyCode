@@ -1,82 +1,86 @@
 {
-    "title": "Wiggle Subsequence",
-    "slug": "wiggle-subsequence",
-    "difficulty": "Medium",
-    "statement": "A wiggle sequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences.\n\nGiven an integer array `nums`, return the length of the longest wiggle subsequence of `nums`.\n\nA subsequence is obtained by deleting some elements (possibly zero) from the original sequence, leaving the remaining elements in their original order.",
-    "constraints": "1 <= nums.length <= 1000\n0 <= nums[i] <= 1000",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `nums`.",
-    "outputFormat": "A single integer denoting the max wiggle length.",
-    "examples": [
-        {
-            "input": "6\n1 7 4 9 2 5",
-            "output": "6",
-            "explanation": "The entire sequence is a wiggle sequence, the differences are (6, -3, 5, -7, 3)."
-        },
-        {
-            "input": "9\n1 17 5 10 13 15 10 5 16 8",
-            "output": "7",
-            "explanation": "There are several subsequences that achieve this length. One is [1, 17, 10, 13, 10, 16, 8] with differences (16, -7, 3, -3, 6, -8)."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Greedy: Count the number of peaks and valleys in the array\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // implement logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] nums = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) nums[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+  "title": "Wiggle Subsequence",
+  "slug": "wiggle-subsequence",
+  "difficulty": "Medium",
+  "topic": "Greedy",
+  "tags": [
+    "Greedy"
+  ],
+  "statement": "A wiggle sequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences.\n\nGiven an integer array `nums`, return the length of the longest wiggle subsequence of `nums`.\n\nA subsequence is obtained by deleting some elements (possibly zero) from the original sequence, leaving the remaining elements in their original order.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `nums`.",
+  "outputFormat": "A single integer denoting the max wiggle length.",
+  "constraints": "1 <= nums.length <= 1000\n0 <= nums[i] <= 1000",
+  "examples": [
+    {
+      "input": "6\n1 7 4 9 2 5",
+      "output": "6",
+      "explanation": "The entire sequence is a wiggle sequence, the differences are (6, -3, 5, -7, 3)."
     },
-    "testCases": [
-        {
-            "input": "6\n1 7 4 9 2 5",
-            "expectedOutput": "6",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "10\n1 17 5 10 13 15 10 5 16 8",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "10\n1 2 3 4 5 6 7 8 9 10",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1\n15",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5\n2 2 2 2 2",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "2\n1 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "3\n1 2 1",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "3\n1 1 2",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "8\n5 5 10 10 5 5 2 2",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 8
-        }
-    ]
+    {
+      "input": "9\n1 17 5 10 13 15 10 5 16 8",
+      "output": "7",
+      "explanation": "There are several subsequences that achieve this length. One is [1, 17, 10, 13, 10, 16, 8] with differences (16, -7, 3, -3, 6, -8)."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Greedy: Count the number of peaks and valleys in the array\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // implement logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] nums = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) nums[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "6\n1 7 4 9 2 5",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "10\n1 17 5 10 13 15 10 5 16 8",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "10\n1 2 3 4 5 6 7 8 9 10",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1\n15",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5\n2 2 2 2 2",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "2\n1 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "3\n1 2 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "3\n1 1 2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "8\n5 5 10 10 5 5 2 2",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 8
+    }
+  ]
 }

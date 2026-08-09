@@ -1,81 +1,85 @@
 {
-    "title": "Count Complete Tree Nodes",
-    "slug": "count-complete-tree-nodes",
-    "difficulty": "Medium",
-    "statement": "Given the root of a complete binary tree, return the number of the nodes in the tree.\n\nDesign an algorithm that runs in less than O(n) time complexity by leveraging the fact that it is a complete tree (all levels are completely filled except possibly the last level, which is filled from left to right).",
-    "constraints": "0 <= The number of nodes in the tree <= 5 * 10^4\n-10^4 <= Node.val <= 10^4",
-    "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree (`null` for missing nodes).",
-    "outputFormat": "A single integer denoting the node count.",
-    "examples": [
-        {
-            "input": "1 2 3 4 5 6",
-            "output": "6",
-            "explanation": "6 nodes are defined."
-        },
-        {
-            "input": "",
-            "output": "0",
-            "explanation": "Empty tree."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nline = sys.stdin.read().split()\nif not line:\n    print(0)\nelse:\n    # While the total length could just be calculated by the nodes given, try executing left/right depths checks for practice on O(log^2 N).\n    print(len([x for x in line if x != 'null']))\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    int count = 0;\n    while(cin >> s) if(s != \"null\") count++;\n    cout << count << \"\\n\";\n    return 0;\n}\n"
+  "title": "Count Complete Tree Nodes",
+  "slug": "count-complete-tree-nodes",
+  "difficulty": "Medium",
+  "topic": "Trees",
+  "tags": [
+    "Trees"
+  ],
+  "statement": "Given the root of a complete binary tree, return the number of the nodes in the tree.\n\nDesign an algorithm that runs in less than O(n) time complexity by leveraging the fact that it is a complete tree (all levels are completely filled except possibly the last level, which is filled from left to right).",
+  "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree (`null` for missing nodes).",
+  "outputFormat": "A single integer denoting the node count.",
+  "constraints": "0 <= The number of nodes in the tree <= 5 * 10^4\n-10^4 <= Node.val <= 10^4",
+  "examples": [
+    {
+      "input": "1 2 3 4 5 6",
+      "output": "6",
+      "explanation": "6 nodes are defined."
     },
-    "testCases": [
-        {
-            "input": "1 2 3 4 5 6",
-            "expectedOutput": "6",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1 2 3 4 5 6 7",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1 2 3 4 5",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 2 3 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "10 20 30 40 50 60 70 80 90 100",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "0 0 0",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "-1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11 -12 -13 -14 -15",
-            "expectedOutput": "15",
-            "isHidden": true,
-            "orderIndex": 8
-        }
-    ]
+    {
+      "input": "",
+      "output": "0",
+      "explanation": "Empty tree."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nline = sys.stdin.read().split()\nif not line:\n    print(0)\nelse:\n    # While the total length could just be calculated by the nodes given, try executing left/right depths checks for practice on O(log^2 N).\n    print(len([x for x in line if x != 'null']))\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    int count = 0;\n    while(cin >> s) if(s != \"null\") count++;\n    cout << count << \"\\n\";\n    return 0;\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "1 2 3 4 5 6",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1 2 3 4 5 6 7",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 2 3 4 5",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 2 3 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "10 20 30 40 50 60 70 80 90 100",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "0 0 0",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "-1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11 -12 -13 -14 -15",
+      "expectedOutput": "15",
+      "isHidden": true,
+      "orderIndex": 8
+    }
+  ]
 }

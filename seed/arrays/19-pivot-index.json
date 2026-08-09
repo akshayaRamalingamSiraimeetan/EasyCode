@@ -1,124 +1,128 @@
 {
-    "title": "Find Pivot Index",
-    "slug": "find-pivot-index",
-    "difficulty": "Medium",
-    "statement": "Given an array of N integers, find the leftmost **pivot index** — an index i such that the sum of elements to the left of i equals the sum of elements to the right of i.\n\nElements at index i itself are not counted. If no such index exists, print -1.\n\nUse total-sum and prefix-sum to achieve O(N) time.",
-    "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "A single integer: the 0-indexed pivot index (leftmost), or -1 if none exists.",
-    "examples": [
-        {
-            "input": "7\n1 7 3 6 5 6 0",
-            "output": "3",
-            "explanation": "Left of index 3: 1+7+3=11. Right of index 3: 5+6+0=11. Equal."
-        },
-        {
-            "input": "3\n1 2 3",
-            "output": "-1",
-            "explanation": "No index satisfies the condition."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n# total = sum(a), traverse with left_sum and compare to total - left_sum - a[i]\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  "title": "Find Pivot Index",
+  "slug": "find-pivot-index",
+  "difficulty": "Medium",
+  "topic": "Arrays",
+  "tags": [
+    "Arrays"
+  ],
+  "statement": "Given an array of N integers, find the leftmost **pivot index** — an index i such that the sum of elements to the left of i equals the sum of elements to the right of i.\n\nElements at index i itself are not counted. If no such index exists, print -1.\n\nUse total-sum and prefix-sum to achieve O(N) time.",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "A single integer: the 0-indexed pivot index (leftmost), or -1 if none exists.",
+  "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "7\n1 7 3 6 5 6 0",
+      "output": "3",
+      "explanation": "Left of index 3: 1+7+3=11. Right of index 3: 5+6+0=11. Equal."
     },
-    "testCases": [
-        {
-            "input": "7\n1 7 3 6 5 6 0",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "3\n1 2 3",
-            "expectedOutput": "-1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3\n2 1 -1",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1\n0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "3\n0 0 0",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5\n1 2 0 -2 -1",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "4\n-1 1 -1 1",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5\n0 1 0 -1 0",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "3\n10 -10 0",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "5\n3 3 3 3 3",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4\n1 0 0 -1",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "6\n0 0 0 0 0 0",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "5\n5 1 2 3 0",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "3\n-1 0 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5\n1 1 1 1 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "7\n0 1 -1 0 1 -1 0",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "3\n1 2 3",
+      "output": "-1",
+      "explanation": "No index satisfies the condition."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n# total = sum(a), traverse with left_sum and compare to total - left_sum - a[i]\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "7\n1 7 3 6 5 6 0",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3\n1 2 3",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3\n2 1 -1",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1\n0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3\n0 0 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5\n1 2 0 -2 -1",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4\n-1 1 -1 1",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5\n0 1 0 -1 0",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3\n10 -10 0",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5\n3 3 3 3 3",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\n1 0 0 -1",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "6\n0 0 0 0 0 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5\n5 1 2 3 0",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3\n-1 0 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5\n1 1 1 1 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "7\n0 1 -1 0 1 -1 0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

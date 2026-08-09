@@ -1,70 +1,74 @@
 {
-    "title": "Repeated String Match",
-    "slug": "repeated-string-match",
-    "difficulty": "Medium",
-    "statement": "Given two strings `a` and `b`, return the minimum number of times you should repeat string `a` so that string `b` is a substring of it. If it is impossible for `b` to be a substring of `a` after repeating it, return `-1`.\nNotice: string `a` is repeated, not `b`.",
-    "constraints": "1 <= a.length, b.length <= 10^4\na and b consist of lowercase English letters.",
-    "inputFormat": "Line 1: string a.\nLine 2: string b.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "abcd\ncdabcdab",
-            "output": "3",
-            "explanation": "Repeat a 3 times: 'abcdabcdabcd', b is a substring of it."
-        },
-        {
-            "input": "a\naa",
-            "output": "2",
-            "explanation": "Repeat 'a' twice."
-        }
-    ],
-    "starterCode": {
-        "python": "a = input().strip()\nb = input().strip()\n# Repeat a enough times, then search for b (Rabin-Karp or KMP)\n",
-        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string a, b; cin >> a >> b;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Repeated String Match",
+  "slug": "repeated-string-match",
+  "difficulty": "Medium",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "Given two strings `a` and `b`, return the minimum number of times you should repeat string `a` so that string `b` is a substring of it. If it is impossible for `b` to be a substring of `a` after repeating it, return `-1`.\nNotice: string `a` is repeated, not `b`.",
+  "inputFormat": "Line 1: string a.\nLine 2: string b.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= a.length, b.length <= 10^4\na and b consist of lowercase English letters.",
+  "examples": [
+    {
+      "input": "abcd\ncdabcdab",
+      "output": "3",
+      "explanation": "Repeat a 3 times: 'abcdabcdabcd', b is a substring of it."
     },
-    "testCases": [
-        {
-            "input": "abcd\ncdabcdab",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "a\naa",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a\na",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "abc\nxyz",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "abc\ncabcabca",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "ab\nba",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aa\na",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "a\naa",
+      "output": "2",
+      "explanation": "Repeat 'a' twice."
+    }
+  ],
+  "starterCode": {
+    "python": "a = input().strip()\nb = input().strip()\n# Repeat a enough times, then search for b (Rabin-Karp or KMP)\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string a, b; cin >> a >> b;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "abcd\ncdabcdab",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "a\naa",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a\na",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abc\nxyz",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "abc\ncabcabca",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "ab\nba",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aa\na",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

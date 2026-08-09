@@ -2,10 +2,14 @@
   "title": "Manacher's Algorithm: Palindrome Radius Queries",
   "slug": "manacher-palindrome-queries",
   "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
   "statement": "Given a string S and Q queries, each query gives a center index c and asks: what is the length of the longest palindromic substring centered at character c (odd-length palindromes only)?\n\nUse Manacher's algorithm to precompute the palindrome radius array P where P[i] is the radius of the longest odd palindrome centered at i (radius 0 means just the character itself).\n\nFor each query c (0-indexed), print 2*P[c]+1.",
-  "constraints": "1 <= |S| <= 10^6\n1 <= Q <= 10^5\n0 <= c < |S|\nS consists of lowercase English letters.",
   "inputFormat": "Line 1: the string S.\nLine 2: Q.\nNext Q lines: a single integer c.",
   "outputFormat": "Q lines, each the length of the longest odd palindrome centered at c.",
+  "constraints": "1 <= |S| <= 10^6\n1 <= Q <= 10^5\n0 <= c < |S|\nS consists of lowercase English letters.",
   "examples": [
     {
       "input": "abacaba\n3\n3\n0\n2",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        int n = s.length();\n        int[] P = new int[n];\n        int c=0,r=0;\n        for(int i=0;i<n;i++){\n            int mirror=2*c-i;\n            if(i<r) P[i]=Math.min(r-i,P[mirror]);\n            while(i-P[i]-1>=0 && i+P[i]+1<n && s.charAt(i-P[i]-1)==s.charAt(i+P[i]+1)) P[i]++;\n            if(i+P[i]>r){c=i;r=i+P[i];}\n        }\n        int q=Integer.parseInt(br.readLine().trim());\n        StringBuilder sb=new StringBuilder();\n        for(int i=0;i<q;i++){\n            int ci=Integer.parseInt(br.readLine().trim());\n            sb.append(2*P[ci]+1).append('\\n');\n        }\n        System.out.print(sb);\n    }\n}\n"
   },
   "testCases": [
-    { "input": "abacaba\n3\n3\n0\n2",            "expectedOutput": "7\n1\n3", "isHidden": false, "orderIndex": 0 },
-    { "input": "racecar\n2\n3\n1",               "expectedOutput": "7\n1",   "isHidden": false, "orderIndex": 1 },
-    { "input": "aaa\n3\n0\n1\n2",               "expectedOutput": "1\n3\n1", "isHidden": false, "orderIndex": 2 },
-    { "input": "abcba\n1\n2",                    "expectedOutput": "5",      "isHidden": false, "orderIndex": 3 },
-    { "input": "a\n1\n0",                        "expectedOutput": "1",      "isHidden": true,  "orderIndex": 4 },
-    { "input": "ab\n2\n0\n1",                    "expectedOutput": "1\n1",   "isHidden": true,  "orderIndex": 5 },
-    { "input": "aaaa\n4\n0\n1\n2\n3",           "expectedOutput": "1\n3\n3\n1", "isHidden": true, "orderIndex": 6 },
-    { "input": "abcde\n5\n0\n1\n2\n3\n4",        "expectedOutput": "1\n1\n1\n1\n1", "isHidden": true, "orderIndex": 7 },
-    { "input": "abaaba\n3\n2\n3\n0",             "expectedOutput": "3\n1\n1", "isHidden": true,  "orderIndex": 8 },
-    { "input": "xyzyx\n3\n2\n1\n4",              "expectedOutput": "5\n3\n1", "isHidden": true,  "orderIndex": 9 },
-    { "input": "mississippi\n4\n5\n3\n0\n10",    "expectedOutput": "1\n1\n1\n1", "isHidden": true, "orderIndex": 10 },
-    { "input": "aabaab\n4\n1\n2\n4\n5",          "expectedOutput": "3\n1\n1\n3", "isHidden": true, "orderIndex": 11 },
-    { "input": "abcbabcba\n3\n4\n2\n6",          "expectedOutput": "9\n3\n3", "isHidden": true,  "orderIndex": 12 },
-    { "input": "zz\n2\n0\n1",                    "expectedOutput": "1\n1",   "isHidden": true,  "orderIndex": 13 },
-    { "input": "aabbaa\n4\n0\n2\n3\n5",          "expectedOutput": "1\n1\n1\n1", "isHidden": true, "orderIndex": 14 },
-    { "input": "abacabadabacaba\n3\n7\n3\n11",   "expectedOutput": "15\n7\n7", "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "abacaba\n3\n3\n0\n2",
+      "expectedOutput": "7\n1\n3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "racecar\n2\n3\n1",
+      "expectedOutput": "7\n1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "aaa\n3\n0\n1\n2",
+      "expectedOutput": "1\n3\n1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abcba\n1\n2",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "a\n1\n0",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "ab\n2\n0\n1",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aaaa\n4\n0\n1\n2\n3",
+      "expectedOutput": "1\n3\n3\n1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abcde\n5\n0\n1\n2\n3\n4",
+      "expectedOutput": "1\n1\n1\n1\n1",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abaaba\n3\n2\n3\n0",
+      "expectedOutput": "3\n1\n1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "xyzyx\n3\n2\n1\n4",
+      "expectedOutput": "5\n3\n1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "mississippi\n4\n5\n3\n0\n10",
+      "expectedOutput": "1\n1\n1\n1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "aabaab\n4\n1\n2\n4\n5",
+      "expectedOutput": "3\n1\n1\n3",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "abcbabcba\n3\n4\n2\n6",
+      "expectedOutput": "9\n3\n3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "zz\n2\n0\n1",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aabbaa\n4\n0\n2\n3\n5",
+      "expectedOutput": "1\n1\n1\n1",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abacabadabacaba\n3\n7\n3\n11",
+      "expectedOutput": "15\n7\n7",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

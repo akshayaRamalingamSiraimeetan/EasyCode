@@ -1,76 +1,80 @@
 {
-    "title": "Count Distinct Subsequences",
-    "slug": "count-distinct-subsequences",
-    "difficulty": "Hard",
-    "statement": "Given two strings `s` and `t`, return the number of distinct subsequences of `s` which equals `t`.\nThe answer may be very large, so return it modulo `10^9 + 7`.",
-    "constraints": "1 <= s.length <= 1000\n1 <= t.length <= 1000\ns and t consist of English letters.",
-    "inputFormat": "Line 1: string s.\nLine 2: string t.",
-    "outputFormat": "A single integer (answer mod 10^9+7).",
-    "examples": [
-        {
-            "input": "rabbbit\nrabbit",
-            "output": "3",
-            "explanation": "Three ways to pick 'rabbit' as subsequence: rAbBbIt, raBbBIt (where capital = selected)."
-        },
-        {
-            "input": "babgbag\nbag",
-            "output": "5",
-            "explanation": "5 distinct paths to select 'bag' as subsequence."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\nt = input().strip()\nMOD = 10**9 + 7\n# dp[i][j] = number of ways s[:i] contains t[:j] as subsequence\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nconst int MOD = 1e9 + 7;\nint main() {\n    string s, t; cin >> s >> t;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(), t = sc.next();\n        final long MOD = 1_000_000_007L;\n        // Write logic\n    }\n}\n"
+  "title": "Count Distinct Subsequences",
+  "slug": "count-distinct-subsequences",
+  "difficulty": "Hard",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given two strings `s` and `t`, return the number of distinct subsequences of `s` which equals `t`.\nThe answer may be very large, so return it modulo `10^9 + 7`.",
+  "inputFormat": "Line 1: string s.\nLine 2: string t.",
+  "outputFormat": "A single integer (answer mod 10^9+7).",
+  "constraints": "1 <= s.length <= 1000\n1 <= t.length <= 1000\ns and t consist of English letters.",
+  "examples": [
+    {
+      "input": "rabbbit\nrabbit",
+      "output": "3",
+      "explanation": "Three ways to pick 'rabbit' as subsequence: rAbBbIt, raBbBIt (where capital = selected)."
     },
-    "testCases": [
-        {
-            "input": "rabbbit\nrabbit",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "babgbag\nbag",
-            "expectedOutput": "5",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a\na",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "b\na",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "aaaa\naa",
-            "expectedOutput": "6",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abcabc\nabc",
-            "expectedOutput": "8",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aabdbabd\nabd",
-            "expectedOutput": "12",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "xslledayhxhadmctrliaxsxdeyxlphadxoyfuxnyltlmqjwjkoyajlpqejfxbddsfmxjtmczpvpyhujjatnbhsyktzlacggohqhyvxdyahcnhnhyfxqlsdsdoxybfyqdsgazxuqpcqhexyhrxjqhxjhxjxjhplxjxjhplxhxjhxhxjhxjhxjhxjhxhxjxjhxjx\nxjhxjhxjhxjhxhxjxjhxjx",
-            "expectedOutput": "632",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "babgbag\nbag",
+      "output": "5",
+      "explanation": "5 distinct paths to select 'bag' as subsequence."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\nt = input().strip()\nMOD = 10**9 + 7\n# dp[i][j] = number of ways s[:i] contains t[:j] as subsequence\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nconst int MOD = 1e9 + 7;\nint main() {\n    string s, t; cin >> s >> t;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next(), t = sc.next();\n        final long MOD = 1_000_000_007L;\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "rabbbit\nrabbit",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "babgbag\nbag",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a\na",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "b\na",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aaaa\naa",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcabc\nabc",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aabdbabd\nabd",
+      "expectedOutput": "12",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "xslledayhxhadmctrliaxsxdeyxlphadxoyfuxnyltlmqjwjkoyajlpqejfxbddsfmxjtmczpvpyhujjatnbhsyktzlacggohqhyvxdyahcnhnhyfxqlsdsdoxybfyqdsgazxuqpcqhexyhrxjqhxjhxjxjhplxjxjhplxhxjhxhxjhxjhxjhxjhxhxjxjhxjx\nxjhxjhxjhxjhxhxjxjhxjx",
+      "expectedOutput": "632",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

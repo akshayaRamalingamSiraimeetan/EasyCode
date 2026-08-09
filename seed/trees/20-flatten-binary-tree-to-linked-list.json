@@ -1,76 +1,80 @@
 {
-    "title": "Flatten Binary Tree to Linked List",
-    "slug": "flatten-binary-tree-to-linked-list",
-    "difficulty": "Medium",
-    "statement": "Given the root of a binary tree, flatten the tree into a \"linked list\":\n\nThe \"linked list\" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.\nThe \"linked list\" should be in the same order as a pre-order traversal of the binary tree.\n\nOutput the right-skewed tree as a standard level-order format.",
-    "constraints": "0 <= The number of nodes in the tree <= 2000\n-100 <= Node.val <= 100",
-    "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree.",
-    "outputFormat": "Space-separated strings mapping the level-order of the flattened tree (it should look like `1 null 2 null 3 ...`).",
-    "examples": [
-        {
-            "input": "1 2 5 3 4 null 6",
-            "output": "1 null 2 null 3 null 4 null 5 null 6",
-            "explanation": "Preorder is 1,2,3,4,5,6. It's converted to a single right branch tree."
-        },
-        {
-            "input": "1",
-            "output": "1",
-            "explanation": "Just 1."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nline = sys.stdin.read().split()\n# Implement flattening and print new level order structure.\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null || line.trim().isEmpty()) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  "title": "Flatten Binary Tree to Linked List",
+  "slug": "flatten-binary-tree-to-linked-list",
+  "difficulty": "Medium",
+  "topic": "Trees",
+  "tags": [
+    "Trees"
+  ],
+  "statement": "Given the root of a binary tree, flatten the tree into a \"linked list\":\n\nThe \"linked list\" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.\nThe \"linked list\" should be in the same order as a pre-order traversal of the binary tree.\n\nOutput the right-skewed tree as a standard level-order format.",
+  "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree.",
+  "outputFormat": "Space-separated strings mapping the level-order of the flattened tree (it should look like `1 null 2 null 3 ...`).",
+  "constraints": "0 <= The number of nodes in the tree <= 2000\n-100 <= Node.val <= 100",
+  "examples": [
+    {
+      "input": "1 2 5 3 4 null 6",
+      "output": "1 null 2 null 3 null 4 null 5 null 6",
+      "explanation": "Preorder is 1,2,3,4,5,6. It's converted to a single right branch tree."
     },
-    "testCases": [
-        {
-            "input": "1 2 5 3 4 null 6",
-            "expectedOutput": "1 null 2 null 3 null 4 null 5 null 6",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1 2 null 3 null 4",
-            "expectedOutput": "1 null 2 null 3 null 4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1 2 3",
-            "expectedOutput": "1 null 2 null 3",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5 4 null 3 null 2",
-            "expectedOutput": "5 null 4 null 3 null 2",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "10 5 15\n",
-            "expectedOutput": "10 null 5 null 15",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "1 null 2 null 3",
-            "expectedOutput": "1 null 2 null 3",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "1",
+      "output": "1",
+      "explanation": "Just 1."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nline = sys.stdin.read().split()\n# Implement flattening and print new level order structure.\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null || line.trim().isEmpty()) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "1 2 5 3 4 null 6",
+      "expectedOutput": "1 null 2 null 3 null 4 null 5 null 6",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1 2 null 3 null 4",
+      "expectedOutput": "1 null 2 null 3 null 4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 2 3",
+      "expectedOutput": "1 null 2 null 3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5 4 null 3 null 2",
+      "expectedOutput": "5 null 4 null 3 null 2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "10 5 15\n",
+      "expectedOutput": "10 null 5 null 15",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1 null 2 null 3",
+      "expectedOutput": "1 null 2 null 3",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

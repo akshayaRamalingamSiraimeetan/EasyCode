@@ -1,124 +1,190 @@
 {
-    "title": "Valid Parentheses",
-    "slug": "valid-parentheses",
-    "difficulty": "Easy",
-    "statement": "Given a string S containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nAn input string is valid if:\n1. Open brackets must be closed by the same type of brackets.\n2. Open brackets must be closed in the correct order.\n3. Every close bracket has a corresponding open bracket of the same type.\n\nPrint `YES` if valid, otherwise `NO`.",
-    "constraints": "1 <= |S| <= 10^5\nS consists of parentheses only.",
-    "inputFormat": "A single line containing the string S.",
-    "outputFormat": "`YES` or `NO`.",
-    "examples": [
-        {
-            "input": "()[]{}",
-            "output": "YES",
-            "explanation": "All brackets are properly closed."
-        },
-        {
-            "input": "(]",
-            "output": "NO",
-            "explanation": "Mismatched brackets."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# Write your solution here using a stack\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write your solution here\n    }\n}\n"
+  "title": "Valid Parentheses",
+  "slug": "valid-parentheses",
+  "difficulty": "Easy",
+  "topic": "Stack Queue",
+  "tags": [
+    "Stack",
+    "Queue",
+    "Strings"
+  ],
+  "statement": "Given a string S containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nAn input string is valid if:\n1. Open brackets must be closed by the same type of brackets.\n2. Open brackets must be closed in the correct order.\n3. Every close bracket has a corresponding open bracket of the same type.\n\nPrint `YES` if valid, otherwise `NO`.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "`YES` or `NO`.",
+  "constraints": "1 <= |S| <= 10^5\nS consists of parentheses only '(', ')', '{', '}', '[', ']'.",
+  "examples": [
+    {
+      "input": "()[]{}",
+      "output": "YES",
+      "explanation": "All brackets are properly closed."
     },
-    "testCases": [
-        {
-            "input": "()[]{}",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "(]",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "([)]",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "{[]}",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "(",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "]",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "(((((())))))",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "()()()()",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "((()))[",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "{}[{()}]",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "{}[{()}]{",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "}}{",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "[{({})}]",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "()[}{]",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "(((()))",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "((}}",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "(]",
+      "output": "NO",
+      "explanation": "Mismatched brackets."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your solution here using a stack\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <stack>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "()[]{}",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "(]",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "([)]",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "{[]}",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "()",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 4
+    },
+    {
+      "input": "(",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "]",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "(((((())))))",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "()()()()",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "((()))[",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "{}[{()}]",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "{}[{()}]{",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "}}{",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "[{({})}]",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "()[}{]",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "(((()))",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 15
+    },
+    {
+      "input": "((}}",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 16
+    },
+    {
+      "input": "(((",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 17
+    },
+    {
+      "input": ")))",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 18
+    },
+    {
+      "input": "({[]})",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 19
+    },
+    {
+      "input": "({}[])",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 20
+    },
+    {
+      "input": "((())",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 21
+    },
+    {
+      "input": "[{(})]",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 22
+    },
+    {
+      "input": "[][]{}()",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 23
+    },
+    {
+      "input": "{",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 24
+    },
+    {
+      "input": "{}{}{}()()()",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 25
+    }
+  ]
 }

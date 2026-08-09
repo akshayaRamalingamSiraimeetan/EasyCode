@@ -2,10 +2,14 @@
   "title": "Count Digits",
   "slug": "count-digits",
   "difficulty": "Easy",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given a positive integer N, find how many digits it has.\n\nFor example, N = 4567 has 4 digits.",
-  "constraints": "1 <= N <= 10^18",
   "inputFormat": "A single line containing one positive integer N.",
   "outputFormat": "A single integer: the number of digits in N.",
+  "constraints": "1 <= N <= 10^18",
   "examples": [
     {
       "input": "4567",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String n = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4567", "expectedOutput": "4", "isHidden": false, "orderIndex": 0 },
-    { "input": "1000000000", "expectedOutput": "10", "isHidden": false, "orderIndex": 1 },
-    { "input": "1", "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
-    { "input": "99", "expectedOutput": "2", "isHidden": false, "orderIndex": 3 },
-    { "input": "10", "expectedOutput": "2", "isHidden": true, "orderIndex": 4 },
-    { "input": "100", "expectedOutput": "3", "isHidden": true, "orderIndex": 5 },
-    { "input": "999", "expectedOutput": "3", "isHidden": true, "orderIndex": 6 },
-    { "input": "1000000000000000000", "expectedOutput": "19", "isHidden": true, "orderIndex": 7 },
-    { "input": "9999999999999999999", "expectedOutput": "19", "isHidden": true, "orderIndex": 8 },
-    { "input": "5", "expectedOutput": "1", "isHidden": true, "orderIndex": 9 },
-    { "input": "12345678901234", "expectedOutput": "14", "isHidden": true, "orderIndex": 10 },
-    { "input": "999999999", "expectedOutput": "9", "isHidden": true, "orderIndex": 11 },
-    { "input": "1000000001", "expectedOutput": "10", "isHidden": true, "orderIndex": 12 },
-    { "input": "123", "expectedOutput": "3", "isHidden": true, "orderIndex": 13 },
-    { "input": "9", "expectedOutput": "1", "isHidden": true, "orderIndex": 14 },
-    { "input": "10000000000", "expectedOutput": "11", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "4567",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1000000000",
+      "expectedOutput": "10",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "99",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "10",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "100",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "999",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1000000000000000000",
+      "expectedOutput": "19",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9999999999999999999",
+      "expectedOutput": "19",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "12345678901234",
+      "expectedOutput": "14",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "999999999",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "1000000001",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "123",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "9",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "10000000000",
+      "expectedOutput": "11",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

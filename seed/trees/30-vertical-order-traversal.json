@@ -1,82 +1,86 @@
 {
-    "title": "Vertical Order Traversal of a Binary Tree",
-    "slug": "vertical-order-traversal",
-    "difficulty": "Hard",
-    "statement": "Given the root of a binary tree, calculate the vertical order traversal of the binary tree.\n\nFor each node at position (row, col), its left and right children will be at positions (row + 1, col - 1) and (row + 1, col + 1) respectively. The root of the tree is at (0, 0).\n\nThe vertical order traversal of a binary tree is a list of top-to-bottom orderings for each column index starting from the leftmost column and ending on the rightmost column. There may be multiple nodes in the same row and same column. In such a case, sort these nodes by their values.",
-    "constraints": "1 <= The number of nodes in the tree <= 1000\n0 <= Node.val <= 1000",
-    "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree.",
-    "outputFormat": "Print each column's node values separated by space on a new line, from leftmost column to rightmost.",
-    "examples": [
-        {
-            "input": "3 9 20 null null 15 7",
-            "output": "9\n3 15\n20\n7",
-            "explanation": "Column -1: 9. Column 0: 3, 15. Column 1: 20. Column 2: 7."
-        },
-        {
-            "input": "1 2 3 4 5 6 7",
-            "output": "4\n2\n1 5 6\n3\n7",
-            "explanation": "Note 5 and 6 are at the same position (2, 0). They are sorted by value 5 < 6."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nline = sys.stdin.read().split()\n# Implement BFS tracking (x, y) coordinates. Then sort logic and print.\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Write tree build and logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  "title": "Vertical Order Traversal of a Binary Tree",
+  "slug": "vertical-order-traversal",
+  "difficulty": "Hard",
+  "topic": "Trees",
+  "tags": [
+    "Trees"
+  ],
+  "statement": "Given the root of a binary tree, calculate the vertical order traversal of the binary tree.\n\nFor each node at position (row, col), its left and right children will be at positions (row + 1, col - 1) and (row + 1, col + 1) respectively. The root of the tree is at (0, 0).\n\nThe vertical order traversal of a binary tree is a list of top-to-bottom orderings for each column index starting from the leftmost column and ending on the rightmost column. There may be multiple nodes in the same row and same column. In such a case, sort these nodes by their values.",
+  "inputFormat": "A single line containing space-separated strings mapping the level-order traversal of the tree.",
+  "outputFormat": "Print each column's node values separated by space on a new line, from leftmost column to rightmost.",
+  "constraints": "1 <= The number of nodes in the tree <= 1000\n0 <= Node.val <= 1000",
+  "examples": [
+    {
+      "input": "3 9 20 null null 15 7",
+      "output": "9\n3 15\n20\n7",
+      "explanation": "Column -1: 9. Column 0: 3, 15. Column 1: 20. Column 2: 7."
     },
-    "testCases": [
-        {
-            "input": "3 9 20 null null 15 7",
-            "expectedOutput": "9\n3 15\n20\n7",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "1 2 3 4 5 6 7",
-            "expectedOutput": "4\n2\n1 5 6\n3\n7",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1 2 3 4 6 5 7",
-            "expectedOutput": "4\n2\n1 5 6\n3\n7",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "2 0 1 null null 5 6",
-            "expectedOutput": "0\n2 5\n1\n6",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 2 3 4 5 6 7 null null null null null 8 null 9",
-            "expectedOutput": "4\n2\n1 5 6\n3 8\n7\n9",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "3 1 4 0 2 2",
-            "expectedOutput": "0\n1\n2 2 3\n4",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "8 2 10 1 null 9 12",
-            "expectedOutput": "1\n2\n8 9\n10\n12",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "99 100",
-            "expectedOutput": "100\n99",
-            "isHidden": true,
-            "orderIndex": 8
-        }
-    ]
+    {
+      "input": "1 2 3 4 5 6 7",
+      "output": "4\n2\n1 5 6\n3\n7",
+      "explanation": "Note 5 and 6 are at the same position (2, 0). They are sorted by value 5 < 6."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nline = sys.stdin.read().split()\n# Implement BFS tracking (x, y) coordinates. Then sort logic and print.\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s;\n    vector<string> arr;\n    while(cin >> s) arr.push_back(s);\n    // Write tree build and logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line = br.readLine();\n        if (line == null) return;\n        String[] arr = line.split(\" \");\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "3 9 20 null null 15 7",
+      "expectedOutput": "9\n3 15\n20\n7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1 2 3 4 5 6 7",
+      "expectedOutput": "4\n2\n1 5 6\n3\n7",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 2 3 4 6 5 7",
+      "expectedOutput": "4\n2\n1 5 6\n3\n7",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "2 0 1 null null 5 6",
+      "expectedOutput": "0\n2 5\n1\n6",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 2 3 4 5 6 7 null null null null null 8 null 9",
+      "expectedOutput": "4\n2\n1 5 6\n3 8\n7\n9",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "3 1 4 0 2 2",
+      "expectedOutput": "0\n1\n2 2 3\n4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "8 2 10 1 null 9 12",
+      "expectedOutput": "1\n2\n8 9\n10\n12",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "99 100",
+      "expectedOutput": "100\n99",
+      "isHidden": true,
+      "orderIndex": 8
+    }
+  ]
 }

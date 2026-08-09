@@ -2,10 +2,14 @@
   "title": "Length of Longest Palindromic Substring",
   "slug": "length-of-longest-palindromic-substring",
   "difficulty": "Medium",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S, find the length of its longest palindromic substring.\n\nA substring is a contiguous part of a string. A palindromic substring reads the same forwards and backwards.",
-  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single integer: the length of the longest palindromic substring of S.",
+  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "babad",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "babad", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
-    { "input": "cbbd", "expectedOutput": "2", "isHidden": false, "orderIndex": 1 },
-    { "input": "a", "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
-    { "input": "racecar", "expectedOutput": "7", "isHidden": false, "orderIndex": 3 },
-    { "input": "abcba", "expectedOutput": "5", "isHidden": true, "orderIndex": 4 },
-    { "input": "abcde", "expectedOutput": "1", "isHidden": true, "orderIndex": 5 },
-    { "input": "aabaa", "expectedOutput": "5", "isHidden": true, "orderIndex": 6 },
-    { "input": "xaabaax", "expectedOutput": "7", "isHidden": true, "orderIndex": 7 },
-    { "input": "abacaba", "expectedOutput": "7", "isHidden": true, "orderIndex": 8 },
-    { "input": "aaaa", "expectedOutput": "4", "isHidden": true, "orderIndex": 9 },
-    { "input": "aabb", "expectedOutput": "2", "isHidden": true, "orderIndex": 10 },
-    { "input": "abcbad", "expectedOutput": "5", "isHidden": true, "orderIndex": 11 },
-    { "input": "zzzaz", "expectedOutput": "4", "isHidden": true, "orderIndex": 12 },
-    { "input": "forgeeksskeegfor", "expectedOutput": "10", "isHidden": true, "orderIndex": 13 },
-    { "input": "bb", "expectedOutput": "2", "isHidden": true, "orderIndex": 14 },
-    { "input": "ccc", "expectedOutput": "3", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "babad",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "cbbd",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "racecar",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abcba",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcde",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aabaa",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "xaabaax",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abacaba",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "aaaa",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "aabb",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcbad",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "zzzaz",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "forgeeksskeegfor",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "bb",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "ccc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

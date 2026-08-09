@@ -2,10 +2,14 @@
   "title": "N-Queens Count",
   "slug": "n-queens-count",
   "difficulty": "Medium",
+  "topic": "Backtracking",
+  "tags": [
+    "Backtracking"
+  ],
   "statement": "The N-Queens problem asks: in how many ways can N non-attacking queens be placed on an N×N chessboard?\n\nTwo queens attack each other if they share the same row, column, or diagonal.\n\nGiven N, print the number of distinct solutions.",
-  "constraints": "1 <= N <= 9",
   "inputFormat": "A single line containing N.",
   "outputFormat": "A single integer: the number of ways to place N non-attacking queens.",
+  "constraints": "1 <= N <= 9",
   "examples": [
     {
       "input": "4",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4", "expectedOutput": "2",   "isHidden": false, "orderIndex": 0 },
-    { "input": "8", "expectedOutput": "92",  "isHidden": false, "orderIndex": 1 },
-    { "input": "1", "expectedOutput": "1",   "isHidden": false, "orderIndex": 2 },
-    { "input": "5", "expectedOutput": "10",  "isHidden": false, "orderIndex": 3 },
-    { "input": "2", "expectedOutput": "0",   "isHidden": true,  "orderIndex": 4 },
-    { "input": "3", "expectedOutput": "0",   "isHidden": true,  "orderIndex": 5 },
-    { "input": "6", "expectedOutput": "4",   "isHidden": true,  "orderIndex": 6 },
-    { "input": "7", "expectedOutput": "40",  "isHidden": true,  "orderIndex": 7 },
-    { "input": "9", "expectedOutput": "352", "isHidden": true,  "orderIndex": 8 },
-    { "input": "4", "expectedOutput": "2",   "isHidden": true,  "orderIndex": 9 },
-    { "input": "5", "expectedOutput": "10",  "isHidden": true,  "orderIndex": 10 },
-    { "input": "6", "expectedOutput": "4",   "isHidden": true,  "orderIndex": 11 },
-    { "input": "7", "expectedOutput": "40",  "isHidden": true,  "orderIndex": 12 },
-    { "input": "8", "expectedOutput": "92",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "9", "expectedOutput": "352", "isHidden": true,  "orderIndex": 14 },
-    { "input": "1", "expectedOutput": "1",   "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "4",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "8",
+      "expectedOutput": "92",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "5",
+      "expectedOutput": "10",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "2",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "7",
+      "expectedOutput": "40",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9",
+      "expectedOutput": "352",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "7",
+      "expectedOutput": "40",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "8",
+      "expectedOutput": "92",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "9",
+      "expectedOutput": "352",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

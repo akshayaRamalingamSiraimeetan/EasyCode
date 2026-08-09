@@ -1,70 +1,74 @@
 {
-    "title": "Longest Palindrome Length",
-    "slug": "longest-palindrome-length",
-    "difficulty": "Easy",
-    "statement": "Given a string `s` which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.\nLetters are case sensitive, for example, `\"Aa\"` is not considered a palindrome here.",
-    "constraints": "1 <= s.length <= 2000\ns consists of lowercase and/or uppercase English letters only.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "abccccdd",
-            "output": "7",
-            "explanation": "One longest palindrome that can be built is 'dccaccd', whose length is 7."
-        },
-        {
-            "input": "a",
-            "output": "1",
-            "explanation": "Single character."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# Count frequencies, pairs contribute evenly, one character can be the center\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Longest Palindrome Length",
+  "slug": "longest-palindrome-length",
+  "difficulty": "Easy",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "Given a string `s` which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.\nLetters are case sensitive, for example, `\"Aa\"` is not considered a palindrome here.",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= s.length <= 2000\ns consists of lowercase and/or uppercase English letters only.",
+  "examples": [
+    {
+      "input": "abccccdd",
+      "output": "7",
+      "explanation": "One longest palindrome that can be built is 'dccaccd', whose length is 7."
     },
-    "testCases": [
-        {
-            "input": "abccccdd",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "a",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "bb",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "ccc",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "zeusnilemacaronimaisanitratetartinasiaminoracamelinsuez",
-            "expectedOutput": "55",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "bananas",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "Aa",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "a",
+      "output": "1",
+      "explanation": "Single character."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Count frequencies, pairs contribute evenly, one character can be the center\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <unordered_map>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "abccccdd",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "a",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "bb",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "ccc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "zeusnilemacaronimaisanitratetartinasiaminoracamelinsuez",
+      "expectedOutput": "55",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "bananas",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "Aa",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

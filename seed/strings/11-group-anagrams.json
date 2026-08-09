@@ -2,10 +2,14 @@
   "title": "Count Anagram Groups",
   "slug": "count-anagram-groups",
   "difficulty": "Medium",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given N words, group them by anagram class and print the number of distinct groups.\n\nTwo words belong to the same group if they are anagrams of each other.",
-  "constraints": "1 <= N <= 10^4\n1 <= |word| <= 20\nAll words contain only lowercase English letters.",
   "inputFormat": "The first line contains N.\nThe next N lines each contain one word.",
   "outputFormat": "A single integer: the number of distinct anagram groups.",
+  "constraints": "1 <= N <= 10^4\n1 <= |word| <= 20\nAll words contain only lowercase English letters.",
   "examples": [
     {
       "input": "6\neat\ntea\ntan\nate\nnat\nbat",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        String[] words = new String[n];\n        for (int i = 0; i < n; i++) words[i] = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "6\neat\ntea\ntan\nate\nnat\nbat", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
-    { "input": "3\nabc\nbca\nxyz", "expectedOutput": "2", "isHidden": false, "orderIndex": 1 },
-    { "input": "1\nhello", "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
-    { "input": "4\nab\nba\ncd\ndc", "expectedOutput": "2", "isHidden": false, "orderIndex": 3 },
-    { "input": "5\na\na\na\na\na", "expectedOutput": "1", "isHidden": true, "orderIndex": 4 },
-    { "input": "5\nabc\nbca\ncab\ndef\nfed", "expectedOutput": "2", "isHidden": true, "orderIndex": 5 },
-    { "input": "4\nlisten\nsilent\nenlist\nworld", "expectedOutput": "2", "isHidden": true, "orderIndex": 6 },
-    { "input": "3\nabc\nabc\nabc", "expectedOutput": "1", "isHidden": true, "orderIndex": 7 },
-    { "input": "5\ndog\ngod\ncat\nact\nbird", "expectedOutput": "3", "isHidden": true, "orderIndex": 8 },
-    { "input": "6\naa\nbb\ncc\naa\nbb\ncc", "expectedOutput": "3", "isHidden": true, "orderIndex": 9 },
-    { "input": "4\nabc\ndef\nghi\njkl", "expectedOutput": "4", "isHidden": true, "orderIndex": 10 },
-    { "input": "3\nab\nba\ncc", "expectedOutput": "2", "isHidden": true, "orderIndex": 11 },
-    { "input": "2\naab\naba", "expectedOutput": "1", "isHidden": true, "orderIndex": 12 },
-    { "input": "4\nabc\ncba\nbac\nxyz", "expectedOutput": "2", "isHidden": true, "orderIndex": 13 },
-    { "input": "5\na\nb\nc\nd\ne", "expectedOutput": "5", "isHidden": true, "orderIndex": 14 },
-    { "input": "6\nnight\nthing\ntinghy\nang\nnag\ngan", "expectedOutput": "3", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "6\neat\ntea\ntan\nate\nnat\nbat",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3\nabc\nbca\nxyz",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1\nhello",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4\nab\nba\ncd\ndc",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5\na\na\na\na\na",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5\nabc\nbca\ncab\ndef\nfed",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4\nlisten\nsilent\nenlist\nworld",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "3\nabc\nabc\nabc",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "5\ndog\ngod\ncat\nact\nbird",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6\naa\nbb\ncc\naa\nbb\ncc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\nabc\ndef\nghi\njkl",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "3\nab\nba\ncc",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "2\naab\naba",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4\nabc\ncba\nbac\nxyz",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5\na\nb\nc\nd\ne",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6\nnight\nthing\ntinghy\nang\nnag\ngan",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

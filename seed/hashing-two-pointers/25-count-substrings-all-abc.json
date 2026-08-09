@@ -2,10 +2,14 @@
   "title": "Count Substrings Containing All Three Characters",
   "slug": "count-substrings-all-abc",
   "difficulty": "Hard",
+  "topic": "Hashing & Two Pointers",
+  "tags": [
+    "Hashing"
+  ],
   "statement": "Given a string S consisting only of the characters 'a', 'b', and 'c', count the number of substrings that contain at least one occurrence of each of 'a', 'b', and 'c'.\n\nUse the two-pointer (sliding window) technique for an O(N) solution: once a valid window [l, r] is found, all extensions of the right end (r, r+1, ..., N-1) are also valid, contributing N-r substrings.",
-  "constraints": "3 <= |S| <= 5*10^4\nS contains only 'a', 'b', 'c'.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single integer: the count of substrings containing at least one 'a', one 'b', and one 'c'.",
+  "constraints": "3 <= |S| <= 5*10^4\nS contains only 'a', 'b', 'c'.",
   "examples": [
     {
       "input": "abcabc",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "abcabc",     "expectedOutput": "10", "isHidden": false, "orderIndex": 0 },
-    { "input": "aaacb",     "expectedOutput": "3",  "isHidden": false, "orderIndex": 1 },
-    { "input": "abc",       "expectedOutput": "1",  "isHidden": false, "orderIndex": 2 },
-    { "input": "aabbcc",    "expectedOutput": "4",  "isHidden": false, "orderIndex": 3 },
-    { "input": "abbc",      "expectedOutput": "1",  "isHidden": true,  "orderIndex": 4 },
-    { "input": "abcbc",     "expectedOutput": "3",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "aabbc",     "expectedOutput": "2",  "isHidden": true,  "orderIndex": 6 },
-    { "input": "aabc",      "expectedOutput": "2",  "isHidden": true,  "orderIndex": 7 },
-    { "input": "abcc",      "expectedOutput": "2",  "isHidden": true,  "orderIndex": 8 },
-    { "input": "abcabcabc", "expectedOutput": "28", "isHidden": true,  "orderIndex": 9 },
-    { "input": "aabcbc",    "expectedOutput": "6",  "isHidden": true,  "orderIndex": 10 },
-    { "input": "aaabcbc",   "expectedOutput": "9",  "isHidden": true,  "orderIndex": 11 },
-    { "input": "abcba",     "expectedOutput": "5",  "isHidden": true,  "orderIndex": 12 },
-    { "input": "aabcca",    "expectedOutput": "7",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "abcaab",    "expectedOutput": "7",  "isHidden": true,  "orderIndex": 14 },
-    { "input": "cbabca",    "expectedOutput": "7",  "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "abcabc",
+      "expectedOutput": "10",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaacb",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "aabbcc",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abbc",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcbc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aabbc",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aabc",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abcc",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcabcabc",
+      "expectedOutput": "28",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "aabcbc",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "aaabcbc",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "abcba",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "aabcca",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "abcaab",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "cbabca",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -2,10 +2,14 @@
   "title": "Prime Number Check",
   "slug": "prime-number-check",
   "difficulty": "Medium",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given an integer N, determine whether it is a prime number.\n\nA prime number is a number greater than 1 that has no divisors other than 1 and itself.\n\nPrint \"Prime\" if N is prime, otherwise print \"Not Prime\".",
-  "constraints": "1 <= N <= 10^6",
   "inputFormat": "A single line containing one integer N.",
   "outputFormat": "Print \"Prime\" if N is prime, otherwise print \"Not Prime\".",
+  "constraints": "1 <= N <= 10^6",
   "examples": [
     {
       "input": "7",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "7", "expectedOutput": "Prime", "isHidden": false, "orderIndex": 0 },
-    { "input": "12", "expectedOutput": "Not Prime", "isHidden": false, "orderIndex": 1 },
-    { "input": "1", "expectedOutput": "Not Prime", "isHidden": false, "orderIndex": 2 },
-    { "input": "2", "expectedOutput": "Prime", "isHidden": false, "orderIndex": 3 },
-    { "input": "3", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 4 },
-    { "input": "4", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 5 },
-    { "input": "97", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 6 },
-    { "input": "100", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 7 },
-    { "input": "999983", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 8 },
-    { "input": "1000000", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 9 },
-    { "input": "999999", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 10 },
-    { "input": "524287", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 11 },
-    { "input": "49", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 12 },
-    { "input": "13", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 13 },
-    { "input": "25", "expectedOutput": "Not Prime", "isHidden": true, "orderIndex": 14 },
-    { "input": "17", "expectedOutput": "Prime", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "7",
+      "expectedOutput": "Prime",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "12",
+      "expectedOutput": "Not Prime",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "Not Prime",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2",
+      "expectedOutput": "Prime",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "97",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "100",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "999983",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "1000000",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "999999",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "524287",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "49",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "13",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "25",
+      "expectedOutput": "Not Prime",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "17",
+      "expectedOutput": "Prime",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

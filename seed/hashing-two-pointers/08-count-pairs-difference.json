@@ -2,10 +2,14 @@
   "title": "Count Pairs with Given Difference",
   "slug": "count-pairs-given-difference",
   "difficulty": "Easy",
+  "topic": "Hashing & Two Pointers",
+  "tags": [
+    "Hashing"
+  ],
   "statement": "Given an array of distinct integers and a non-negative integer K, count the number of unique pairs (a, b) such that |a - b| = K.\n\nA pair (a, b) and (b, a) count as the same pair. Report each unordered pair once.",
-  "constraints": "1 <= N <= 10^5\n-10^6 <= A[i] <= 10^6\nAll elements are distinct.\n0 <= K <= 10^6",
   "inputFormat": "The first line contains N and K.\nThe second line contains N space-separated distinct integers.",
   "outputFormat": "A single integer: the count of unique unordered pairs with absolute difference K.",
+  "constraints": "1 <= N <= 10^5\n-10^6 <= A[i] <= 10^6\nAll elements are distinct.\n0 <= K <= 10^6",
   "examples": [
     {
       "input": "5 2\n1 5 3 4 2",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "5 2\n1 5 3 4 2",          "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
-    { "input": "5 1\n1 2 3 4 5",          "expectedOutput": "4", "isHidden": false, "orderIndex": 1 },
-    { "input": "5 2\n1 2 3 4 5",          "expectedOutput": "3", "isHidden": false, "orderIndex": 2 },
-    { "input": "6 4\n8 12 16 4 0 20",     "expectedOutput": "5", "isHidden": false, "orderIndex": 3 },
-    { "input": "5 2\n1 3 5 7 9",          "expectedOutput": "4", "isHidden": true,  "orderIndex": 4 },
-    { "input": "2 1\n1 2",                "expectedOutput": "1", "isHidden": true,  "orderIndex": 5 },
-    { "input": "5 3\n1 5 3 4 2",          "expectedOutput": "2", "isHidden": true,  "orderIndex": 6 },
-    { "input": "5 4\n1 2 3 5 7",          "expectedOutput": "2", "isHidden": true,  "orderIndex": 7 },
-    { "input": "5 2\n2 4 6 8 10",         "expectedOutput": "4", "isHidden": true,  "orderIndex": 8 },
-    { "input": "6 6\n1 3 5 7 9 11",       "expectedOutput": "3", "isHidden": true,  "orderIndex": 9 },
-    { "input": "3 9\n1 10 100",            "expectedOutput": "1", "isHidden": true,  "orderIndex": 10 },
-    { "input": "7 2\n5 20 3 2 5 6 8",     "expectedOutput": "2", "isHidden": true,  "orderIndex": 11 },
-    { "input": "6 3\n0 1 2 3 4 5",        "expectedOutput": "3", "isHidden": true,  "orderIndex": 12 },
-    { "input": "5 0\n1 2 3 4 5",          "expectedOutput": "0", "isHidden": true,  "orderIndex": 13 },
-    { "input": "4 1\n1 3 5 7",             "expectedOutput": "0", "isHidden": true,  "orderIndex": 14 },
-    { "input": "6 4\n3 1 4 1 5 9",        "expectedOutput": "2", "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "5 2\n1 5 3 4 2",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5 1\n1 2 3 4 5",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5 2\n1 2 3 4 5",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "6 4\n8 12 16 4 0 20",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5 2\n1 3 5 7 9",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "2 1\n1 2",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5 3\n1 5 3 4 2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 4\n1 2 3 5 7",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "5 2\n2 4 6 8 10",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6 6\n1 3 5 7 9 11",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "3 9\n1 10 100",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "7 2\n5 20 3 2 5 6 8",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6 3\n0 1 2 3 4 5",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "5 0\n1 2 3 4 5",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "4 1\n1 3 5 7",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6 4\n3 1 4 1 5 9",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -2,10 +2,14 @@
   "title": "Number of Factors",
   "slug": "number-of-factors",
   "difficulty": "Medium",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given a positive integer N, find and print the total number of its factors (divisors).\n\nA factor of N is any positive integer d such that N % d == 0.\n\nFor example, the factors of 12 are 1, 2, 3, 4, 6, 12 — so there are 6 factors.",
-  "constraints": "1 <= N <= 10^7",
   "inputFormat": "A single line containing one positive integer N.",
   "outputFormat": "A single integer: the count of factors of N.",
+  "constraints": "1 <= N <= 10^7",
   "examples": [
     {
       "input": "12",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "12", "expectedOutput": "6", "isHidden": false, "orderIndex": 0 },
-    { "input": "7", "expectedOutput": "2", "isHidden": false, "orderIndex": 1 },
-    { "input": "1", "expectedOutput": "1", "isHidden": false, "orderIndex": 2 },
-    { "input": "36", "expectedOutput": "9", "isHidden": false, "orderIndex": 3 },
-    { "input": "100", "expectedOutput": "9", "isHidden": true, "orderIndex": 4 },
-    { "input": "2", "expectedOutput": "2", "isHidden": true, "orderIndex": 5 },
-    { "input": "4", "expectedOutput": "3", "isHidden": true, "orderIndex": 6 },
-    { "input": "1000000", "expectedOutput": "49", "isHidden": true, "orderIndex": 7 },
-    { "input": "9999991", "expectedOutput": "2", "isHidden": true, "orderIndex": 8 },
-    { "input": "10000000", "expectedOutput": "64", "isHidden": true, "orderIndex": 9 },
-    { "input": "48", "expectedOutput": "10", "isHidden": true, "orderIndex": 10 },
-    { "input": "60", "expectedOutput": "12", "isHidden": true, "orderIndex": 11 },
-    { "input": "128", "expectedOutput": "8", "isHidden": true, "orderIndex": 12 },
-    { "input": "1024", "expectedOutput": "11", "isHidden": true, "orderIndex": 13 },
-    { "input": "720", "expectedOutput": "30", "isHidden": true, "orderIndex": 14 },
-    { "input": "999983", "expectedOutput": "2", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "12",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "7",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "36",
+      "expectedOutput": "9",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "100",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1000000",
+      "expectedOutput": "49",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9999991",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "10000000",
+      "expectedOutput": "64",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "48",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "60",
+      "expectedOutput": "12",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "128",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "1024",
+      "expectedOutput": "11",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "720",
+      "expectedOutput": "30",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "999983",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

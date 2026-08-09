@@ -1,59 +1,63 @@
 {
-    "title": "Surrounded Regions",
-    "slug": "surrounded-regions",
-    "difficulty": "Medium",
-    "statement": "Given an `m x n` matrix `board` containing `X` and `O`, capture all regions that are 4-directionally surrounded by `X`.\nA region is captured by flipping all `O`s into `X`s in that surrounded region.\nAn `O` is NOT surrounded if it is on the border or connected to an `O` on the border.",
-    "constraints": "1 <= m, n <= 200\nboard[i][j] is 'X' or 'O'.",
-    "inputFormat": "Line 1: two integers m and n.\nNext m lines: n space-separated characters.",
-    "outputFormat": "Print the modified board.",
-    "examples": [
-        {
-            "input": "4 4\nX X X X\nX O O X\nX X O X\nX O X X",
-            "output": "X X X X\nX X X X\nX X X X\nX O X X",
-            "explanation": "The bottom-left O is on the border, so it stays. The interior Os are surrounded."
-        }
-    ],
-    "starterCode": {
-        "python": "m, n = map(int, input().split())\nboard = [input().split() for _ in range(m)]\n# DFS/BFS from border 'O's to mark safe, then flip remaining 'O's\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int m,n; cin >> m >> n;\n    vector<vector<char>> board(m, vector<char>(n));\n    for(int i=0; i<m; i++) for(int j=0; j<n; j++) cin >> board[i][j];\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        char[][] board = new char[m][n];\n        for(int i=0; i<m; i++) for(int j=0; j<n; j++) board[i][j]=sc.next().charAt(0);\n        // Write logic\n    }\n}\n"
+  "title": "Surrounded Regions",
+  "slug": "surrounded-regions",
+  "difficulty": "Medium",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given an `m x n` matrix `board` containing `X` and `O`, capture all regions that are 4-directionally surrounded by `X`.\nA region is captured by flipping all `O`s into `X`s in that surrounded region.\nAn `O` is NOT surrounded if it is on the border or connected to an `O` on the border.",
+  "inputFormat": "Line 1: two integers m and n.\nNext m lines: n space-separated characters.",
+  "outputFormat": "Print the modified board.",
+  "constraints": "1 <= m, n <= 200\nboard[i][j] is 'X' or 'O'.",
+  "examples": [
+    {
+      "input": "4 4\nX X X X\nX O O X\nX X O X\nX O X X",
+      "output": "X X X X\nX X X X\nX X X X\nX O X X",
+      "explanation": "The bottom-left O is on the border, so it stays. The interior Os are surrounded."
+    }
+  ],
+  "starterCode": {
+    "python": "m, n = map(int, input().split())\nboard = [input().split() for _ in range(m)]\n# DFS/BFS from border 'O's to mark safe, then flip remaining 'O's\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int m,n; cin >> m >> n;\n    vector<vector<char>> board(m, vector<char>(n));\n    for(int i=0; i<m; i++) for(int j=0; j<n; j++) cin >> board[i][j];\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        char[][] board = new char[m][n];\n        for(int i=0; i<m; i++) for(int j=0; j<n; j++) board[i][j]=sc.next().charAt(0);\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4 4\nX X X X\nX O O X\nX X O X\nX O X X",
+      "expectedOutput": "X X X X\nX X X X\nX X X X\nX O X X",
+      "isHidden": false,
+      "orderIndex": 0
     },
-    "testCases": [
-        {
-            "input": "4 4\nX X X X\nX O O X\nX X O X\nX O X X",
-            "expectedOutput": "X X X X\nX X X X\nX X X X\nX O X X",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "1 1\nO",
-            "expectedOutput": "O",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "2 2\nX X\nX X",
-            "expectedOutput": "X X\nX X",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3 3\nO O O\nO O O\nO O O",
-            "expectedOutput": "O O O\nO O O\nO O O",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "3 3\nX X X\nX O X\nX X X",
-            "expectedOutput": "X X X\nX X X\nX X X",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4 5\nX X X X X\nX O O O X\nX O X O X\nX X X X X",
-            "expectedOutput": "X X X X X\nX X X X X\nX X X X X\nX X X X X",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "1 1\nO",
+      "expectedOutput": "O",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2 2\nX X\nX X",
+      "expectedOutput": "X X\nX X",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3 3\nO O O\nO O O\nO O O",
+      "expectedOutput": "O O O\nO O O\nO O O",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 3\nX X X\nX O X\nX X X",
+      "expectedOutput": "X X X\nX X X\nX X X",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4 5\nX X X X X\nX O O O X\nX O X O X\nX X X X X",
+      "expectedOutput": "X X X X X\nX X X X X\nX X X X X\nX X X X X",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

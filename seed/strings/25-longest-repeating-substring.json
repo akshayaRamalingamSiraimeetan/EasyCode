@@ -2,10 +2,14 @@
   "title": "Longest Repeating Substring",
   "slug": "longest-repeating-substring",
   "difficulty": "Hard",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S, find the length of the longest substring that appears at least twice in S (the two occurrences may overlap).\n\nIf no substring repeats, print 0.\n\nFor example, in \"banana\", the substring \"an\" appears at positions 1 and 3, and \"ana\" also appears twice (positions 1 and 3 with overlap). The longest is \"ana\" of length 3.",
-  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single integer: the length of the longest repeating substring.",
+  "constraints": "1 <= |S| <= 1000\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "banana",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "banana", "expectedOutput": "3", "isHidden": false, "orderIndex": 0 },
-    { "input": "abcd", "expectedOutput": "0", "isHidden": false, "orderIndex": 1 },
-    { "input": "aaa", "expectedOutput": "2", "isHidden": false, "orderIndex": 2 },
-    { "input": "abab", "expectedOutput": "2", "isHidden": false, "orderIndex": 3 },
-    { "input": "a", "expectedOutput": "0", "isHidden": true, "orderIndex": 4 },
-    { "input": "aa", "expectedOutput": "1", "isHidden": true, "orderIndex": 5 },
-    { "input": "abcabc", "expectedOutput": "3", "isHidden": true, "orderIndex": 6 },
-    { "input": "aaaa", "expectedOutput": "3", "isHidden": true, "orderIndex": 7 },
-    { "input": "abcde", "expectedOutput": "0", "isHidden": true, "orderIndex": 8 },
-    { "input": "aababaa", "expectedOutput": "3", "isHidden": true, "orderIndex": 9 },
-    { "input": "xyxy", "expectedOutput": "2", "isHidden": true, "orderIndex": 10 },
-    { "input": "abcabcabc", "expectedOutput": "6", "isHidden": true, "orderIndex": 11 },
-    { "input": "mississippi", "expectedOutput": "4", "isHidden": true, "orderIndex": 12 },
-    { "input": "aabaab", "expectedOutput": "3", "isHidden": true, "orderIndex": 13 },
-    { "input": "abacabac", "expectedOutput": "4", "isHidden": true, "orderIndex": 14 },
-    { "input": "ababab", "expectedOutput": "4", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "banana",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "abcd",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "aaa",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abab",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "a",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aa",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abcabc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aaaa",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abcde",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "aababaa",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "xyxy",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcabcabc",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "mississippi",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "aabaab",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "abacabac",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "ababab",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

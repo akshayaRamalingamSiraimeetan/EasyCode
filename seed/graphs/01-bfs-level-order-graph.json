@@ -1,76 +1,80 @@
 {
-    "title": "BFS Level Order in a Graph",
-    "slug": "bfs-level-order-graph",
-    "difficulty": "Easy",
-    "statement": "Given an undirected graph with `n` nodes (0-indexed) and `e` edges, perform a BFS starting from node `0` and print the nodes in the order they are visited.\nIf a node has multiple neighbors, visit them in ascending order.",
-    "constraints": "1 <= n <= 1000\n0 <= e <= 5000\nGraph may be disconnected.",
-    "inputFormat": "Line 1: two integers n and e.\nNext e lines: two integers u and v (undirected edge).",
-    "outputFormat": "Space-separated integers: BFS traversal order from node 0.",
-    "examples": [
-        {
-            "input": "6 6\n0 1\n0 2\n1 3\n1 4\n2 5\n3 4",
-            "output": "0 1 2 3 4 5",
-            "explanation": "BFS visits 0, then neighbors 1,2,  then 3,4, then 5."
-        },
-        {
-            "input": "3 0",
-            "output": "0",
-            "explanation": "No edges; only node 0 is reachable."
-        }
-    ],
-    "starterCode": {
-        "python": "from collections import deque\nn, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\n# BFS from node 0\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n, e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    // Write BFS\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), e = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) {\n            int u = sc.nextInt(), v = sc.nextInt();\n            adj.get(u).add(v);\n            adj.get(v).add(u);\n        }\n        // Write BFS\n    }\n}\n"
+  "title": "BFS Level Order in a Graph",
+  "slug": "bfs-level-order-graph",
+  "difficulty": "Easy",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given an undirected graph with `n` nodes (0-indexed) and `e` edges, perform a BFS starting from node `0` and print the nodes in the order they are visited.\nIf a node has multiple neighbors, visit them in ascending order.",
+  "inputFormat": "Line 1: two integers n and e.\nNext e lines: two integers u and v (undirected edge).",
+  "outputFormat": "Space-separated integers: BFS traversal order from node 0.",
+  "constraints": "1 <= n <= 1000\n0 <= e <= 5000\nGraph may be disconnected.",
+  "examples": [
+    {
+      "input": "6 6\n0 1\n0 2\n1 3\n1 4\n2 5\n3 4",
+      "output": "0 1 2 3 4 5",
+      "explanation": "BFS visits 0, then neighbors 1,2,  then 3,4, then 5."
     },
-    "testCases": [
-        {
-            "input": "6 6\n0 1\n0 2\n1 3\n1 4\n2 5\n3 4",
-            "expectedOutput": "0 1 2 3 4 5",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "3 0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1 0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "5 4\n0 1\n0 2\n0 3\n0 4",
-            "expectedOutput": "0 1 2 3 4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5 4\n0 1\n1 2\n2 3\n3 4",
-            "expectedOutput": "0 1 2 3 4",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "7 7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n3 4",
-            "expectedOutput": "0 1 2 3 4 5 6",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "4 4\n0 3\n0 1\n1 2\n2 3",
-            "expectedOutput": "0 1 3 2",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "6 5\n0 5\n0 1\n0 2\n0 3\n0 4",
-            "expectedOutput": "0 1 2 3 4 5",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "3 0",
+      "output": "0",
+      "explanation": "No edges; only node 0 is reachable."
+    }
+  ],
+  "starterCode": {
+    "python": "from collections import deque\nn, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\n# BFS from node 0\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n, e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    // Write BFS\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), e = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) {\n            int u = sc.nextInt(), v = sc.nextInt();\n            adj.get(u).add(v);\n            adj.get(v).add(u);\n        }\n        // Write BFS\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "6 6\n0 1\n0 2\n1 3\n1 4\n2 5\n3 4",
+      "expectedOutput": "0 1 2 3 4 5",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3 0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "5 4\n0 1\n0 2\n0 3\n0 4",
+      "expectedOutput": "0 1 2 3 4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5 4\n0 1\n1 2\n2 3\n3 4",
+      "expectedOutput": "0 1 2 3 4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "7 7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n3 4",
+      "expectedOutput": "0 1 2 3 4 5 6",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4 4\n0 3\n0 1\n1 2\n2 3",
+      "expectedOutput": "0 1 3 2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "6 5\n0 5\n0 1\n0 2\n0 3\n0 4",
+      "expectedOutput": "0 1 2 3 4 5",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

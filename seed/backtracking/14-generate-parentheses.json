@@ -2,10 +2,14 @@
   "title": "Count Valid Parentheses",
   "slug": "count-valid-parentheses",
   "difficulty": "Medium",
+  "topic": "Backtracking",
+  "tags": [
+    "Backtracking"
+  ],
   "statement": "Given an integer N, count the number of valid combinations of N pairs of parentheses.\n\nA string is a valid combination if every opening bracket has a corresponding closing bracket in the correct order.\n\nThis count equals the Nth Catalan number: C(2N, N) / (N + 1).",
-  "constraints": "1 <= N <= 10",
   "inputFormat": "A single line containing N.",
   "outputFormat": "A single integer: the number of valid parentheses combinations with N pairs.",
+  "constraints": "1 <= N <= 10",
   "examples": [
     {
       "input": "3",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "3",  "expectedOutput": "5",    "isHidden": false, "orderIndex": 0 },
-    { "input": "1",  "expectedOutput": "1",    "isHidden": false, "orderIndex": 1 },
-    { "input": "2",  "expectedOutput": "2",    "isHidden": false, "orderIndex": 2 },
-    { "input": "4",  "expectedOutput": "14",   "isHidden": false, "orderIndex": 3 },
-    { "input": "5",  "expectedOutput": "42",   "isHidden": true,  "orderIndex": 4 },
-    { "input": "6",  "expectedOutput": "132",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "7",  "expectedOutput": "429",  "isHidden": true,  "orderIndex": 6 },
-    { "input": "8",  "expectedOutput": "1430", "isHidden": true,  "orderIndex": 7 },
-    { "input": "9",  "expectedOutput": "4862", "isHidden": true,  "orderIndex": 8 },
-    { "input": "10", "expectedOutput": "16796","isHidden": true,  "orderIndex": 9 },
-    { "input": "3",  "expectedOutput": "5",    "isHidden": true,  "orderIndex": 10 },
-    { "input": "4",  "expectedOutput": "14",   "isHidden": true,  "orderIndex": 11 },
-    { "input": "5",  "expectedOutput": "42",   "isHidden": true,  "orderIndex": 12 },
-    { "input": "6",  "expectedOutput": "132",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "2",  "expectedOutput": "2",    "isHidden": true,  "orderIndex": 14 },
-    { "input": "1",  "expectedOutput": "1",    "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "3",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4",
+      "expectedOutput": "14",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5",
+      "expectedOutput": "42",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6",
+      "expectedOutput": "132",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "7",
+      "expectedOutput": "429",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "8",
+      "expectedOutput": "1430",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "9",
+      "expectedOutput": "4862",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "10",
+      "expectedOutput": "16796",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "3",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4",
+      "expectedOutput": "14",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5",
+      "expectedOutput": "42",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "6",
+      "expectedOutput": "132",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -1,76 +1,80 @@
 {
-    "title": "Word Break",
-    "slug": "word-break",
-    "difficulty": "Medium",
-    "statement": "Given a string `s` and a dictionary of strings `wordDict`, return `YES` if `s` can be segmented into a space-separated sequence of one or more dictionary words.\nNote that the same word in the dictionary may be reused multiple times in the segmentation.",
-    "constraints": "1 <= s.length <= 300\n1 <= wordDict.length <= 1000\n1 <= wordDict[i].length <= 20\ns and the words in wordDict consist of only lowercase English letters.",
-    "inputFormat": "Line 1: the string s.\nLine 2: an integer N (number of words in dict).\nLine 3: N space-separated strings.",
-    "outputFormat": "Print `YES` or `NO`.",
-    "examples": [
-        {
-            "input": "leetcode\n2\nleet code",
-            "output": "YES",
-            "explanation": "'leetcode' = 'leet' + 'code'."
-        },
-        {
-            "input": "catsandog\n3\ncats dog sand and cat",
-            "output": "NO",
-            "explanation": "No valid segmentation."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\nn = int(input())\nwordDict = input().split()\n# dp[i] = True if s[:i] can be segmented\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    int n; cin >> n;\n    unordered_set<string> dict;\n    for(int i=0; i<n; i++) { string w; cin >> w; dict.insert(w); }\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        int n = sc.nextInt();\n        Set<String> dict = new HashSet<>();\n        for(int i=0; i<n; i++) dict.add(sc.next());\n        // Write logic\n    }\n}\n"
+  "title": "Word Break",
+  "slug": "word-break",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given a string `s` and a dictionary of strings `wordDict`, return `YES` if `s` can be segmented into a space-separated sequence of one or more dictionary words.\nNote that the same word in the dictionary may be reused multiple times in the segmentation.",
+  "inputFormat": "Line 1: the string s.\nLine 2: an integer N (number of words in dict).\nLine 3: N space-separated strings.",
+  "outputFormat": "Print `YES` or `NO`.",
+  "constraints": "1 <= s.length <= 300\n1 <= wordDict.length <= 1000\n1 <= wordDict[i].length <= 20\ns and the words in wordDict consist of only lowercase English letters.",
+  "examples": [
+    {
+      "input": "leetcode\n2\nleet code",
+      "output": "YES",
+      "explanation": "'leetcode' = 'leet' + 'code'."
     },
-    "testCases": [
-        {
-            "input": "leetcode\n2\nleet code",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "catsandog\n5\ncats dog sand and cat",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "applepenapple\n3\napple pen penapple",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "a\n1\na",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "aaaaaaaaaaaaaaaaaaaaaaaab\n2\na aa",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "goalspecial\n4\ngo goal special goalspecial",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "bb\n2\na b",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "catsanddog\n4\ncat cats and sand dog",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "catsandog\n3\ncats dog sand and cat",
+      "output": "NO",
+      "explanation": "No valid segmentation."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\nn = int(input())\nwordDict = input().split()\n# dp[i] = True if s[:i] can be segmented\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <unordered_set>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    int n; cin >> n;\n    unordered_set<string> dict;\n    for(int i=0; i<n; i++) { string w; cin >> w; dict.insert(w); }\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        int n = sc.nextInt();\n        Set<String> dict = new HashSet<>();\n        for(int i=0; i<n; i++) dict.add(sc.next());\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "leetcode\n2\nleet code",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "catsandog\n5\ncats dog sand and cat",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "applepenapple\n3\napple pen penapple",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "a\n1\na",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaab\n2\na aa",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "goalspecial\n4\ngo goal special goalspecial",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "bb\n2\na b",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "catsanddog\n4\ncat cats and sand dog",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

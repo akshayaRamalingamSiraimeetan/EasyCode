@@ -1,82 +1,86 @@
 {
-    "title": "Jump Game II",
-    "slug": "jump-game-ii",
-    "difficulty": "Medium",
-    "statement": "You are given a 0-indexed array of integers `nums` of length `n`. You are initially positioned at `nums[0]`.\n\nEach element `nums[i]` represents the maximum length of a forward jump from index `i`. In other words, if you are at `nums[i]`, you can jump to any `nums[i + j]` where: `0 <= j <= nums[i]` and `i + j < n`.\n\nReturn the minimum number of jumps to reach `nums[n - 1]`. The test cases are generated such that you can always reach `nums[n - 1]`.",
-    "constraints": "1 <= nums.length <= 10^4\n0 <= nums[i] <= 1000",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `nums`.",
-    "outputFormat": "A single integer denoting the minimum jumps.",
-    "examples": [
-        {
-            "input": "5\n2 3 1 1 4",
-            "output": "2",
-            "explanation": "The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index."
-        },
-        {
-            "input": "5\n2 3 0 1 4",
-            "output": "2",
-            "explanation": "Jump from 0 to 1, then 1 to 4."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Use Greedy BFS logic: track current_level_end and farthest\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] nums = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) nums[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+  "title": "Jump Game II",
+  "slug": "jump-game-ii",
+  "difficulty": "Medium",
+  "topic": "Greedy",
+  "tags": [
+    "Greedy"
+  ],
+  "statement": "You are given a 0-indexed array of integers `nums` of length `n`. You are initially positioned at `nums[0]`.\n\nEach element `nums[i]` represents the maximum length of a forward jump from index `i`. In other words, if you are at `nums[i]`, you can jump to any `nums[i + j]` where: `0 <= j <= nums[i]` and `i + j < n`.\n\nReturn the minimum number of jumps to reach `nums[n - 1]`. The test cases are generated such that you can always reach `nums[n - 1]`.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing `nums`.",
+  "outputFormat": "A single integer denoting the minimum jumps.",
+  "constraints": "1 <= nums.length <= 10^4\n0 <= nums[i] <= 1000",
+  "examples": [
+    {
+      "input": "5\n2 3 1 1 4",
+      "output": "2",
+      "explanation": "The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index."
     },
-    "testCases": [
-        {
-            "input": "5\n2 3 1 1 4",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5\n2 3 0 1 4",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1\n0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n1 2 3",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "10\n1 1 1 1 1 1 1 1 1 1",
-            "expectedOutput": "9",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6\n5 4 3 2 1 0",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "7\n2 1 3 1 1 1 1",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "8\n3 1 1 3 1 1 1 1",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "4\n1 2 1 1",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 8
-        }
-    ]
+    {
+      "input": "5\n2 3 0 1 4",
+      "output": "2",
+      "explanation": "Jump from 0 to 1, then 1 to 4."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\nnums = list(map(int, input().split()))\n# Use Greedy BFS logic: track current_level_end and farthest\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; if (!(cin >> n)) return 0;\n    vector<int> nums(n);\n    for(int i=0; i<n; i++) cin >> nums[i];\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] nums = new int[n];\n        StringTokenizer tz = new StringTokenizer(br.readLine());\n        for(int i=0; i<n; i++) nums[i] = Integer.parseInt(tz.nextToken());\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5\n2 3 1 1 4",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5\n2 3 0 1 4",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1\n0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n1 2 3",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "10\n1 1 1 1 1 1 1 1 1 1",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6\n5 4 3 2 1 0",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "7\n2 1 3 1 1 1 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "8\n3 1 1 3 1 1 1 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4\n1 2 1 1",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 8
+    }
+  ]
 }

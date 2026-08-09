@@ -1,124 +1,128 @@
 {
-    "title": "Sort 0s, 1s, and 2s (Dutch National Flag)",
-    "slug": "sort-012-dutch-flag",
-    "difficulty": "Easy",
-    "statement": "Given an array of N elements where each element is 0, 1, or 2, sort the array in-place such that all 0s come first, then 1s, then 2s.\n\nThis is the Dutch National Flag problem. Solve it in O(N) with only one pass using three pointers: `low`, `mid`, and `high`.\n\nDo NOT use any built-in sort.",
-    "constraints": "1 <= N <= 10^6\nA[i] ∈ {0, 1, 2}",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers (each 0, 1, or 2).",
-    "outputFormat": "N space-separated integers: the sorted array.",
-    "examples": [
-        {
-            "input": "6\n2 0 1 2 0 1",
-            "output": "0 0 1 1 2 2",
-            "explanation": "Dutch National Flag: partition into 0s, 1s, 2s."
-        },
-        {
-            "input": "5\n0 0 0 0 0",
-            "output": "0 0 0 0 0",
-            "explanation": "Already sorted (all 0s)."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\nlow, mid, high = 0, 0, n - 1\n# Write your solution here (one pass, three pointers)\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int lo = 0, mid = 0, hi = n - 1;\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        int lo = 0, mid = 0, hi = n - 1;\n        // Write your solution here\n    }\n}\n"
+  "title": "Sort 0s, 1s, and 2s (Dutch National Flag)",
+  "slug": "sort-012-dutch-flag",
+  "difficulty": "Easy",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "Given an array of N elements where each element is 0, 1, or 2, sort the array in-place such that all 0s come first, then 1s, then 2s.\n\nThis is the Dutch National Flag problem. Solve it in O(N) with only one pass using three pointers: `low`, `mid`, and `high`.\n\nDo NOT use any built-in sort.",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers (each 0, 1, or 2).",
+  "outputFormat": "N space-separated integers: the sorted array.",
+  "constraints": "1 <= N <= 10^6\nA[i] ∈ {0, 1, 2}",
+  "examples": [
+    {
+      "input": "6\n2 0 1 2 0 1",
+      "output": "0 0 1 1 2 2",
+      "explanation": "Dutch National Flag: partition into 0s, 1s, 2s."
     },
-    "testCases": [
-        {
-            "input": "6\n2 0 1 2 0 1",
-            "expectedOutput": "0 0 1 1 2 2",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5\n0 0 0 0 0",
-            "expectedOutput": "0 0 0 0 0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5\n2 2 2 2 2",
-            "expectedOutput": "2 2 2 2 2",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n2 1 0",
-            "expectedOutput": "0 1 2",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1\n1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4\n1 1 0 0",
-            "expectedOutput": "0 0 1 1",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6\n1 2 0 1 2 0",
-            "expectedOutput": "0 0 1 1 2 2",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "7\n0 1 2 0 1 2 0",
-            "expectedOutput": "0 0 0 1 1 2 2",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "4\n2 2 0 0",
-            "expectedOutput": "0 0 2 2",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "4\n1 0 2 1",
-            "expectedOutput": "0 1 1 2",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "8\n2 0 1 2 0 1 2 0",
-            "expectedOutput": "0 0 0 1 1 2 2 2",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5\n1 1 1 1 1",
-            "expectedOutput": "1 1 1 1 1",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "3\n0 2 1",
-            "expectedOutput": "0 1 2",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "6\n0 0 2 2 1 1",
-            "expectedOutput": "0 0 1 1 2 2",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "9\n1 2 0 1 2 0 1 2 0",
-            "expectedOutput": "0 0 0 1 1 1 2 2 2",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "2\n2 0",
-            "expectedOutput": "0 2",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "5\n0 0 0 0 0",
+      "output": "0 0 0 0 0",
+      "explanation": "Already sorted (all 0s)."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\nlow, mid, high = 0, 0, n - 1\n# Write your solution here (one pass, three pointers)\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int lo = 0, mid = 0, hi = n - 1;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        int lo = 0, mid = 0, hi = n - 1;\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "6\n2 0 1 2 0 1",
+      "expectedOutput": "0 0 1 1 2 2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5\n0 0 0 0 0",
+      "expectedOutput": "0 0 0 0 0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5\n2 2 2 2 2",
+      "expectedOutput": "2 2 2 2 2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n2 1 0",
+      "expectedOutput": "0 1 2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1\n1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4\n1 1 0 0",
+      "expectedOutput": "0 0 1 1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6\n1 2 0 1 2 0",
+      "expectedOutput": "0 0 1 1 2 2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "7\n0 1 2 0 1 2 0",
+      "expectedOutput": "0 0 0 1 1 2 2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4\n2 2 0 0",
+      "expectedOutput": "0 0 2 2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4\n1 0 2 1",
+      "expectedOutput": "0 1 1 2",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "8\n2 0 1 2 0 1 2 0",
+      "expectedOutput": "0 0 0 1 1 2 2 2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\n1 1 1 1 1",
+      "expectedOutput": "1 1 1 1 1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "3\n0 2 1",
+      "expectedOutput": "0 1 2",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "6\n0 0 2 2 1 1",
+      "expectedOutput": "0 0 1 1 2 2",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "9\n1 2 0 1 2 0 1 2 0",
+      "expectedOutput": "0 0 0 1 1 1 2 2 2",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "2\n2 0",
+      "expectedOutput": "0 2",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

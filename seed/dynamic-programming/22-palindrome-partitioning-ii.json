@@ -1,81 +1,85 @@
 {
-    "title": "Palindrome Partitioning II",
-    "slug": "palindrome-partitioning-ii",
-    "difficulty": "Medium",
-    "statement": "Given a string `s`, partition `s` such that every substring of the partition is a palindrome.\nReturn the minimum cuts needed for a palindrome partitioning of `s`.",
-    "constraints": "1 <= s.length <= 2000\ns consists of only lowercase English letters.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "aab",
-            "output": "1",
-            "explanation": "The palindrome partitioning [aa][b] uses 1 cut."
-        },
-        {
-            "input": "a",
-            "output": "0",
-            "explanation": "Already a palindrome."
-        },
-        {
-            "input": "ab",
-            "output": "1",
-            "explanation": "Cannot avoid one cut."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# dp[i] = min cuts for s[:i+1]\n# Precompute palindrome table is_pal[i][j]\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <climits>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Palindrome Partitioning II",
+  "slug": "palindrome-partitioning-ii",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given a string `s`, partition `s` such that every substring of the partition is a palindrome.\nReturn the minimum cuts needed for a palindrome partitioning of `s`.",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= s.length <= 2000\ns consists of only lowercase English letters.",
+  "examples": [
+    {
+      "input": "aab",
+      "output": "1",
+      "explanation": "The palindrome partitioning [aa][b] uses 1 cut."
     },
-    "testCases": [
-        {
-            "input": "aab",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "a",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "ab",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "aabb",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "abacaba",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abcde",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aaaa",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "ababababababababababab",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "a",
+      "output": "0",
+      "explanation": "Already a palindrome."
+    },
+    {
+      "input": "ab",
+      "output": "1",
+      "explanation": "Cannot avoid one cut."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# dp[i] = min cuts for s[:i+1]\n# Precompute palindrome table is_pal[i][j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <climits>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "aab",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "a",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "ab",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "aabb",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abacaba",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcde",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aaaa",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "ababababababababababab",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

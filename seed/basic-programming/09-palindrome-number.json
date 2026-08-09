@@ -2,10 +2,14 @@
   "title": "Palindrome Number",
   "slug": "palindrome-number",
   "difficulty": "Easy",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given a non-negative integer N, determine if it is a palindrome.\n\nA palindrome number reads the same forwards and backwards. For example, 121 is a palindrome, but 123 is not.",
-  "constraints": "0 <= N <= 10^9",
   "inputFormat": "A single line containing one non-negative integer N.",
   "outputFormat": "Print \"Yes\" if N is a palindrome, otherwise print \"No\".",
+  "constraints": "0 <= N <= 10^9",
   "examples": [
     {
       "input": "121",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String n = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "121", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 0 },
-    { "input": "123", "expectedOutput": "No", "isHidden": false, "orderIndex": 1 },
-    { "input": "0", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 2 },
-    { "input": "1001", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 3 },
-    { "input": "1", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 4 },
-    { "input": "10", "expectedOutput": "No", "isHidden": true, "orderIndex": 5 },
-    { "input": "9", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 6 },
-    { "input": "1221", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 7 },
-    { "input": "12321", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 8 },
-    { "input": "12345", "expectedOutput": "No", "isHidden": true, "orderIndex": 9 },
-    { "input": "1000000001", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 10 },
-    { "input": "999999999", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 11 },
-    { "input": "100", "expectedOutput": "No", "isHidden": true, "orderIndex": 12 },
-    { "input": "11", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 13 },
-    { "input": "12", "expectedOutput": "No", "isHidden": true, "orderIndex": 14 },
-    { "input": "9009", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "121",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "123",
+      "expectedOutput": "No",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "0",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1001",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "10",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "9",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "1221",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "12321",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "12345",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "1000000001",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "999999999",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "100",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "11",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "12",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "9009",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

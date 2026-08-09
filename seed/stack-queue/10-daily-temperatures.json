@@ -1,124 +1,128 @@
 {
-    "title": "Daily Temperatures",
-    "slug": "daily-temperatures",
-    "difficulty": "Medium",
-    "statement": "Given an array of integers T representing the daily temperatures, return an array such that answer[i] is the number of days you have to wait after the i-th day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.\n\nUse a monotonic stack.",
-    "constraints": "1 <= N <= 10^5\n30 <= T[i] <= 100",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing temperatures.",
-    "outputFormat": "N space-separated integers: the number of days to wait for each day.",
-    "examples": [
-        {
-            "input": "8\n73 74 75 71 69 72 76 73",
-            "output": "1 1 4 2 1 1 0 0",
-            "explanation": "Day 0 (73): wait 1 day for 74. Day 2 (75): wait 4 days for 76. Day 6 (76): no warmer day."
-        },
-        {
-            "input": "4\n30 40 50 60",
-            "output": "1 1 1 0",
-            "explanation": "Each day just waits 1 day for a warmer one, except the last."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\ntemps = list(map(int, input().split()))\nans = [0] * n\n# Write your solution using a stack\nprint(*ans)\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> temps(n);\n    for (int i = 0; i < n; i++) cin >> temps[i];\n    vector<int> ans(n, 0);\n    // Write your solution here\n    for (int i = 0; i < n; i++) cout << ans[i] << (i == n-1 ? \"\" : \" \");\n    cout << '\\n';\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] temps = new int[n];\n        int[] ans = new int[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) temps[i] = Integer.parseInt(st.nextToken());\n        // Write your solution here\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < n; i++) {\n            sb.append(ans[i]);\n            if (i < n - 1) sb.append(\" \");\n        }\n        System.out.println(sb);\n    }\n}\n"
+  "title": "Daily Temperatures",
+  "slug": "daily-temperatures",
+  "difficulty": "Medium",
+  "topic": "Stack & Queue",
+  "tags": [
+    "Stack"
+  ],
+  "statement": "Given an array of integers T representing the daily temperatures, return an array such that answer[i] is the number of days you have to wait after the i-th day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.\n\nUse a monotonic stack.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers representing temperatures.",
+  "outputFormat": "N space-separated integers: the number of days to wait for each day.",
+  "constraints": "1 <= N <= 10^5\n30 <= T[i] <= 100",
+  "examples": [
+    {
+      "input": "8\n73 74 75 71 69 72 76 73",
+      "output": "1 1 4 2 1 1 0 0",
+      "explanation": "Day 0 (73): wait 1 day for 74. Day 2 (75): wait 4 days for 76. Day 6 (76): no warmer day."
     },
-    "testCases": [
-        {
-            "input": "8\n73 74 75 71 69 72 76 73",
-            "expectedOutput": "1 1 4 2 1 1 0 0",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n30 40 50 60",
-            "expectedOutput": "1 1 1 0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3\n30 60 90",
-            "expectedOutput": "1 1 0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n90 60 30",
-            "expectedOutput": "0 0 0",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5\n89 62 70 58 47",
-            "expectedOutput": "0 1 0 0 0",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6\n30 30 30 30 30 30",
-            "expectedOutput": "0 0 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "10\n100 99 98 97 96 95 94 93 92 91",
-            "expectedOutput": "0 0 0 0 0 0 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "10\n50 51 52 53 54 55 56 57 58 59",
-            "expectedOutput": "1 1 1 1 1 1 1 1 1 0",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "7\n80 70 60 50 40 30 90",
-            "expectedOutput": "6 5 4 3 2 1 0",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "6\n40 40 50 50 60 60",
-            "expectedOutput": "2 1 2 1 0 0",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "5\n30 40 35 45 40",
-            "expectedOutput": "1 2 1 0 0",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5\n30 35 40 35 30",
-            "expectedOutput": "1 1 0 0 0",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "6\n72 73 71 70 74 72",
-            "expectedOutput": "1 3 2 1 0 0",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "4\n30 100 30 100",
-            "expectedOutput": "1 0 1 0",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "1\n30",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "6\n40 35 30 50 45 40",
-            "expectedOutput": "3 2 1 0 0 0",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n30 40 50 60",
+      "output": "1 1 1 0",
+      "explanation": "Each day just waits 1 day for a warmer one, except the last."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\ntemps = list(map(int, input().split()))\nans = [0] * n\n# Write your solution using a stack\nprint(*ans)\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> temps(n);\n    for (int i = 0; i < n; i++) cin >> temps[i];\n    vector<int> ans(n, 0);\n    // Write your solution here\n    for (int i = 0; i < n; i++) cout << ans[i] << (i == n-1 ? \"\" : \" \");\n    cout << '\\n';\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        int[] temps = new int[n];\n        int[] ans = new int[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) temps[i] = Integer.parseInt(st.nextToken());\n        // Write your solution here\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < n; i++) {\n            sb.append(ans[i]);\n            if (i < n - 1) sb.append(\" \");\n        }\n        System.out.println(sb);\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "8\n73 74 75 71 69 72 76 73",
+      "expectedOutput": "1 1 4 2 1 1 0 0",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n30 40 50 60",
+      "expectedOutput": "1 1 1 0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3\n30 60 90",
+      "expectedOutput": "1 1 0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n90 60 30",
+      "expectedOutput": "0 0 0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5\n89 62 70 58 47",
+      "expectedOutput": "0 1 0 0 0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6\n30 30 30 30 30 30",
+      "expectedOutput": "0 0 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "10\n100 99 98 97 96 95 94 93 92 91",
+      "expectedOutput": "0 0 0 0 0 0 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "10\n50 51 52 53 54 55 56 57 58 59",
+      "expectedOutput": "1 1 1 1 1 1 1 1 1 0",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "7\n80 70 60 50 40 30 90",
+      "expectedOutput": "6 5 4 3 2 1 0",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6\n40 40 50 50 60 60",
+      "expectedOutput": "2 1 2 1 0 0",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5\n30 40 35 45 40",
+      "expectedOutput": "1 2 1 0 0",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\n30 35 40 35 30",
+      "expectedOutput": "1 1 0 0 0",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6\n72 73 71 70 74 72",
+      "expectedOutput": "1 3 2 1 0 0",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4\n30 100 30 100",
+      "expectedOutput": "1 0 1 0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "1\n30",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6\n40 35 30 50 45 40",
+      "expectedOutput": "3 2 1 0 0 0",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

@@ -2,10 +2,14 @@
   "title": "Minimum Window Substring",
   "slug": "minimum-window-substring",
   "difficulty": "Hard",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given strings T and P, find the minimum length window (contiguous substring) in T that contains all characters of P (including duplicates).\n\nPrint the minimum length. If no such window exists, print -1.",
-  "constraints": "1 <= |T| <= 10^5\n1 <= |P| <= 10^5\n|P| <= |T|\nT and P contain only lowercase English letters.",
   "inputFormat": "The first line contains T.\nThe second line contains P.",
   "outputFormat": "A single integer: the length of the minimum window, or -1 if none exists.",
+  "constraints": "1 <= |T| <= 10^5\n1 <= |P| <= 10^5\n|P| <= |T|\nT and P contain only lowercase English letters.",
   "examples": [
     {
       "input": "adobecodebanc\nabc",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String t = sc.next(), p = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "adobecodebanc\nabc", "expectedOutput": "4", "isHidden": false, "orderIndex": 0 },
-    { "input": "aa\naa", "expectedOutput": "2", "isHidden": false, "orderIndex": 1 },
-    { "input": "abc\nabc", "expectedOutput": "3", "isHidden": false, "orderIndex": 2 },
-    { "input": "abcde\nxyz", "expectedOutput": "-1", "isHidden": false, "orderIndex": 3 },
-    { "input": "a\na", "expectedOutput": "1", "isHidden": true, "orderIndex": 4 },
-    { "input": "ab\na", "expectedOutput": "1", "isHidden": true, "orderIndex": 5 },
-    { "input": "cabwefgewcwaefgcf\ncaw", "expectedOutput": "3", "isHidden": true, "orderIndex": 6 },
-    { "input": "aaabbbccc\nabc", "expectedOutput": "5", "isHidden": true, "orderIndex": 7 },
-    { "input": "acbbaca\naba", "expectedOutput": "4", "isHidden": true, "orderIndex": 8 },
-    { "input": "abcabdebac\ncda", "expectedOutput": "4", "isHidden": true, "orderIndex": 9 },
-    { "input": "zzz\nzz", "expectedOutput": "2", "isHidden": true, "orderIndex": 10 },
-    { "input": "bba\nab", "expectedOutput": "2", "isHidden": true, "orderIndex": 11 },
-    { "input": "abcdefgh\nzyx", "expectedOutput": "-1", "isHidden": true, "orderIndex": 12 },
-    { "input": "aab\nab", "expectedOutput": "2", "isHidden": true, "orderIndex": 13 },
-    { "input": "abbbbbbc\nabc", "expectedOutput": "8", "isHidden": true, "orderIndex": 14 },
-    { "input": "dcabefbcba\nabc", "expectedOutput": "3", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "adobecodebanc\nabc",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aa\naa",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc\nabc",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abcde\nxyz",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "a\na",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "ab\na",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "cabwefgewcwaefgcf\ncaw",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aaabbbccc\nabc",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "acbbaca\naba",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcabdebac\ncda",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "zzz\nzz",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "bba\nab",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "abcdefgh\nzyx",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "aab\nab",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "abbbbbbc\nabc",
+      "expectedOutput": "8",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "dcabefbcba\nabc",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -1,124 +1,128 @@
 {
-    "title": "Kth Smallest in Sorted Matrix",
-    "slug": "kth-smallest-sorted-matrix",
-    "difficulty": "Medium",
-    "statement": "Given an N×N matrix where each row and each column is sorted in non-decreasing order, find the K-th smallest element in the matrix.\n\n**Approach (binary search on answer):**\n- The answer lies in [matrix[0][0], matrix[N-1][N-1]].\n- For a mid value, count how many elements are <= mid using staircase search (O(N) per count).\n- Binary search on value: find the smallest value V such that count(V) >= K.\n\nTotal complexity: O(N log(max-min)).",
-    "constraints": "1 <= N <= 300\n1 <= K <= N*N\n-10^9 <= matrix[i][j] <= 10^9\nEach row and each column is sorted in non-decreasing order.",
-    "inputFormat": "Line 1: two integers N and K.\nNext N lines: each contains N space-separated integers (the matrix rows).",
-    "outputFormat": "A single integer: the K-th smallest element.",
-    "examples": [
-        {
-            "input": "3 5\n1 5 9\n10 11 13\n12 13 15",
-            "output": "13",
-            "explanation": "Sorted elements: 1,5,9,10,11,12,13,13,15. The 5th smallest is 13? No: 1,5,9,10,11 → 5th is 11. Wait: sorted order: 1,5,9,10,11,12,13,13,15. K=5 → 11."
-        },
-        {
-            "input": "2 2\n1 3\n2 4",
-            "output": "2",
-            "explanation": "Sorted: 1,2,3,4. K=2 → 2."
-        }
-    ],
-    "starterCode": {
-        "python": "n, k = map(int, input().split())\nmatrix = []\nfor _ in range(n):\n    row = list(map(int, input().split()))\n    matrix.append(row)\n\ndef count_le(mid):\n    # Count elements <= mid using staircase search\n    count = 0\n    row, col = n - 1, 0\n    while row >= 0 and col < n:\n        if matrix[row][col] <= mid:\n            count += row + 1\n            col += 1\n        else:\n            row -= 1\n    return count\n\nlo, hi = matrix[0][0], matrix[n-1][n-1]\n# Write your binary search on value here\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint n;\nvector<vector<long long>> mat;\nint countLE(long long mid) {\n    int cnt = 0, row = n - 1, col = 0;\n    while (row >= 0 && col < n) {\n        if (mat[row][col] <= mid) { cnt += row + 1; col++; }\n        else row--;\n    }\n    return cnt;\n}\nint main() {\n    int k; cin >> n >> k;\n    mat.assign(n, vector<long long>(n));\n    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) cin >> mat[i][j];\n    long long lo = mat[0][0], hi = mat[n-1][n-1];\n    // Write your binary search here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    static int n;\n    static long[][] mat;\n    static int countLE(long mid) {\n        int cnt = 0, row = n - 1, col = 0;\n        while (row >= 0 && col < n) {\n            if (mat[row][col] <= mid) { cnt += row + 1; col++; }\n            else row--;\n        }\n        return cnt;\n    }\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        n = Integer.parseInt(st.nextToken());\n        int k = Integer.parseInt(st.nextToken());\n        mat = new long[n][n];\n        for (int i = 0; i < n; i++) {\n            st = new StringTokenizer(br.readLine());\n            for (int j = 0; j < n; j++) mat[i][j] = Long.parseLong(st.nextToken());\n        }\n        long lo = mat[0][0], hi = mat[n-1][n-1];\n        // Write your binary search here\n    }\n}\n"
+  "title": "Kth Smallest in Sorted Matrix",
+  "slug": "kth-smallest-sorted-matrix",
+  "difficulty": "Medium",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "Given an N×N matrix where each row and each column is sorted in non-decreasing order, find the K-th smallest element in the matrix.\n\n**Approach (binary search on answer):**\n- The answer lies in [matrix[0][0], matrix[N-1][N-1]].\n- For a mid value, count how many elements are <= mid using staircase search (O(N) per count).\n- Binary search on value: find the smallest value V such that count(V) >= K.\n\nTotal complexity: O(N log(max-min)).",
+  "inputFormat": "Line 1: two integers N and K.\nNext N lines: each contains N space-separated integers (the matrix rows).",
+  "outputFormat": "A single integer: the K-th smallest element.",
+  "constraints": "1 <= N <= 300\n1 <= K <= N*N\n-10^9 <= matrix[i][j] <= 10^9\nEach row and each column is sorted in non-decreasing order.",
+  "examples": [
+    {
+      "input": "3 5\n1 5 9\n10 11 13\n12 13 15",
+      "output": "13",
+      "explanation": "Sorted elements: 1,5,9,10,11,12,13,13,15. The 5th smallest is 13? No: 1,5,9,10,11 → 5th is 11. Wait: sorted order: 1,5,9,10,11,12,13,13,15. K=5 → 11."
     },
-    "testCases": [
-        {
-            "input": "3 5\n1 5 9\n10 11 13\n12 13 15",
-            "expectedOutput": "11",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "2 2\n1 3\n2 4",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1 1\n7",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "2 4\n1 2\n3 4",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "3 1\n1 2 3\n4 5 6\n7 8 9",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "3 9\n1 2 3\n4 5 6\n7 8 9",
-            "expectedOutput": "9",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "3 5\n1 2 3\n4 5 6\n7 8 9",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "3 8\n1 5 9\n10 11 13\n12 13 15",
-            "expectedOutput": "13",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "4 7\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
-            "expectedOutput": "7",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "2 1\n1 1\n1 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "3 4\n1 1 3\n1 3 5\n3 5 7",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "3 3\n-5 -4 -3\n-2 -1 0\n1 2 3",
-            "expectedOutput": "-3",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "4 10\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "2 3\n1 3\n2 4",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "3 6\n1 2 3\n2 3 4\n3 4 5",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "4 16\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
-            "expectedOutput": "16",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "2 2\n1 3\n2 4",
+      "output": "2",
+      "explanation": "Sorted: 1,2,3,4. K=2 → 2."
+    }
+  ],
+  "starterCode": {
+    "python": "n, k = map(int, input().split())\nmatrix = []\nfor _ in range(n):\n    row = list(map(int, input().split()))\n    matrix.append(row)\n\ndef count_le(mid):\n    # Count elements <= mid using staircase search\n    count = 0\n    row, col = n - 1, 0\n    while row >= 0 and col < n:\n        if matrix[row][col] <= mid:\n            count += row + 1\n            col += 1\n        else:\n            row -= 1\n    return count\n\nlo, hi = matrix[0][0], matrix[n-1][n-1]\n# Write your binary search on value here\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint n;\nvector<vector<long long>> mat;\nint countLE(long long mid) {\n    int cnt = 0, row = n - 1, col = 0;\n    while (row >= 0 && col < n) {\n        if (mat[row][col] <= mid) { cnt += row + 1; col++; }\n        else row--;\n    }\n    return cnt;\n}\nint main() {\n    int k; cin >> n >> k;\n    mat.assign(n, vector<long long>(n));\n    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) cin >> mat[i][j];\n    long long lo = mat[0][0], hi = mat[n-1][n-1];\n    // Write your binary search here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    static int n;\n    static long[][] mat;\n    static int countLE(long mid) {\n        int cnt = 0, row = n - 1, col = 0;\n        while (row >= 0 && col < n) {\n            if (mat[row][col] <= mid) { cnt += row + 1; col++; }\n            else row--;\n        }\n        return cnt;\n    }\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        n = Integer.parseInt(st.nextToken());\n        int k = Integer.parseInt(st.nextToken());\n        mat = new long[n][n];\n        for (int i = 0; i < n; i++) {\n            st = new StringTokenizer(br.readLine());\n            for (int j = 0; j < n; j++) mat[i][j] = Long.parseLong(st.nextToken());\n        }\n        long lo = mat[0][0], hi = mat[n-1][n-1];\n        // Write your binary search here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "3 5\n1 5 9\n10 11 13\n12 13 15",
+      "expectedOutput": "11",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "2 2\n1 3\n2 4",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 1\n7",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2 4\n1 2\n3 4",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 1\n1 2 3\n4 5 6\n7 8 9",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3 9\n1 2 3\n4 5 6\n7 8 9",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "3 5\n1 2 3\n4 5 6\n7 8 9",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "3 8\n1 5 9\n10 11 13\n12 13 15",
+      "expectedOutput": "13",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4 7\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
+      "expectedOutput": "7",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "2 1\n1 1\n1 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "3 4\n1 1 3\n1 3 5\n3 5 7",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "3 3\n-5 -4 -3\n-2 -1 0\n1 2 3",
+      "expectedOutput": "-3",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "4 10\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "2 3\n1 3\n2 4",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "3 6\n1 2 3\n2 3 4\n3 4 5",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "4 16\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
+      "expectedOutput": "16",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

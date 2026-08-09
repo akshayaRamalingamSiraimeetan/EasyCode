@@ -1,124 +1,128 @@
 {
-    "title": "Find Minimum in Rotated Sorted Array",
-    "slug": "min-rotated-sorted",
-    "difficulty": "Medium",
-    "statement": "A sorted array of N distinct integers has been rotated at some unknown pivot. Find the minimum element in the array.\n\nSolve in O(log N) — at each binary search step the minimum lies in the unsorted half.\n\nIf the array is not rotated at all (already sorted), the minimum is simply A[0].",
-    "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9\nAll elements are distinct.",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers (rotated sorted array).",
-    "outputFormat": "A single integer: the minimum element.",
-    "examples": [
-        {
-            "input": "5\n3 4 5 1 2",
-            "output": "1",
-            "explanation": "The pivot is between 5 and 1; minimum is 1."
-        },
-        {
-            "input": "4\n2 3 4 1",
-            "output": "1",
-            "explanation": "Minimum is 1 at the end."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\nlo, hi = 0, n - 1\n# Write your binary search here\n# The unsorted half always contains the minimum\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int lo = 0, hi = n - 1;\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        int lo = 0, hi = n - 1;\n        // Write your solution here\n    }\n}\n"
+  "title": "Find Minimum in Rotated Sorted Array",
+  "slug": "min-rotated-sorted",
+  "difficulty": "Medium",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "A sorted array of N distinct integers has been rotated at some unknown pivot. Find the minimum element in the array.\n\nSolve in O(log N) — at each binary search step the minimum lies in the unsorted half.\n\nIf the array is not rotated at all (already sorted), the minimum is simply A[0].",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers (rotated sorted array).",
+  "outputFormat": "A single integer: the minimum element.",
+  "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9\nAll elements are distinct.",
+  "examples": [
+    {
+      "input": "5\n3 4 5 1 2",
+      "output": "1",
+      "explanation": "The pivot is between 5 and 1; minimum is 1."
     },
-    "testCases": [
-        {
-            "input": "5\n3 4 5 1 2",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n2 3 4 1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5\n1 2 3 4 5",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1\n7",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "6\n6 7 1 2 3 4",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5\n5 1 2 3 4",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "5\n2 3 4 5 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "7\n4 5 6 7 0 1 2",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "2\n2 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "2\n1 2",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4\n4 1 2 3",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "6\n10 1 2 3 4 5",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "8\n5 6 7 8 9 1 2 3",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "3\n3 1 2",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5\n-5 -3 -1 -10 -8",
-            "expectedOutput": "-10",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "6\n-1 1 2 3 -5 -3",
-            "expectedOutput": "-5",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n2 3 4 1",
+      "output": "1",
+      "explanation": "Minimum is 1 at the end."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\nlo, hi = 0, n - 1\n# Write your binary search here\n# The unsorted half always contains the minimum\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int lo = 0, hi = n - 1;\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        int lo = 0, hi = n - 1;\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5\n3 4 5 1 2",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n2 3 4 1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5\n1 2 3 4 5",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1\n7",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6\n6 7 1 2 3 4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5\n5 1 2 3 4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5\n2 3 4 5 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "7\n4 5 6 7 0 1 2",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "2\n2 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "2\n1 2",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\n4 1 2 3",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "6\n10 1 2 3 4 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "8\n5 6 7 8 9 1 2 3",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3\n3 1 2",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5\n-5 -3 -1 -10 -8",
+      "expectedOutput": "-10",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6\n-1 1 2 3 -5 -3",
+      "expectedOutput": "-5",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

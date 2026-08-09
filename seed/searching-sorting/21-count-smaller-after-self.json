@@ -1,124 +1,128 @@
 {
-    "title": "Count Smaller Numbers After Self",
-    "slug": "count-smaller-after-self",
-    "difficulty": "Hard",
-    "statement": "Given an array of N integers, for each element A[i], count the number of elements to its right that are strictly smaller than it.\n\nPrint the resulting counts for each element as a space-separated array.\n\nUse merge sort (sorting array of index-value pairs) or a Fenwick Tree / Segment Tree. Time complexity should be O(N log N).",
-    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "N space-separated integers representing the counts.",
-    "examples": [
-        {
-            "input": "4\n5 2 6 1",
-            "output": "2 1 1 0",
-            "explanation": "Right of 5: 2, 1 (2 elements). Right of 2: 1 (1 element). Right of 6: 1 (1 element). Right of 1: none."
-        },
-        {
-            "input": "4\n1 2 3 4",
-            "output": "0 0 0 0",
-            "explanation": "No smaller elements to the right for any element."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\nans = [0] * n\n# Write your solution here\nprint(*ans)\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  "title": "Count Smaller Numbers After Self",
+  "slug": "count-smaller-after-self",
+  "difficulty": "Hard",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "Given an array of N integers, for each element A[i], count the number of elements to its right that are strictly smaller than it.\n\nPrint the resulting counts for each element as a space-separated array.\n\nUse merge sort (sorting array of index-value pairs) or a Fenwick Tree / Segment Tree. Time complexity should be O(N log N).",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "N space-separated integers representing the counts.",
+  "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "4\n5 2 6 1",
+      "output": "2 1 1 0",
+      "explanation": "Right of 5: 2, 1 (2 elements). Right of 2: 1 (1 element). Right of 6: 1 (1 element). Right of 1: none."
     },
-    "testCases": [
-        {
-            "input": "4\n5 2 6 1",
-            "expectedOutput": "2 1 1 0",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n1 2 3 4",
-            "expectedOutput": "0 0 0 0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5\n5 4 3 2 1",
-            "expectedOutput": "4 3 2 1 0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "1\n99",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "6\n1 3 5 2 4 6",
-            "expectedOutput": "0 1 2 0 0 0",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "5\n-1 -1 -1 -1 -1",
-            "expectedOutput": "0 0 0 0 0",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6\n5 5 2 2 1 1",
-            "expectedOutput": "4 4 2 2 0 0",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "4\n1 0 1 0",
-            "expectedOutput": "1 0 1 0",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "3\n0 -5 5",
-            "expectedOutput": "1 0 0",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "4\n-1000000000 1000000000 -1000000000 1000000000",
-            "expectedOutput": "0 1 0 0",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "7\n3 2 1 7 6 5 4",
-            "expectedOutput": "2 1 0 3 2 1 0",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5\n10 8 6 10 9",
-            "expectedOutput": "3 1 0 1 0",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "8\n1 5 2 6 3 7 4 8",
-            "expectedOutput": "0 3 0 3 0 2 0 0",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "3\n100 100 100",
-            "expectedOutput": "0 0 0",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5\n9 6 3 2 1",
-            "expectedOutput": "4 3 2 1 0",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "6\n1 2 3 3 2 1",
-            "expectedOutput": "0 0 2 2 1 0",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n1 2 3 4",
+      "output": "0 0 0 0",
+      "explanation": "No smaller elements to the right for any element."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\nans = [0] * n\n# Write your solution here\nprint(*ans)\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4\n5 2 6 1",
+      "expectedOutput": "2 1 1 0",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n1 2 3 4",
+      "expectedOutput": "0 0 0 0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5\n5 4 3 2 1",
+      "expectedOutput": "4 3 2 1 0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "1\n99",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6\n1 3 5 2 4 6",
+      "expectedOutput": "0 1 2 0 0 0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "5\n-1 -1 -1 -1 -1",
+      "expectedOutput": "0 0 0 0 0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6\n5 5 2 2 1 1",
+      "expectedOutput": "4 4 2 2 0 0",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "4\n1 0 1 0",
+      "expectedOutput": "1 0 1 0",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3\n0 -5 5",
+      "expectedOutput": "1 0 0",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4\n-1000000000 1000000000 -1000000000 1000000000",
+      "expectedOutput": "0 1 0 0",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "7\n3 2 1 7 6 5 4",
+      "expectedOutput": "2 1 0 3 2 1 0",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\n10 8 6 10 9",
+      "expectedOutput": "3 1 0 1 0",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "8\n1 5 2 6 3 7 4 8",
+      "expectedOutput": "0 3 0 3 0 2 0 0",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3\n100 100 100",
+      "expectedOutput": "0 0 0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5\n9 6 3 2 1",
+      "expectedOutput": "4 3 2 1 0",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6\n1 2 3 3 2 1",
+      "expectedOutput": "0 0 2 2 1 0",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

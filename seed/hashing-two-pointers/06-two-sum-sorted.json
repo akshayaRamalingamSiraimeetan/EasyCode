@@ -2,10 +2,14 @@
   "title": "Two Sum in Sorted Array",
   "slug": "two-sum-sorted-array",
   "difficulty": "Easy",
+  "topic": "Hashing & Two Pointers",
+  "tags": [
+    "Hashing"
+  ],
   "statement": "Given a sorted array of integers and a target T, use the two-pointer technique to find two numbers that add up to T.\n\nReturn their 1-based indices as a space-separated pair in ascending order. It is guaranteed that exactly one solution exists.",
-  "constraints": "2 <= N <= 3*10^4\n-10^9 <= A[i] <= 10^9 (sorted non-decreasing)\n-2*10^9 <= T <= 2*10^9",
   "inputFormat": "The first line contains N and T.\nThe second line contains N space-separated integers in sorted order.",
   "outputFormat": "Two space-separated 1-based indices.",
+  "constraints": "2 <= N <= 3*10^4\n-10^9 <= A[i] <= 10^9 (sorted non-decreasing)\n-2*10^9 <= T <= 2*10^9",
   "examples": [
     {
       "input": "4 9\n2 7 11 15",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long t = sc.nextLong();\n        long[] arr = new long[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4 9\n2 7 11 15",             "expectedOutput": "1 2", "isHidden": false, "orderIndex": 0 },
-    { "input": "3 6\n2 3 4",                 "expectedOutput": "1 3", "isHidden": false, "orderIndex": 1 },
-    { "input": "6 7\n1 2 3 4 5 6",           "expectedOutput": "1 6", "isHidden": false, "orderIndex": 2 },
-    { "input": "2 4\n2 2",                   "expectedOutput": "1 2", "isHidden": false, "orderIndex": 3 },
-    { "input": "6 9\n1 3 4 5 7 11",          "expectedOutput": "3 4", "isHidden": true,  "orderIndex": 4 },
-    { "input": "4 15\n1 5 10 20",            "expectedOutput": "2 3", "isHidden": true,  "orderIndex": 5 },
-    { "input": "4 10\n2 4 6 8",              "expectedOutput": "1 4", "isHidden": true,  "orderIndex": 6 },
-    { "input": "5 17\n1 2 4 8 16",           "expectedOutput": "1 5", "isHidden": true,  "orderIndex": 7 },
-    { "input": "5 16\n2 3 5 8 13",           "expectedOutput": "2 5", "isHidden": true,  "orderIndex": 8 },
-    { "input": "4 3\n1 1 2 3",               "expectedOutput": "1 3", "isHidden": true,  "orderIndex": 9 },
-    { "input": "4 12\n1 2 5 10",             "expectedOutput": "2 4", "isHidden": true,  "orderIndex": 10 },
-    { "input": "4 12\n3 5 7 9",              "expectedOutput": "1 4", "isHidden": true,  "orderIndex": 11 },
-    { "input": "4 1001\n1 10 100 1000",      "expectedOutput": "1 4", "isHidden": true,  "orderIndex": 12 },
-    { "input": "4 11\n4 5 6 7",              "expectedOutput": "1 4", "isHidden": true,  "orderIndex": 13 },
-    { "input": "5 16\n1 3 6 10 15",          "expectedOutput": "1 5", "isHidden": true,  "orderIndex": 14 },
-    { "input": "7 14\n1 2 3 5 7 11 13",      "expectedOutput": "1 7", "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "4 9\n2 7 11 15",
+      "expectedOutput": "1 2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3 6\n2 3 4",
+      "expectedOutput": "1 3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "6 7\n1 2 3 4 5 6",
+      "expectedOutput": "1 6",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2 4\n2 2",
+      "expectedOutput": "1 2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6 9\n1 3 4 5 7 11",
+      "expectedOutput": "3 4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4 15\n1 5 10 20",
+      "expectedOutput": "2 3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4 10\n2 4 6 8",
+      "expectedOutput": "1 4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 17\n1 2 4 8 16",
+      "expectedOutput": "1 5",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "5 16\n2 3 5 8 13",
+      "expectedOutput": "2 5",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4 3\n1 1 2 3",
+      "expectedOutput": "1 3",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4 12\n1 2 5 10",
+      "expectedOutput": "2 4",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4 12\n3 5 7 9",
+      "expectedOutput": "1 4",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "4 1001\n1 10 100 1000",
+      "expectedOutput": "1 4",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 11\n4 5 6 7",
+      "expectedOutput": "1 4",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5 16\n1 3 6 10 15",
+      "expectedOutput": "1 5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "7 14\n1 2 3 5 7 11 13",
+      "expectedOutput": "1 7",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

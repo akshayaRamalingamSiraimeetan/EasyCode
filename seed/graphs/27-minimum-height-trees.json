@@ -1,70 +1,74 @@
 {
-    "title": "Minimum Height Trees",
-    "slug": "minimum-height-trees",
-    "difficulty": "Medium",
-    "statement": "A tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any connected graph without simple cycles is a tree.\nGiven a tree of `n` nodes labelled from `0` to `n - 1`, and an array of `n - 1` `edges` where `edges[i] = [ai, bi]` indicates that there is an undirected edge between the two nodes in the tree, you can choose any node of the tree as the root. When you select a node `x` as the root, the result tree has height `h`. Among all possible rooted trees, those with minimum height (i.e. `min(h)`) are called minimum height trees (MHTs).\nReturn a list of all MHTs' root labels. You can return the answer in ascending order.",
-    "constraints": "1 <= n <= 2 * 10^4\nedges.length == n - 1",
-    "inputFormat": "Line 1: an integer N.\nNext N-1 lines: two integers u and v.",
-    "outputFormat": "Space-separated integers: the roots of MHTs in ascending order.",
-    "examples": [
-        {
-            "input": "4\n1 0\n1 2\n1 3",
-            "output": "1",
-            "explanation": "Node 1 is the center, height is 1."
-        },
-        {
-            "input": "6\n3 0\n3 1\n3 2\n3 4\n5 4",
-            "output": "3 4",
-            "explanation": "Centers are 3 and 4, height is 2."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\nedges = [tuple(map(int, input().split())) for _ in range(n - 1)]\n# Topological sort from leaves inward\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<n-1; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<n-1; i++) {\n            int u=sc.nextInt(), v=sc.nextInt();\n            adj.get(u).add(v); adj.get(v).add(u);\n        }\n        // Write logic\n    }\n}\n"
+  "title": "Minimum Height Trees",
+  "slug": "minimum-height-trees",
+  "difficulty": "Medium",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "A tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any connected graph without simple cycles is a tree.\nGiven a tree of `n` nodes labelled from `0` to `n - 1`, and an array of `n - 1` `edges` where `edges[i] = [ai, bi]` indicates that there is an undirected edge between the two nodes in the tree, you can choose any node of the tree as the root. When you select a node `x` as the root, the result tree has height `h`. Among all possible rooted trees, those with minimum height (i.e. `min(h)`) are called minimum height trees (MHTs).\nReturn a list of all MHTs' root labels. You can return the answer in ascending order.",
+  "inputFormat": "Line 1: an integer N.\nNext N-1 lines: two integers u and v.",
+  "outputFormat": "Space-separated integers: the roots of MHTs in ascending order.",
+  "constraints": "1 <= n <= 2 * 10^4\nedges.length == n - 1",
+  "examples": [
+    {
+      "input": "4\n1 0\n1 2\n1 3",
+      "output": "1",
+      "explanation": "Node 1 is the center, height is 1."
     },
-    "testCases": [
-        {
-            "input": "4\n1 0\n1 2\n1 3",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "6\n3 0\n3 1\n3 2\n3 4\n5 4",
-            "expectedOutput": "3 4",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1\n",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "2\n1 0",
-            "expectedOutput": "0 1",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5\n0 1\n1 2\n2 3\n3 4",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6\n0 1\n1 2\n2 3\n3 4\n4 5",
-            "expectedOutput": "2 3",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "7\n0 1\n1 2\n1 3\n2 4\n3 5\n4 6",
-            "expectedOutput": "1 2",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "6\n3 0\n3 1\n3 2\n3 4\n5 4",
+      "output": "3 4",
+      "explanation": "Centers are 3 and 4, height is 2."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\nedges = [tuple(map(int, input().split())) for _ in range(n - 1)]\n# Topological sort from leaves inward\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<n-1; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<n-1; i++) {\n            int u=sc.nextInt(), v=sc.nextInt();\n            adj.get(u).add(v); adj.get(v).add(u);\n        }\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4\n1 0\n1 2\n1 3",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "6\n3 0\n3 1\n3 2\n3 4\n5 4",
+      "expectedOutput": "3 4",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1\n",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2\n1 0",
+      "expectedOutput": "0 1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5\n0 1\n1 2\n2 3\n3 4",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6\n0 1\n1 2\n2 3\n3 4\n4 5",
+      "expectedOutput": "2 3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "7\n0 1\n1 2\n1 3\n2 4\n3 5\n4 6",
+      "expectedOutput": "1 2",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

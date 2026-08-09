@@ -2,10 +2,14 @@
   "title": "Letter Case Permutations",
   "slug": "letter-case-permutations",
   "difficulty": "Medium",
+  "topic": "Backtracking",
+  "tags": [
+    "Backtracking"
+  ],
   "statement": "Given an alphanumeric string S, generate all possible strings by toggling the case of each letter (digits remain unchanged).\n\nPrint all results in lexicographic order, one per line.",
-  "constraints": "1 <= |S| <= 12\nS contains letters (a-z, A-Z) and digits (0-9).",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "All permutations (sorted lexicographically), one per line.",
+  "constraints": "1 <= |S| <= 12\nS contains letters (a-z, A-Z) and digits (0-9).",
   "examples": [
     {
       "input": "a1b2",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "a1b2",   "expectedOutput": "A1B2\nA1b2\na1B2\na1b2",                                                                                             "isHidden": false, "orderIndex": 0 },
-    { "input": "3z4",    "expectedOutput": "3Z4\n3z4",                                                                                                          "isHidden": false, "orderIndex": 1 },
-    { "input": "12345",  "expectedOutput": "12345",                                                                                                              "isHidden": false, "orderIndex": 2 },
-    { "input": "a",      "expectedOutput": "A\na",                                                                                                              "isHidden": false, "orderIndex": 3 },
-    { "input": "ABC",    "expectedOutput": "ABC\nABc\nAbC\nAbc\naBC\naBc\nabC\nabc",                                                                             "isHidden": true,  "orderIndex": 4 },
-    { "input": "A1B2C3", "expectedOutput": "A1B2C3\nA1B2c3\nA1b2C3\nA1b2c3\na1B2C3\na1B2c3\na1b2C3\na1b2c3",                                                   "isHidden": true,  "orderIndex": 5 },
-    { "input": "abc",    "expectedOutput": "ABC\nABc\nAbC\nAbc\naBC\naBc\nabC\nabc",                                                                             "isHidden": true,  "orderIndex": 6 },
-    { "input": "ab",     "expectedOutput": "AB\nAb\naB\nab",                                                                                                    "isHidden": true,  "orderIndex": 7 },
-    { "input": "a1",     "expectedOutput": "A1\na1",                                                                                                            "isHidden": true,  "orderIndex": 8 },
-    { "input": "123",    "expectedOutput": "123",                                                                                                                "isHidden": true,  "orderIndex": 9 },
-    { "input": "Z",      "expectedOutput": "Z\nz",                                                                                                              "isHidden": true,  "orderIndex": 10 },
-    { "input": "1a",     "expectedOutput": "1A\n1a",                                                                                                            "isHidden": true,  "orderIndex": 11 },
-    { "input": "C2d",    "expectedOutput": "C2D\nC2d\nc2D\nc2d",                                                                                                "isHidden": true,  "orderIndex": 12 },
-    { "input": "0",      "expectedOutput": "0",                                                                                                                  "isHidden": true,  "orderIndex": 13 },
-    { "input": "xY",     "expectedOutput": "XY\nXy\nxY\nxy",                                                                                                    "isHidden": true,  "orderIndex": 14 },
-    { "input": "1A2b",   "expectedOutput": "1A2B\n1A2b\n1a2B\n1a2b",                                                                                            "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "a1b2",
+      "expectedOutput": "A1B2\nA1b2\na1B2\na1b2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3z4",
+      "expectedOutput": "3Z4\n3z4",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "12345",
+      "expectedOutput": "12345",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "a",
+      "expectedOutput": "A\na",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "ABC",
+      "expectedOutput": "ABC\nABc\nAbC\nAbc\naBC\naBc\nabC\nabc",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "A1B2C3",
+      "expectedOutput": "A1B2C3\nA1B2c3\nA1b2C3\nA1b2c3\na1B2C3\na1B2c3\na1b2C3\na1b2c3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abc",
+      "expectedOutput": "ABC\nABc\nAbC\nAbc\naBC\naBc\nabC\nabc",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "ab",
+      "expectedOutput": "AB\nAb\naB\nab",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "a1",
+      "expectedOutput": "A1\na1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "123",
+      "expectedOutput": "123",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "Z",
+      "expectedOutput": "Z\nz",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "1a",
+      "expectedOutput": "1A\n1a",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "C2d",
+      "expectedOutput": "C2D\nC2d\nc2D\nc2d",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "0",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "xY",
+      "expectedOutput": "XY\nXy\nxY\nxy",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "1A2b",
+      "expectedOutput": "1A2B\n1A2b\n1a2B\n1a2b",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

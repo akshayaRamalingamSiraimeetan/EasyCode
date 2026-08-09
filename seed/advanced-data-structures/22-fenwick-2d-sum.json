@@ -2,10 +2,14 @@
   "title": "Fenwick Tree 2D: Rectangle Sum Queries",
   "slug": "fenwick-2d-rectangle-sum",
   "difficulty": "Hard",
+  "topic": "Advanced Data Structures",
+  "tags": [
+    "Advanced Data Structures"
+  ],
   "statement": "Given an N×M grid initialized to zeros, process Q operations:\n- \"U r c v\" — add v to cell (r, c)\n- \"Q r1 c1 r2 c2\" — print the sum of all cells in the sub-rectangle from (r1,c1) to (r2,c2) inclusive\n\nAll coordinates are 1-indexed. Use a 2D Fenwick Tree (Binary Indexed Tree) for O(log N · log M) per operation.",
-  "constraints": "1 <= N, M <= 500\n1 <= Q <= 10^4\n1 <= r, c <= N or M\n-10^4 <= v <= 10^4",
   "inputFormat": "The first line contains N, M, and Q.\nEach of the next Q lines starts with 'U' or 'Q' followed by the respective parameters.",
   "outputFormat": "One line per Q operation with the rectangle sum.",
+  "constraints": "1 <= N, M <= 500\n1 <= Q <= 10^4\n1 <= r, c <= N or M\n-10^4 <= v <= 10^4",
   "examples": [
     {
       "input": "4 4 5\nU 1 1 3\nU 2 2 5\nQ 1 1 2 2\nU 3 3 2\nQ 1 1 4 4",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    static int N,M;\n    static int[][] bit;\n    static void upd(int r,int c,int v){\n        for(int i=r;i<=N;i+=i&-i)\n            for(int j=c;j<=M;j+=j&-j)\n                bit[i][j]+=v;\n    }\n    static int qry(int r,int c){\n        int s=0;\n        for(int i=r;i>0;i-=i&-i)\n            for(int j=c;j>0;j-=j&-j)\n                s+=bit[i][j];\n        return s;\n    }\n    static int rect(int r1,int c1,int r2,int c2){return qry(r2,c2)-qry(r1-1,c2)-qry(r2,c1-1)+qry(r1-1,c1-1);}\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        N=sc.nextInt();M=sc.nextInt();int q=sc.nextInt();\n        bit=new int[N+1][M+1];\n        while(q-->0){\n            String op=sc.next();\n            if(op.equals(\"U\")){int r=sc.nextInt(),c=sc.nextInt(),v=sc.nextInt();upd(r,c,v);}\n            else{int r1=sc.nextInt(),c1=sc.nextInt(),r2=sc.nextInt(),c2=sc.nextInt();System.out.println(rect(r1,c1,r2,c2));}\n        }\n    }\n}\n"
   },
   "testCases": [
-    { "input": "4 4 5\nU 1 1 3\nU 2 2 5\nQ 1 1 2 2\nU 3 3 2\nQ 1 1 4 4",          "expectedOutput": "8\n10",     "isHidden": false, "orderIndex": 0 },
-    { "input": "3 3 3\nU 1 1 10\nU 3 3 5\nQ 1 1 3 3",                            "expectedOutput": "15",       "isHidden": false, "orderIndex": 1 },
-    { "input": "2 2 4\nU 1 1 1\nU 1 2 2\nU 2 1 3\nQ 1 1 2 2",                    "expectedOutput": "6",        "isHidden": false, "orderIndex": 2 },
-    { "input": "5 5 3\nU 3 3 7\nQ 2 2 4 4\nQ 1 1 5 5",                           "expectedOutput": "7\n7",      "isHidden": false, "orderIndex": 3 },
-    { "input": "3 3 2\nQ 1 1 3 3\nU 2 2 5",                                      "expectedOutput": "0",        "isHidden": true,  "orderIndex": 4 },
-    { "input": "4 4 6\nU 1 1 1\nU 2 2 2\nU 3 3 3\nU 4 4 4\nQ 1 1 4 4\nQ 2 2 3 3", "expectedOutput": "10\n5",    "isHidden": true,  "orderIndex": 5 },
-    { "input": "3 3 5\nU 1 1 5\nU 1 2 5\nU 2 1 5\nU 2 2 5\nQ 1 1 2 2",            "expectedOutput": "20",       "isHidden": true,  "orderIndex": 6 },
-    { "input": "5 5 4\nU 2 3 10\nU 4 3 10\nQ 1 3 5 3\nQ 2 2 4 4",               "expectedOutput": "20\n20",    "isHidden": true,  "orderIndex": 7 },
-    { "input": "2 2 3\nU 1 1 -5\nU 2 2 3\nQ 1 1 2 2",                            "expectedOutput": "-2",       "isHidden": true,  "orderIndex": 8 },
-    { "input": "3 4 4\nU 1 4 7\nU 3 1 3\nQ 1 1 3 4\nQ 2 2 2 3",                 "expectedOutput": "10\n0",     "isHidden": true,  "orderIndex": 9 },
-    { "input": "5 5 5\nU 1 1 1\nU 5 5 1\nU 3 3 1\nQ 1 1 5 5\nQ 3 3 3 3",        "expectedOutput": "3\n1",      "isHidden": true,  "orderIndex": 10 },
-    { "input": "4 4 4\nU 2 2 4\nU 2 3 4\nU 3 2 4\nQ 1 1 4 4",                   "expectedOutput": "12",       "isHidden": true,  "orderIndex": 11 },
-    { "input": "3 3 5\nU 1 1 2\nU 2 2 3\nU 3 3 4\nQ 1 1 2 2\nQ 2 2 3 3",        "expectedOutput": "5\n7",      "isHidden": true,  "orderIndex": 12 },
-    { "input": "4 4 3\nU 1 1 100\nQ 1 1 1 1\nQ 1 1 4 4",                        "expectedOutput": "100\n100",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "3 3 4\nU 1 2 3\nU 2 1 3\nU 2 3 3\nQ 1 1 3 3",                   "expectedOutput": "9",        "isHidden": true,  "orderIndex": 14 },
-    { "input": "2 3 4\nU 1 1 5\nU 1 3 5\nU 2 2 5\nQ 1 1 2 3",                   "expectedOutput": "15",       "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "4 4 5\nU 1 1 3\nU 2 2 5\nQ 1 1 2 2\nU 3 3 2\nQ 1 1 4 4",
+      "expectedOutput": "8\n10",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3 3 3\nU 1 1 10\nU 3 3 5\nQ 1 1 3 3",
+      "expectedOutput": "15",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2 2 4\nU 1 1 1\nU 1 2 2\nU 2 1 3\nQ 1 1 2 2",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "5 5 3\nU 3 3 7\nQ 2 2 4 4\nQ 1 1 5 5",
+      "expectedOutput": "7\n7",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 3 2\nQ 1 1 3 3\nU 2 2 5",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4 4 6\nU 1 1 1\nU 2 2 2\nU 3 3 3\nU 4 4 4\nQ 1 1 4 4\nQ 2 2 3 3",
+      "expectedOutput": "10\n5",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "3 3 5\nU 1 1 5\nU 1 2 5\nU 2 1 5\nU 2 2 5\nQ 1 1 2 2",
+      "expectedOutput": "20",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 5 4\nU 2 3 10\nU 4 3 10\nQ 1 3 5 3\nQ 2 2 4 4",
+      "expectedOutput": "20\n20",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "2 2 3\nU 1 1 -5\nU 2 2 3\nQ 1 1 2 2",
+      "expectedOutput": "-2",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "3 4 4\nU 1 4 7\nU 3 1 3\nQ 1 1 3 4\nQ 2 2 2 3",
+      "expectedOutput": "10\n0",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5 5 5\nU 1 1 1\nU 5 5 1\nU 3 3 1\nQ 1 1 5 5\nQ 3 3 3 3",
+      "expectedOutput": "3\n1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4 4 4\nU 2 2 4\nU 2 3 4\nU 3 2 4\nQ 1 1 4 4",
+      "expectedOutput": "12",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "3 3 5\nU 1 1 2\nU 2 2 3\nU 3 3 4\nQ 1 1 2 2\nQ 2 2 3 3",
+      "expectedOutput": "5\n7",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 4 3\nU 1 1 100\nQ 1 1 1 1\nQ 1 1 4 4",
+      "expectedOutput": "100\n100",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "3 3 4\nU 1 2 3\nU 2 1 3\nU 2 3 3\nQ 1 1 3 3",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "2 3 4\nU 1 1 5\nU 1 3 5\nU 2 2 5\nQ 1 1 2 3",
+      "expectedOutput": "15",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

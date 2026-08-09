@@ -1,124 +1,128 @@
 {
-    "title": "Range Sum Queries",
-    "slug": "range-sum-queries",
-    "difficulty": "Easy",
-    "statement": "Given an array of N integers, answer Q queries. Each query gives two indices L and R (1-indexed) and asks for the sum of elements A[L] + A[L+1] + ... + A[R].\n\nBuild a prefix sum array to answer each query in O(1).",
-    "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n1 <= L <= R <= N\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: two integers N and Q.\nLine 2: N space-separated integers A[1..N].\nNext Q lines: each contains two integers L and R.",
-    "outputFormat": "For each query, print the range sum on a separate line.",
-    "examples": [
-        {
-            "input": "5 3\n1 2 3 4 5\n1 3\n2 5\n1 5",
-            "output": "6\n14\n15",
-            "explanation": "prefix = [0,1,3,6,10,15]. Query(1,3)=6, Query(2,5)=14, Query(1,5)=15."
-        },
-        {
-            "input": "4 2\n-1 2 -3 4\n1 4\n2 3",
-            "output": "2\n-1",
-            "explanation": "Sum of all = 2. Sum(2..3) = 2+(-3) = -1."
-        }
-    ],
-    "starterCode": {
-        "python": "n, q = map(int, input().split())\na = list(map(int, input().split()))\n# Build prefix sum array\n# Write your solution here\nfor _ in range(q):\n    l, r = map(int, input().split())\n    # Answer each query\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, q;\n    cin >> n >> q;\n    vector<long long> a(n+1), pre(n+1, 0);\n    for (int i = 1; i <= n; i++) { cin >> a[i]; }\n    // Build prefix sum\n    // Write your solution here\n    while (q--) {\n        int l, r; cin >> l >> r;\n        // Answer query\n    }\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(st.nextToken()), q = Integer.parseInt(st.nextToken());\n        long[] a = new long[n+1], pre = new long[n+1];\n        st = new StringTokenizer(br.readLine());\n        for (int i = 1; i <= n; i++) a[i] = Long.parseLong(st.nextToken());\n        // Build prefix sum and answer queries\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < q; i++) {\n            st = new StringTokenizer(br.readLine());\n            int l = Integer.parseInt(st.nextToken()), r = Integer.parseInt(st.nextToken());\n            // Write your solution here\n        }\n        System.out.print(sb);\n    }\n}\n"
+  "title": "Range Sum Queries",
+  "slug": "range-sum-queries",
+  "difficulty": "Easy",
+  "topic": "Arrays",
+  "tags": [
+    "Arrays"
+  ],
+  "statement": "Given an array of N integers, answer Q queries. Each query gives two indices L and R (1-indexed) and asks for the sum of elements A[L] + A[L+1] + ... + A[R].\n\nBuild a prefix sum array to answer each query in O(1).",
+  "inputFormat": "Line 1: two integers N and Q.\nLine 2: N space-separated integers A[1..N].\nNext Q lines: each contains two integers L and R.",
+  "outputFormat": "For each query, print the range sum on a separate line.",
+  "constraints": "1 <= N <= 10^5\n1 <= Q <= 10^5\n1 <= L <= R <= N\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "5 3\n1 2 3 4 5\n1 3\n2 5\n1 5",
+      "output": "6\n14\n15",
+      "explanation": "prefix = [0,1,3,6,10,15]. Query(1,3)=6, Query(2,5)=14, Query(1,5)=15."
     },
-    "testCases": [
-        {
-            "input": "5 3\n1 2 3 4 5\n1 3\n2 5\n1 5",
-            "expectedOutput": "6\n14\n15",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4 2\n-1 2 -3 4\n1 4\n2 3",
-            "expectedOutput": "2\n-1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1 1\n7\n1 1",
-            "expectedOutput": "7",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3 3\n0 0 0\n1 1\n1 3\n2 2",
-            "expectedOutput": "0\n0\n0",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5 2\n-5 -5 -5 -5 -5\n1 5\n2 4",
-            "expectedOutput": "-25\n-15",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4 4\n1000000000 1000000000 1000000000 1000000000\n1 4\n1 2\n2 3\n3 4",
-            "expectedOutput": "4000000000\n2000000000\n2000000000\n2000000000",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6 3\n10 -10 10 -10 10 -10\n1 6\n1 1\n6 6",
-            "expectedOutput": "0\n10\n-10",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5 1\n1 2 3 4 5\n3 3",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "3 2\n-1000000000 0 1000000000\n1 3\n1 2",
-            "expectedOutput": "0\n-1000000000",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "7 4\n1 1 1 1 1 1 1\n1 7\n2 6\n3 5\n4 4",
-            "expectedOutput": "7\n5\n3\n1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4 3\n100 200 300 400\n1 4\n2 4\n3 4",
-            "expectedOutput": "1000\n900\n700",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5 3\n-3 1 -4 1 5\n1 5\n1 2\n4 5",
-            "expectedOutput": "0\n-2\n6",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "6 2\n0 0 0 0 0 1\n1 6\n5 6",
-            "expectedOutput": "1\n1",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "4 2\n-1000000000 -1000000000 1000000000 1000000000\n1 2\n3 4",
-            "expectedOutput": "-2000000000\n2000000000",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "5 5\n5 4 3 2 1\n1 1\n2 2\n3 3\n4 4\n5 5",
-            "expectedOutput": "5\n4\n3\n2\n1",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "6 3\n999999999 -999999999 999999999 -999999999 999999999 -999999999\n1 6\n1 3\n2 4",
-            "expectedOutput": "0\n999999999\n-999999999",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4 2\n-1 2 -3 4\n1 4\n2 3",
+      "output": "2\n-1",
+      "explanation": "Sum of all = 2. Sum(2..3) = 2+(-3) = -1."
+    }
+  ],
+  "starterCode": {
+    "python": "n, q = map(int, input().split())\na = list(map(int, input().split()))\n# Build prefix sum array\n# Write your solution here\nfor _ in range(q):\n    l, r = map(int, input().split())\n    # Answer each query\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n, q;\n    cin >> n >> q;\n    vector<long long> a(n+1), pre(n+1, 0);\n    for (int i = 1; i <= n; i++) { cin >> a[i]; }\n    // Build prefix sum\n    // Write your solution here\n    while (q--) {\n        int l, r; cin >> l >> r;\n        // Answer query\n    }\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(st.nextToken()), q = Integer.parseInt(st.nextToken());\n        long[] a = new long[n+1], pre = new long[n+1];\n        st = new StringTokenizer(br.readLine());\n        for (int i = 1; i <= n; i++) a[i] = Long.parseLong(st.nextToken());\n        // Build prefix sum and answer queries\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < q; i++) {\n            st = new StringTokenizer(br.readLine());\n            int l = Integer.parseInt(st.nextToken()), r = Integer.parseInt(st.nextToken());\n            // Write your solution here\n        }\n        System.out.print(sb);\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5 3\n1 2 3 4 5\n1 3\n2 5\n1 5",
+      "expectedOutput": "6\n14\n15",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4 2\n-1 2 -3 4\n1 4\n2 3",
+      "expectedOutput": "2\n-1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 1\n7\n1 1",
+      "expectedOutput": "7",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3 3\n0 0 0\n1 1\n1 3\n2 2",
+      "expectedOutput": "0\n0\n0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5 2\n-5 -5 -5 -5 -5\n1 5\n2 4",
+      "expectedOutput": "-25\n-15",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4 4\n1000000000 1000000000 1000000000 1000000000\n1 4\n1 2\n2 3\n3 4",
+      "expectedOutput": "4000000000\n2000000000\n2000000000\n2000000000",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6 3\n10 -10 10 -10 10 -10\n1 6\n1 1\n6 6",
+      "expectedOutput": "0\n10\n-10",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 1\n1 2 3 4 5\n3 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3 2\n-1000000000 0 1000000000\n1 3\n1 2",
+      "expectedOutput": "0\n-1000000000",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "7 4\n1 1 1 1 1 1 1\n1 7\n2 6\n3 5\n4 4",
+      "expectedOutput": "7\n5\n3\n1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4 3\n100 200 300 400\n1 4\n2 4\n3 4",
+      "expectedOutput": "1000\n900\n700",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5 3\n-3 1 -4 1 5\n1 5\n1 2\n4 5",
+      "expectedOutput": "0\n-2\n6",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6 2\n0 0 0 0 0 1\n1 6\n5 6",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 2\n-1000000000 -1000000000 1000000000 1000000000\n1 2\n3 4",
+      "expectedOutput": "-2000000000\n2000000000",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "5 5\n5 4 3 2 1\n1 1\n2 2\n3 3\n4 4\n5 5",
+      "expectedOutput": "5\n4\n3\n2\n1",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "6 3\n999999999 -999999999 999999999 -999999999 999999999 -999999999\n1 6\n1 3\n2 4",
+      "expectedOutput": "0\n999999999\n-999999999",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

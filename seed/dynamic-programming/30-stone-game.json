@@ -1,76 +1,80 @@
 {
-    "title": "Stone Game",
-    "slug": "stone-game",
-    "difficulty": "Medium",
-    "statement": "Alice and Bob play a game with piles of stones. There are an even number of piles arranged in a row, and each pile has a positive integer number of stones.\nAlice and Bob take turns, with Alice going first. Each turn, a player takes the entire pile of stones from either the beginning or the end of the row.\nThe player with the most stones at the end wins.\nBoth players play optimally. Return `YES` if Alice wins the game, or `NO` if Bob wins.",
-    "constraints": "2 <= piles.length <= 500\npiles.length is even.\n1 <= piles[i] <= 500",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "Print `YES` or `NO`.",
-    "examples": [
-        {
-            "input": "4\n5 3 4 5",
-            "output": "YES",
-            "explanation": "Alice wins regardless of Bob's moves."
-        },
-        {
-            "input": "4\n3 7 2 3",
-            "output": "YES",
-            "explanation": "Alice picks 3 (left), Bob picks 7, Alice picks 3 (right), Bob picks 2. Alice=6>Bob=9... actually Alice goes first and wins optimally."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\npiles = list(map(int, input().split()))\n# Interval DP: dp[i][j] = max score difference Alice can achieve on piles[i..j]\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> piles(n);\n    for(int i=0; i<n; i++) cin >> piles[i];\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] piles = new int[n];\n        for(int i=0; i<n; i++) piles[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+  "title": "Stone Game",
+  "slug": "stone-game",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Alice and Bob play a game with piles of stones. There are an even number of piles arranged in a row, and each pile has a positive integer number of stones.\nAlice and Bob take turns, with Alice going first. Each turn, a player takes the entire pile of stones from either the beginning or the end of the row.\nThe player with the most stones at the end wins.\nBoth players play optimally. Return `YES` if Alice wins the game, or `NO` if Bob wins.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "Print `YES` or `NO`.",
+  "constraints": "2 <= piles.length <= 500\npiles.length is even.\n1 <= piles[i] <= 500",
+  "examples": [
+    {
+      "input": "4\n5 3 4 5",
+      "output": "YES",
+      "explanation": "Alice wins regardless of Bob's moves."
     },
-    "testCases": [
-        {
-            "input": "4\n5 3 4 5",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n3 7 2 3",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "2\n1 2",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "2\n2 1",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "6\n1 100 1 1 1 100",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4\n1 2 3 100",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6\n6 1 5 2 4 3",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "8\n1 1 1 1 1 1 1 1",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "4\n3 7 2 3",
+      "output": "YES",
+      "explanation": "Alice picks 3 (left), Bob picks 7, Alice picks 3 (right), Bob picks 2. Alice=6>Bob=9... actually Alice goes first and wins optimally."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\npiles = list(map(int, input().split()))\n# Interval DP: dp[i][j] = max score difference Alice can achieve on piles[i..j]\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<int> piles(n);\n    for(int i=0; i<n; i++) cin >> piles[i];\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] piles = new int[n];\n        for(int i=0; i<n; i++) piles[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4\n5 3 4 5",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n3 7 2 3",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "2\n1 2",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "2\n2 1",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "6\n1 100 1 1 1 100",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4\n1 2 3 100",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6\n6 1 5 2 4 3",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "8\n1 1 1 1 1 1 1 1",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

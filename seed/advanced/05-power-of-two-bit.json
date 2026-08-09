@@ -1,75 +1,79 @@
 {
-    "title": "Power of Two (Bit Manipulation)",
-    "slug": "power-of-two-bit",
-    "difficulty": "Easy",
-    "statement": "Given an integer `n`, return `YES` if it is a power of two. Otherwise, return `NO`.\nDo this without using loops or recursion (use bit manipulation).",
-    "constraints": "-2^31 <= n <= 2^31 - 1",
-    "inputFormat": "A single integer n.",
-    "outputFormat": "Print `YES` or `NO`.",
-    "examples": [
-        {
-            "input": "1",
-            "output": "YES",
-            "explanation": "2^0 = 1"
-        },
-        {
-            "input": "16",
-            "output": "YES",
-            "explanation": "2^4 = 16"
-        },
-        {
-            "input": "3",
-            "output": "NO",
-            "explanation": "3 is not a power of 2."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\n# A power of two has exactly one 1-bit in its binary representation\n",
-        "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    long long n; cin >> n;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write logic\n    }\n}\n"
+  "title": "Power of Two (Bit Manipulation)",
+  "slug": "power-of-two-bit",
+  "difficulty": "Easy",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "Given an integer `n`, return `YES` if it is a power of two. Otherwise, return `NO`.\nDo this without using loops or recursion (use bit manipulation).",
+  "inputFormat": "A single integer n.",
+  "outputFormat": "Print `YES` or `NO`.",
+  "constraints": "-2^31 <= n <= 2^31 - 1",
+  "examples": [
+    {
+      "input": "1",
+      "output": "YES",
+      "explanation": "2^0 = 1"
     },
-    "testCases": [
-        {
-            "input": "1",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "16",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "0",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "-16",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1073741824",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "2147483647",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "16",
+      "output": "YES",
+      "explanation": "2^4 = 16"
+    },
+    {
+      "input": "3",
+      "output": "NO",
+      "explanation": "3 is not a power of 2."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\n# A power of two has exactly one 1-bit in its binary representation\n",
+    "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    long long n; cin >> n;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "1",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "16",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "0",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "-16",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1073741824",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "2147483647",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

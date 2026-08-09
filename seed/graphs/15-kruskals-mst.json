@@ -1,65 +1,69 @@
 {
-    "title": "Kruskal's MST",
-    "slug": "kruskals-mst",
-    "difficulty": "Medium",
-    "statement": "Given an undirected weighted connected graph with `n` nodes (0-indexed) and `e` edges, find the weight of its Minimum Spanning Tree (MST) using Kruskal's algorithm with Union-Find.",
-    "constraints": "1 <= n <= 10^5\nn-1 <= e <= 2 * 10^5\n1 <= w <= 10^6",
-    "inputFormat": "Line 1: two integers n and e.\nNext e lines: three integers u, v, w.",
-    "outputFormat": "A single integer: the total weight of the MST.",
-    "examples": [
-        {
-            "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4",
-            "output": "19",
-            "explanation": "MST edges: (2,3,4), (0,3,5), (0,1,10). Total = 19."
-        }
-    ],
-    "starterCode": {
-        "python": "n, e = map(int, input().split())\nedges = []\nfor _ in range(e):\n    u, v, w = map(int, input().split())\n    edges.append((w, u, v))\n# Sort edges by weight, Union-Find to build MST\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint parent[100001], rnk[100001];\nint find(int x) { return parent[x] == x ? x : parent[x] = find(parent[x]); }\nbool unite(int a, int b) {\n    a=find(a); b=find(b);\n    if(a==b) return false;\n    if(rnk[a]<rnk[b]) swap(a,b);\n    parent[b]=a; if(rnk[a]==rnk[b]) rnk[a]++;\n    return true;\n}\nint main() {\n    int n,e; cin >> n >> e;\n    vector<tuple<int,int,int>> edges;\n    for(int i=0; i<e; i++) { int u,v,w; cin>>u>>v>>w; edges.push_back({w,u,v}); }\n    sort(edges.begin(), edges.end());\n    for(int i=0; i<n; i++) { parent[i]=i; rnk[i]=0; }\n    // Kruskal's\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    static int[] parent, rank;\n    static int find(int x) { return parent[x]==x ? x : (parent[x]=find(parent[x])); }\n    static boolean union(int a, int b) {\n        a=find(a); b=find(b);\n        if(a==b) return false;\n        if(rank[a]<rank[b]) { int t=a; a=b; b=t; }\n        parent[b]=a; if(rank[a]==rank[b]) rank[a]++;\n        return true;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        int[][] edges = new int[e][3];\n        for(int i=0; i<e; i++) { edges[i][0]=sc.nextInt(); edges[i][1]=sc.nextInt(); edges[i][2]=sc.nextInt(); }\n        // Write logic\n    }\n}\n"
+  "title": "Kruskal's MST",
+  "slug": "kruskals-mst",
+  "difficulty": "Medium",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given an undirected weighted connected graph with `n` nodes (0-indexed) and `e` edges, find the weight of its Minimum Spanning Tree (MST) using Kruskal's algorithm with Union-Find.",
+  "inputFormat": "Line 1: two integers n and e.\nNext e lines: three integers u, v, w.",
+  "outputFormat": "A single integer: the total weight of the MST.",
+  "constraints": "1 <= n <= 10^5\nn-1 <= e <= 2 * 10^5\n1 <= w <= 10^6",
+  "examples": [
+    {
+      "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4",
+      "output": "19",
+      "explanation": "MST edges: (2,3,4), (0,3,5), (0,1,10). Total = 19."
+    }
+  ],
+  "starterCode": {
+    "python": "n, e = map(int, input().split())\nedges = []\nfor _ in range(e):\n    u, v, w = map(int, input().split())\n    edges.append((w, u, v))\n# Sort edges by weight, Union-Find to build MST\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint parent[100001], rnk[100001];\nint find(int x) { return parent[x] == x ? x : parent[x] = find(parent[x]); }\nbool unite(int a, int b) {\n    a=find(a); b=find(b);\n    if(a==b) return false;\n    if(rnk[a]<rnk[b]) swap(a,b);\n    parent[b]=a; if(rnk[a]==rnk[b]) rnk[a]++;\n    return true;\n}\nint main() {\n    int n,e; cin >> n >> e;\n    vector<tuple<int,int,int>> edges;\n    for(int i=0; i<e; i++) { int u,v,w; cin>>u>>v>>w; edges.push_back({w,u,v}); }\n    sort(edges.begin(), edges.end());\n    for(int i=0; i<n; i++) { parent[i]=i; rnk[i]=0; }\n    // Kruskal's\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    static int[] parent, rank;\n    static int find(int x) { return parent[x]==x ? x : (parent[x]=find(parent[x])); }\n    static boolean union(int a, int b) {\n        a=find(a); b=find(b);\n        if(a==b) return false;\n        if(rank[a]<rank[b]) { int t=a; a=b; b=t; }\n        parent[b]=a; if(rank[a]==rank[b]) rank[a]++;\n        return true;\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        int[][] edges = new int[e][3];\n        for(int i=0; i<e; i++) { edges[i][0]=sc.nextInt(); edges[i][1]=sc.nextInt(); edges[i][2]=sc.nextInt(); }\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4",
+      "expectedOutput": "19",
+      "isHidden": false,
+      "orderIndex": 0
     },
-    "testCases": [
-        {
-            "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4",
-            "expectedOutput": "19",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "2 1\n0 1 5",
-            "expectedOutput": "5",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "1 0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "5 7\n0 1 2\n0 3 6\n1 2 3\n1 3 8\n1 4 5\n2 4 7\n3 4 9",
-            "expectedOutput": "16",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "6 9\n0 1 1\n0 2 5\n1 2 4\n1 3 2\n2 3 8\n2 4 3\n3 4 6\n3 5 7\n4 5 9",
-            "expectedOutput": "17",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "3 3\n0 1 1\n1 2 2\n0 2 3",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "4 6\n0 1 1\n0 2 2\n0 3 3\n1 2 4\n1 3 5\n2 3 6",
-            "expectedOutput": "6",
-            "isHidden": true,
-            "orderIndex": 6
-        }
-    ]
+    {
+      "input": "2 1\n0 1 5",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "1 0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "5 7\n0 1 2\n0 3 6\n1 2 3\n1 3 8\n1 4 5\n2 4 7\n3 4 9",
+      "expectedOutput": "16",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "6 9\n0 1 1\n0 2 5\n1 2 4\n1 3 2\n2 3 8\n2 4 3\n3 4 6\n3 5 7\n4 5 9",
+      "expectedOutput": "17",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3 3\n0 1 1\n1 2 2\n0 2 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "4 6\n0 1 1\n0 2 2\n0 3 3\n1 2 4\n1 3 5\n2 3 6",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 6
+    }
+  ]
 }

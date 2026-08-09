@@ -1,124 +1,128 @@
 {
-    "title": "Remove All Adjacent Duplicates",
-    "slug": "remove-adjacent-duplicates",
-    "difficulty": "Easy",
-    "statement": "Given a string S of lowercase letters, repeatedly remove adjacent duplicate characters until no more removals are possible.\n\nReturn the final string. The answer is guaranteed to be unique.",
-    "constraints": "1 <= |S| <= 10^5\nS consists of lowercase English letters.",
-    "inputFormat": "A single line containing the string S.",
-    "outputFormat": "The final processed string on a single line.",
-    "examples": [
-        {
-            "input": "abbaca",
-            "output": "ca",
-            "explanation": "Remove 'bb' -> 'aaca'. Remove 'aa' -> 'ca'."
-        },
-        {
-            "input": "azxxzy",
-            "output": "ay",
-            "explanation": "Remove 'xx' -> 'azzy'. Remove 'zz' -> 'ay'."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# Write your stack based solution\n# Use a list as a stack and append/pop\n",
-        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    string st = \"\";\n    // Write your logic here\n    cout << st << '\\n';\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        StringBuilder sb = new StringBuilder();\n        // Write logic using StringBuilder as a stack\n        System.out.println(sb.toString());\n    }\n}\n"
+  "title": "Remove All Adjacent Duplicates",
+  "slug": "remove-adjacent-duplicates",
+  "difficulty": "Easy",
+  "topic": "Stack & Queue",
+  "tags": [
+    "Stack"
+  ],
+  "statement": "Given a string S of lowercase letters, repeatedly remove adjacent duplicate characters until no more removals are possible.\n\nReturn the final string. The answer is guaranteed to be unique.",
+  "inputFormat": "A single line containing the string S.",
+  "outputFormat": "The final processed string on a single line.",
+  "constraints": "1 <= |S| <= 10^5\nS consists of lowercase English letters.",
+  "examples": [
+    {
+      "input": "abbaca",
+      "output": "ca",
+      "explanation": "Remove 'bb' -> 'aaca'. Remove 'aa' -> 'ca'."
     },
-    "testCases": [
-        {
-            "input": "abbaca",
-            "expectedOutput": "ca",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "azxxzy",
-            "expectedOutput": "ay",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a",
-            "expectedOutput": "a",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "bb",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "abcddcba",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "aababaab",
-            "expectedOutput": "ba",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "aaaaaaaa",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "aaaaaaaaa",
-            "expectedOutput": "a",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "abcdefg",
-            "expectedOutput": "abcdefg",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "abccbadeed",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "xxyyxx",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "xyyx",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "xxyyzz",
-            "expectedOutput": "",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "abaab",
-            "expectedOutput": "b",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "abbbbaca",
-            "expectedOutput": "aca",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "z",
-            "expectedOutput": "z",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "azxxzy",
+      "output": "ay",
+      "explanation": "Remove 'xx' -> 'azzy'. Remove 'zz' -> 'ay'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Write your stack based solution\n# Use a list as a stack and append/pop\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    string st = \"\";\n    // Write your logic here\n    cout << st << '\\n';\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String s = br.readLine().trim();\n        StringBuilder sb = new StringBuilder();\n        // Write logic using StringBuilder as a stack\n        System.out.println(sb.toString());\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "abbaca",
+      "expectedOutput": "ca",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "azxxzy",
+      "expectedOutput": "ay",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "a",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "bb",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "abcddcba",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aababaab",
+      "expectedOutput": "ba",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "aaaaaaaa",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "aaaaaaaaa",
+      "expectedOutput": "a",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abcdefg",
+      "expectedOutput": "abcdefg",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abccbadeed",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "xxyyxx",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "xyyx",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "xxyyzz",
+      "expectedOutput": "",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "abaab",
+      "expectedOutput": "b",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "abbbbaca",
+      "expectedOutput": "aca",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "z",
+      "expectedOutput": "z",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

@@ -2,10 +2,14 @@
   "title": "Combination Sum II (No Reuse)",
   "slug": "combination-sum-no-reuse",
   "difficulty": "Medium",
+  "topic": "Backtracking",
+  "tags": [
+    "Backtracking"
+  ],
   "statement": "Given a collection of integers (may contain duplicates) and a target T, count the number of unique combinations that sum to T.\n\nEach number may be used at most once. Two combinations are considered the same if they contain the same multiset of values, regardless of order.",
-  "constraints": "1 <= N <= 20\n1 <= candidates[i] <= 50\n1 <= T <= 100",
   "inputFormat": "The first line contains N and T.\nThe second line contains N space-separated integers.",
   "outputFormat": "A single integer: the count of unique combinations summing to T.",
+  "constraints": "1 <= N <= 20\n1 <= candidates[i] <= 50\n1 <= T <= 100",
   "examples": [
     {
       "input": "7 8\n10 1 2 7 6 1 5",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), t = sc.nextInt();\n        int[] cands = new int[n];\n        for (int i = 0; i < n; i++) cands[i] = sc.nextInt();\n        Arrays.sort(cands);\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "7 8\n10 1 2 7 6 1 5",           "expectedOutput": "4",  "isHidden": false, "orderIndex": 0 },
-    { "input": "5 5\n2 5 2 1 2",                 "expectedOutput": "2",  "isHidden": false, "orderIndex": 1 },
-    { "input": "5 5\n1 2 3 4 5",                 "expectedOutput": "3",  "isHidden": false, "orderIndex": 2 },
-    { "input": "4 3\n1 1 1 2",                   "expectedOutput": "2",  "isHidden": false, "orderIndex": 3 },
-    { "input": "3 3\n1 2 3",                     "expectedOutput": "2",  "isHidden": true,  "orderIndex": 4 },
-    { "input": "3 10\n2 3 5",                    "expectedOutput": "1",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "10 10\n1 2 3 4 5 6 7 8 9 10",   "expectedOutput": "10", "isHidden": true,  "orderIndex": 6 },
-    { "input": "5 6\n1 2 3 4 5",                 "expectedOutput": "4",  "isHidden": true,  "orderIndex": 7 },
-    { "input": "4 4\n1 1 2 4",                   "expectedOutput": "3",  "isHidden": true,  "orderIndex": 8 },
-    { "input": "4 7\n2 3 4 5",                   "expectedOutput": "2",  "isHidden": true,  "orderIndex": 9 },
-    { "input": "6 9\n1 1 2 3 4 5",               "expectedOutput": "5",  "isHidden": true,  "orderIndex": 10 },
-    { "input": "3 5\n1 2 4",                     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 11 },
-    { "input": "5 4\n1 1 1 1 2",                 "expectedOutput": "2",  "isHidden": true,  "orderIndex": 12 },
-    { "input": "4 6\n1 2 3 5",                   "expectedOutput": "3",  "isHidden": true,  "orderIndex": 13 },
-    { "input": "3 7\n1 3 5",                     "expectedOutput": "1",  "isHidden": true,  "orderIndex": 14 },
-    { "input": "5 8\n2 3 4 5 6",                 "expectedOutput": "3",  "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "7 8\n10 1 2 7 6 1 5",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5 5\n2 5 2 1 2",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5 5\n1 2 3 4 5",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 3\n1 1 1 2",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3 3\n1 2 3",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3 10\n2 3 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "10 10\n1 2 3 4 5 6 7 8 9 10",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 6\n1 2 3 4 5",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "4 4\n1 1 2 4",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "4 7\n2 3 4 5",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "6 9\n1 1 2 3 4 5",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "3 5\n1 2 4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5 4\n1 1 1 1 2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "4 6\n1 2 3 5",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "3 7\n1 3 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "5 8\n2 3 4 5 6",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

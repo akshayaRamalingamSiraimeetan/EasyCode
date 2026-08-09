@@ -1,64 +1,68 @@
 {
-    "title": "Count Palindromic Substrings (Manacher's Algorithm)",
-    "slug": "count-palindromic-substrings",
-    "difficulty": "Hard",
-    "statement": "Given a string `s`, return the number of palindromic substrings in it.\nA string is a palindrome when it reads the same backward as forward.\nA substring is a contiguous sequence of characters within the string.\nDo this in O(N) time utilizing Manacher's Algorithm (or similar advanced technique).",
-    "constraints": "1 <= s.length <= 10^5\ns consists of lowercase English letters.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "abc",
-            "output": "3",
-            "explanation": "Three palindromic strings: 'a', 'b', 'c'."
-        },
-        {
-            "input": "aaa",
-            "output": "6",
-            "explanation": "Six palindromic strings: 'a', 'a', 'a', 'aa', 'aa', 'aaa'."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# Transform string for Manacher's algorithm\n",
-        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Count Palindromic Substrings (Manacher's Algorithm)",
+  "slug": "count-palindromic-substrings",
+  "difficulty": "Hard",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "Given a string `s`, return the number of palindromic substrings in it.\nA string is a palindrome when it reads the same backward as forward.\nA substring is a contiguous sequence of characters within the string.\nDo this in O(N) time utilizing Manacher's Algorithm (or similar advanced technique).",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= s.length <= 10^5\ns consists of lowercase English letters.",
+  "examples": [
+    {
+      "input": "abc",
+      "output": "3",
+      "explanation": "Three palindromic strings: 'a', 'b', 'c'."
     },
-    "testCases": [
-        {
-            "input": "abc",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "aaa",
-            "expectedOutput": "6",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "abba",
-            "expectedOutput": "6",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "abacaba",
-            "expectedOutput": "12",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "xxyyxx",
-            "expectedOutput": "11",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "aaa",
+      "output": "6",
+      "explanation": "Six palindromic strings: 'a', 'a', 'a', 'aa', 'aa', 'aaa'."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# Transform string for Manacher's algorithm\n",
+    "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "abc",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaa",
+      "expectedOutput": "6",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abba",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "abacaba",
+      "expectedOutput": "12",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "xxyyxx",
+      "expectedOutput": "11",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

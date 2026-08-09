@@ -1,124 +1,128 @@
 {
-    "title": "Minimum Number of Days to Make M Bouquets",
-    "slug": "min-days-m-bouquets",
-    "difficulty": "Hard",
-    "statement": "You have an array of N integers representing the days on which N flowers bloom. You want to make M bouquets. To make a bouquet, you need to use K **adjacent** flowers from the garden.\n\nFind the minimum number of days you need to wait to be able to make exactly M bouquets. If it is impossible, print -1.\n\nSolve this using binary search on the answer (number of days). The minimum possible days is the earliest bloom day, the maximum is the latest bloom day.",
-    "constraints": "1 <= N <= 10^5\n1 <= M, K <= 10^5\n1 <= bloomDay[i] <= 10^9",
-    "inputFormat": "Line 1: three integers N, M, and K.\nLine 2: N space-separated integers (the bloom days).",
-    "outputFormat": "A single integer: minimum number of days, or -1 if impossible.",
-    "examples": [
-        {
-            "input": "5 3 1\n1 10 3 10 2",
-            "output": "3",
-            "explanation": "Wait 3 days: flowers at index 0, 2, 4 bloom. This gives 3 bouquets of size 1."
-        },
-        {
-            "input": "5 3 2\n1 10 3 10 2",
-            "output": "-1",
-            "explanation": "Need 3 * 2 = 6 flowers, but only have 5. Impossible."
-        }
-    ],
-    "starterCode": {
-        "python": "n, m, k = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution here\n# If m * k > n, return -1\n# Binary search on the answer space from min(a) to max(a)\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n, m, k; cin >> n >> m >> k;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    if (1LL * m * k > n) { cout << -1 << '\\n'; return 0; }\n    // Write your binary search here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(st.nextToken());\n        int m = Integer.parseInt(st.nextToken());\n        int k = Integer.parseInt(st.nextToken());\n        int[] a = new int[n];\n        st = new StringTokenizer(br.readLine());\n        for (int i=0; i<n; i++) a[i] = Integer.parseInt(st.nextToken());\n        if ((long)m * k > n) { System.out.println(-1); return; }\n        // Write your solution here\n    }\n}\n"
+  "title": "Minimum Number of Days to Make M Bouquets",
+  "slug": "min-days-m-bouquets",
+  "difficulty": "Hard",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "You have an array of N integers representing the days on which N flowers bloom. You want to make M bouquets. To make a bouquet, you need to use K **adjacent** flowers from the garden.\n\nFind the minimum number of days you need to wait to be able to make exactly M bouquets. If it is impossible, print -1.\n\nSolve this using binary search on the answer (number of days). The minimum possible days is the earliest bloom day, the maximum is the latest bloom day.",
+  "inputFormat": "Line 1: three integers N, M, and K.\nLine 2: N space-separated integers (the bloom days).",
+  "outputFormat": "A single integer: minimum number of days, or -1 if impossible.",
+  "constraints": "1 <= N <= 10^5\n1 <= M, K <= 10^5\n1 <= bloomDay[i] <= 10^9",
+  "examples": [
+    {
+      "input": "5 3 1\n1 10 3 10 2",
+      "output": "3",
+      "explanation": "Wait 3 days: flowers at index 0, 2, 4 bloom. This gives 3 bouquets of size 1."
     },
-    "testCases": [
-        {
-            "input": "5 3 1\n1 10 3 10 2",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5 3 2\n1 10 3 10 2",
-            "expectedOutput": "-1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "7 2 3\n7 7 7 7 12 7 7",
-            "expectedOutput": "12",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "4 1 4\n1 2 3 4",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "5 2 2\n1 10 3 10 2",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6 2 3\n1 10 2 10 3 10",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6 3 2\n1 1 1 1 1 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5 5 1\n5 4 3 2 1",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "6 2 2\n1 2 4 9 3 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "6 1 6\n1 2 4 9 3 4",
-            "expectedOutput": "9",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4 2 3\n1 2 3 4",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "7 1 7\n1 1 1 1 1 1 100",
-            "expectedOutput": "100",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "6 2 2\n1 1000 1 1 1000 1",
-            "expectedOutput": "1000",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "1 1 1\n1000000000",
-            "expectedOutput": "1000000000",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "6 2 2\n10 10 10 10 10 10",
-            "expectedOutput": "10",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "8 3 2\n3 2 1 4 2 1 5 6",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "5 3 2\n1 10 3 10 2",
+      "output": "-1",
+      "explanation": "Need 3 * 2 = 6 flowers, but only have 5. Impossible."
+    }
+  ],
+  "starterCode": {
+    "python": "n, m, k = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution here\n# If m * k > n, return -1\n# Binary search on the answer space from min(a) to max(a)\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nint main() {\n    int n, m, k; cin >> n >> m >> k;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    if (1LL * m * k > n) { cout << -1 << '\\n'; return 0; }\n    // Write your binary search here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int n = Integer.parseInt(st.nextToken());\n        int m = Integer.parseInt(st.nextToken());\n        int k = Integer.parseInt(st.nextToken());\n        int[] a = new int[n];\n        st = new StringTokenizer(br.readLine());\n        for (int i=0; i<n; i++) a[i] = Integer.parseInt(st.nextToken());\n        if ((long)m * k > n) { System.out.println(-1); return; }\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5 3 1\n1 10 3 10 2",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5 3 2\n1 10 3 10 2",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "7 2 3\n7 7 7 7 12 7 7",
+      "expectedOutput": "12",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 1 4\n1 2 3 4",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "5 2 2\n1 10 3 10 2",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6 2 3\n1 10 2 10 3 10",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6 3 2\n1 1 1 1 1 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5 5 1\n5 4 3 2 1",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "6 2 2\n1 2 4 9 3 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6 1 6\n1 2 4 9 3 4",
+      "expectedOutput": "9",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4 2 3\n1 2 3 4",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "7 1 7\n1 1 1 1 1 1 100",
+      "expectedOutput": "100",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6 2 2\n1 1000 1 1 1000 1",
+      "expectedOutput": "1000",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "1 1 1\n1000000000",
+      "expectedOutput": "1000000000",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "6 2 2\n10 10 10 10 10 10",
+      "expectedOutput": "10",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "8 3 2\n3 2 1 4 2 1 5 6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

@@ -1,64 +1,68 @@
 {
-    "title": "Strongly Connected Components (Kosaraju or Tarjan)",
-    "slug": "strongly-connected-components",
-    "difficulty": "Hard",
-    "statement": "Given a Directed Graph with `n` nodes (0-indexed) and `e` edges, find the number of Strongly Connected Components (SCCs).",
-    "constraints": "1 <= n <= 10^5\n0 <= e <= 10^5",
-    "inputFormat": "Line 1: n and e.\nNext e lines: two integers u and v (directed edge u->v).",
-    "outputFormat": "A single integer: the number of SCCs.",
-    "examples": [
-        {
-            "input": "5 5\n0 2\n2 1\n1 0\n0 3\n3 4",
-            "output": "3",
-            "explanation": "SCC 1: {0,1,2}, SCC 2: {3}, SCC 3: {4}."
-        },
-        {
-            "input": "3 3\n0 1\n1 2\n2 0",
-            "output": "1",
-            "explanation": "The entire graph is one SCC."
-        }
-    ],
-    "starterCode": {
-        "python": "n, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n# Use Kosaraju's algorithm or Tarjan's\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n,e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    // Kosaraju's or Tarjan's\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); }\n        // Write logic\n    }\n}\n"
+  "title": "Strongly Connected Components (Kosaraju or Tarjan)",
+  "slug": "strongly-connected-components",
+  "difficulty": "Hard",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given a Directed Graph with `n` nodes (0-indexed) and `e` edges, find the number of Strongly Connected Components (SCCs).",
+  "inputFormat": "Line 1: n and e.\nNext e lines: two integers u and v (directed edge u->v).",
+  "outputFormat": "A single integer: the number of SCCs.",
+  "constraints": "1 <= n <= 10^5\n0 <= e <= 10^5",
+  "examples": [
+    {
+      "input": "5 5\n0 2\n2 1\n1 0\n0 3\n3 4",
+      "output": "3",
+      "explanation": "SCC 1: {0,1,2}, SCC 2: {3}, SCC 3: {4}."
     },
-    "testCases": [
-        {
-            "input": "5 5\n0 2\n2 1\n1 0\n0 3\n3 4",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "3 3\n0 1\n1 2\n2 0",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "4 4\n0 1\n1 2\n2 3\n3 0",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "4 3\n0 1\n1 2\n2 3",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "7 8\n0 1\n1 2\n2 0\n2 3\n3 4\n4 5\n5 3\n5 6",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6 7\n0 1\n1 2\n2 0\n3 4\n4 5\n5 3\n2 4",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "3 3\n0 1\n1 2\n2 0",
+      "output": "1",
+      "explanation": "The entire graph is one SCC."
+    }
+  ],
+  "starterCode": {
+    "python": "n, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n# Use Kosaraju's algorithm or Tarjan's\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n,e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); }\n    // Kosaraju's or Tarjan's\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); }\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5 5\n0 2\n2 1\n1 0\n0 3\n3 4",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "3 3\n0 1\n1 2\n2 0",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "4 4\n0 1\n1 2\n2 3\n3 0",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 3\n0 1\n1 2\n2 3",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "7 8\n0 1\n1 2\n2 0\n2 3\n3 4\n4 5\n5 3\n5 6",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6 7\n0 1\n1 2\n2 0\n3 4\n4 5\n5 3\n2 4",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

@@ -1,124 +1,128 @@
 {
-    "title": "Minimum Window Subarray Containing All Distinct Elements",
-    "slug": "min-window-all-distinct",
-    "difficulty": "Hard",
-    "statement": "Given an array of N integers, find the length of the shortest contiguous subarray that contains all distinct elements present in the full array.\n\nIn other words, find the minimum-length window [l, r] such that the set of distinct elements in A[l..r] equals the set of all distinct elements in A.\n\nUse a sliding window (two pointers) with a frequency map to solve in O(N).\n\nReturn the length of the minimum such window.",
-    "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "A single integer: the length of the shortest subarray containing all distinct elements.",
-    "examples": [
-        {
-            "input": "7\n2 1 2 3 1 3 2",
-            "output": "3",
-            "explanation": "All distinct elements are {1,2,3}. Window [2,3,1] (indices 1-3) has length 3 and contains all three."
-        },
-        {
-            "input": "6\n1 2 3 1 2 3",
-            "output": "3",
-            "explanation": "Shortest window with {1,2,3}: any of the windows [1,2,3] of length 3."
-        }
-    ],
-    "starterCode": {
-        "python": "from collections import defaultdict\nn = int(input())\na = list(map(int, input().split()))\ntotal_distinct = len(set(a))\n# Write your solution here\n# Sliding window: expand right, shrink left while all distinct covered\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <unordered_set>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int totalDistinct = unordered_set<int>(a.begin(), a.end()).size();\n    // Write your solution here (sliding window)\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = Integer.parseInt(st.nextToken());\n        Set<Integer> all = new HashSet<>();\n        for (int x : a) all.add(x);\n        int totalDistinct = all.size();\n        // Write your solution here (sliding window)\n    }\n}\n"
+  "title": "Minimum Window Subarray Containing All Distinct Elements",
+  "slug": "min-window-all-distinct",
+  "difficulty": "Hard",
+  "topic": "Arrays",
+  "tags": [
+    "Arrays"
+  ],
+  "statement": "Given an array of N integers, find the length of the shortest contiguous subarray that contains all distinct elements present in the full array.\n\nIn other words, find the minimum-length window [l, r] such that the set of distinct elements in A[l..r] equals the set of all distinct elements in A.\n\nUse a sliding window (two pointers) with a frequency map to solve in O(N).\n\nReturn the length of the minimum such window.",
+  "inputFormat": "Line 1: a single integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "A single integer: the length of the shortest subarray containing all distinct elements.",
+  "constraints": "1 <= N <= 10^6\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "7\n2 1 2 3 1 3 2",
+      "output": "3",
+      "explanation": "All distinct elements are {1,2,3}. Window [2,3,1] (indices 1-3) has length 3 and contains all three."
     },
-    "testCases": [
-        {
-            "input": "7\n2 1 2 3 1 3 2",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "6\n1 2 3 1 2 3",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5\n1 1 1 1 1",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "4\n1 2 3 4",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1\n7",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "6\n1 2 1 3 2 3",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "8\n1 2 3 4 1 2 3 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "5\n1 1 2 1 2",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "7\n3 1 2 3 1 2 3",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "6\n1 2 1 1 1 3",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "5\n2 2 2 1 3",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "9\n1 2 3 4 5 1 2 3 4",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "8\n1 3 2 1 3 2 1 2",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "2\n1 2",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "10\n1 2 1 3 1 2 3 1 2 1",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "8\n4 1 2 4 3 1 2 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "6\n1 2 3 1 2 3",
+      "output": "3",
+      "explanation": "Shortest window with {1,2,3}: any of the windows [1,2,3] of length 3."
+    }
+  ],
+  "starterCode": {
+    "python": "from collections import defaultdict\nn = int(input())\na = list(map(int, input().split()))\ntotal_distinct = len(set(a))\n# Write your solution here\n# Sliding window: expand right, shrink left while all distinct covered\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <unordered_set>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    int totalDistinct = unordered_set<int>(a.begin(), a.end()).size();\n    // Write your solution here (sliding window)\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = Integer.parseInt(st.nextToken());\n        Set<Integer> all = new HashSet<>();\n        for (int x : a) all.add(x);\n        int totalDistinct = all.size();\n        // Write your solution here (sliding window)\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "7\n2 1 2 3 1 3 2",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "6\n1 2 3 1 2 3",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5\n1 1 1 1 1",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4\n1 2 3 4",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1\n7",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "6\n1 2 1 3 2 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "8\n1 2 3 4 1 2 3 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "5\n1 1 2 1 2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "7\n3 1 2 3 1 2 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "6\n1 2 1 1 1 3",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "5\n2 2 2 1 3",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "9\n1 2 3 4 5 1 2 3 4",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "8\n1 3 2 1 3 2 1 2",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "2\n1 2",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "10\n1 2 1 3 1 2 3 1 2 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "8\n4 1 2 4 3 1 2 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

@@ -1,59 +1,63 @@
 {
-    "title": "Articulation Points in a Graph",
-    "slug": "articulation-points",
-    "difficulty": "Hard",
-    "statement": "Given an undirected connected graph with `n` nodes (0-indexed) and `e` edges, find all the articulation points.\nAn articulation point is a vertex whose removal increases the number of connected components of the graph.\nOutput the articulation points in ascending order. If there are none, output `-1`.",
-    "constraints": "1 <= n <= 10^5\n0 <= e <= 10^5",
-    "inputFormat": "Line 1: n and e.\nNext e lines: two integers u and v.",
-    "outputFormat": "Space-separated integers in ascending order, or -1.",
-    "examples": [
-        {
-            "input": "5 5\n0 1\n1 2\n2 0\n1 3\n3 4",
-            "output": "1 3",
-            "explanation": "Removing 1 disconnects (0,2) from (3,4). Removing 3 disconnects 4."
-        }
-    ],
-    "starterCode": {
-        "python": "n, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\n# Tarjan's algorithm for articulation points\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <set>\nusing namespace std;\nint main() {\n    int n,e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    // Tarjan's\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); adj.get(v).add(u); }\n        // Tarjan's\n    }\n}\n"
+  "title": "Articulation Points in a Graph",
+  "slug": "articulation-points",
+  "difficulty": "Hard",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "Given an undirected connected graph with `n` nodes (0-indexed) and `e` edges, find all the articulation points.\nAn articulation point is a vertex whose removal increases the number of connected components of the graph.\nOutput the articulation points in ascending order. If there are none, output `-1`.",
+  "inputFormat": "Line 1: n and e.\nNext e lines: two integers u and v.",
+  "outputFormat": "Space-separated integers in ascending order, or -1.",
+  "constraints": "1 <= n <= 10^5\n0 <= e <= 10^5",
+  "examples": [
+    {
+      "input": "5 5\n0 1\n1 2\n2 0\n1 3\n3 4",
+      "output": "1 3",
+      "explanation": "Removing 1 disconnects (0,2) from (3,4). Removing 3 disconnects 4."
+    }
+  ],
+  "starterCode": {
+    "python": "n, e = map(int, input().split())\nadj = [[] for _ in range(n)]\nfor _ in range(e):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\n# Tarjan's algorithm for articulation points\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <set>\nusing namespace std;\nint main() {\n    int n,e; cin >> n >> e;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<e; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    // Tarjan's\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), e=sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<e; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); adj.get(v).add(u); }\n        // Tarjan's\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5 5\n0 1\n1 2\n2 0\n1 3\n3 4",
+      "expectedOutput": "1 3",
+      "isHidden": false,
+      "orderIndex": 0
     },
-    "testCases": [
-        {
-            "input": "5 5\n0 1\n1 2\n2 0\n1 3\n3 4",
-            "expectedOutput": "1 3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4 4\n0 1\n1 2\n2 3\n3 0",
-            "expectedOutput": "-1",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3 2\n0 1\n0 2",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "7 7\n0 1\n1 2\n2 0\n1 3\n1 4\n1 6\n3 5",
-            "expectedOutput": "1 3",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "4 3\n0 1\n1 2\n2 3",
-            "expectedOutput": "1 2",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "2 1\n0 1",
-            "expectedOutput": "-1",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "4 4\n0 1\n1 2\n2 3\n3 0",
+      "expectedOutput": "-1",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3 2\n0 1\n0 2",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "7 7\n0 1\n1 2\n2 0\n1 3\n1 4\n1 6\n3 5",
+      "expectedOutput": "1 3",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "4 3\n0 1\n1 2\n2 3",
+      "expectedOutput": "1 2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "2 1\n0 1",
+      "expectedOutput": "-1",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

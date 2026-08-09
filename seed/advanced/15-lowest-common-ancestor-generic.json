@@ -1,59 +1,63 @@
 {
-    "title": "Lowest Common Ancestor of a Binary Tree (Binary Lifting generic concept)",
-    "slug": "lowest-common-ancestor-binary-tree-generic",
-    "difficulty": "Medium",
-    "statement": "Given a binary tree (represented as an adjacency list of a generic tree rooted at 0), find the lowest common ancestor (LCA) node of two given nodes `p` and `q`.\nThis tests tree traversal and LCA concepts.",
-    "constraints": "2 <= n <= 10^5\n0 <= p, q < n\nThe tree is connected and acyclic.",
-    "inputFormat": "Line 1: N (number of nodes). Nodes are 0 to N-1.\nNext N-1 lines: u v (undirected edge).\nLast line: p q.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "5\n0 1\n0 2\n1 3\n1 4\n3 4",
-            "output": "1",
-            "explanation": "Wait, 5 nodes, N-1 edges: 0-1, 0-2, 1-3, 1-4. Query: 3 4. LCA is 1."
-        }
-    ],
-    "starterCode": {
-        "python": "import sys\nsys.setrecursionlimit(200000)\nn = int(input())\nadj = [[] for _ in range(n)]\nfor _ in range(n - 1):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\np, q = map(int, input().split())\n# Root is 0. Find LCA(p, q) using DFS or Binary Lifting.\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<n-1; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    int p,q; cin >> p >> q;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<n-1; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); adj.get(v).add(u); }\n        int p=sc.nextInt(), q=sc.nextInt();\n        // Write logic\n    }\n}\n"
+  "title": "Lowest Common Ancestor of a Binary Tree (Binary Lifting generic concept)",
+  "slug": "lowest-common-ancestor-binary-tree-generic",
+  "difficulty": "Medium",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "Given a binary tree (represented as an adjacency list of a generic tree rooted at 0), find the lowest common ancestor (LCA) node of two given nodes `p` and `q`.\nThis tests tree traversal and LCA concepts.",
+  "inputFormat": "Line 1: N (number of nodes). Nodes are 0 to N-1.\nNext N-1 lines: u v (undirected edge).\nLast line: p q.",
+  "outputFormat": "A single integer.",
+  "constraints": "2 <= n <= 10^5\n0 <= p, q < n\nThe tree is connected and acyclic.",
+  "examples": [
+    {
+      "input": "5\n0 1\n0 2\n1 3\n1 4\n3 4",
+      "output": "1",
+      "explanation": "Wait, 5 nodes, N-1 edges: 0-1, 0-2, 1-3, 1-4. Query: 3 4. LCA is 1."
+    }
+  ],
+  "starterCode": {
+    "python": "import sys\nsys.setrecursionlimit(200000)\nn = int(input())\nadj = [[] for _ in range(n)]\nfor _ in range(n - 1):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)\np, q = map(int, input().split())\n# Root is 0. Find LCA(p, q) using DFS or Binary Lifting.\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<vector<int>> adj(n);\n    for(int i=0; i<n-1; i++) { int u,v; cin>>u>>v; adj[u].push_back(v); adj[v].push_back(u); }\n    int p,q; cin >> p >> q;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        List<List<Integer>> adj = new ArrayList<>();\n        for(int i=0; i<n; i++) adj.add(new ArrayList<>());\n        for(int i=0; i<n-1; i++) { int u=sc.nextInt(), v=sc.nextInt(); adj.get(u).add(v); adj.get(v).add(u); }\n        int p=sc.nextInt(), q=sc.nextInt();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "5\n0 1\n0 2\n1 3\n1 4\n3 4",
+      "expectedOutput": "1",
+      "isHidden": false,
+      "orderIndex": 0
     },
-    "testCases": [
-        {
-            "input": "5\n0 1\n0 2\n1 3\n1 4\n3 4",
-            "expectedOutput": "1",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5\n0 1\n0 2\n1 3\n1 4\n3 2",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3\n0 1\n1 2\n2 0",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n3 4",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n5 6",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4\n0 1\n1 2\n2 3\n3 1",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "5\n0 1\n0 2\n1 3\n1 4\n3 2",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3\n0 1\n1 2\n2 0",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n3 4",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "7\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n5 6",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4\n0 1\n1 2\n2 3\n3 1",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

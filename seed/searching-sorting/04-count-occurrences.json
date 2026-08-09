@@ -1,124 +1,128 @@
 {
-    "title": "Count Occurrences Using Binary Search",
-    "slug": "count-occurrences-binary-search",
-    "difficulty": "Easy",
-    "statement": "Given a sorted array of N integers (may contain duplicates) and a target T, count how many times T appears in the array.\n\nUse lower_bound and upper_bound (both implemented with binary search) so the total complexity is O(log N).\n\nCount = upper_bound(T) - lower_bound(T).",
-    "constraints": "1 <= N <= 10^7\n-10^9 <= A[i] <= 10^9\nArray is in non-decreasing order.\n-10^9 <= T <= 10^9",
-    "inputFormat": "Line 1: two integers N and T.\nLine 2: N space-separated integers in non-decreasing order.",
-    "outputFormat": "A single integer: the number of times T appears.",
-    "examples": [
-        {
-            "input": "8 5\n1 2 4 4 5 5 7 9",
-            "output": "2",
-            "explanation": "5 appears at indices 4 and 5. Count = upper_bound - lower_bound = 6 - 4 = 2."
-        },
-        {
-            "input": "5 6\n1 2 4 4 5",
-            "output": "0",
-            "explanation": "6 does not appear."
-        }
-    ],
-    "starterCode": {
-        "python": "n, t = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution: implement lower_bound and upper_bound, then subtract\n",
-        "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; long long t;\n    cin >> n >> t;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long t = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  "title": "Count Occurrences Using Binary Search",
+  "slug": "count-occurrences-binary-search",
+  "difficulty": "Easy",
+  "topic": "Searching & Sorting",
+  "tags": [
+    "Sorting"
+  ],
+  "statement": "Given a sorted array of N integers (may contain duplicates) and a target T, count how many times T appears in the array.\n\nUse lower_bound and upper_bound (both implemented with binary search) so the total complexity is O(log N).\n\nCount = upper_bound(T) - lower_bound(T).",
+  "inputFormat": "Line 1: two integers N and T.\nLine 2: N space-separated integers in non-decreasing order.",
+  "outputFormat": "A single integer: the number of times T appears.",
+  "constraints": "1 <= N <= 10^7\n-10^9 <= A[i] <= 10^9\nArray is in non-decreasing order.\n-10^9 <= T <= 10^9",
+  "examples": [
+    {
+      "input": "8 5\n1 2 4 4 5 5 7 9",
+      "output": "2",
+      "explanation": "5 appears at indices 4 and 5. Count = upper_bound - lower_bound = 6 - 4 = 2."
     },
-    "testCases": [
-        {
-            "input": "8 5\n1 2 4 4 5 5 7 9",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "5 6\n1 2 4 4 5",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "5 4\n1 2 4 4 5",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "4 1\n1 1 1 1",
-            "expectedOutput": "4",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "1 7\n7",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "1 7\n8",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "6 0\n-2 -1 0 0 0 1",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "6 3\n1 2 3 3 4 5",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "5 5\n1 2 3 4 5",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "5 1\n1 2 3 4 5",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "6 -1\n-3 -2 -1 -1 0 1",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "7 3\n1 2 3 3 3 3 4",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "5 10\n1 5 10 10 10",
-            "expectedOutput": "3",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "3 2\n1 3 5",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "6 1000000000\n1000000000 1000000000 1000000000 1000000000 1000000000 1000000000",
-            "expectedOutput": "6",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "5 0\n0 0 0 0 0",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "5 6\n1 2 4 4 5",
+      "output": "0",
+      "explanation": "6 does not appear."
+    }
+  ],
+  "starterCode": {
+    "python": "n, t = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution: implement lower_bound and upper_bound, then subtract\n",
+    "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n    int n; long long t;\n    cin >> n >> t;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long t = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "8 5\n1 2 4 4 5 5 7 9",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "5 6\n1 2 4 4 5",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5 4\n1 2 4 4 5",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "4 1\n1 1 1 1",
+      "expectedOutput": "4",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "1 7\n7",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "1 7\n8",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "6 0\n-2 -1 0 0 0 1",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "6 3\n1 2 3 3 4 5",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "5 5\n1 2 3 4 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5 1\n1 2 3 4 5",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "6 -1\n-3 -2 -1 -1 0 1",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "7 3\n1 2 3 3 3 3 4",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "5 10\n1 5 10 10 10",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3 2\n1 3 5",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "6 1000000000\n1000000000 1000000000 1000000000 1000000000 1000000000 1000000000",
+      "expectedOutput": "6",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "5 0\n0 0 0 0 0",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

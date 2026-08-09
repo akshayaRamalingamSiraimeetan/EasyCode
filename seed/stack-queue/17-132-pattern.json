@@ -1,129 +1,133 @@
 {
-    "title": "132 Pattern",
-    "slug": "132-pattern",
-    "difficulty": "Medium",
-    "statement": "Given an array of N integers, return `YES` if there is a 132 pattern in the array, otherwise return `NO`.\n\nA 132 pattern is a subsequence of three integers A[i], A[j] and A[k] such that i < j < k and A[i] < A[k] < A[j].\n\nUse a monotonic stack.",
-    "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
-    "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
-    "outputFormat": "`YES` or `NO`.",
-    "examples": [
-        {
-            "input": "4\n1 2 3 4",
-            "output": "NO",
-            "explanation": "There is no 132 pattern in the sequence."
-        },
-        {
-            "input": "4\n3 1 4 2",
-            "output": "YES",
-            "explanation": "There is a 132 pattern: [1, 4, 2]."
-        },
-        {
-            "input": "5\n-1 3 2 0",
-            "output": "YES",
-            "explanation": "[-1, 3, 2], [-1, 3, 0], and [-1, 2, 0] are valid 132 patterns."
-        }
-    ],
-    "starterCode": {
-        "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your monotonic stack solution here\n# Iterate from right to left\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
-        "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        long[] a = new long[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) a[i] = Long.parseLong(st.nextToken());\n        // Write your solution here\n    }\n}\n"
+  "title": "132 Pattern",
+  "slug": "132-pattern",
+  "difficulty": "Medium",
+  "topic": "Stack & Queue",
+  "tags": [
+    "Stack"
+  ],
+  "statement": "Given an array of N integers, return `YES` if there is a 132 pattern in the array, otherwise return `NO`.\n\nA 132 pattern is a subsequence of three integers A[i], A[j] and A[k] such that i < j < k and A[i] < A[k] < A[j].\n\nUse a monotonic stack.",
+  "inputFormat": "Line 1: an integer N.\nLine 2: N space-separated integers.",
+  "outputFormat": "`YES` or `NO`.",
+  "constraints": "1 <= N <= 10^5\n-10^9 <= A[i] <= 10^9",
+  "examples": [
+    {
+      "input": "4\n1 2 3 4",
+      "output": "NO",
+      "explanation": "There is no 132 pattern in the sequence."
     },
-    "testCases": [
-        {
-            "input": "4\n1 2 3 4",
-            "expectedOutput": "NO",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "4\n3 1 4 2",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "4\n-1 3 2 0",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "3\n1 3 2",
-            "expectedOutput": "YES",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "2\n1 2",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "4\n2 1 3 4",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "5\n3 5 0 3 4",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "6\n1 0 1 -4 -3 0",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 7
-        },
-        {
-            "input": "7\n1 4 0 -1 -2 -3 -1",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 8
-        },
-        {
-            "input": "5\n5 4 3 2 1",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 9
-        },
-        {
-            "input": "4\n10 12 6 8",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 10
-        },
-        {
-            "input": "5\n100 200 100 200 100",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 11
-        },
-        {
-            "input": "6\n9 11 8 9 10 7 9",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 12
-        },
-        {
-            "input": "3\n1 2 2",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 13
-        },
-        {
-            "input": "7\n-100 -50 -10 -20 -30 -40 -100",
-            "expectedOutput": "YES",
-            "isHidden": true,
-            "orderIndex": 14
-        },
-        {
-            "input": "1\n5",
-            "expectedOutput": "NO",
-            "isHidden": true,
-            "orderIndex": 15
-        }
-    ]
+    {
+      "input": "4\n3 1 4 2",
+      "output": "YES",
+      "explanation": "There is a 132 pattern: [1, 4, 2]."
+    },
+    {
+      "input": "5\n-1 3 2 0",
+      "output": "YES",
+      "explanation": "[-1, 3, 2], [-1, 3, 0], and [-1, 2, 0] are valid 132 patterns."
+    }
+  ],
+  "starterCode": {
+    "python": "n = int(input())\na = list(map(int, input().split()))\n# Write your monotonic stack solution here\n# Iterate from right to left\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <stack>\nusing namespace std;\nint main() {\n    int n; cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    return 0;\n}\n",
+    "java": "import java.util.*;\nimport java.io.*;\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        long[] a = new long[n];\n        StringTokenizer st = new StringTokenizer(br.readLine());\n        for (int i = 0; i < n; i++) a[i] = Long.parseLong(st.nextToken());\n        // Write your solution here\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "4\n1 2 3 4",
+      "expectedOutput": "NO",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\n3 1 4 2",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "4\n-1 3 2 0",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\n1 3 2",
+      "expectedOutput": "YES",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "2\n1 2",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "4\n2 1 3 4",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "5\n3 5 0 3 4",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "6\n1 0 1 -4 -3 0",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "7\n1 4 0 -1 -2 -3 -1",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "5\n5 4 3 2 1",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "4\n10 12 6 8",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "5\n100 200 100 200 100",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "6\n9 11 8 9 10 7 9",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3\n1 2 2",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "7\n-100 -50 -10 -20 -30 -40 -100",
+      "expectedOutput": "YES",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "1\n5",
+      "expectedOutput": "NO",
+      "isHidden": true,
+      "orderIndex": 15
+    }
+  ]
 }

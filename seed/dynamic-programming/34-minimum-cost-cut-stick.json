@@ -1,76 +1,80 @@
 {
-    "title": "Minimum Cost to Cut a Stick",
-    "slug": "minimum-cost-to-cut-a-stick",
-    "difficulty": "Hard",
-    "statement": "Given a wooden stick of length `n` units. The stick is labelled from `0` to `n`. You are given an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at.\nThe cost of one cut is the length of the stick to be cut, the same as the length of the segment you are cutting.\nReturn the minimum total cost of the cuts.",
-    "constraints": "2 <= n <= 10^6\n1 <= cuts.length <= min(n-1, 100)\n1 <= cuts[i] <= n-1\nAll the integers in cuts array are distinct.",
-    "inputFormat": "Line 1: two integers n and m (number of cuts).\nLine 2: m space-separated integers for `cuts`.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "7 3\n1 3 4",
-            "output": "16",
-            "explanation": "Optimal: cut at 3 (cost 7), cut at 1 (cost 3), cut at 4 (cost 4). Total = 16."
-        },
-        {
-            "input": "9 5\n5 6 1 4 2",
-            "output": "22",
-            "explanation": "Optimal cuts give total cost 22."
-        }
-    ],
-    "starterCode": {
-        "python": "n, m = map(int, input().split())\ncuts = list(map(int, input().split()))\n# Interval DP: add 0 and n as boundaries, sort cuts.\n# dp[i][j] = min cost to make all cuts between cuts[i] and cuts[j]\n",
-        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <climits>\nusing namespace std;\nint main() {\n    int n, m; cin >> n >> m;\n    vector<int> cuts(m);\n    for(int i=0; i<m; i++) cin >> cuts[i];\n    // Write interval DP\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[] cuts = new int[m];\n        for(int i=0; i<m; i++) cuts[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+  "title": "Minimum Cost to Cut a Stick",
+  "slug": "minimum-cost-to-cut-a-stick",
+  "difficulty": "Hard",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given a wooden stick of length `n` units. The stick is labelled from `0` to `n`. You are given an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at.\nThe cost of one cut is the length of the stick to be cut, the same as the length of the segment you are cutting.\nReturn the minimum total cost of the cuts.",
+  "inputFormat": "Line 1: two integers n and m (number of cuts).\nLine 2: m space-separated integers for `cuts`.",
+  "outputFormat": "A single integer.",
+  "constraints": "2 <= n <= 10^6\n1 <= cuts.length <= min(n-1, 100)\n1 <= cuts[i] <= n-1\nAll the integers in cuts array are distinct.",
+  "examples": [
+    {
+      "input": "7 3\n1 3 4",
+      "output": "16",
+      "explanation": "Optimal: cut at 3 (cost 7), cut at 1 (cost 3), cut at 4 (cost 4). Total = 16."
     },
-    "testCases": [
-        {
-            "input": "7 3\n1 3 4",
-            "expectedOutput": "16",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "9 5\n5 6 1 4 2",
-            "expectedOutput": "22",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "3 1\n1",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "10 2\n5 2",
-            "expectedOutput": "20",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "100 4\n25 50 75 10",
-            "expectedOutput": "200",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "20 5\n2 5 10 15 18",
-            "expectedOutput": "44",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "1000000 3\n500000 250000 750000",
-            "expectedOutput": "2000000",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "50 6\n5 10 15 20 25 30",
-            "expectedOutput": "110",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "9 5\n5 6 1 4 2",
+      "output": "22",
+      "explanation": "Optimal cuts give total cost 22."
+    }
+  ],
+  "starterCode": {
+    "python": "n, m = map(int, input().split())\ncuts = list(map(int, input().split()))\n# Interval DP: add 0 and n as boundaries, sort cuts.\n# dp[i][j] = min cost to make all cuts between cuts[i] and cuts[j]\n",
+    "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <climits>\nusing namespace std;\nint main() {\n    int n, m; cin >> n >> m;\n    vector<int> cuts(m);\n    for(int i=0; i<m; i++) cin >> cuts[i];\n    // Write interval DP\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[] cuts = new int[m];\n        for(int i=0; i<m; i++) cuts[i] = sc.nextInt();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "7 3\n1 3 4",
+      "expectedOutput": "16",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "9 5\n5 6 1 4 2",
+      "expectedOutput": "22",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "3 1\n1",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "10 2\n5 2",
+      "expectedOutput": "20",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "100 4\n25 50 75 10",
+      "expectedOutput": "200",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "20 5\n2 5 10 15 18",
+      "expectedOutput": "44",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "1000000 3\n500000 250000 750000",
+      "expectedOutput": "2000000",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "50 6\n5 10 15 20 25 30",
+      "expectedOutput": "110",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

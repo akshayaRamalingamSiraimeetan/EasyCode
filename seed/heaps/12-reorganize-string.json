@@ -2,10 +2,16 @@
   "title": "Reorganize String",
   "slug": "reorganize-string",
   "difficulty": "Medium",
+  "topic": "Heaps",
+  "tags": [
+    "Heaps",
+    "Greedy",
+    "Priority Queue"
+  ],
   "statement": "Given a string S, rearrange its characters so that no two adjacent characters are the same.\n\nIf it is possible, print any valid rearrangement. If it is impossible, print \"IMPOSSIBLE\".\n\nA rearrangement is impossible if and only if the frequency of the most common character exceeds (|S| + 1) / 2.\n\nHint: use a max-heap to always place the most frequent remaining character, keeping a cooldown slot.",
-  "constraints": "1 <= |S| <= 500\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A valid rearrangement with no two adjacent identical characters, or \"IMPOSSIBLE\".",
+  "constraints": "1 <= |S| <= 500\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "aab",
@@ -24,21 +30,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "aab",       "expectedOutput": "aba",       "isHidden": false, "orderIndex": 0 },
-    { "input": "aaab",      "expectedOutput": "IMPOSSIBLE", "isHidden": false, "orderIndex": 1 },
-    { "input": "aabb",      "expectedOutput": "abab",      "isHidden": false, "orderIndex": 2 },
-    { "input": "aaabbc",    "expectedOutput": "ababac",    "isHidden": false, "orderIndex": 3 },
-    { "input": "vvvlo",     "expectedOutput": "vlvov",     "isHidden": true,  "orderIndex": 4 },
-    { "input": "aaaaabc",   "expectedOutput": "IMPOSSIBLE", "isHidden": true,  "orderIndex": 5 },
-    { "input": "a",         "expectedOutput": "a",         "isHidden": true,  "orderIndex": 6 },
-    { "input": "ab",        "expectedOutput": "ab",        "isHidden": true,  "orderIndex": 7 },
-    { "input": "aabbcc",    "expectedOutput": "abcabc",    "isHidden": true,  "orderIndex": 8 },
-    { "input": "aaabbbccc", "expectedOutput": "abcabcabc", "isHidden": true,  "orderIndex": 9 },
-    { "input": "zzzz",      "expectedOutput": "IMPOSSIBLE", "isHidden": true,  "orderIndex": 10 },
-    { "input": "aabc",      "expectedOutput": "abac",      "isHidden": true,  "orderIndex": 11 },
-    { "input": "aaa",       "expectedOutput": "IMPOSSIBLE", "isHidden": true,  "orderIndex": 12 },
-    { "input": "abc",       "expectedOutput": "abc",       "isHidden": true,  "orderIndex": 13 },
-    { "input": "aaabb",     "expectedOutput": "ababa",     "isHidden": true,  "orderIndex": 14 },
-    { "input": "aabbccc",   "expectedOutput": "cabcabc",   "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "aab",
+      "expectedOutput": "aba",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaab",
+      "expectedOutput": "IMPOSSIBLE",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "aabb",
+      "expectedOutput": "abab",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "aaabbc",
+      "expectedOutput": "ababac",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "vvvlo",
+      "expectedOutput": "vlvov",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aaaaabc",
+      "expectedOutput": "IMPOSSIBLE",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "a",
+      "expectedOutput": "a",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "ab",
+      "expectedOutput": "ab",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "aabbcc",
+      "expectedOutput": "abcabc",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "aaabbbccc",
+      "expectedOutput": "abcabcabc",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "zzzz",
+      "expectedOutput": "IMPOSSIBLE",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "aabc",
+      "expectedOutput": "abac",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aaa",
+      "expectedOutput": "IMPOSSIBLE",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "abc",
+      "expectedOutput": "abc",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aaabb",
+      "expectedOutput": "ababa",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "aabbccc",
+      "expectedOutput": "cabcabc",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

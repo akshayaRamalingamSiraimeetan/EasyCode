@@ -2,10 +2,14 @@
   "title": "First Non-Repeating Character",
   "slug": "first-non-repeating-character",
   "difficulty": "Easy",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S of lowercase English letters, find the first character that does not repeat anywhere in the string.\n\nPrint that character. If all characters repeat, print \"#\".",
-  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single character: the first non-repeating character, or \"#\" if none exists.",
+  "constraints": "1 <= |S| <= 10^5\nS contains only lowercase English letters.",
   "examples": [
     {
       "input": "aabbc",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "aabbc", "expectedOutput": "c", "isHidden": false, "orderIndex": 0 },
-    { "input": "aabb", "expectedOutput": "#", "isHidden": false, "orderIndex": 1 },
-    { "input": "z", "expectedOutput": "z", "isHidden": false, "orderIndex": 2 },
-    { "input": "abacabad", "expectedOutput": "c", "isHidden": false, "orderIndex": 3 },
-    { "input": "aabbccdd", "expectedOutput": "#", "isHidden": true, "orderIndex": 4 },
-    { "input": "abcabc", "expectedOutput": "#", "isHidden": true, "orderIndex": 5 },
-    { "input": "abcd", "expectedOutput": "a", "isHidden": true, "orderIndex": 6 },
-    { "input": "zzza", "expectedOutput": "a", "isHidden": true, "orderIndex": 7 },
-    { "input": "azbzc", "expectedOutput": "c", "isHidden": true, "orderIndex": 8 },
-    { "input": "abba", "expectedOutput": "#", "isHidden": true, "orderIndex": 9 },
-    { "input": "programming", "expectedOutput": "p", "isHidden": true, "orderIndex": 10 },
-    { "input": "teeter", "expectedOutput": "r", "isHidden": true, "orderIndex": 11 },
-    { "input": "aaabbbccc", "expectedOutput": "#", "isHidden": true, "orderIndex": 12 },
-    { "input": "xyzyx", "expectedOutput": "z", "isHidden": true, "orderIndex": 13 },
-    { "input": "mississippi", "expectedOutput": "m", "isHidden": true, "orderIndex": 14 },
-    { "input": "aabbccd", "expectedOutput": "d", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "aabbc",
+      "expectedOutput": "c",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aabb",
+      "expectedOutput": "#",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "z",
+      "expectedOutput": "z",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abacabad",
+      "expectedOutput": "c",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aabbccdd",
+      "expectedOutput": "#",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcabc",
+      "expectedOutput": "#",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "abcd",
+      "expectedOutput": "a",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "zzza",
+      "expectedOutput": "a",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "azbzc",
+      "expectedOutput": "c",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abba",
+      "expectedOutput": "#",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "programming",
+      "expectedOutput": "p",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "teeter",
+      "expectedOutput": "r",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aaabbbccc",
+      "expectedOutput": "#",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "xyzyx",
+      "expectedOutput": "z",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "mississippi",
+      "expectedOutput": "m",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "aabbccd",
+      "expectedOutput": "d",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

@@ -66,6 +66,12 @@ const problemSchema = new mongoose.Schema({
     trim: true,
   },
 
+  // Cross-cutting labels — lets a problem appear under multiple categories in the UI
+  tags: {
+    type: [{ type: String, trim: true }],
+    default: [],
+  },
+
   inputFormat: {
     type: String,
     default: "",

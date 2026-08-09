@@ -2,10 +2,14 @@
   "title": "Check Anagram",
   "slug": "check-anagram",
   "difficulty": "Medium",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Two strings are anagrams if one can be rearranged to form the other — they must contain the exact same characters with the same frequencies.\n\nGiven two strings A and B of lowercase English letters, print \"Yes\" if they are anagrams, otherwise print \"No\".",
-  "constraints": "1 <= |A|, |B| <= 10^5\nA and B contain only lowercase English letters.",
   "inputFormat": "Two lines: the first contains A, the second contains B.",
   "outputFormat": "Print \"Yes\" if A and B are anagrams, otherwise \"No\".",
+  "constraints": "1 <= |A|, |B| <= 10^5\nA and B contain only lowercase English letters.",
   "examples": [
     {
       "input": "listen\nsilent",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String a = sc.next(), b = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "listen\nsilent", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 0 },
-    { "input": "hello\nworld", "expectedOutput": "No", "isHidden": false, "orderIndex": 1 },
-    { "input": "abc\ncba", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 2 },
-    { "input": "abc\nabc", "expectedOutput": "Yes", "isHidden": false, "orderIndex": 3 },
-    { "input": "aab\naba", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 4 },
-    { "input": "aab\naab", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 5 },
-    { "input": "ab\nabc", "expectedOutput": "No", "isHidden": true, "orderIndex": 6 },
-    { "input": "triangle\nintegral", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 7 },
-    { "input": "abcde\nedcba", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 8 },
-    { "input": "aaabbb\nbbbaaa", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 9 },
-    { "input": "aaabbb\naabbba", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 10 },
-    { "input": "aaabbb\naabbbb", "expectedOutput": "No", "isHidden": true, "orderIndex": 11 },
-    { "input": "a\na", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 12 },
-    { "input": "a\nb", "expectedOutput": "No", "isHidden": true, "orderIndex": 13 },
-    { "input": "dusty\nstudy", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 14 },
-    { "input": "night\nthing", "expectedOutput": "Yes", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "listen\nsilent",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "hello\nworld",
+      "expectedOutput": "No",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc\ncba",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abc\nabc",
+      "expectedOutput": "Yes",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aab\naba",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "aab\naab",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "ab\nabc",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "triangle\nintegral",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "abcde\nedcba",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "aaabbb\nbbbaaa",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "aaabbb\naabbba",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "aaabbb\naabbbb",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "a\na",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "a\nb",
+      "expectedOutput": "No",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "dusty\nstudy",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "night\nthing",
+      "expectedOutput": "Yes",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

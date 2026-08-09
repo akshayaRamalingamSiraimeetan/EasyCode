@@ -2,10 +2,14 @@
   "title": "Caesar Cipher",
   "slug": "caesar-cipher",
   "difficulty": "Medium",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "The Caesar cipher shifts each letter in a string by K positions in the alphabet (wrapping around).\n\nGiven a string S and an integer K, apply the Caesar cipher:\n- Uppercase letters shift among uppercase letters.\n- Lowercase letters shift among lowercase letters.\n- Non-letter characters remain unchanged.\n\nPrint the encoded string.",
-  "constraints": "1 <= |S| <= 10^5\n0 <= K <= 10^9\nS contains printable ASCII characters.",
   "inputFormat": "The first line contains S.\nThe second line contains K.",
   "outputFormat": "A single line: the Caesar-encoded string.",
+  "constraints": "1 <= |S| <= 10^5\n0 <= K <= 10^9\nS contains printable ASCII characters.",
   "examples": [
     {
       "input": "Hello World\n3",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.nextLine();\n        long k = sc.nextLong();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "Hello World\n3", "expectedOutput": "Khoor Zruog", "isHidden": false, "orderIndex": 0 },
-    { "input": "xyz\n3", "expectedOutput": "abc", "isHidden": false, "orderIndex": 1 },
-    { "input": "abc\n0", "expectedOutput": "abc", "isHidden": false, "orderIndex": 2 },
-    { "input": "abc\n26", "expectedOutput": "abc", "isHidden": false, "orderIndex": 3 },
-    { "input": "ABC\n1", "expectedOutput": "BCD", "isHidden": true, "orderIndex": 4 },
-    { "input": "ZAP\n1", "expectedOutput": "ABQ", "isHidden": true, "orderIndex": 5 },
-    { "input": "Hello\n13", "expectedOutput": "Uryyb", "isHidden": true, "orderIndex": 6 },
-    { "input": "abc123\n5", "expectedOutput": "fgh123", "isHidden": true, "orderIndex": 7 },
-    { "input": "The Quick Brown Fox\n4", "expectedOutput": "Xli Uymgo Fvsar Jsb", "isHidden": true, "orderIndex": 8 },
-    { "input": "zz\n52", "expectedOutput": "zz", "isHidden": true, "orderIndex": 9 },
-    { "input": "abcdefghijklmnopqrstuvwxyz\n1", "expectedOutput": "bcdefghijklmnopqrstuvwxyza", "isHidden": true, "orderIndex": 10 },
-    { "input": "Attack at dawn\n7", "expectedOutput": "Haahjr ha khdu", "isHidden": true, "orderIndex": 11 },
-    { "input": "ABCXYZ\n3", "expectedOutput": "DEFABC", "isHidden": true, "orderIndex": 12 },
-    { "input": "a\n1000000000", "expectedOutput": "m", "isHidden": true, "orderIndex": 13 },
-    { "input": "Python3\n10", "expectedOutput": "Zidryx3", "isHidden": true, "orderIndex": 14 },
-    { "input": "WXY\n5", "expectedOutput": "BCD", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "Hello World\n3",
+      "expectedOutput": "Khoor Zruog",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "xyz\n3",
+      "expectedOutput": "abc",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc\n0",
+      "expectedOutput": "abc",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abc\n26",
+      "expectedOutput": "abc",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "ABC\n1",
+      "expectedOutput": "BCD",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "ZAP\n1",
+      "expectedOutput": "ABQ",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "Hello\n13",
+      "expectedOutput": "Uryyb",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abc123\n5",
+      "expectedOutput": "fgh123",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "The Quick Brown Fox\n4",
+      "expectedOutput": "Xli Uymgo Fvsar Jsb",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "zz\n52",
+      "expectedOutput": "zz",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "abcdefghijklmnopqrstuvwxyz\n1",
+      "expectedOutput": "bcdefghijklmnopqrstuvwxyza",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "Attack at dawn\n7",
+      "expectedOutput": "Haahjr ha khdu",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "ABCXYZ\n3",
+      "expectedOutput": "DEFABC",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "a\n1000000000",
+      "expectedOutput": "m",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "Python3\n10",
+      "expectedOutput": "Zidryx3",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "WXY\n5",
+      "expectedOutput": "BCD",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

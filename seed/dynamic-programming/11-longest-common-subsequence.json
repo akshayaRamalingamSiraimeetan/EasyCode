@@ -1,81 +1,85 @@
 {
-    "title": "Longest Common Subsequence",
-    "slug": "longest-common-subsequence",
-    "difficulty": "Medium",
-    "statement": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return 0.\nA subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.",
-    "constraints": "1 <= text1.length, text2.length <= 1000\ntext1 and text2 consist of only lowercase English characters.",
-    "inputFormat": "Line 1: string `text1`.\nLine 2: string `text2`.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "abcde\nace",
-            "output": "3",
-            "explanation": "LCS is 'ace'."
-        },
-        {
-            "input": "abc\nabc",
-            "output": "3",
-            "explanation": "Entire string is common."
-        },
-        {
-            "input": "abc\ndef",
-            "output": "0",
-            "explanation": "No common subsequence."
-        }
-    ],
-    "starterCode": {
-        "python": "text1 = input().strip()\ntext2 = input().strip()\n# 2D DP: dp[i][j] = LCS length of text1[:i] and text2[:j]\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string text1, text2; cin >> text1 >> text2;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text1 = sc.next(), text2 = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Longest Common Subsequence",
+  "slug": "longest-common-subsequence",
+  "difficulty": "Medium",
+  "topic": "Dynamic Programming",
+  "tags": [
+    "Dynamic Programming"
+  ],
+  "statement": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return 0.\nA subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.",
+  "inputFormat": "Line 1: string `text1`.\nLine 2: string `text2`.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= text1.length, text2.length <= 1000\ntext1 and text2 consist of only lowercase English characters.",
+  "examples": [
+    {
+      "input": "abcde\nace",
+      "output": "3",
+      "explanation": "LCS is 'ace'."
     },
-    "testCases": [
-        {
-            "input": "abcde\nace",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "abc\nabc",
-            "expectedOutput": "3",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "abc\ndef",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "bsbininm\njmjkbkjkv",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 3
-        },
-        {
-            "input": "oxcpqrsvwf\nshmtulqrypy",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abcbdab\nbdcab",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 5
-        },
-        {
-            "input": "ezupkr\nubmrapg",
-            "expectedOutput": "2",
-            "isHidden": true,
-            "orderIndex": 6
-        },
-        {
-            "input": "bl\nyby",
-            "expectedOutput": "1",
-            "isHidden": true,
-            "orderIndex": 7
-        }
-    ]
+    {
+      "input": "abc\nabc",
+      "output": "3",
+      "explanation": "Entire string is common."
+    },
+    {
+      "input": "abc\ndef",
+      "output": "0",
+      "explanation": "No common subsequence."
+    }
+  ],
+  "starterCode": {
+    "python": "text1 = input().strip()\ntext2 = input().strip()\n# 2D DP: dp[i][j] = LCS length of text1[:i] and text2[:j]\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string text1, text2; cin >> text1 >> text2;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text1 = sc.next(), text2 = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "abcde\nace",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "abc\nabc",
+      "expectedOutput": "3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abc\ndef",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "bsbininm\njmjkbkjkv",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "oxcpqrsvwf\nshmtulqrypy",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcbdab\nbdcab",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "ezupkr\nubmrapg",
+      "expectedOutput": "2",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "bl\nyby",
+      "expectedOutput": "1",
+      "isHidden": true,
+      "orderIndex": 7
+    }
+  ]
 }

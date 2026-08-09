@@ -1,64 +1,68 @@
 {
-    "title": "Longest Happy Prefix",
-    "slug": "longest-happy-prefix",
-    "difficulty": "Medium",
-    "statement": "A string is called a happy prefix if is a non-empty prefix which is also a suffix (excluding itself).\nGiven a string `s`, return the longest happy prefix of `s`. Return an empty string `\"\"` if no such prefix exists.",
-    "constraints": "1 <= s.length <= 10^5\ns contains only lowercase English letters.",
-    "inputFormat": "A single string s.",
-    "outputFormat": "A single string. If empty, print nothing (or empty line).",
-    "examples": [
-        {
-            "input": "level",
-            "output": "l",
-            "explanation": "'l' is the longest prefix that is also a suffix."
-        },
-        {
-            "input": "ababab",
-            "output": "abab",
-            "explanation": "'abab' is the prefix and suffix."
-        }
-    ],
-    "starterCode": {
-        "python": "s = input().strip()\n# KMP Prefix Array (Pi array) yields the longest proper prefix that is also suffix\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  "title": "Longest Happy Prefix",
+  "slug": "longest-happy-prefix",
+  "difficulty": "Medium",
+  "topic": "Advanced",
+  "tags": [
+    "Advanced"
+  ],
+  "statement": "A string is called a happy prefix if is a non-empty prefix which is also a suffix (excluding itself).\nGiven a string `s`, return the longest happy prefix of `s`. Return an empty string `\"\"` if no such prefix exists.",
+  "inputFormat": "A single string s.",
+  "outputFormat": "A single string. If empty, print nothing (or empty line).",
+  "constraints": "1 <= s.length <= 10^5\ns contains only lowercase English letters.",
+  "examples": [
+    {
+      "input": "level",
+      "output": "l",
+      "explanation": "'l' is the longest prefix that is also a suffix."
     },
-    "testCases": [
-        {
-            "input": "level",
-            "expectedOutput": "l",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "ababab",
-            "expectedOutput": "abab",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a",
-            "expectedOutput": "",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "leetcodeleet",
-            "expectedOutput": "leet",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "aaaaa",
-            "expectedOutput": "aaaa",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "abacabadabacaba",
-            "expectedOutput": "abacaba",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "ababab",
+      "output": "abab",
+      "explanation": "'abab' is the prefix and suffix."
+    }
+  ],
+  "starterCode": {
+    "python": "s = input().strip()\n# KMP Prefix Array (Pi array) yields the longest proper prefix that is also suffix\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string s; cin >> s;\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "level",
+      "expectedOutput": "l",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "ababab",
+      "expectedOutput": "abab",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a",
+      "expectedOutput": "",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "leetcodeleet",
+      "expectedOutput": "leet",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "aaaaa",
+      "expectedOutput": "aaaa",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abacabadabacaba",
+      "expectedOutput": "abacaba",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

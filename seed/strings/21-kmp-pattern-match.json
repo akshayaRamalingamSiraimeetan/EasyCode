@@ -2,10 +2,14 @@
   "title": "Pattern Occurrences (KMP)",
   "slug": "pattern-occurrences-kmp",
   "difficulty": "Hard",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a text string T and a pattern string P, find all starting positions (0-indexed) where P occurs in T.\n\nPrint the count of occurrences on the first line, followed by each starting index on a separate line in ascending order.\n\nOverlapping occurrences must also be counted.",
-  "constraints": "1 <= |T| <= 10^6\n1 <= |P| <= 10^4\n|P| <= |T|\nT and P contain only lowercase English letters.",
   "inputFormat": "The first line contains T.\nThe second line contains P.",
   "outputFormat": "The first line: count of occurrences.\nThe following lines: each starting index (0-indexed), one per line, in ascending order.",
+  "constraints": "1 <= |T| <= 10^6\n1 <= |P| <= 10^4\n|P| <= |T|\nT and P contain only lowercase English letters.",
   "examples": [
     {
       "input": "ababcabab\nab",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String t = sc.next(), p = sc.next();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "ababcabab\nab", "expectedOutput": "4\n0\n2\n5\n7", "isHidden": false, "orderIndex": 0 },
-    { "input": "aaaaaa\naaa", "expectedOutput": "4\n0\n1\n2\n3", "isHidden": false, "orderIndex": 1 },
-    { "input": "hello\nll", "expectedOutput": "1\n2", "isHidden": false, "orderIndex": 2 },
-    { "input": "abcdef\nxyz", "expectedOutput": "0", "isHidden": false, "orderIndex": 3 },
-    { "input": "aaaa\na", "expectedOutput": "4\n0\n1\n2\n3", "isHidden": true, "orderIndex": 4 },
-    { "input": "abcabc\nabc", "expectedOutput": "2\n0\n3", "isHidden": true, "orderIndex": 5 },
-    { "input": "mississippi\nissi", "expectedOutput": "2\n1\n4", "isHidden": true, "orderIndex": 6 },
-    { "input": "abababab\nabab", "expectedOutput": "3\n0\n2\n4", "isHidden": true, "orderIndex": 7 },
-    { "input": "aabaab\naab", "expectedOutput": "2\n0\n3", "isHidden": true, "orderIndex": 8 },
-    { "input": "abcde\nabcde", "expectedOutput": "1\n0", "isHidden": true, "orderIndex": 9 },
-    { "input": "zzzzzzzzzz\nzz", "expectedOutput": "9\n0\n1\n2\n3\n4\n5\n6\n7\n8", "isHidden": true, "orderIndex": 10 },
-    { "input": "abcabcabc\nabc", "expectedOutput": "3\n0\n3\n6", "isHidden": true, "orderIndex": 11 },
-    { "input": "aaaa\naa", "expectedOutput": "3\n0\n1\n2", "isHidden": true, "orderIndex": 12 },
-    { "input": "abcde\nb", "expectedOutput": "1\n1", "isHidden": true, "orderIndex": 13 },
-    { "input": "aaabaaaab\naaab", "expectedOutput": "2\n0\n5", "isHidden": true, "orderIndex": 14 },
-    { "input": "abcdabcdabcd\nabcd", "expectedOutput": "3\n0\n4\n8", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "ababcabab\nab",
+      "expectedOutput": "4\n0\n2\n5\n7",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aaaaaa\naaa",
+      "expectedOutput": "4\n0\n1\n2\n3",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "hello\nll",
+      "expectedOutput": "1\n2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "abcdef\nxyz",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "aaaa\na",
+      "expectedOutput": "4\n0\n1\n2\n3",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "abcabc\nabc",
+      "expectedOutput": "2\n0\n3",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "mississippi\nissi",
+      "expectedOutput": "2\n1\n4",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "abababab\nabab",
+      "expectedOutput": "3\n0\n2\n4",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "aabaab\naab",
+      "expectedOutput": "2\n0\n3",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "abcde\nabcde",
+      "expectedOutput": "1\n0",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "zzzzzzzzzz\nzz",
+      "expectedOutput": "9\n0\n1\n2\n3\n4\n5\n6\n7\n8",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "abcabcabc\nabc",
+      "expectedOutput": "3\n0\n3\n6",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "aaaa\naa",
+      "expectedOutput": "3\n0\n1\n2",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "abcde\nb",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "aaabaaaab\naaab",
+      "expectedOutput": "2\n0\n5",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "abcdabcdabcd\nabcd",
+      "expectedOutput": "3\n0\n4\n8",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

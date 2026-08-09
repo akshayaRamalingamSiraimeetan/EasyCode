@@ -2,10 +2,14 @@
   "title": "Toggle Case",
   "slug": "toggle-case",
   "difficulty": "Easy",
+  "topic": "Strings",
+  "tags": [
+    "Strings"
+  ],
   "statement": "Given a string S, toggle the case of every letter: uppercase letters become lowercase and lowercase letters become uppercase.\n\nNon-letter characters remain unchanged.",
-  "constraints": "1 <= |S| <= 10^5\nS contains printable ASCII characters.",
   "inputFormat": "A single line containing the string S.",
   "outputFormat": "A single line: S with every letter's case toggled.",
+  "constraints": "1 <= |S| <= 10^5\nS contains printable ASCII characters.",
   "examples": [
     {
       "input": "Hello World",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.nextLine();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "Hello World", "expectedOutput": "hELLO wORLD", "isHidden": false, "orderIndex": 0 },
-    { "input": "aB3cD", "expectedOutput": "Ab3Cd", "isHidden": false, "orderIndex": 1 },
-    { "input": "abcdef", "expectedOutput": "ABCDEF", "isHidden": false, "orderIndex": 2 },
-    { "input": "ABCDEF", "expectedOutput": "abcdef", "isHidden": false, "orderIndex": 3 },
-    { "input": "123", "expectedOutput": "123", "isHidden": true, "orderIndex": 4 },
-    { "input": "a", "expectedOutput": "A", "isHidden": true, "orderIndex": 5 },
-    { "input": "Z", "expectedOutput": "z", "isHidden": true, "orderIndex": 6 },
-    { "input": "PyThOn", "expectedOutput": "pYtHoN", "isHidden": true, "orderIndex": 7 },
-    { "input": "HeLLo WoRLd", "expectedOutput": "hEllO wOrLd", "isHidden": true, "orderIndex": 8 },
-    { "input": "AaAaAa", "expectedOutput": "aAaAaA", "isHidden": true, "orderIndex": 9 },
-    { "input": "Test123Case", "expectedOutput": "tEST123cASE", "isHidden": true, "orderIndex": 10 },
-    { "input": "UPPERCASE", "expectedOutput": "uppercase", "isHidden": true, "orderIndex": 11 },
-    { "input": "lowercase", "expectedOutput": "LOWERCASE", "isHidden": true, "orderIndex": 12 },
-    { "input": "MiXeD cAsE", "expectedOutput": "mIxEd CaSe", "isHidden": true, "orderIndex": 13 },
-    { "input": "a1B2c3D4", "expectedOutput": "A1b2C3d4", "isHidden": true, "orderIndex": 14 },
-    { "input": "xYzXyZ", "expectedOutput": "XyZxYz", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "Hello World",
+      "expectedOutput": "hELLO wORLD",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "aB3cD",
+      "expectedOutput": "Ab3Cd",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "abcdef",
+      "expectedOutput": "ABCDEF",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "ABCDEF",
+      "expectedOutput": "abcdef",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "123",
+      "expectedOutput": "123",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "a",
+      "expectedOutput": "A",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "Z",
+      "expectedOutput": "z",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "PyThOn",
+      "expectedOutput": "pYtHoN",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "HeLLo WoRLd",
+      "expectedOutput": "hEllO wOrLd",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "AaAaAa",
+      "expectedOutput": "aAaAaA",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "Test123Case",
+      "expectedOutput": "tEST123cASE",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "UPPERCASE",
+      "expectedOutput": "uppercase",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "lowercase",
+      "expectedOutput": "LOWERCASE",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "MiXeD cAsE",
+      "expectedOutput": "mIxEd CaSe",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "a1B2c3D4",
+      "expectedOutput": "A1b2C3d4",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "xYzXyZ",
+      "expectedOutput": "XyZxYz",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

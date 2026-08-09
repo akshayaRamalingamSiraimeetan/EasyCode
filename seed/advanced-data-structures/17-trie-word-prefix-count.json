@@ -2,10 +2,14 @@
   "title": "Trie: Count Words with Given Prefix",
   "slug": "trie-count-words-prefix",
   "difficulty": "Medium",
+  "topic": "Advanced Data Structures",
+  "tags": [
+    "Advanced Data Structures"
+  ],
   "statement": "Build a Trie and, for each query prefix P, count how many inserted words start with P.\n\nThis requires storing at each Trie node the count of words passing through it.",
-  "constraints": "1 <= W <= 10^4\n1 <= Q <= 10^4\n1 <= |word|, |prefix| <= 20\nAll words/prefixes are lowercase letters.",
   "inputFormat": "The first line contains W.\nThe next W lines each contain a word (duplicates allowed).\nThe next line contains Q.\nThe next Q lines each contain a prefix.",
   "outputFormat": "Q lines, each the count of inserted words that start with the given prefix.",
+  "constraints": "1 <= W <= 10^4\n1 <= Q <= 10^4\n1 <= |word|, |prefix| <= 20\nAll words/prefixes are lowercase letters.",
   "examples": [
     {
       "input": "5\napple\napp\napplication\napt\napply\n3\napp\napt\nap",
@@ -24,21 +28,101 @@
     "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int w = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "5\napple\napp\napplication\napt\napply\n3\napp\napt\nap",         "expectedOutput": "4\n1\n5",   "isHidden": false, "orderIndex": 0 },
-    { "input": "4\ndog\ndoor\ncat\ncar\n2\nca\ndo",                             "expectedOutput": "2\n2",     "isHidden": false, "orderIndex": 1 },
-    { "input": "4\nhello\nhelp\nhe\nhero\n2\nhe\nhel",                         "expectedOutput": "4\n2",     "isHidden": false, "orderIndex": 2 },
-    { "input": "3\nabc\nabd\nabe\n2\nab\nabc",                                "expectedOutput": "3\n1",     "isHidden": false, "orderIndex": 3 },
-    { "input": "3\npre\nprefix\nprecise\n2\npre\npref",                        "expectedOutput": "3\n1",     "isHidden": true,  "orderIndex": 4 },
-    { "input": "3\na\nab\nabc\n3\na\nab\nabc",                                "expectedOutput": "3\n2\n1",  "isHidden": true,  "orderIndex": 5 },
-    { "input": "1\nxyz\n2\nxy\nxyz",                                          "expectedOutput": "1\n1",     "isHidden": true,  "orderIndex": 6 },
-    { "input": "4\ncat\ncar\ncap\ncan\n2\nca\ncat",                            "expectedOutput": "4\n1",     "isHidden": true,  "orderIndex": 7 },
-    { "input": "3\nred\nblue\ngreen\n2\nre\nbl",                               "expectedOutput": "1\n1",     "isHidden": true,  "orderIndex": 8 },
-    { "input": "3\naaa\naab\naac\n2\naa\naaa",                                "expectedOutput": "3\n1",     "isHidden": true,  "orderIndex": 9 },
-    { "input": "3\ntest\ntester\ntesting\n2\ntest\ntesti",                     "expectedOutput": "3\n1",     "isHidden": true,  "orderIndex": 10 },
-    { "input": "4\nword\nworld\nwonder\nwon\n2\nwo\nwor",                      "expectedOutput": "4\n2",     "isHidden": true,  "orderIndex": 11 },
-    { "input": "3\nsame\nsame\nsame\n1\nsame",                                "expectedOutput": "3",        "isHidden": true,  "orderIndex": 12 },
-    { "input": "3\na\nb\nc\n2\nd\na",                                        "expectedOutput": "0\n1",     "isHidden": true,  "orderIndex": 13 },
-    { "input": "2\nabc\nabcde\n2\nabc\nabcde",                                "expectedOutput": "2\n1",     "isHidden": true,  "orderIndex": 14 },
-    { "input": "4\np\npa\npar\npara\n2\npar\np",                              "expectedOutput": "2\n4",     "isHidden": true,  "orderIndex": 15 }
+    {
+      "input": "5\napple\napp\napplication\napt\napply\n3\napp\napt\nap",
+      "expectedOutput": "4\n1\n5",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "4\ndog\ndoor\ncat\ncar\n2\nca\ndo",
+      "expectedOutput": "2\n2",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "4\nhello\nhelp\nhe\nhero\n2\nhe\nhel",
+      "expectedOutput": "4\n2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "3\nabc\nabd\nabe\n2\nab\nabc",
+      "expectedOutput": "3\n1",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "3\npre\nprefix\nprecise\n2\npre\npref",
+      "expectedOutput": "3\n1",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "3\na\nab\nabc\n3\na\nab\nabc",
+      "expectedOutput": "3\n2\n1",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "1\nxyz\n2\nxy\nxyz",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "4\ncat\ncar\ncap\ncan\n2\nca\ncat",
+      "expectedOutput": "4\n1",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "3\nred\nblue\ngreen\n2\nre\nbl",
+      "expectedOutput": "1\n1",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "3\naaa\naab\naac\n2\naa\naaa",
+      "expectedOutput": "3\n1",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "3\ntest\ntester\ntesting\n2\ntest\ntesti",
+      "expectedOutput": "3\n1",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "4\nword\nworld\nwonder\nwon\n2\nwo\nwor",
+      "expectedOutput": "4\n2",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "3\nsame\nsame\nsame\n1\nsame",
+      "expectedOutput": "3",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "3\na\nb\nc\n2\nd\na",
+      "expectedOutput": "0\n1",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "2\nabc\nabcde\n2\nabc\nabcde",
+      "expectedOutput": "2\n1",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "4\np\npa\npar\npara\n2\npar\np",
+      "expectedOutput": "2\n4",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }

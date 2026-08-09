@@ -1,64 +1,68 @@
 {
-    "title": "Word Ladder",
-    "slug": "word-ladder",
-    "difficulty": "Medium",
-    "statement": "A transformation sequence from word `beginWord` to word `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that:\n- Every adjacent pair of words differs by a single letter.\n- Every `si` for `1 <= i <= k` is in `wordList`.\n- `sk == endWord`.\n\nReturn the number of words in the shortest transformation sequence from `beginWord` to `endWord`, or 0 if no such sequence exists.",
-    "constraints": "1 <= beginWord.length <= 10\nendWord.length == beginWord.length\n1 <= wordList.length <= 5000\nwordList[i].length == beginWord.length",
-    "inputFormat": "Line 1: beginWord and endWord.\nLine 2: an integer N (size of wordList).\nLine 3: N space-separated strings.",
-    "outputFormat": "A single integer.",
-    "examples": [
-        {
-            "input": "hit cog\n6\nhot dot dog lot log cog",
-            "output": "5",
-            "explanation": "hit -> hot -> dot -> dog -> cog"
-        },
-        {
-            "input": "hit cog\n5\nhot dot dog lot log",
-            "output": "0",
-            "explanation": "cog is not in wordList."
-        }
-    ],
-    "starterCode": {
-        "python": "beginWord, endWord = input().split()\nn = int(input())\nwordList = input().split()\n# BFS level by level\n",
-        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string bw, ew; cin >> bw >> ew;\n    int n; cin >> n;\n    vector<string> wl(n);\n    for(int i=0; i<n; i++) cin >> wl[i];\n    // Write logic\n    return 0;\n}\n",
-        "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String bw = sc.next(), ew = sc.next();\n        int n = sc.nextInt();\n        List<String> wl = new ArrayList<>();\n        for(int i=0; i<n; i++) wl.add(sc.next());\n        // Write logic\n    }\n}\n"
+  "title": "Word Ladder",
+  "slug": "word-ladder",
+  "difficulty": "Medium",
+  "topic": "Graphs",
+  "tags": [
+    "Graphs"
+  ],
+  "statement": "A transformation sequence from word `beginWord` to word `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that:\n- Every adjacent pair of words differs by a single letter.\n- Every `si` for `1 <= i <= k` is in `wordList`.\n- `sk == endWord`.\n\nReturn the number of words in the shortest transformation sequence from `beginWord` to `endWord`, or 0 if no such sequence exists.",
+  "inputFormat": "Line 1: beginWord and endWord.\nLine 2: an integer N (size of wordList).\nLine 3: N space-separated strings.",
+  "outputFormat": "A single integer.",
+  "constraints": "1 <= beginWord.length <= 10\nendWord.length == beginWord.length\n1 <= wordList.length <= 5000\nwordList[i].length == beginWord.length",
+  "examples": [
+    {
+      "input": "hit cog\n6\nhot dot dog lot log cog",
+      "output": "5",
+      "explanation": "hit -> hot -> dot -> dog -> cog"
     },
-    "testCases": [
-        {
-            "input": "hit cog\n6\nhot dot dog lot log cog",
-            "expectedOutput": "5",
-            "isHidden": false,
-            "orderIndex": 0
-        },
-        {
-            "input": "hit cog\n5\nhot dot dog lot log",
-            "expectedOutput": "0",
-            "isHidden": false,
-            "orderIndex": 1
-        },
-        {
-            "input": "a c\n3\na b c",
-            "expectedOutput": "2",
-            "isHidden": false,
-            "orderIndex": 2
-        },
-        {
-            "input": "hot dog\n1\nhot",
-            "expectedOutput": "0",
-            "isHidden": true,
-            "orderIndex": 3
-        },
-        {
-            "input": "abc zzz\n3\nbbc bzc zzz",
-            "expectedOutput": "4",
-            "isHidden": true,
-            "orderIndex": 4
-        },
-        {
-            "input": "leet code\n8\nlezt cezt cede code leet lzet ledt lodt",
-            "expectedOutput": "5",
-            "isHidden": true,
-            "orderIndex": 5
-        }
-    ]
+    {
+      "input": "hit cog\n5\nhot dot dog lot log",
+      "output": "0",
+      "explanation": "cog is not in wordList."
+    }
+  ],
+  "starterCode": {
+    "python": "beginWord, endWord = input().split()\nn = int(input())\nwordList = input().split()\n# BFS level by level\n",
+    "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n    string bw, ew; cin >> bw >> ew;\n    int n; cin >> n;\n    vector<string> wl(n);\n    for(int i=0; i<n; i++) cin >> wl[i];\n    // Write logic\n    return 0;\n}\n",
+    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String bw = sc.next(), ew = sc.next();\n        int n = sc.nextInt();\n        List<String> wl = new ArrayList<>();\n        for(int i=0; i<n; i++) wl.add(sc.next());\n        // Write logic\n    }\n}\n"
+  },
+  "testCases": [
+    {
+      "input": "hit cog\n6\nhot dot dog lot log cog",
+      "expectedOutput": "5",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "hit cog\n5\nhot dot dog lot log",
+      "expectedOutput": "0",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "a c\n3\na b c",
+      "expectedOutput": "2",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "hot dog\n1\nhot",
+      "expectedOutput": "0",
+      "isHidden": true,
+      "orderIndex": 3
+    },
+    {
+      "input": "abc zzz\n3\nbbc bzc zzz",
+      "expectedOutput": "4",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "leet code\n8\nlezt cezt cede code leet lzet ledt lodt",
+      "expectedOutput": "5",
+      "isHidden": true,
+      "orderIndex": 5
+    }
+  ]
 }

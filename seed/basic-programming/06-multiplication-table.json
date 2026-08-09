@@ -2,10 +2,14 @@
   "title": "Multiplication Table",
   "slug": "multiplication-table",
   "difficulty": "Easy",
+  "topic": "Basic Programming",
+  "tags": [
+    "Basic Programming"
+  ],
   "statement": "Given an integer N, print its multiplication table from 1 to 10.\n\nEach line should be in the format: \"N x i = result\" where i goes from 1 to 10.",
-  "constraints": "1 <= N <= 100",
   "inputFormat": "A single line containing one integer N.",
   "outputFormat": "10 lines, where the i-th line is \"N x i = N*i\".",
+  "constraints": "1 <= N <= 100",
   "examples": [
     {
       "input": "3",
@@ -24,21 +28,101 @@
     "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n    }\n}\n"
   },
   "testCases": [
-    { "input": "3", "expectedOutput": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27\n3 x 10 = 30", "isHidden": false, "orderIndex": 0 },
-    { "input": "1", "expectedOutput": "1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5\n1 x 6 = 6\n1 x 7 = 7\n1 x 8 = 8\n1 x 9 = 9\n1 x 10 = 10", "isHidden": false, "orderIndex": 1 },
-    { "input": "5", "expectedOutput": "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50", "isHidden": false, "orderIndex": 2 },
-    { "input": "10", "expectedOutput": "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100", "isHidden": false, "orderIndex": 3 },
-    { "input": "2", "expectedOutput": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20", "isHidden": true, "orderIndex": 4 },
-    { "input": "7", "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70", "isHidden": true, "orderIndex": 5 },
-    { "input": "9", "expectedOutput": "9 x 1 = 9\n9 x 2 = 18\n9 x 3 = 27\n9 x 4 = 36\n9 x 5 = 45\n9 x 6 = 54\n9 x 7 = 63\n9 x 8 = 72\n9 x 9 = 81\n9 x 10 = 90", "isHidden": true, "orderIndex": 6 },
-    { "input": "11", "expectedOutput": "11 x 1 = 11\n11 x 2 = 22\n11 x 3 = 33\n11 x 4 = 44\n11 x 5 = 55\n11 x 6 = 66\n11 x 7 = 77\n11 x 8 = 88\n11 x 9 = 99\n11 x 10 = 110", "isHidden": true, "orderIndex": 7 },
-    { "input": "12", "expectedOutput": "12 x 1 = 12\n12 x 2 = 24\n12 x 3 = 36\n12 x 4 = 48\n12 x 5 = 60\n12 x 6 = 72\n12 x 7 = 84\n12 x 8 = 96\n12 x 9 = 108\n12 x 10 = 120", "isHidden": true, "orderIndex": 8 },
-    { "input": "50", "expectedOutput": "50 x 1 = 50\n50 x 2 = 100\n50 x 3 = 150\n50 x 4 = 200\n50 x 5 = 250\n50 x 6 = 300\n50 x 7 = 350\n50 x 8 = 400\n50 x 9 = 450\n50 x 10 = 500", "isHidden": true, "orderIndex": 9 },
-    { "input": "100", "expectedOutput": "100 x 1 = 100\n100 x 2 = 200\n100 x 3 = 300\n100 x 4 = 400\n100 x 5 = 500\n100 x 6 = 600\n100 x 7 = 700\n100 x 8 = 800\n100 x 9 = 900\n100 x 10 = 1000", "isHidden": true, "orderIndex": 10 },
-    { "input": "6", "expectedOutput": "6 x 1 = 6\n6 x 2 = 12\n6 x 3 = 18\n6 x 4 = 24\n6 x 5 = 30\n6 x 6 = 36\n6 x 7 = 42\n6 x 8 = 48\n6 x 9 = 54\n6 x 10 = 60", "isHidden": true, "orderIndex": 11 },
-    { "input": "4", "expectedOutput": "4 x 1 = 4\n4 x 2 = 8\n4 x 3 = 12\n4 x 4 = 16\n4 x 5 = 20\n4 x 6 = 24\n4 x 7 = 28\n4 x 8 = 32\n4 x 9 = 36\n4 x 10 = 40", "isHidden": true, "orderIndex": 12 },
-    { "input": "8", "expectedOutput": "8 x 1 = 8\n8 x 2 = 16\n8 x 3 = 24\n8 x 4 = 32\n8 x 5 = 40\n8 x 6 = 48\n8 x 7 = 56\n8 x 8 = 64\n8 x 9 = 72\n8 x 10 = 80", "isHidden": true, "orderIndex": 13 },
-    { "input": "25", "expectedOutput": "25 x 1 = 25\n25 x 2 = 50\n25 x 3 = 75\n25 x 4 = 100\n25 x 5 = 125\n25 x 6 = 150\n25 x 7 = 175\n25 x 8 = 200\n25 x 9 = 225\n25 x 10 = 250", "isHidden": true, "orderIndex": 14 },
-    { "input": "99", "expectedOutput": "99 x 1 = 99\n99 x 2 = 198\n99 x 3 = 297\n99 x 4 = 396\n99 x 5 = 495\n99 x 6 = 594\n99 x 7 = 693\n99 x 8 = 792\n99 x 9 = 891\n99 x 10 = 990", "isHidden": true, "orderIndex": 15 }
+    {
+      "input": "3",
+      "expectedOutput": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27\n3 x 10 = 30",
+      "isHidden": false,
+      "orderIndex": 0
+    },
+    {
+      "input": "1",
+      "expectedOutput": "1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5\n1 x 6 = 6\n1 x 7 = 7\n1 x 8 = 8\n1 x 9 = 9\n1 x 10 = 10",
+      "isHidden": false,
+      "orderIndex": 1
+    },
+    {
+      "input": "5",
+      "expectedOutput": "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50",
+      "isHidden": false,
+      "orderIndex": 2
+    },
+    {
+      "input": "10",
+      "expectedOutput": "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100",
+      "isHidden": false,
+      "orderIndex": 3
+    },
+    {
+      "input": "2",
+      "expectedOutput": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20",
+      "isHidden": true,
+      "orderIndex": 4
+    },
+    {
+      "input": "7",
+      "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+      "isHidden": true,
+      "orderIndex": 5
+    },
+    {
+      "input": "9",
+      "expectedOutput": "9 x 1 = 9\n9 x 2 = 18\n9 x 3 = 27\n9 x 4 = 36\n9 x 5 = 45\n9 x 6 = 54\n9 x 7 = 63\n9 x 8 = 72\n9 x 9 = 81\n9 x 10 = 90",
+      "isHidden": true,
+      "orderIndex": 6
+    },
+    {
+      "input": "11",
+      "expectedOutput": "11 x 1 = 11\n11 x 2 = 22\n11 x 3 = 33\n11 x 4 = 44\n11 x 5 = 55\n11 x 6 = 66\n11 x 7 = 77\n11 x 8 = 88\n11 x 9 = 99\n11 x 10 = 110",
+      "isHidden": true,
+      "orderIndex": 7
+    },
+    {
+      "input": "12",
+      "expectedOutput": "12 x 1 = 12\n12 x 2 = 24\n12 x 3 = 36\n12 x 4 = 48\n12 x 5 = 60\n12 x 6 = 72\n12 x 7 = 84\n12 x 8 = 96\n12 x 9 = 108\n12 x 10 = 120",
+      "isHidden": true,
+      "orderIndex": 8
+    },
+    {
+      "input": "50",
+      "expectedOutput": "50 x 1 = 50\n50 x 2 = 100\n50 x 3 = 150\n50 x 4 = 200\n50 x 5 = 250\n50 x 6 = 300\n50 x 7 = 350\n50 x 8 = 400\n50 x 9 = 450\n50 x 10 = 500",
+      "isHidden": true,
+      "orderIndex": 9
+    },
+    {
+      "input": "100",
+      "expectedOutput": "100 x 1 = 100\n100 x 2 = 200\n100 x 3 = 300\n100 x 4 = 400\n100 x 5 = 500\n100 x 6 = 600\n100 x 7 = 700\n100 x 8 = 800\n100 x 9 = 900\n100 x 10 = 1000",
+      "isHidden": true,
+      "orderIndex": 10
+    },
+    {
+      "input": "6",
+      "expectedOutput": "6 x 1 = 6\n6 x 2 = 12\n6 x 3 = 18\n6 x 4 = 24\n6 x 5 = 30\n6 x 6 = 36\n6 x 7 = 42\n6 x 8 = 48\n6 x 9 = 54\n6 x 10 = 60",
+      "isHidden": true,
+      "orderIndex": 11
+    },
+    {
+      "input": "4",
+      "expectedOutput": "4 x 1 = 4\n4 x 2 = 8\n4 x 3 = 12\n4 x 4 = 16\n4 x 5 = 20\n4 x 6 = 24\n4 x 7 = 28\n4 x 8 = 32\n4 x 9 = 36\n4 x 10 = 40",
+      "isHidden": true,
+      "orderIndex": 12
+    },
+    {
+      "input": "8",
+      "expectedOutput": "8 x 1 = 8\n8 x 2 = 16\n8 x 3 = 24\n8 x 4 = 32\n8 x 5 = 40\n8 x 6 = 48\n8 x 7 = 56\n8 x 8 = 64\n8 x 9 = 72\n8 x 10 = 80",
+      "isHidden": true,
+      "orderIndex": 13
+    },
+    {
+      "input": "25",
+      "expectedOutput": "25 x 1 = 25\n25 x 2 = 50\n25 x 3 = 75\n25 x 4 = 100\n25 x 5 = 125\n25 x 6 = 150\n25 x 7 = 175\n25 x 8 = 200\n25 x 9 = 225\n25 x 10 = 250",
+      "isHidden": true,
+      "orderIndex": 14
+    },
+    {
+      "input": "99",
+      "expectedOutput": "99 x 1 = 99\n99 x 2 = 198\n99 x 3 = 297\n99 x 4 = 396\n99 x 5 = 495\n99 x 6 = 594\n99 x 7 = 693\n99 x 8 = 792\n99 x 9 = 891\n99 x 10 = 990",
+      "isHidden": true,
+      "orderIndex": 15
+    }
   ]
 }
