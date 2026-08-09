@@ -53,7 +53,7 @@ function StatCard({ icon, label, value, accent }) {
     <div className="db-stat-card">
       <div
         className="db-stat-icon"
-        style={accent ? { color: "var(--color-accent)" } : {}}
+        style={accent ? { color: "var(--accent)" } : {}}
       >
         {icon}
       </div>

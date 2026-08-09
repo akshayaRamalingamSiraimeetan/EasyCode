@@ -27,6 +27,9 @@
   --danger:             #ef4444;
   --danger-bg:          rgba(239,68,68,0.10);
   --danger-border:      rgba(239,68,68,0.20);
+  --info:               #60a5fa;
+  --info-bg:            rgba(96,165,250,0.10);
+  --info-border:        rgba(96,165,250,0.20);
   --radius:             8px;
   --shadow:             0 2px 12px rgba(0,0,0,0.4);
   --transition:         0.18s ease;
@@ -54,6 +57,9 @@
   --danger:             #dc2626;
   --danger-bg:          rgba(220,38,38,0.08);
   --danger-border:      rgba(220,38,38,0.20);
+  --info:               #3b82f6;
+  --info-bg:            rgba(59,130,246,0.08);
+  --info-border:        rgba(59,130,246,0.20);
   --shadow:             0 2px 8px rgba(0,0,0,0.07);
 }
 
@@ -370,7 +376,7 @@ button { cursor: pointer; }
 .delete-dialog h2 { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
 .delete-dialog p  { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; }
 .delete-dialog h3 { font-size: 15px; font-weight: 700; margin-bottom: 22px; }
-.delete-btn-large { padding: 9px 22px; background: var(--danger); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 700; transition: opacity var(--transition); }
+.delete-btn-large { padding: 9px 22px; background: var(--danger); color: var(--accent-fg); border: none; border-radius: var(--radius); font-size: 14px; font-weight: 700; transition: opacity var(--transition); }
 .delete-btn-large:hover { opacity: 0.88; }
 
 /* ============================================================
@@ -390,7 +396,7 @@ button { cursor: pointer; }
 .tc-toggle { position: relative; width: 36px; height: 20px; background: var(--border); border-radius: 999px; transition: background var(--transition); outline: none; }
 .tc-toggle:focus-visible { box-shadow: 0 0 0 3px rgba(250,204,21,0.3); }
 .tc-toggle--on { background: var(--accent); }
-.tc-toggle-thumb { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; background: white; border-radius: 50%; transition: transform var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+.tc-toggle-thumb { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; background: var(--surface); border-radius: 50%; transition: transform var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
 .tc-toggle--on .tc-toggle-thumb { transform: translateX(16px); }
 .tc-delete-btn { color: var(--text-muted); }
 .tc-delete-btn:hover { color: var(--danger); transform: scale(1.1); }
@@ -441,13 +447,26 @@ button { cursor: pointer; }
 .sub-verdict-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .sub-verdict--accepted { background: var(--success-bg);  color: var(--success); border: 1px solid var(--success-border); }
 .sub-verdict--wrong    { background: var(--danger-bg);   color: var(--danger);  border: 1px solid var(--danger-border); }
-.sub-verdict--tle      { background: rgba(59,130,246,.1); color: #60a5fa; border: 1px solid rgba(59,130,246,.2); }
+.sub-verdict--tle      { background: var(--info-bg);     color: var(--info);    border: 1px solid var(--info-border); }
 .sub-verdict--error    { background: var(--warning-bg);  color: var(--warning); border: 1px solid var(--warning-border); }
 
 .sub-row:hover { background: var(--surface-secondary) !important; }
 .sub-problem-title { font-weight: 600; color: var(--text-primary); }
 .sub-pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; }
 .sub-pagination-label { font-size: 13px; color: var(--text-secondary); }
+
+/* submissions-specific helpers */
+.submissions-subtitle { font-size: 13px; color: var(--text-muted); margin: 2px 0 0; }
+.sub-date-cell { white-space: nowrap; font-size: 13px; color: var(--text-secondary); }
+
+/* secondary action button — outlined style for "Load" etc. */
+.table-btn--secondary {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  display: inline-flex; align-items: center;
+}
+.table-btn--secondary:hover { background: var(--surface); border-color: var(--text-muted); opacity: 1; }
 
 .sub-modal { background: var(--surface); border: 1px solid var(--border); width: 820px; max-width: 95vw; max-height: 90vh; border-radius: calc(var(--radius)*1.5); display: flex; flex-direction: column; overflow: hidden; }
 .sub-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }

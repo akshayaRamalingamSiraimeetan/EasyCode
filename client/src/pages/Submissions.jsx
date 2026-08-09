@@ -276,7 +276,6 @@ export default function Submissions() {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button
             className="solve-back-btn"
-            style={{ background: "transparent", border: "1px solid #ddd", color: "#555" }}
             onClick={() => navigate("/dashboard")}
             title="Back to Dashboard"
           >
@@ -284,7 +283,7 @@ export default function Submissions() {
           </button>
           <div>
             <h1 style={{ marginBottom: 2 }}>My Submissions</h1>
-            <p style={{ fontSize: 13, color: "#888", margin: 0 }}>Your full submission history</p>
+            <p className="submissions-subtitle">Your full submission history</p>
           </div>
         </div>
         <button
@@ -415,7 +414,7 @@ export default function Submissions() {
                   <td className="sub-problem-title">{s.problemTitle}</td>
                   <td>{LANG_LABELS[s.language] ?? s.language}</td>
                   <td>{s.passed} / {s.total}</td>
-                  <td style={{ whiteSpace: "nowrap", fontSize: 13, color: "#666" }}>
+                  <td className="sub-date-cell">
                     {formatDate(s.submittedAt)}
                   </td>
                   <td>
@@ -427,8 +426,7 @@ export default function Submissions() {
                         View
                       </button>
                       <button
-                        className="table-btn"
-                        style={{ background: "#111", color: "#fff", border: "1px solid #444" }}
+                        className="table-btn table-btn--secondary"
                         onClick={async (e) => {
                           e.stopPropagation();
                           try {
