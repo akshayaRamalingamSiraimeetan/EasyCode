@@ -23,13 +23,17 @@ COPY judge/runners/          ./runners/
 COPY judge/src/              ./src/
 
 # ── Runtime workspace for code execution sandboxes ───────────────────────────
-# Creates the default fallback path used when JUDGE_TEMP_DIR is not set.
-# For containerised deployments, JUDGE_TEMP_DIR must point to a host path
-# that is bind-mounted into this container at the same absolute path so that
-# runner containers spawned by the host daemon can resolve it.
-# See .env.example for the required docker run flags.
-RUN mkdir -p /tmp/judge-workspace && chown appuser:appgroup /tmp/judge-workspace
+# /app/judge/temp is the fallback path used by runners when JUDGE_TEMP_DIR
+# is not set (TEMP_DIR = path.join(__dirname, "..", "temp")).
+# Create it here and hand ownership to appuser so the process can write
+# workspace subdirectories without needing JUDGE_TEMP_DIR at all.
+# In production you should still mount a host path via JUDGE_TEMP_DIR so
+# runner containers spawned by the host daemon can resolve the same files.
+#RUN mkdir -p /app/judge/temp && chown appuser:appgroup /app/judge/temp
 
+RUN mkdir -p /tmp/judge-workspace \
+    && mkdir -p /app/judge/temp \
+    && chown -R appuser:appgroup /tmp/judge-workspace /app/judge/temp
 # ── Entrypoint ────────────────────────────────────────────────────────────────
 # Runs as root so it can inspect the socket GID and create a matching group,
 # then drops to appuser before exec-ing the Node process.
