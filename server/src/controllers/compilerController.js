@@ -59,6 +59,7 @@ const runCode = async (req, res) => {
           output: runResult.stdout ?? "",
           stderr: runResult.stderr ?? "",
           executionTime: runResult.executionTime ?? null,
+          memoryKB: runResult.memoryKB ?? null,
         });
         continue;
       }
@@ -74,6 +75,7 @@ const runCode = async (req, res) => {
         expected: tc.expectedOutput,
         output: runResult.stdout ?? "",
         executionTime: runResult.executionTime ?? null,
+        memoryKB: runResult.memoryKB ?? null,
       });
     }
 
@@ -103,6 +105,7 @@ const runCode = async (req, res) => {
         output: runResult.stdout ?? "",
         stderr: runResult.stderr ?? "",
         executionTime: runResult.executionTime ?? null,
+        memoryKB: runResult.memoryKB ?? null,
       });
     }
 

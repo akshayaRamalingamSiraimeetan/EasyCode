@@ -26,19 +26,20 @@ function _deleteWorkspace(workspacePath) {
 }
 
 function _mapRunResult(result, executionTime) {
+  const memoryKB = result.memoryKB ?? null;
   if (result.timedOut) {
-    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: result.stdout, stderr: result.stderr, executionTime };
+    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: result.stdout, stderr: result.stderr, executionTime, memoryKB };
   }
 
   if (result.outputLimitExceeded) {
-    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime };
+    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime, memoryKB };
   }
 
   if (result.exitCode !== 0) {
-    return { status: Status.RUNTIME_ERROR, stdout: result.stdout, stderr: result.stderr, executionTime };
+    return { status: Status.RUNTIME_ERROR, stdout: result.stdout, stderr: result.stderr, executionTime, memoryKB };
   }
 
-  return { status: Status.SUCCESS, stdout: result.stdout, stderr: result.stderr, executionTime };
+  return { status: Status.SUCCESS, stdout: result.stdout, stderr: result.stderr, executionTime, memoryKB };
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -83,6 +84,7 @@ async function execute(code, input) {
       cwd: `/workspace/${workspaceId}`,
       stdin: input,
       timeout: 5000,
+      measureMemory: true,
     });
     const executionTime = Date.now() - t0;
 
@@ -140,6 +142,7 @@ async function judge(code, testCases) {
         cwd: `/workspace/${workspaceId}`,
         stdin: testCase.input,
         timeout: 5000,
+        measureMemory: true,
       });
       const executionTime = Date.now() - t0;
 
@@ -152,8 +155,12 @@ async function judge(code, testCases) {
     }
 
     const maxExecutionTime = results.reduce((max, r) => Math.max(max, r.executionTime ?? 0), 0);
-    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime };
-    console.log("[RUNNER javaRunner]", JSON.stringify({ executionTime: maxExecutionTime, resultCount: results.length, firstResult: results[0] }));
+    const peakMemoryKB = results.reduce((max, r) => {
+      if (r.memoryKB == null) return max;
+      return max === null ? r.memoryKB : Math.max(max, r.memoryKB);
+    }, null);
+    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime, peakMemoryKB };
+    console.log("[RUNNER javaRunner]", JSON.stringify({ executionTime: maxExecutionTime, peakMemoryKB, resultCount: results.length, firstResult: results[0] }));
     return runnerReturn;
 
   } finally {

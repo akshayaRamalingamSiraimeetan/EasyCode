@@ -126,7 +126,12 @@ async function judge(language, code, testCases) {
     status: "accepted",
     passed: total,
     total,
-    executionTime: runnerResult.executionTime ?? null,
+    executionTime:  runnerResult.executionTime  ?? null,
+    peakMemoryKB:   runnerResult.peakMemoryKB   ?? null,
+    results: runnerResult.results.map((r) => ({
+      executionTime: r.executionTime ?? null,
+      memoryKB:      r.memoryKB      ?? null,
+    })),
   };
   console.log("[judgeService] returning =", JSON.stringify(verdict));
   return verdict;

@@ -24,6 +24,27 @@ const HOST_TEMP_DIR       = process.env.HOST_JUDGE_TEMP_DIR || CONTAINER_TEMP_DI
 const OUTPUT_LIMIT  = 1 * 1024 * 1024; // 1 MB
 const OLE_EXIT_CODE = 200;              // reserved: output limit exceeded
 
+// ─── Memory parsing ───────────────────────────────────────────────────────────
+
+/**
+ * Parses the peak RSS memory from the stderr output of `/usr/bin/time -v`.
+ *
+ * GNU time writes to stderr a block like:
+ *   Maximum resident set size (kbytes): 8192
+ *
+ * We extract that value and return it as a number (kbytes).
+ * Returns null if the marker is not found (e.g. BSD time, timeout, crash).
+ *
+ * @param {string} timeStderr
+ * @returns {number|null} memory in kbytes, or null
+ */
+function parseMemoryKB(timeStderr) {
+  // The line written by GNU time -v:
+  //   \tMaximum resident set size (kbytes): 8192
+  const match = timeStderr.match(/Maximum resident set size \(kbytes\):\s*(\d+)/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
 /**
  * Runs a command inside an ephemeral Docker container.
  *
@@ -32,6 +53,15 @@ const OLE_EXIT_CODE = 200;              // reserved: output limit exceeded
  * - Node-side safety net also enforces the limit.
  * - Exit code 200 is reserved for output-limit-exceeded.
  *
+ * Memory measurement (measureMemory: true):
+ * - Wraps the user command with `/usr/bin/time -v`.
+ * - GNU time writes its report to stderr; we separate it from program stderr
+ *   using a sentinel marker so the two streams never collide.
+ * - The measured value is the true kernel-tracked peak RSS — no polling,
+ *   no Docker API calls, zero sampling jitter.
+ * - Requires the `time` package to be installed in the runner image
+ *   (it is — docker/Dockerfile installs it explicitly).
+ *
  * @param {object}  opts
  * @param {string}  opts.command
  * @param {string[]} [opts.args]
@@ -39,6 +69,7 @@ const OLE_EXIT_CODE = 200;              // reserved: output limit exceeded
  * @param {string}  [opts.stdin]
  * @param {number}  [opts.timeout]          ms, default 5000
  * @param {boolean} [opts.checkOutputLimit] default true
+ * @param {boolean} [opts.measureMemory]    wrap with /usr/bin/time -v, default false
  */
 function runInDocker({
   command,
@@ -47,6 +78,7 @@ function runInDocker({
   stdin = "",
   timeout = 5000,
   checkOutputLimit = true,
+  measureMemory = false,
 }) {
   return new Promise((resolve) => {
     let settled = false;
@@ -80,7 +112,20 @@ function runInDocker({
       return `'${s.replace(/'/g, "'\\''")}'`;
     }
 
-    const userCmd = [command, ...args].map(shQuote).join(" ");
+    // When measureMemory is true we wrap the user command with /usr/bin/time -v.
+    // GNU time writes its report to file descriptor 2 (stderr). To separate it
+    // from the program's own stderr we redirect time's output to a temp file,
+    // then emit a fixed sentinel line followed by the file contents. This way
+    // the combined stderr stream is always parseable regardless of what the
+    // program writes to its own stderr.
+    //
+    // Sentinel: "__TIME_REPORT__"  (unlikely to appear in program output)
+    const TIME_SENTINEL = "__TIME_REPORT__";
+
+    const baseUserCmd = [command, ...args].map(shQuote).join(" ");
+    const userCmd = measureMemory
+      ? `TIME_OUT=$(mktemp /tmp/.time.XXXXXX); /usr/bin/time -v -o "$TIME_OUT" ${baseUserCmd}; _UE=$?; echo '${TIME_SENTINEL}'; cat "$TIME_OUT"; rm -f "$TIME_OUT"; exit $_UE`
+      : baseUserCmd;
 
     // Docker flags shared by both execution paths.
     const baseDockerArgs = [
@@ -109,6 +154,10 @@ function runInDocker({
     // checkOutputLimit=false (compilation phase):
     //   Run the compiler directly so full error output is returned as-is and
     //   cannot be misidentified as output-limit-exceeded.
+    //
+    // When measureMemory=true, userCmd already contains the /usr/bin/time -v
+    // wrapper so we always go through bash -c (checkOutputLimit path). The
+    // sentinel-based stderr parsing happens in the close handler below.
     const wrapperScript =
       `RC_FILE=$(mktemp /tmp/.rc.XXXXXX); ` +
       `{ ${userCmd}; echo $? > "$RC_FILE"; } 2>&1 | head -c ${headLimit}; ` +
@@ -176,6 +225,7 @@ function runInDocker({
         stderr: err.message,
         timedOut: false,
         outputLimitExceeded: false,
+        memoryKB: null,
       });
     });
 
@@ -185,13 +235,41 @@ function runInDocker({
       const didExceedOutputLimit =
         checkOutputLimit && (exitCode === OLE_EXIT_CODE || outputLimitExceeded);
 
+      // When measureMemory is true, the program's combined stdout+stderr
+      // (via the bash wrapper) contains a sentinel line followed by the
+      // /usr/bin/time -v report. We need to:
+      //   1. Split on the sentinel to extract the time report.
+      //   2. Strip the sentinel + report from the visible stderr.
+      //   3. Parse the memory value.
+      //
+      // The bash wrapper redirects time's output to a temp file then cats it
+      // to stderr AFTER the program exits, so the sentinel always appears
+      // at the end of combined output. When checkOutputLimit=true everything
+      // goes through the 2>&1 pipe so both stdout and the time report land
+      // in the `stdout` buffer (stdout and stderr are merged by the wrapper).
+      let programStdout  = stdout;
+      let programStderr  = stderr;
+      let memoryKB       = null;
+
+      if (measureMemory && !didExceedOutputLimit) {
+        // The wrapper merges stdout+stderr through the bash subshell.
+        // The time report sentinel appears in the merged output.
+        const sentinelIdx = programStdout.indexOf(TIME_SENTINEL);
+        if (sentinelIdx !== -1) {
+          const timeReport  = programStdout.slice(sentinelIdx + TIME_SENTINEL.length + 1);
+          programStdout     = programStdout.slice(0, sentinelIdx);
+          memoryKB          = parseMemoryKB(timeReport);
+        }
+      }
+
       finish({
         exitCode,
         signal,
-        stdout:              didExceedOutputLimit ? ""                     : stdout,
-        stderr:              didExceedOutputLimit ? "Output limit exceeded" : stderr,
-        timedOut:            didExceedOutputLimit ? false                  : timedOut,
+        stdout:              didExceedOutputLimit ? ""                      : programStdout,
+        stderr:              didExceedOutputLimit ? "Output limit exceeded" : programStderr,
+        timedOut:            didExceedOutputLimit ? false                   : timedOut,
         outputLimitExceeded: didExceedOutputLimit,
+        memoryKB,
       });
     });
   });

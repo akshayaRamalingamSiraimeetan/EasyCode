@@ -54,7 +54,7 @@ async function _compile({ workspaceId, compiler, sourceFileName, executableName,
 
 /**
  * Runs the compiled executable from /workspace where it was written by _compile.
- * Returns { status, stdout, stderr, executionTime }.
+ * Returns { status, stdout, stderr, executionTime, memoryKB }.
  */
 async function _runOne({ workspaceId, executableName, input }) {
   const t0 = Date.now();
@@ -63,22 +63,24 @@ async function _runOne({ workspaceId, executableName, input }) {
     cwd: `/workspace/${workspaceId}`,
     stdin: input,
     timeout: 2000,
+    measureMemory: true,
   });
   const executionTime = Date.now() - t0;
+  const memoryKB = runResult.memoryKB ?? null;
 
   if (runResult.timedOut) {
-    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
+    return { status: Status.TIME_LIMIT_EXCEEDED, stdout: runResult.stdout, stderr: runResult.stderr, executionTime, memoryKB };
   }
 
   if (runResult.outputLimitExceeded) {
-    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime };
+    return { status: Status.OUTPUT_LIMIT_EXCEEDED, stdout: "", stderr: "Output limit exceeded", executionTime, memoryKB };
   }
 
   if (runResult.exitCode !== 0) {
-    return { status: Status.RUNTIME_ERROR, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
+    return { status: Status.RUNTIME_ERROR, stdout: runResult.stdout, stderr: runResult.stderr, executionTime, memoryKB };
   }
 
-  return { status: Status.SUCCESS, stdout: runResult.stdout, stderr: runResult.stderr, executionTime };
+  return { status: Status.SUCCESS, stdout: runResult.stdout, stderr: runResult.stderr, executionTime, memoryKB };
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -151,8 +153,12 @@ async function judge(code, testCases, { sourceFileName, executableName, compiler
     }
 
     const maxExecutionTime = results.reduce((max, r) => Math.max(max, r.executionTime ?? 0), 0);
-    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime };
-    console.log("[RUNNER compiledRunner]", JSON.stringify({ executionTime: maxExecutionTime, resultCount: results.length, firstResult: results[0] }));
+    const peakMemoryKB = results.reduce((max, r) => {
+      if (r.memoryKB == null) return max;
+      return max === null ? r.memoryKB : Math.max(max, r.memoryKB);
+    }, null);
+    const runnerReturn = { compilationError: false, results, executionTime: maxExecutionTime, peakMemoryKB };
+    console.log("[RUNNER compiledRunner]", JSON.stringify({ executionTime: maxExecutionTime, peakMemoryKB, resultCount: results.length, firstResult: results[0] }));
     return runnerReturn;
 
   } finally {
