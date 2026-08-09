@@ -17,6 +17,7 @@ async function executeCode(req, res, next) {
 
     const result = await judgeService.execute(language, code, input);
 
+    console.log("[executeController] result:", JSON.stringify(result));
     // Always 200 — status field in the body carries the execution verdict.
     return res.status(200).json(result);
   } catch (err) {

@@ -38,7 +38,7 @@ const client = axios.create({
 async function _post(path, payload) {
   try {
     const response = await client.post(path, payload);
-    console.log("[judgeClient] response =", JSON.stringify(response.data));
+    console.log(`[judgeClient] ${path} response.data:`, JSON.stringify(response.data));
     return response.data;
   } catch (err) {
     // Log the raw error so the real failure (ECONNREFUSED, ETIMEDOUT, etc.) is visible

@@ -9,6 +9,7 @@ const Submission = require("../models/Submission");
  * Run executions are NEVER saved to the Submission collection.
  */
 const runCode = async (req, res) => {
+  console.log("RUN CONTROLLER VERSION: memory-build-2026-08-09");
   try {
     const { language, code, problemId, input: customInput } = req.body;
 
@@ -48,6 +49,8 @@ const runCode = async (req, res) => {
         });
         continue;
       }
+
+      console.log("[runCode] runResult:", JSON.stringify(runResult));
 
       if (runResult.status !== "success") {
         results.push({
