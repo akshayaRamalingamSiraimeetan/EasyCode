@@ -3027,3 +3027,28 @@ input {
   color: #4ade80;
   letter-spacing: -0.01em;
 }
+
+/* ============================================================
+   MEMORY STAT — inline badge for run-result pane and verdict
+============================================================ */
+
+/* Inline memory badge inside rt-status-banner (sits next to rt-exec-time) */
+.rt-memory-stat {
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Standalone row used under custom-input pane */
+.rt-memory-stat--standalone {
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+}

@@ -17,6 +17,7 @@ import {
   FiCopy,
   FiCheck,
   FiTerminal,
+  FiDatabase,
 } from "react-icons/fi";
 
 import { getProblemById } from "../services/problem";
@@ -68,6 +69,16 @@ function statusMod(status) {
   return "err";
 }
 
+/**
+ * Format memoryKB for display.
+ * Values under 1024 KB are shown as "X KB"; above as "X.X MB".
+ */
+function formatMemory(memoryKB) {
+  if (memoryKB == null) return null;
+  if (memoryKB < 1024) return `${memoryKB} KB`;
+  return `${(memoryKB / 1024).toFixed(1)} MB`;
+}
+
 /* ─── run-result tab indicator dot ──────────────────────── */
 function TabDot({ status }) {
   const mod = statusMod(status);
@@ -93,12 +104,20 @@ function RunResultPane({ item }) {
             <pre className="rt-pre rt-pre--neutral">{item.output || "(no output)"}</pre>
           )}
         </div>
-        {item.executionTime != null && (
-          <div className="rt-pane-block">
-            <span className="rt-exec-time rt-exec-time--standalone">
-              <FiClock size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
-              {item.executionTime} ms
-            </span>
+        {(item.executionTime != null || item.memoryKB != null) && (
+          <div className="rt-pane-block" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            {item.executionTime != null && (
+              <span className="rt-exec-time rt-exec-time--standalone">
+                <FiClock size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
+                {item.executionTime} ms
+              </span>
+            )}
+            {item.memoryKB != null && (
+              <span className="rt-memory-stat rt-memory-stat--standalone">
+                <FiDatabase size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
+                {formatMemory(item.memoryKB)}
+              </span>
+            )}
           </div>
         )}
       </div>
@@ -118,6 +137,12 @@ function RunResultPane({ item }) {
           <span className="rt-exec-time">
             <FiClock size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
             {item.executionTime} ms
+          </span>
+        )}
+        {item.memoryKB != null && (
+          <span className="rt-memory-stat">
+            <FiDatabase size={11} style={{ marginRight: 3, verticalAlign: "middle" }} />
+            {formatMemory(item.memoryKB)}
           </span>
         )}
       </div>
@@ -165,12 +190,20 @@ function SubmitVerdict({ data }) {
         <p className="verdict-detail">
           Passed <strong>{v.passed}</strong> / <strong>{v.total}</strong> test cases
         </p>
-        {v.executionTime != null && (
+        {(v.executionTime != null || v.peakMemoryKB != null) && (
           <div className="verdict-stats">
-            <div className="verdict-stat">
-              <span className="verdict-stat-label">Execution Time</span>
-              <span className="verdict-stat-value">{v.executionTime} ms</span>
-            </div>
+            {v.executionTime != null && (
+              <div className="verdict-stat">
+                <span className="verdict-stat-label">Execution Time</span>
+                <span className="verdict-stat-value">{v.executionTime} ms</span>
+              </div>
+            )}
+            {v.peakMemoryKB != null && (
+              <div className="verdict-stat">
+                <span className="verdict-stat-label">Peak Memory</span>
+                <span className="verdict-stat-value">{formatMemory(v.peakMemoryKB)}</span>
+              </div>
+            )}
           </div>
         )}
       </div>
