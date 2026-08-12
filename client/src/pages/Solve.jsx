@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
-  FiArrowLeft,
   FiCheckCircle,
   FiXCircle,
   FiAlertTriangle,
@@ -24,6 +23,8 @@ import { getProblemById, getTestCases } from "../services/problem";
 import { runCode, submitSolution } from "../services/compiler";
 import AIHintPanel from "../components/AIHintPanel";
 import SampleTestCases from "../components/SampleTestCases";
+import AppNavbar from "../components/AppNavbar";
+import { useTheme } from "../context/ThemeContext";
 
 /* ─── constants ──────────────────────────────────────────── */
 
@@ -429,6 +430,7 @@ export default function Solve() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useTheme();
 
   /* problem */
   const [problem, setProblem]         = useState(null);
@@ -686,39 +688,34 @@ export default function Solve() {
   return (
     <div className="solve-page">
 
-      {/* ── top nav ──────────────────────────────────────── */}
-      <header className="solve-nav">
-        <div className="solve-nav-left">
-          <button className="solve-back-btn" onClick={() => navigate("/problems")} title="Back to Problems">
-            <FiArrowLeft size={16} />
-          </button>
-          <span className="solve-nav-title">{problem.title}</span>
-          <span className={`difficulty ${problem.difficulty.toLowerCase()}`}>
-            {problem.difficulty}
-          </span>
-        </div>
-
-        <div className="solve-nav-right">
-          <button
-            className="solve-run-btn"
-            onClick={handleRun}
-            disabled={busy}
-            title="Run Code (Ctrl+Enter)"
-          >
-            {running ? <span className="btn-spinner" /> : <FiPlay size={14} />}
-            Run
-          </button>
-          <button
-            className="solve-submit-btn"
-            onClick={handleSubmit}
-            disabled={busy}
-            title="Submit (Ctrl+Shift+Enter)"
-          >
-            {submitting ? <span className="btn-spinner" /> : <FiSend size={14} />}
-            Submit
-          </button>
-        </div>
-      </header>
+      {/* ── top nav (shared AppNavbar with Run/Submit in actions slot) ── */}
+      <AppNavbar
+        title={problem.title}
+        backTo="/problems"
+        backLabel="Back to Problems"
+        actions={
+          <div className="solve-nav-actions">
+            <button
+              className="solve-run-btn"
+              onClick={handleRun}
+              disabled={busy}
+              title="Run Code (Ctrl+Enter)"
+            >
+              {running ? <span className="btn-spinner btn-spinner--inline" /> : <FiPlay size={14} />}
+              Run
+            </button>
+            <button
+              className="solve-submit-btn"
+              onClick={handleSubmit}
+              disabled={busy}
+              title="Submit (Ctrl+Shift+Enter)"
+            >
+              {submitting ? <span className="btn-spinner btn-spinner--inline" /> : <FiSend size={14} />}
+              Submit
+            </button>
+          </div>
+        }
+      />
 
       {/* ── main workspace ───────────────────────────────── */}
       <main className="solve-workspace">
@@ -744,7 +741,7 @@ export default function Solve() {
               language={MONACO_LANG[language]}
               value={currentCode}
               onChange={handleCodeChange}
-              theme="vs-dark"
+              theme={theme === "light" ? "vs" : "vs-dark"}
               options={{
                 fontSize: 14,
                 lineHeight: 22,
@@ -840,7 +837,7 @@ export default function Solve() {
                   <div className="console-output-area">
                     {running ? (
                       <div className="console-running">
-                        <span className="btn-spinner btn-spinner--dark" />
+                        <span className="btn-spinner btn-spinner--muted" />
                         <span>Running against test cases…</span>
                       </div>
                     ) : runResults.length === 0 ? (
@@ -856,7 +853,7 @@ export default function Solve() {
                   <div className="console-output-area">
                     {submitting ? (
                       <div className="console-running">
-                        <span className="btn-spinner btn-spinner--dark" />
+                        <span className="btn-spinner btn-spinner--muted" />
                         <span>Judging…</span>
                       </div>
                     ) : submitData ? (
