@@ -20,9 +20,10 @@ import {
   FiDatabase,
 } from "react-icons/fi";
 
-import { getProblemById } from "../services/problem";
+import { getProblemById, getTestCases } from "../services/problem";
 import { runCode, submitSolution } from "../services/compiler";
 import AIHintPanel from "../components/AIHintPanel";
+import SampleTestCases from "../components/SampleTestCases";
 
 /* ─── constants ──────────────────────────────────────────── */
 
@@ -323,7 +324,7 @@ function QpSection({ id, icon, title, children, defaultOpen = true }) {
 }
 
 /* ─── left problem panel ─────────────────────────────────── */
-function ProblemPanel({ problem, language, currentCode }) {
+function ProblemPanel({ problem, language, currentCode, testCases }) {
   const contentRef = useRef(null);
   const diffCls = problem.difficulty?.toLowerCase() ?? "easy";
   const tags = Array.isArray(problem.tags)
@@ -350,6 +351,12 @@ function ProblemPanel({ problem, language, currentCode }) {
         <QpSection id="qp-description-body" icon={<FiFileText size={14} />} title="Description">
           <p className="qp-body-text">{problem.description}</p>
         </QpSection>
+
+        {testCases && testCases.length > 0 && (
+          <QpSection id="qp-sample-tests" icon={<FiTerminal size={14} />} title="Sample Test Cases">
+            <SampleTestCases testCases={testCases} />
+          </QpSection>
+        )}
 
         {problem.constraints && (
           <QpSection id="qp-constraints" icon={<FiLock size={14} />} title="Constraints">
@@ -427,6 +434,7 @@ export default function Solve() {
   const [problem, setProblem]         = useState(null);
   const [probLoading, setProbLoading] = useState(true);
   const [probError, setProbError]     = useState("");
+  const [testCases, setTestCases]     = useState([]);
 
   /* editor */
   const [language, setLanguage] = useState("python");
@@ -542,8 +550,15 @@ export default function Solve() {
   useEffect(() => {
     if (!id) return;
     setProbLoading(true);
-    getProblemById(id)
-      .then((res) => setProblem(res.data.problem))
+    
+    Promise.all([
+      getProblemById(id),
+      getTestCases(id).catch(() => ({ data: { testCases: [] } }))
+    ])
+      .then(([problemRes, testCasesRes]) => {
+        setProblem(problemRes.data.problem);
+        setTestCases(testCasesRes.data.testCases || []);
+      })
       .catch(() => setProbError("Problem not found."))
       .finally(() => setProbLoading(false));
   }, [id]);
@@ -709,7 +724,7 @@ export default function Solve() {
       <main className="solve-workspace">
 
         {/* LEFT */}
-        <ProblemPanel problem={problem} language={language} currentCode={currentCode} />
+        <ProblemPanel problem={problem} language={language} currentCode={currentCode} testCases={testCases} />
 
         {/* RIGHT */}
         <section className="solve-right">
