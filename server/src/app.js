@@ -7,6 +7,7 @@ const problemRoutes = require("./routes/problemRoutes");
 const compilerRoutes = require("./routes/compilerRoutes");
 const submissionRoutes = require("./routes/submissionRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use("/api/problems", problemRoutes);
 app.use("/api/compiler", compilerRoutes);
 app.use("/api/submissions", submissionRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Root — quick human/browser check
 app.get("/", (_req, res) =>

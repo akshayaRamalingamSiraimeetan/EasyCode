@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { getAllProblems, createProblem } from "../services/problem";
 import { getMySubmissions } from "../services/submission";
+import { getPlatformStats } from "../services/admin";
 import ProblemModal from "../components/ProblemModal";
 
 import {
@@ -14,6 +15,8 @@ import {
   FiCheckCircle,
   FiBookOpen,
   FiCalendar,
+  FiUsers,
+  FiActivity,
 } from "react-icons/fi";
 import AppNavbar from "../components/AppNavbar";
 
@@ -78,21 +81,41 @@ function Dashboard() {
   const [totalProblems, setTotalProblems] = useState(null);
   const [totalSubmissions, setTotalSubmissions] = useState(null);
 
+  // Platform-wide stats — only fetched for admins
+  const [platformUsers, setPlatformUsers] = useState(null);
+  const [platformSubmissions, setPlatformSubmissions] = useState(null);
+
   /* ── inline create-problem modal ─────────────────────── */
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   /* ── fetch stats on mount ─────────────────────────────── */
   useEffect(() => {
-    // Total problems — reuse existing endpoint, just read the count
-    getAllProblems()
-      .then((res) => setTotalProblems(res.data.count ?? res.data.problems?.length ?? 0))
-      .catch(() => setTotalProblems("—"));
+    if (isAdmin) {
+      // For admins: get all stats from the consolidated admin endpoint
+      getPlatformStats()
+        .then((res) => {
+          const stats = res.data.stats;
+          setPlatformUsers(stats?.totalUsers ?? "—");
+          setPlatformSubmissions(stats?.totalSubmissions ?? "—");
+          setTotalProblems(stats?.totalProblems ?? "—");
+        })
+        .catch(() => {
+          setPlatformUsers("—");
+          setPlatformSubmissions("—");
+          setTotalProblems("—");
+        });
+    } else {
+      // For regular users: fetch problems separately
+      getAllProblems()
+        .then((res) => setTotalProblems(res.data.count ?? res.data.problems?.length ?? 0))
+        .catch(() => setTotalProblems("—"));
+    }
 
-    // Total submissions for the logged-in user — fetch 1 item, read pagination.total
+    // Always fetch user's own submissions
     getMySubmissions(1, 1)
       .then((res) => setTotalSubmissions(res.data.pagination?.total ?? 0))
       .catch(() => setTotalSubmissions("—"));
-  }, []);
+  }, [isAdmin]);
 
   /* ── inline create-problem handler ───────────────────── */
   const handleCreateModalSave = async ({ mode, problemData }) => {
@@ -142,6 +165,12 @@ function Dashboard() {
       onClick: () => navigate("/problems"),
     },
     {
+      icon: <FiUsers size={22} />,
+      title: "Users",
+      description: "Manage and monitor registered users",
+      onClick: () => navigate("/users"),
+    },
+    {
       icon: <FiFileText size={22} />,
       title: "View Submissions",
       description: "Review your submitted solutions",
@@ -186,6 +215,25 @@ function Dashboard() {
           </div>
           {isAdmin && <span className="db-role-badge">Admin</span>}
         </section>
+
+        {/* ── platform overview (admin only) ─────────────── */}
+        {isAdmin && (
+          <section className="db-section">
+            <h2 className="db-section-title">Platform Overview</h2>
+            <div className="db-stats-grid">
+              <StatCard
+                icon={<FiUsers size={20} />}
+                label="Registered Users"
+                value={platformUsers === null ? "…" : platformUsers}
+              />
+              <StatCard
+                icon={<FiActivity size={20} />}
+                label="Total Submissions"
+                value={platformSubmissions === null ? "…" : platformSubmissions}
+              />
+            </div>
+          </section>
+        )}
 
         {/* ── overview stats ──────────────────────────────── */}
         <section className="db-section">
