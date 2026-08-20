@@ -11,9 +11,7 @@ import ProblemModal from "../components/ProblemModal";
 import {
   FiList,
   FiPlusSquare,
-  FiFileText,
   FiCheckCircle,
-  FiBookOpen,
   FiCalendar,
   FiUsers,
   FiActivity,
@@ -40,9 +38,23 @@ function formatJoined(iso) {
 
 /* ── sub-components ──────────────────────────────────────── */
 
-function StatCard({ icon, label, value, accent }) {
+function StatCard({ icon, label, value, accent, onClick, isClickable = false }) {
+  const CardComponent = isClickable ? "button" : "div";
+  
+  const handleKeyDown = (e) => {
+    if (isClickable && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div className="db-stat-card">
+    <CardComponent 
+      className={`db-stat-card ${isClickable ? "db-stat-card--clickable" : ""}`}
+      onClick={isClickable ? onClick : undefined}
+      onKeyDown={isClickable ? handleKeyDown : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+    >
       <div
         className="db-stat-icon"
         style={accent ? { color: "var(--accent)" } : {}}
@@ -54,20 +66,7 @@ function StatCard({ icon, label, value, accent }) {
         <span className="db-stat-value">{value}</span>
       </div>
       <div className="db-stat-accent-bar" />
-    </div>
-  );
-}
-
-function ActionCard({ icon, title, description, onClick }) {
-  return (
-    <button className="db-action-card" onClick={onClick}>
-      <div className="db-action-icon">{icon}</div>
-      <div className="db-action-body">
-        <span className="db-action-title">{title}</span>
-        <span className="db-action-desc">{description}</span>
-      </div>
-      <span className="db-action-arrow">→</span>
-    </button>
+    </CardComponent>
   );
 }
 
@@ -137,63 +136,40 @@ function Dashboard() {
       label: "Total Problems",
       value: totalProblems === null ? "…" : totalProblems,
       accent: true,
+      isClickable: isAdmin,
+      onClick: isAdmin ? () => navigate("/problems") : undefined,
     },
     {
       icon: <FiCheckCircle size={20} />,
-      label: "My Submissions",
+      label: "My Submissions", 
       value: totalSubmissions === null ? "…" : totalSubmissions,
+      isClickable: true,
+      onClick: () => navigate("/submissions"),
     },
     {
       icon: <FiCalendar size={20} />,
       label: "Joined",
       value: formatJoined(user?.createdAt),
+      isClickable: false,
     },
   ];
 
-  /* ── quick actions ────────────────────────────────────── */
-  const adminActions = [
+  /* ── platform overview stats for admins ──────────────── */
+  const platformStats = isAdmin ? [
     {
-      icon: <FiPlusSquare size={22} />,
-      title: "Create Problem",
-      description: "Add a new coding challenge",
-      onClick: () => setShowCreateModal(true),
-    },
-    {
-      icon: <FiList size={22} />,
-      title: "Manage Problems",
-      description: "Edit, delete, or update test cases",
-      onClick: () => navigate("/problems"),
-    },
-    {
-      icon: <FiUsers size={22} />,
-      title: "Users",
-      description: "Manage and monitor registered users",
+      icon: <FiUsers size={20} />,
+      label: "Registered Users",
+      value: platformUsers === null ? "…" : platformUsers,
+      isClickable: true,
       onClick: () => navigate("/users"),
     },
     {
-      icon: <FiFileText size={22} />,
-      title: "View Submissions",
-      description: "Review your submitted solutions",
-      onClick: () => navigate("/submissions"),
+      icon: <FiActivity size={20} />,
+      label: "Total Submissions",
+      value: platformSubmissions === null ? "…" : platformSubmissions,
+      isClickable: false,
     },
-  ];
-
-  const userActions = [
-    {
-      icon: <FiBookOpen size={22} />,
-      title: "Browse Problems",
-      description: "Explore the problem set",
-      onClick: () => navigate("/problems"),
-    },
-    {
-      icon: <FiCheckCircle size={22} />,
-      title: "My Submissions",
-      description: "Review your past solutions",
-      onClick: () => navigate("/submissions"),
-    },
-  ];
-
-  const actions = isAdmin ? adminActions : userActions;
+  ] : [];
 
   /* ── render ───────────────────────────────────────────── */
   return (
@@ -221,36 +197,30 @@ function Dashboard() {
           <section className="db-section">
             <h2 className="db-section-title">Platform Overview</h2>
             <div className="db-stats-grid">
-              <StatCard
-                icon={<FiUsers size={20} />}
-                label="Registered Users"
-                value={platformUsers === null ? "…" : platformUsers}
-              />
-              <StatCard
-                icon={<FiActivity size={20} />}
-                label="Total Submissions"
-                value={platformSubmissions === null ? "…" : platformSubmissions}
-              />
+              {platformStats.map((s) => (
+                <StatCard key={s.label} {...s} />
+              ))}
             </div>
           </section>
         )}
 
         {/* ── overview stats ──────────────────────────────── */}
         <section className="db-section">
-          <h2 className="db-section-title">Overview</h2>
+          <div className="db-section-header">
+            <h2 className="db-section-title">Overview</h2>
+            {isAdmin && (
+              <button 
+                className="db-create-btn"
+                onClick={() => setShowCreateModal(true)}
+              >
+                <FiPlusSquare size={16} />
+                Create Problem
+              </button>
+            )}
+          </div>
           <div className="db-stats-grid">
             {stats.map((s) => (
               <StatCard key={s.label} {...s} />
-            ))}
-          </div>
-        </section>
-
-        {/* ── quick actions ───────────────────────────────── */}
-        <section className="db-section">
-          <h2 className="db-section-title">Quick Actions</h2>
-          <div className="db-actions-grid">
-            {actions.map((a) => (
-              <ActionCard key={a.title} {...a} />
             ))}
           </div>
         </section>
